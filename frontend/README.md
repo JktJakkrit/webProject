@@ -5,8 +5,6 @@
 เปิด terminal window แล้วพิมพ์คำสั่ง:
 >> npm install -g @angular/cli
 
-//-----------------------------------------------
-
 //---------------Run Project---------------------
 
 1. clone โปรเจ็ค เปิด gitbash แล้วพิมพ์คำสั่ง:
@@ -18,7 +16,7 @@
    > npm install
    
 4. รัน Project
-   > npm serve --open
+   > ng serve --open
 
 
 
