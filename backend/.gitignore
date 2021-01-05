@@ -12,3 +12,7 @@
 
 # node.js
 package-lock.json
+build
+npm-debug.log
+.DS_Store
+log
