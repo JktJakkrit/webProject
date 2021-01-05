@@ -1,3 +1,7 @@
+
+# dependencies
+/node_modules
+
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json
@@ -5,3 +9,6 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+
+# node.js
+package-lock.json
