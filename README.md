@@ -16,7 +16,7 @@
    > npm install
    
 4. รัน Project
-   > npm serve --open
+   > ng serve --open
 
 
 
