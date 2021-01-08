@@ -17,6 +17,5 @@ if(err){
 }else{
     console.log(rows[0])
 }
-
 })
 module.exports = connection;

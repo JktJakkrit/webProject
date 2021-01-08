@@ -31,6 +31,7 @@ module.exports = async (app) => {
     //Passport
     //TODO:ยังไม่ทำ Passport
 
+
     // Static file
     app.use('/static', express.static(path.join(__dirname, '../public')))
 
