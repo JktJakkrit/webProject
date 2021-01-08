@@ -245,7 +245,7 @@ export class CartService {
                   total: this.cartDataClient.total
                 }
               };
-              this.spinner.hide().then();
+              // this.spinner.hide().then();
               this.router.navigate(['/thankyou'], navigationExtras).then(p => {
                 this.cartDataClient = {prodData: [{incart: 0, id: 0}], total: 0};
                 this.cartTotal$.next(0);
@@ -256,7 +256,7 @@ export class CartService {
 
         })
       } else {
-        this.spinner.hide().then();
+        // this.spinner.hide().then();
         this.router.navigateByUrl('/checkout').then();
         this.toast.error(`Sorry, failed to book the order`, "Order Status", {
           timeOut: 1500,

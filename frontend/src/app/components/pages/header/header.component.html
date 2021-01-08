@@ -1,159 +1,91 @@
-<!-- HEADER -->
-<header>
-    <!-- TOP HEADER -->
-    <div id="top-header">
-        <div class="container">
-            <ul class="header-links pull-left">
-                <li>
-                    <a href="#"><i class="fa fa-phone"></i> +666-97-986-2395</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-envelope-o"></i> jjt.jakkrit.thuekmon@gmail.com</a
-          >
-        </li>
-        <li>
-          <a href="#"><i class="fa fa-map-marker"></i> Lampang</a>
-                </li>
-            </ul>
-            <ul class="header-links pull-right">
-                <li>
-                    <a href="#"><i class="fa fa-dollar"></i> THB</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-user-o"></i> My Account</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!-- /TOP HEADER -->
-
-    <!-- MAIN HEADER -->
-    <div id="header">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <!-- LOGO -->
-                <div class="col-md-3">
-                    <div class="header-logo">
-                        <a routerLink="/" class="logo">
-                            <img src="../../../assets/img/logo.png" alt="">
-                        </a>
-                    </div>
-                </div>
-                <!-- /LOGO -->
-
-                <!-- SEARCH BAR -->
-                <div class="col-md-6">
-                    <div class="header-search">
-                        <form>
-                            <select class="input-select">
-                <option value="0">All Categories</option>
-                <option value="1">Air Condition</option>
-                <option value="2">Dish Washers</option>
-                <option value="3">Fans</option>
-                <option value="4">Refrigerator</option>
-                <option value="5">Television</option>
-                <option value="6">Washing</option>
-              </select>
-                            <input class="input" placeholder="Search here..." autocomplete="off" />
-                            <button class="search-btn">Search</button>
-                        </form>
-                    </div>
-                </div>
-                <!-- /SEARCH BAR -->
-
-                <!-- ACCOUNT -->
-                <div class="col-md-3 clearfix">
-                    <div class="header-ctn">
-                        <!-- Wishlist -->
-                        <div>
-                            <a href="#">
-                                <i class="fa fa-heart-o"></i>
-                                <span>Your Wishlist</span>
-                                <div class="qty">0</div>
-                            </a>
-                        </div>
-                        <!-- /Wishlist -->
-
-                        <!-- Cart -->
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="cursor: pointer">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span>Your Cart</span>
-                            </a>
-                            <div class="cart-dropdown">
-                                <div class="cart-list">
-                                    <div class="product-widget" *ngFor="let c of cartData.data; let i = index">
-                                        <div class="product-img">
-                                            <img src="{{ c.product?.image }}" alt="" width="20px" />
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name">
-                                                <a href="#">{{ c.product?.name }}</a>
-                                            </h3>
-                                            <h4 class="product-price">
-                                                <span class="qty">{{ c.numInCart }} x </span
-                        >{{ c.product?.price | currency: "THB" }}
-                      </h4>
-                    </div>
-                    <button
-                      class="delete"
-                      (click)="cartService.DeleteProductFromCart(i)"
-                    >
-                      <i class="fa fa-close"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="cart-summary">
-                  <h5>TOTAL : {{ cartTotal | currency: "THB" }}</h5>
-                </div>
-                <div class="cart-btns">
-                  <a routerLink="/cart">View Cart</a>
-                  <a routerLink="/checkout"
-                    >Checkout <i class="fa fa-arrow-circle-right"></i
-                  ></a>
-                </div>
-              </div>
+<!-- ##### Header Area Start ##### -->
+<header class="header_area">
+    <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
+        <!-- Classy Menu -->
+        <nav class="classy-navbar" id="richNav">
+            <!-- Logo -->
+            <a class="nav-brand" href="#">Shop</a>
+            <!-- Navbar Toggler -->
+            <div class="classy-navbar-toggler">
+                <span class="navbarToggler"><span></span><span></span><span></span></span>
             </div>
-            <!-- /Cart -->
-
-            <!-- Menu Toogle -->
-            <div class="menu-toggle">
-              <a href="#">
-                <i class="fa fa-bars"></i>
-                <span>Menu</span>
-                                                </a>
-                                        </div>
-                                        <!-- /Menu Toogle -->
-                                    </div>
+            <!-- Menu -->
+            <div class="classy-menu">
+                <!-- close btn -->
+                <div class="classycloseIcon">
+                    <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                </div>
+                <!-- Nav Start -->
+                <div class="classynav">
+                    <ul>
+                        <li><a href="#">Shop</a>
+                            <div class="megamenu">
+                                <ul class="single-mega cn-col-4">
+                                    <li class="title">Women's Collection</li>
+                                    <li><a href="#">Dresses</a></li>
+                                    <li><a href="#">Blouses &amp; Shirts</a></li>
+                                    <li><a href="#">T-shirts</a></li>
+                                    <li><a href="#">Rompers</a></li>
+                                    <li><a href="#">Bras &amp; Panties</a></li>
+                                </ul>
+                                <ul class="single-mega cn-col-4">
+                                    <li class="title">Men's Collection</li>
+                                    <li><a href="#">T-Shirts</a></li>
+                                    <li><a href="#">Polo</a></li>
+                                    <li><a href="#">Shirts</a></li>
+                                    <li><a href="#">Jackets</a></li>
+                                    <li><a href="#">Trench</a></li>
+                                </ul>
+                                <ul class="single-mega cn-col-4">
+                                    <li class="title">Kid's Collection</li>
+                                    <li><a href="#">Dresses</a></li>
+                                    <li><a href="#">Shirts</a></li>
+                                    <li><a href="#">T-shirts</a></li>
+                                    <li><a href="#">Jackets</a></li>
+                                    <li><a href="#">Trench</a></li>
+                                </ul>
+                                <div class="single-mega cn-col-4">
+                                    <img src="assets/img/bg-img/bg-6.jpg" alt="">
                                 </div>
-                                <!-- /ACCOUNT -->
                             </div>
-                            <!-- row -->
-                        </div>
-                        <!-- container -->
-                    </div>
-                    <!-- /MAIN HEADER -->
-</header>
-<!-- /HEADER -->
+                        </li>
+                        <li><a href="#">Pages</a>
+                            <ul class="dropdown">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Shop</a></li>
+                                <li><a href="#">Product Details</a></li>
+                                <li><a href="#">Checkout</a></li>
 
-<!-- NAVIGATION -->
-<nav id="navigation">
-    <!-- container -->
-    <div class="container">
-        <!-- responsive-nav -->
-        <div id="responsive-nav">
-            <!-- NAV -->
-            <ul class="main-nav nav py-3">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Categories</a></li>
-                <li><a href="#">Contact Us</a></li>
-            </ul>
-            <!-- /NAV -->
+                            </ul>
+                        </li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- Nav End -->
+            </div>
+        </nav>
+        <!-- Header Meta Data -->
+        <div class="header-meta d-flex clearfix justify-content-end">
+            <!-- Search Area -->
+            <div class="search-area">
+                <form ngNoForm method="post">
+                    <input type="search" name="search" id="headerSearch" placeholder="Type for search" />
+                    <button type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </form>
+            </div>
+            <!-- Favourite Area -->
+            <div class="favourite-area">
+                <a href="#"><img src="assets/img/core-img/heart.svg" alt=""></a>
+            </div>
+            <!-- User Login Info -->
+            <div class="user-login-info">
+                <a href="#"><img src="assets/img/core-img/user.svg" alt=""></a>
+            </div>
+            <!-- Cart Area -->
+            <div class="cart-area">
+                <a href="#" id="richCartBtn"><img src="assets/img/core-img/bag.svg" alt=""> <span>3</span></a>
+            </div>
         </div>
-        <!-- /responsive-nav -->
     </div>
-    <!-- /container -->
-</nav>
-<!-- /NAVIGATION -->
+</header>

@@ -9,25 +9,15 @@ import { ProductService } from 'src/app/_services/product.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  products: ProductModelServer[] = [];
-
-  constructor(private productService: ProductService,
-              private cartService: CartService,
-              private router:Router) {
+  languages=['Angular 10','React','Node Js','Spring boot'];
+  
+   languageHasError=true;
+  constructor() {
   }
 
   ngOnInit() {
-    this.productService.getAllProducts(8).subscribe((prods: serverResponse ) => {
-      this.products = prods.products;
-      console.log(this.products);
-    });
+    
   }
 
-  AddProduct(id: Number) {
-    this.cartService.AddProductToCart(id);
-  }
-
-  selectProduct(id: Number) {
-    this.router.navigate(['/product', id]).then();
-  }
+  
 }

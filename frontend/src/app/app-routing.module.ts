@@ -8,6 +8,10 @@ import { ManageFanComponent } from './components/admin/manage-fan/manage-fan.com
 import { ManageRefriComponent } from './components/admin/manage-refri/manage-refri.component';
 import { ManageTvComponent } from './components/admin/manage-tv/manage-tv.component';
 import { ManageWashComponent } from './components/admin/manage-wash/manage-wash.component';
+import { HeaderComponent } from './components/pages/header/header.component';
+
+
+import { HomeComponent } from './components/pages/home/home.component';
 
 
 
@@ -15,8 +19,16 @@ const routes: Routes = [
   
   {
     path: '',
-    redirectTo: '/manage-air',
+    redirectTo: '/header',
     pathMatch: 'full'
+  },
+  {
+    path: "home",
+    component: HomeComponent,
+  },
+  {
+    path: "header",
+    component: HeaderComponent,
   },
   {
     path: "manage-air",

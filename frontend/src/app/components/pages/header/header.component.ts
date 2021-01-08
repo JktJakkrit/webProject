@@ -8,19 +8,12 @@ import { CartService } from 'src/app/_services/cart.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  cartData: CartModelServer;
-  cartTotal: Number;
+  title:string="ANGULAR 10 "
+  
 
   constructor(public cartService: CartService) {
   }
 
   ngOnInit() {
-  this.cartService.cartTotal$.subscribe(total => {
-    this.cartTotal = total;
-  });
-
-  this.cartService.cartDataObs$.subscribe(data => this.cartData = data);
-  }
-
-}
+  
+}}
