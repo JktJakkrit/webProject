@@ -4,9 +4,9 @@ const methods = {
     async onGetQuestion(req,res) {
         try{
             let result = await service.findById(req)
-            res.success(result)
+            res.send(result)
         }catch(error){
-            res.error(error)
+            res.status(404).json(error).end();
         }
     }
 }
