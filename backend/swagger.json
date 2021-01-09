@@ -1,0 +1,17 @@
+{
+    "swagger": "2.0",
+    "info":{
+        "version": "1.0.0",
+        "title": "JktJakkrit Project Express.js",
+        "description": "Application API",
+        "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/api/v",
+    "tags": [
+
+    ]
+}
