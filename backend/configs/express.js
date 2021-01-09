@@ -25,15 +25,19 @@ module.exports = async (app) => {
     //Parser Body
     app.use(express.json())
     app.use(express.urlencoded({ extended : false }))
-     // Logger
+    
+    // Logger
     app.use(morgan('dev'))
     
+
     //Passport
     //TODO:ยังไม่ทำ Passport
+
 
     // Static file
     app.use('/static', express.static(path.join(__dirname, '../public')))
 
+    
     //Custom Response Format
     //TODO:ยังไม่ทำ Custom Response Format
 }

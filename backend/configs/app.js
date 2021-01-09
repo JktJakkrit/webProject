@@ -14,5 +14,5 @@ module.exports = {
     hostname : process.env.HOSTNAME,
     username : process.env.USER,
     password : process.env.PASSWORD,
-    database : process.env.webproject
+    database : process.env.DATABASE
 }
