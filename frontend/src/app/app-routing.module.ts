@@ -1,3 +1,4 @@
+import { WashingMachineComponent } from './components/products/washing-machine/washing-machine.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -8,10 +9,16 @@ import { ManageFanComponent } from './components/admin/manage-fan/manage-fan.com
 import { ManageRefriComponent } from './components/admin/manage-refri/manage-refri.component';
 import { ManageTvComponent } from './components/admin/manage-tv/manage-tv.component';
 import { ManageWashComponent } from './components/admin/manage-wash/manage-wash.component';
+import { FooterComponent } from './components/pages/footer/footer.component';
 import { HeaderComponent } from './components/pages/header/header.component';
 
 
 import { HomeComponent } from './components/pages/home/home.component';
+import { AirConditioningComponent } from './components/products/air-conditioning/air-conditioning.component';
+import { DishwasherComponent } from './components/products/dishwasher/dishwasher.component';
+import { ElectricFanComponent } from './components/products/electric-fan/electric-fan.component';
+import { RefrigeratorComponent } from './components/products/refrigerator/refrigerator.component';
+import { TelevisionComponent } from './components/products/television/television.component';
 
 
 
@@ -19,7 +26,7 @@ const routes: Routes = [
   
   {
     path: '',
-    redirectTo: '/header',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
   {
@@ -29,6 +36,34 @@ const routes: Routes = [
   {
     path: "header",
     component: HeaderComponent,
+  },
+  {
+    path: "footer",
+    component: FooterComponent,
+  },
+  {
+    path: "air",
+    component: AirConditioningComponent,
+  },
+  {
+    path: "dish",
+    component: DishwasherComponent,
+  },
+  {
+    path: "fan",
+    component: ElectricFanComponent,
+  },
+  {
+    path: "refri",
+    component: RefrigeratorComponent,
+  },
+  {
+    path: "tv",
+    component: TelevisionComponent,
+  },
+  {
+    path: "wash",
+    component: WashingMachineComponent,
   },
   {
     path: "manage-air",
