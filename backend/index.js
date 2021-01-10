@@ -4,8 +4,6 @@ const app = express()  //เป็นการสร้าง instance ให้
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
-
-
 //Express Configs
 require('./configs/express')(app)
 
