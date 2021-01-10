@@ -10,8 +10,114 @@
         }
     },
     "host": "localhost:3000",
-    "basePath": "/api/v",
+    "basePath": "/api/v1",
     "tags": [
-
-    ]
+        {
+            "name" : "air",
+            "description": "Everything",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "http://swagger.io"
+            }
+        },
+        {
+            "name" : "dish",
+            "description": "",
+            "externalDocs": {
+                "description": "",
+                "url": ""
+            }
+        },
+        {
+            "name" : "fan",
+            "description": "",
+            "externalDocs": {
+                "description": "",
+                "url": ""
+            }
+        },
+        {
+            "name" : "refri",
+            "description": "",
+            "externalDocs": {
+                "description": "",
+                "url": ""
+            }
+        },
+        {
+            "name" : "tv",
+            "description": "",
+            "externalDocs": {
+                "description": "",
+                "url": ""
+            }
+        },
+        {
+            "name" : "wash",
+            "description": "",
+            "externalDocs": {
+                "description": "",
+                "url": ""
+            }
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/air/all":{
+            "get": {
+                "tags":[
+                    "air"
+                ],
+                "summary":" Get all item mange air",
+                "description":""
+            }
+        },
+        "/dish/all":{
+            "get": {
+                "tags":[
+                    "dish"
+                ],
+                "summary":" Get all item mange air",
+                "description":""
+            }
+        },
+        "/fan/all":{
+            "get": {
+                "tags":[
+                    "fan"
+                ],
+                "summary":" Get all item mange air",
+                "description":""
+            }
+        },
+        "/refri/all":{
+            "get": {
+                "tags":[
+                    "refri"
+                ],
+                "summary":" Get all item mange air",
+                "description":""
+            }
+        },
+        "/tv/all":{
+            "get": {
+                "tags":[
+                    "tv"
+                ],
+                "summary":" Get all item mange air",
+                "description":""
+            }
+        },
+        "/wash/all":{
+            "get": {
+                "tags":[
+                    "wash"
+                ],
+                "summary":" Get all item mange air",
+                "description":""
+            }
+        }
+    }
 }
