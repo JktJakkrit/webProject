@@ -6,6 +6,7 @@ const method = {
                 if(error) return reject(error);
                 return resolve(result);
             })
+            db.end();
         })
     }
 }
