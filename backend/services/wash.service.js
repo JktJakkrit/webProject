@@ -7,9 +7,19 @@ const medthods = {
                 if(error) return reject(error);
                 return resolve(result);
             })
-            db.end();
+            // db.end();
         })
-    }
+    },
+    findById: function (id) {
+        return new Promise((resolve, reject) => {
+            let sql = "SELECT * FROM `manage-wash` where `wash_sys_id` = " + id;
+            db.query(sql, function (error, result) {
+                if (error) return reject(error);
+                return resolve(result);
+            })
+            // db.end();
+        })
+    },
 }
 
 module.exports = {...medthods}

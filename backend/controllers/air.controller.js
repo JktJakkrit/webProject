@@ -6,7 +6,15 @@ const methods = {
             let result = await service.findAll()
             res.status(200).send(result)
         }catch(error){
-            res.status(404).json(error).end();
+            res.json(error).end();
+        }
+    },
+    async GetById(req,res){
+        try{
+            let result = await service.findById(req.params.id)
+            res.status(200).send(result)
+        }catch(error){
+            res.json(error).end();
         }
     },
     async PostAir(req,res){
@@ -15,7 +23,6 @@ const methods = {
             res.status(200).send(result)
         }catch(error){
             res.json(error).end();
-            console.log(error.message)
         }
     }
 }
