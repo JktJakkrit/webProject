@@ -19,4 +19,4 @@ log
 
 
 #upload
-/backend/public/*
+/public

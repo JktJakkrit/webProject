@@ -1,5 +1,8 @@
 const db = require('../configs/database');
-const method = {
+const config = require('../configs/app');
+const path = require('path');
+
+const methods = {
     findById(req){
         return new Promise(async (resolve,reject)=>{
             db.query('SELECT * FROM question',function(error,result,fields){
@@ -20,4 +23,4 @@ const method = {
         })
     },
 }
-module.exports ={...method};
+module.exports ={...methods};

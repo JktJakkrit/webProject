@@ -37,7 +37,7 @@ const methods = {
             });
             // db.end();
         })
-    }
+    } // post
 }
 
 module.exports = {...methods}
