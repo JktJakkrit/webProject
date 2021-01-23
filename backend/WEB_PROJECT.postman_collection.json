@@ -1,0 +1,279 @@
+{
+	"info": {
+		"_postman_id": "72ac8925-90f6-4e92-b00d-d0743e050021",
+		"name": "WEB_PROJECT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "air",
+			"item": [
+				{
+					"name": "get/all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/air/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"air",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/air/id/17",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"air",
+								"id",
+								"17"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post/air",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/AppServ/www/pointdodo/images/theme/default/assets/images/icon-checkbox.png"
+								},
+								{
+									"key": "type",
+									"value": "qweqwe",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "wwwwwwwwwwwwwwwww",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "wwwwwwwwwwwwwww",
+									"type": "text"
+								},
+								{
+									"key": "brand",
+									"value": "qweqwe",
+									"type": "text"
+								},
+								{
+									"key": "btu",
+									"value": "qweqwe",
+									"type": "text"
+								},
+								{
+									"key": "room",
+									"value": "werwer",
+									"type": "text"
+								},
+								{
+									"key": "detail",
+									"value": "dsfsdfsdfsdf",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "12540",
+									"type": "text"
+								},
+								{
+									"key": "isvoid",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/air/post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"air",
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "dish",
+			"item": [
+				{
+					"name": "get/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/dish/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"dish",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/dish/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"dish",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post/dish",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/AppServ/www/pointdodo/images/theme/default/assets/images/icon-checkbox.png"
+								},
+								{
+									"key": "type",
+									"value": "qweqwe",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "wwwwwwwwwwwwwwwww",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "wwwwwwwwwwwwwww",
+									"type": "text"
+								},
+								{
+									"key": "brand",
+									"value": "qweqwe",
+									"type": "text"
+								},
+								{
+									"key": "detail",
+									"value": "qweqwe",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "12540",
+									"type": "text"
+								},
+								{
+									"key": "isvoid",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/dish/post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"dish",
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tv",
+			"item": []
+		},
+		{
+			"name": "fan",
+			"item": []
+		},
+		{
+			"name": "refri",
+			"item": []
+		},
+		{
+			"name": "wash",
+			"item": []
+		}
+	]
+}
