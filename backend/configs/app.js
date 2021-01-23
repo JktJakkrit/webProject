@@ -14,5 +14,6 @@ module.exports = {
     hostname : process.env.HOSTNAME,
     username : process.env.USER,
     password : process.env.PASSWORD,
-    database : process.env.DATABASE
+    database : process.env.DATABASE,
+    file : process.env.FILE
 }

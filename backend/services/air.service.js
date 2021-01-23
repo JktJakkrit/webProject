@@ -1,9 +1,11 @@
 const db = require('../configs/database');
-const sep = require('../helpers/pre_model');
+const config = require('../configs/app');
+const path = require('path');
+
 const methods = {
     findAll: function () {
         return new Promise((resolve, reject) => {
-            // db.connect();
+            // db.connect(function(err){ console.log(err)});
             db.query('SELECT * FROM `manage-air`', function (error, result) {
                 if (error) return reject(error);
                 return resolve(result);
@@ -14,6 +16,7 @@ const methods = {
     findById: function (id) {
         return new Promise((resolve, reject) => {
             let sql = "SELECT * FROM `manage-air` where `air_sys_id` = " + id;
+            // db.connect();
             db.query(sql, function (error, result) {
                 if (error) return reject(error);
                 return resolve(result);
@@ -21,16 +24,18 @@ const methods = {
             // db.end();
         })
     },
-    postItemAir: function (res) {
+    postItemAir: function (path_pic, body) {
         return new Promise((resolve, reject) => {
-            // let {column, data} = sep.create(res);
+            let newPath = config.file + path.basename(path_pic)
+            let pic = {'file': newPath}
+            let data = {...body, ...pic}
             let sql = "INSERT INTO `manage-air` SET ?";
-            db.query(sql,res,function (error, result) {
+            // return resolve(data);
+            db.query(sql, data, function (error, result) {
                 if (error) return reject(error);
                 return resolve(result);
             });
-
-            db.end();
+            // db.end();
         })
     }
 }

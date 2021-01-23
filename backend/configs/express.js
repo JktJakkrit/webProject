@@ -4,11 +4,11 @@ const cors = require('cors');
 const passport = require('passport');
 const path = require('path');
 module.exports = async (app) => {
+
     // connect Mysql
     require('../configs/database')
 
     //CORS
-    //TODO:ต้องใส่methodลงในarray
     const allowedOrigins = []
     const corsOprions = {
         origin: function (origin,callback) {

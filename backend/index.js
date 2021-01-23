@@ -25,5 +25,6 @@ app.use('/api-docs', swaggerUi.serve , swaggerUi.setup(swaggerDocument));
 const server = app.listen(config.port, () => {
     // @ts-ignore
     let port = server.address().port
-    console.log(`Example app listening at  http://localhost:${port}`)
+    // console.log(`Example app listening at  http://localhost:${port}`)
+    console.log(`app listening at  ${process.env.BASE_URL}`)
 });

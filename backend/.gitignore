@@ -16,3 +16,7 @@ build
 npm-debug.log
 .DS_Store
 log
+
+
+#upload
+/backend/public/*
