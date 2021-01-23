@@ -20,7 +20,7 @@ const imageFilter = function (req, file, cb) {
     cb(null, true);
 };
 
-const upload = multer({storage: setting_storage, fileFilter: imageFilter})
+const upload = multer({storage: setting_storage})
 
 module.exports = upload
 

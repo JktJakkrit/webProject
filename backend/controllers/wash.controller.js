@@ -24,6 +24,14 @@ const methods = {
         }catch(error){
             res.json(error).end();
         }
+    },
+    async UpdateWashById(req,res){
+        try{
+            let result = await service.putItemWashById(req.params.id,req.body)
+            res.status(200).send(result)
+        }catch(error){
+            res.json(error).end();
+        }
     }
 }
 

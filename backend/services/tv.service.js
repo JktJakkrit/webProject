@@ -35,7 +35,16 @@ const methods = {
             });
             // db.end();
         })
-    } // post
+    },
+    putItemTVById: function (id, body) {
+        return new Promise((resolve, reject) => {
+            let sql = "UPDATE `manage-tv` SET ? WHERE `tv_sys_id` = " + id;
+            db.query(sql,[body,id], function (error, result) {
+                if (error) return reject(error);
+                return resolve(result);
+            })
+        })
+    }
 }
 
 module.exports = {...methods}

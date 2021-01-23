@@ -35,7 +35,16 @@ const methods = {
             });
             // db.end();
         })
-    } // post
+    },
+    putItemDishById: function (id, body) {
+        return new Promise((resolve, reject) => {
+            let sql = "UPDATE `manage-dish` SET ? WHERE `dish_sys_id` = " + id;
+            db.query(sql,[body,id], function (error, result) {
+                if (error) return reject(error);
+                return resolve(result);
+            })
+        })
+    }
 
 }
 

@@ -37,7 +37,16 @@ const methods = {
             });
             // db.end();
         })
-    } // post
+    },
+    putItemAirById: function (id, body) {
+        return new Promise((resolve, reject) => {
+            let sql = "UPDATE `manage-air` SET ? WHERE `air_sys_id` = " + id;
+            db.query(sql,[body,id], function (error, result) {
+                if (error) return reject(error);
+                return resolve(result);
+            })
+        })
+    }
 }
 
 module.exports = {...methods}
