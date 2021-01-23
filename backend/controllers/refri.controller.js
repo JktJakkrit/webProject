@@ -19,7 +19,7 @@ const methods = {
     },
     async PostRefri(req,res){
         try{
-            let result = await service.postItemAir(req.body)
+            let result = await service.postItemRefri(req.file.path,req.body)
             res.status(200).send(result)
         }catch(error){
             res.json(error).end();

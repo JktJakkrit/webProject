@@ -19,7 +19,7 @@ const methods = {
     },
     async PostFan(req,res){
         try{
-            let result = await service.postItemAir(req.body)
+            let result = await service.postItemFan(req.file.path,req.body)
             res.status(200).send(result)
         }catch(error){
             res.json(error).end();

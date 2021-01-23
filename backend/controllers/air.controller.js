@@ -18,10 +18,6 @@ const methods = {
         }
     },
     async PostAir(req,res){
-        // console.log(req.file.path);
-        // console.log("---------------------------------------")
-        // console.log(req.body);
-        // res.status(200).send(req.body)
         try{
             let result = await service.postItemAir(req.file.path,req.body)
             res.status(200).send(result)
