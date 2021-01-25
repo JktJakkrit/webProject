@@ -24,14 +24,6 @@ const methods = {
         }catch(error){
             res.json(error).end();
         }
-    },
-    async UpdateAirById(req,res){
-        try{
-            let result = await service.putItemAirById(req.params.id,req.body)
-            res.status(200).send(result)
-        }catch(error){
-            res.json(error).end();
-        }
     }
 }
 
