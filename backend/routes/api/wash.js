@@ -6,5 +6,4 @@ router.get('/all', controller.GetWashAll)
 router.get('/id/:id', controller.GetById)
 router.post('/post', upload.single('avatar'), controller.PostWash)
 router.put('/id/:id', controller.UpdateWashById)
-
 module.exports = router;

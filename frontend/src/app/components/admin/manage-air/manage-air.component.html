@@ -131,7 +131,7 @@
                             <div class="form-group">
                                 <label for=" ">BTU Group</label>
                                 <label style="color: red"> * </label>
-                                <select name="btu " class="form-control" formControlName="btu" (change)="select('btu', $event)">
+                                <select name="btu" class="form-control" formControlName="btu" (change)="select('btu', $event)">
                   <option value=" ">Please select</option>
                   <option
                     *ngFor="let m of productBtu"
@@ -148,7 +148,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <div class="form-group">
-                                <label for="">Air-Conditioning CODE</label>
+                                <label for="code">Air-Conditioning CODE</label>
                                 <label style="color: red"> * </label>
                                 <input type="text" id="code" [readonly]="true" class="form-control" formControlName="code" />
                             </div>
@@ -164,7 +164,7 @@
                   <option value=" ">Please select</option>
                   <option
                     *ngFor="let m of productRoom"
-                    id="room "
+                    id="room"
                     [value]="m.title"
                   >
                     {{ m.title }}
@@ -215,8 +215,8 @@
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <div class="form-group">
-                                <label for="file">Upload Image</label>
-                                <input formControlName="file" type="file" class="form-control" (change)="onFileChange($event)" />
+                                <label for="avatar">Upload Image</label>
+                                <input formControlName="avatar" type="file" class="form-control" (change)="onFileChange($event)" />
                             </div>
                             <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width: 150px" />
                         </div>
@@ -225,24 +225,25 @@
 
                 <div class="modal-footer">
                     <button class="btn btn-primary" type="submit ">Submit</button>
-                    <button type="button " class="btn btn-secondary" data-dismiss="modal " (click)="closeModal('modal_addcate')">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal('modal_addcate')">
             Close
           </button>
                 </div>
-                <p>Status: {{ add_air_form.status }}</p>
+                <p>Status: {{ this.add_air_form.status }}</p>
+                <p>BTU: {{ this.add_air_form.value.btu }}</p>
             </div>
         </form>
     </div>
 </div>
 
 <!-- edit -->
-<div class="modal fade" id="modal_editcate " tabindex="-1 " role="dialog " aria-labelledby="exampleModalCenterTitle " aria-hidden="true ">
+<div class="modal fade" id="modal_editcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document ">
         <form [formGroup]="edit_air_form" (ngSubmit)="airEditOnSubmit(this.edit_air_form)">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle ">Edit Building</h5>
-                    <button type="button " class="close" data-dismiss="modal " aria-label="Close " (click)="closeModal('modal_editcate')">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Building</h5>
+                    <button type="button " class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('modal_editcate')">
             <span aria-hidden="true ">&times;</span>
           </button>
                 </div>
@@ -295,9 +296,9 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <div class="form-group">
-                                <label for="">Air-Conditioning CODE</label>
+                                <label for="code">Air-Conditioning CODE</label>
                                 <label style="color: red"> * </label>
-                                <input type="text" id="code" [readonly]="true" class="form-control" formControlName="code" />
+                                <input type="text" [readonly]="true" class="form-control" formControlName="code" />
                             </div>
                         </div>
                     </div>
@@ -311,7 +312,7 @@
                   <option value=" ">Please select</option>
                   <option
                     *ngFor="let m of productRoom"
-                    id="room "
+                    id="room"
                     [value]="m.title"
                   >
                     {{ m.title }}
@@ -362,8 +363,8 @@
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <div class="form-group">
-                                <label for="file">Upload Image</label>
-                                <input formControlName="file" type="file" class="form-control" (change)="onFileChange($event)" />
+                                <label for="avatar">Upload Image</label>
+                                <input formControlName="avatar" type="file" class="form-control" (change)="onFileChange($event)" />
                             </div>
                             <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width: 150px" />
                         </div>
@@ -373,27 +374,27 @@
                         <div class="form-group">
                             <label for=" ">Status</label>
                             <div class="custom-control custom-radio">
-                                <input type="radio " class="custom-control-input" id="isvoid_0 " name="isvoid " formControlName="isvoid " value="0 " />
-                                <label class="custom-control-label" for="isvoid_0 ">Active</label
+                                <input type="radio " class="custom-control-input" id="isvoid_0" name="isvoid" formControlName="isvoid" value="0" />
+                                <label class="custom-control-label" for="isvoid_0">Active</label
                 >
               </div>
               <div class="custom-control custom-radio">
                 <input
-                  type="radio "
+                  type="radio"
                   class="custom-control-input"
-                  id="isvoid_1 "
-                  name="isvoid "
-                  formControlName="isvoid "
-                  value="1 "
+                  id="isvoid_1"
+                  name="isvoid"
+                  formControlName="isvoid"
+                  value="1"
                 />
-                <label class="custom-control-label" for="isvoid_1 ">Void</label>
+                <label class="custom-control-label" for="isvoid_1">Void</label>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit " class="btn btn-primary">Submit</button>
-                    <button type="button " class="btn btn-secondary" data-dismiss="modal " (click)="closeModal('modal_editcate')">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal('modal_editcate')">
             Close
           </button>
                 </div>

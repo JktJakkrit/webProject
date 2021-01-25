@@ -1,68 +1,68 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-} from "@angular/forms";
-import { DataTableDirective } from "angular-datatables";
-import { Subject } from "rxjs";
-import { MasterService } from "src/app/_services/master.service";
-import { ModalService } from "src/app/_services/modal.service";
-import Swal from "sweetalert2";
+} from '@angular/forms';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
+import { MasterService } from 'src/app/_services/master.service';
+import { ModalService } from 'src/app/_services/modal.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-manage-air',
   templateUrl: './manage-air.component.html',
-  styleUrls: ['./manage-air.component.css']
+  styleUrls: ['./manage-air.component.css'],
 })
 export class ManageAirComponent implements OnInit {
-
   edit_air_form: FormGroup;
   add_air_form: FormGroup;
+  photo: File;
 
   imageSrc: string;
 
   productType = [
-    { id: 1, code: "AIR01", title: "แบบติดผนัง" },
-    { id: 2, code: "AIR02", title: "อุปกรณ์เสริมเครื่องปรับอากาศ" },
-    { id: 3, code: "AIR03", title: "แบบเคลื่อนที่" },
-    { id: 4, code: "AIR00", title: "อื่นๆ" },
+    { id: 1, code: 'AIR01', title: 'แบบติดผนัง' },
+    { id: 2, code: 'AIR02', title: 'อุปกรณ์เสริมเครื่องปรับอากาศ' },
+    { id: 3, code: 'AIR03', title: 'แบบเคลื่อนที่' },
+    { id: 4, code: 'AIR00', title: 'อื่นๆ' },
   ];
 
   productBtu = [
-    { id: 1, code: "BTU01", title: "0 - 12000 BTU" },
-    { id: 2, code: "BTU02", title: "18000 - 23999 BTU" },
-    { id: 3, code: "BTU03", title: "12001 - 14999 BTU" },
-    { id: 4, code: "BTU04", title: "24000 - 50000 BTU" },
-    { id: 5, code: "BTU00", title: "อื่นๆ" },
+    { id: 1, code: 'BTU01', title: '0 - 12000 BTU' },
+    { id: 2, code: 'BTU02', title: '18000 - 23999 BTU' },
+    { id: 3, code: 'BTU03', title: '12001 - 14999 BTU' },
+    { id: 4, code: 'BTU04', title: '24000 - 50000 BTU' },
+    { id: 5, code: 'BTU00', title: 'อื่นๆ' },
   ];
 
   productRoom = [
-    { id: 1, code: "R01", title: "11 - 14 SQM" },
-    { id: 2, code: "R02", title: "14.1 - 18 SQM" },
-    { id: 3, code: "R03", title: "18.1- 28 SQM" },
-    { id: 4, code: "R04", title: "28.1 - 35 SQM" },
-    { id: 5, code: "R00", title: "อื่นๆ" },
+    { id: 1, code: 'R01', title: '11 - 14 SQM' },
+    { id: 2, code: 'R02', title: '14.1 - 18 SQM' },
+    { id: 3, code: 'R03', title: '18.1- 28 SQM' },
+    { id: 4, code: 'R04', title: '28.1 - 35 SQM' },
+    { id: 5, code: 'R00', title: 'อื่นๆ' },
   ];
 
   productID = {
-    type: "",
-    btu: "",
+    type: '',
+    btu: '',
   };
 
-  select(type, _$event) {
-    if (type == "type") {
+  select(type,_$event) {
+    if (type == 'type') {
       this.productID.type = _$event.target.value;
     } else {
       this.productID.btu = _$event.target.value;
     }
     var ICODE =
       this.productID.type +
-      "-" +
+      '-' +
       this.productID.btu +
-      "-" +
+      '-' +
       (Math.floor(Math.random() * 9999) + 1);
-    (<HTMLInputElement>document.getElementById("code")).value = ICODE;
+    (<HTMLInputElement>document.getElementById('code')).value = ICODE;
 
     this.add_air_form.patchValue({ code: ICODE });
   }
@@ -73,38 +73,38 @@ export class ManageAirComponent implements OnInit {
     private masterService: MasterService
   ) {
     this.add_air_form = this.formBuilder.group({
-      type: new FormControl("", [Validators.required]),
-      code: new FormControl("", [Validators.required]),
-      name: new FormControl("", [Validators.required]),
-      brand: new FormControl("", [Validators.required]),
-      btu: new FormControl("", [Validators.required]),
-      room: new FormControl("", [Validators.required]),
-      detail: new FormControl("", [Validators.required]),
-      amount: new FormControl("", [Validators.required]),
-      price: new FormControl("", [
+      type: new FormControl('', [Validators.required]),
+      code: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
+      brand: new FormControl('', [Validators.required]),
+      btu: new FormControl('', [Validators.required]),
+      room: new FormControl('', [Validators.required]),
+      detail: new FormControl('', [Validators.required]),
+      amount: new FormControl('', [Validators.required]),
+      price: new FormControl('', [
         Validators.required,
         Validators.min(1),
         Validators.max(100000),
       ]),
-      file: ["", Validators.required],
+      avatar: ['', Validators.required],
     });
 
     this.edit_air_form = this.formBuilder.group({
-      air_sys_id: ["", Validators.required],
-      type: new FormControl("", [Validators.required]),
-      code: new FormControl("", [Validators.required]),
-      name: new FormControl("", [Validators.required]),
-      brand: new FormControl("", [Validators.required]),
-      btu: new FormControl("", [Validators.required]),
-      room: new FormControl("", [Validators.required]),
-      detail: new FormControl("", [Validators.required]),
-      amount: new FormControl("", [Validators.required]),
-      price: new FormControl("", [
+      air_sys_id: ['', Validators.required],
+      type: new FormControl('', [Validators.required]),
+      code: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
+      brand: new FormControl('', [Validators.required]),
+      btu: new FormControl('', [Validators.required]),
+      room: new FormControl('', [Validators.required]),
+      detail: new FormControl('', [Validators.required]),
+      amount: new FormControl('', [Validators.required]),
+      price: new FormControl('', [
         Validators.required,
         Validators.min(1),
         Validators.max(100000),
       ]),
-      file: ["", Validators.required],
+      avatar: ['', Validators.required],
       isvoid: 0,
     });
   }
@@ -128,8 +128,10 @@ export class ManageAirComponent implements OnInit {
   }
 
   airOnSubmit(form: any) {
+    console.log(this.add_air_form);
+
     if (!this.add_air_form.valid) {
-      Swal.fire("Input Valid!", "Please enter require input", "info");
+      Swal.fire('Input Valid!', 'Please enter require input', 'info');
     } else {
       this.masterService
         .addMasterAirs(
@@ -142,21 +144,21 @@ export class ManageAirComponent implements OnInit {
           form.value.detail,
           form.value.price,
           form.value.amount,
-          form.value.file
+          this.photo
         )
         .subscribe(
           (res: any) => {
             console.log(res);
-            Swal.fire("Successful!", "Air added successful.", "success");
+            Swal.fire('Successful!', 'Air added successful.', 'success');
           },
           (error) => {
             if (error.status === 200 || error.status === 201) {
-              Swal.fire("Error!", "error : " + error.status, "error");
-              this.closeModal("modal_addcate");
+              Swal.fire('Error!', 'error : ' + error.status, 'error');
+              this.closeModal('modal_addcate');
               this.loadDataMaster();
             } else {
               console.log(error.status);
-              Swal.fire("Error!", "error : " + error.status, "error");
+              Swal.fire('Error!', 'error : ' + error.status, 'error');
             }
           }
         );
@@ -165,7 +167,7 @@ export class ManageAirComponent implements OnInit {
 
   airEditOnSubmit(form: any) {
     if (!this.edit_air_form.valid) {
-      Swal.fire("Input Valid!", "Please enter require input", "info");
+      Swal.fire('Input Valid!', 'Please enter require input', 'info');
     } else {
       this.masterService
         .updateMasterAirs(
@@ -179,23 +181,23 @@ export class ManageAirComponent implements OnInit {
           form.value.detail,
           form.value.price,
           form.value.amount,
-          form.value.file,
+          this.photo,
           form.value.isvoid
         )
 
         .subscribe(
           (res: any) => {
             console.log(res);
-            Swal.fire("Successful!", "Air edited successful.", "success");
+            Swal.fire('Successful!', 'Air edited successful.', 'success');
           },
           (error) => {
             if (error.status === 200 || error.status === 201) {
-              Swal.fire("Error!", "error : " + error.status, "error");
-              this.closeModal("modal_editcate");
+              Swal.fire('Error!', 'error : ' + error.status, 'error');
+              this.closeModal('modal_editcate');
               this.loadDataMaster();
             } else {
               console.log(error.status);
-              Swal.fire("Error!", "error : " + error.status, "error");
+              Swal.fire('Error!', 'error : ' + error.status, 'error');
             }
           }
         );
@@ -203,20 +205,20 @@ export class ManageAirComponent implements OnInit {
   }
 
   editcate(trdata) {
-    this.edit_air_form.controls["air_sys_id"].setValue(trdata.air_sys_id);
-    this.edit_air_form.controls["name"].setValue(trdata.name);
-    this.edit_air_form.controls["code"].setValue(trdata.code);
-    this.edit_air_form.controls["btu"].setValue(trdata.btu);
-    this.edit_air_form.controls["room"].setValue(trdata.room);
-    this.edit_air_form.controls["brand"].setValue(trdata.brand);
-    this.edit_air_form.controls["type"].setValue(trdata.type);
-    this.edit_air_form.controls["detail"].setValue(trdata.detail);
-    this.edit_air_form.controls["price"].setValue(trdata.price);
-    this.edit_air_form.controls["amount"].setValue(trdata.amount);
-    this.edit_air_form.controls["file"].setValue(trdata.file);
-    this.edit_air_form.controls["isvoid"].setValue(trdata.isvoid.toString());
+    this.edit_air_form.controls['air_sys_id'].setValue(trdata.air_sys_id);
+    this.edit_air_form.controls['name'].setValue(trdata.name);
+    this.edit_air_form.controls['code'].setValue(trdata.code);
+    this.edit_air_form.controls['btu'].setValue(trdata.btu);
+    this.edit_air_form.controls['room'].setValue(trdata.room);
+    this.edit_air_form.controls['brand'].setValue(trdata.brand);
+    this.edit_air_form.controls['type'].setValue(trdata.type);
+    this.edit_air_form.controls['detail'].setValue(trdata.detail);
+    this.edit_air_form.controls['price'].setValue(trdata.price);
+    this.edit_air_form.controls['amount'].setValue(trdata.amount);
+    this.edit_air_form.controls['avatar'].setValue(trdata.avatar);
+    this.edit_air_form.controls['isvoid'].setValue(trdata.isvoid.toString());
 
-    this.modalService.open("modal_editcate");
+    this.modalService.open('modal_editcate');
   }
 
   loadDataMaster() {
@@ -236,26 +238,49 @@ export class ManageAirComponent implements OnInit {
       },
 
       (error) => {
-        Swal.fire("Error!", "error : " + error.status, "error");
+        Swal.fire('Error!', 'error : ' + error.status, 'error');
       }
     );
   }
 
   onFileChange(event) {
-    const reader = new FileReader();
+    try {
+      var file = event.target.files[0];
+      console.log(file);
+      this.photo = file;
+      const reader = new FileReader();
 
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
+      if (event.target.files && event.target.files.length) {
+        const [avatar] = event.target.files;
+        // this.add_air_form.setValue({avatar : avatar})
 
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(avatar);
 
-      reader.onload = () => {
-        this.imageSrc = reader.result as string;
+        reader.onload = () => {
+          this.imageSrc = reader.result as string;
 
-        this.add_air_form.patchValue({
-          fileSource: reader.result,
-        });
-      };
-    }
+          this.add_air_form.patchValue({
+            fileSource: reader.result,
+          });
+        };
+      }
+    } catch (e) {}
   }
+  //   const reader = new FileReader();
+
+  //   if (event.target.files && event.target.files.length) {
+  //     const [avatar] = event.target.files;
+  //     // this.add_air_form.setValue({avatar : avatar})
+
+  //     reader.readAsDataURL(avatar);
+
+  //     reader.onload = () => {
+  //       this.imageSrc = reader.result as string;
+
+  //       this.add_air_form.patchValue({
+  //         fileSource: reader.result,
+  //       });
+  //     };
+  //   }
+  // }
 }

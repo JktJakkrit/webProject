@@ -17,7 +17,7 @@ import Swal from "sweetalert2";
   styleUrls: ['./manage-refri.component.css']
 })
 export class ManageRefriComponent implements OnInit {
-
+  photo: File;
   edit_refri_form: FormGroup;
   add_refri_form: FormGroup;
 
@@ -58,7 +58,7 @@ export class ManageRefriComponent implements OnInit {
       (Math.floor(Math.random() * 9999) + 1);
     (<HTMLInputElement>document.getElementById('code')).value = ICODE;
 
-    this.add_refri_form.patchValue({ icode: ICODE });
+    this.add_refri_form.patchValue({ code: ICODE });
   }
 
   constructor(
@@ -68,7 +68,7 @@ export class ManageRefriComponent implements OnInit {
   ) {
     this.add_refri_form = this.formBuilder.group({
       type: new FormControl('', [Validators.required]),
-    icode: new FormControl('', [Validators.required]),
+    code: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required]),
     brand: new FormControl('', [Validators.required]),
     size: new FormControl('', [Validators.required]),
@@ -86,7 +86,7 @@ export class ManageRefriComponent implements OnInit {
     this.edit_refri_form = this.formBuilder.group({
       fan_sys_id: ["", Validators.required],
       type: new FormControl('', [Validators.required]),
-      icode: new FormControl('', [Validators.required]),
+      code: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
       brand: new FormControl('', [Validators.required]),
       size: new FormControl('', [Validators.required]),
@@ -127,7 +127,7 @@ export class ManageRefriComponent implements OnInit {
       this.masterService
         .addMasterRefri( 
         form.value.type,
-        form.value.icode,
+        form.value.code,
         form.value.name,
         form.value.brand,
         form.value.detail,
@@ -135,7 +135,7 @@ export class ManageRefriComponent implements OnInit {
         form.value.amount,
         form.value.capa,
         form.value.size,
-        form.value.file
+        this.photo
         )
         .subscribe(
           (res: any) => {
@@ -164,7 +164,7 @@ export class ManageRefriComponent implements OnInit {
         .updateMasterRefri(
           form.value.refri_sys_id,
           form.value.type,
-          form.value.icode,
+          form.value.code,
           form.value.name,
           form.value.brand,
           form.value.detail,
@@ -172,7 +172,7 @@ export class ManageRefriComponent implements OnInit {
           form.value.amount,
           form.value.capa,
           form.value.size,
-          form.value.file,
+          this.photo,
           form.value.isvoid
         )
 
@@ -198,7 +198,7 @@ export class ManageRefriComponent implements OnInit {
   editcate(trdata) {
     this.edit_refri_form.controls['refri_sys_id'].setValue(trdata.refri_sys_id);
     this.edit_refri_form.controls['name'].setValue(trdata.name);
-    this.edit_refri_form.controls['icode'].setValue(trdata.icode);
+    this.edit_refri_form.controls['code'].setValue(trdata.code);
     this.edit_refri_form.controls['brand'].setValue(trdata.brand);
     this.edit_refri_form.controls['type'].setValue(trdata.type);
     this.edit_refri_form.controls['detail'].setValue(trdata.detail);
@@ -237,21 +237,27 @@ export class ManageRefriComponent implements OnInit {
   }
 
   onFileChange(event) {
-    const reader = new FileReader();
+    try {
+      var file = event.target.files[0];
+      console.log(file);
+      this.photo = file;
+      const reader = new FileReader();
 
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
+      if (event.target.files && event.target.files.length) {
+        const [avatar] = event.target.files;
+        // this.add_air_form.setValue({avatar : avatar})
 
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(avatar);
 
-      reader.onload = () => {
-        this.imageSrc = reader.result as string;
+        reader.onload = () => {
+          this.imageSrc = reader.result as string;
 
-        this.add_refri_form.patchValue({
-          fileSource: reader.result,
-        });
-      };
-    }
+          this.add_refri_form.patchValue({
+            fileSource: reader.result,
+          });
+        };
+      }
+    } catch (e) {}
   }
 
 }

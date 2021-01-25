@@ -17,7 +17,7 @@ import Swal from "sweetalert2";
   styleUrls: ['./manage-dish.component.css']
 })
 export class ManageDishComponent implements OnInit {
-
+  photo: File;
   edit_dish_form: FormGroup;
   add_dish_form: FormGroup;
 
@@ -60,7 +60,7 @@ export class ManageDishComponent implements OnInit {
         Validators.min(1),
         Validators.max(100000),
       ]),
-      file: ['', Validators.required],
+      avatar: ['', Validators.required],
     });
 
     this.edit_dish_form = this.formBuilder.group({
@@ -76,7 +76,7 @@ export class ManageDishComponent implements OnInit {
         Validators.min(1),
         Validators.max(100000),
       ]),
-      file: ['', Validators.required],
+      avatar: ['', Validators.required],
       isvoid: 0,
     });
   }
@@ -111,7 +111,7 @@ export class ManageDishComponent implements OnInit {
         form.value.detail,
         form.value.price,
         form.value.amount,
-        form.value.file
+        this.photo
         )
         .subscribe(
           (res: any) => {
@@ -146,7 +146,7 @@ export class ManageDishComponent implements OnInit {
           form.value.detail,
           form.value.price,
           form.value.amount,
-          form.value.file,
+          this.photo,
           form.value.isvoid
         )
 
@@ -178,7 +178,7 @@ export class ManageDishComponent implements OnInit {
     this.edit_dish_form.controls['detail'].setValue(trdata.detail);
     this.edit_dish_form.controls['price'].setValue(trdata.price);
     this.edit_dish_form.controls['amount'].setValue(trdata.amount);
-    this.edit_dish_form.controls['file'].setValue(trdata.file);
+    this.edit_dish_form.controls['avatar'].setValue(trdata.avatar);
     this.edit_dish_form.controls['isvoid'].setValue(
       trdata.isvoid.toString()
     );
@@ -209,21 +209,27 @@ export class ManageDishComponent implements OnInit {
   }
 
   onFileChange(event) {
-    const reader = new FileReader();
+    try {
+      var file = event.target.files[0];
+      console.log(file);
+      this.photo = file;
+      const reader = new FileReader();
 
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
+      if (event.target.files && event.target.files.length) {
+        const [avatar] = event.target.files;
+        // this.add_air_form.setValue({avatar : avatar})
 
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(avatar);
 
-      reader.onload = () => {
-        this.imageSrc = reader.result as string;
+        reader.onload = () => {
+          this.imageSrc = reader.result as string;
 
-        this.add_dish_form.patchValue({
-          fileSource: reader.result,
-        });
-      };
-    }
+          this.add_dish_form.patchValue({
+            fileSource: reader.result,
+          });
+        };
+      }
+    } catch (e) {}
   }
 
 }

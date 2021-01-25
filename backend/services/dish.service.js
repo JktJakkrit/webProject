@@ -3,47 +3,46 @@ const config = require('../configs/app');
 const path = require('path');
 
 const methods = {
-    findAll(){
-        return new Promise((resolve, reject)=>{
-            db.query('SELECT * FROM `manage-dish`',function(error,result,fields){
-                if(error) return reject(error);
-                return resolve(result);
-            })
-        })
-    },
-    findById: function (id) {
+    findAll() {
         return new Promise((resolve, reject) => {
-            let sql = "SELECT * FROM `manage-dish` where `dish_sys_id` = " + id;
-            db.query(sql, function (error, result) {
+            db.query('SELECT * FROM `manage-dish`', function(error, result, fields) {
                 if (error) return reject(error);
                 return resolve(result);
             })
-            // db.end();
         })
     },
-    postItemDish: function (path_pic, body) {
+    findById: function(id) {
+        return new Promise((resolve, reject) => {
+            let sql = "SELECT * FROM `manage-dish` where `dish_sys_id` = " + id;
+            db.query(sql, function(error, result) {
+                    if (error) return reject(error);
+                    return resolve(result);
+                })
+                // db.end();
+        })
+    },
+    postItemDish: function(path_pic, body) {
         return new Promise((resolve, reject) => {
             let newPath = config.file + path.basename(path_pic)
-            let pic = {'file': newPath}
-            let data = {...body, ...pic}
+            let pic = { 'file': newPath }
+            let data = {...body, ...pic }
             let sql = "INSERT INTO `manage-dish` SET ?";
-            db.query(sql, data, function (error, result) {
+            db.query(sql, data, function(error, result) {
                 if (error) return reject(error);
                 return resolve(result);
             });
             // db.end();
         })
-    },
-    putItemDishById: function (id, body) {
+    }, // post
+    putItemDishById: function(id, body) {
         return new Promise((resolve, reject) => {
             let sql = "UPDATE `manage-dish` SET ? WHERE `dish_sys_id` = " + id;
-            db.query(sql,[body,id], function (error, result) {
+            db.query(sql, [body, id], function(error, result) {
                 if (error) return reject(error);
                 return resolve(result);
             })
         })
     }
-
 }
 
-module.exports = {...methods}
+module.exports = {...methods }
