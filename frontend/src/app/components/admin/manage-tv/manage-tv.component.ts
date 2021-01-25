@@ -19,7 +19,7 @@ import Swal from "sweetalert2";
 export class ManageTvComponent implements OnInit {
   edit_tv_form: FormGroup;
   add_tv_form: FormGroup;
-
+  photo: File;
   imageSrc: string;
   
   productScsize = [
@@ -57,7 +57,7 @@ export class ManageTvComponent implements OnInit {
       (Math.floor(Math.random() * 9999) + 1);
     (<HTMLInputElement>document.getElementById("code")).value = ICODE;
 
-    this.add_tv_form.patchValue({ icode: ICODE });
+    this.add_tv_form.patchValue({ code: ICODE });
   }
 
   constructor(
@@ -67,7 +67,7 @@ export class ManageTvComponent implements OnInit {
   ) {
     this.add_tv_form = this.formBuilder.group({
       type: new FormControl("", [Validators.required]),
-      icode: new FormControl("", [Validators.required]),
+      code: new FormControl("", [Validators.required]),
       name: new FormControl("", [Validators.required]),
       brand: new FormControl("", [Validators.required]),
       scsize: new FormControl("", [Validators.required]),
@@ -84,7 +84,7 @@ export class ManageTvComponent implements OnInit {
     this.edit_tv_form = this.formBuilder.group({
       tv_sys_id: ["", Validators.required],
       type: new FormControl("", [Validators.required]),
-      icode: new FormControl("", [Validators.required]),
+      code: new FormControl("", [Validators.required]),
       name: new FormControl("", [Validators.required]),
       brand: new FormControl("", [Validators.required]),
       scsize: new FormControl("", [Validators.required]),
@@ -125,14 +125,14 @@ export class ManageTvComponent implements OnInit {
       this.masterService
         .addMasterTv(
           form.value.type,
-          form.value.icode,
+          form.value.code,
           form.value.name,
           form.value.brand,
           form.value.detail,
           form.value.price,
           form.value.amount,
           form.value.scsize,
-          form.value.file
+          this.photo
         )
         .subscribe(
           (res: any) => {
@@ -161,14 +161,14 @@ export class ManageTvComponent implements OnInit {
         .updateMasterTv(
           form.value.tv_sys_id,
           form.value.type,
-          form.value.icode,
+          form.value.code,
           form.value.name,
           form.value.brand,
           form.value.detail,
           form.value.price,
           form.value.amount,
           form.value.scsize,
-          form.value.file,
+          this.photo,
           form.value.isvoid
         )
 
@@ -198,7 +198,7 @@ export class ManageTvComponent implements OnInit {
   editcate(trdata) {
     this.edit_tv_form.controls["refri_sys_id"].setValue(trdata.refri_sys_id);
     this.edit_tv_form.controls["name"].setValue(trdata.name);
-    this.edit_tv_form.controls["icode"].setValue(trdata.icode);
+    this.edit_tv_form.controls["code"].setValue(trdata.code);
     this.edit_tv_form.controls["brand"].setValue(trdata.brand);
     this.edit_tv_form.controls["type"].setValue(trdata.type);
     this.edit_tv_form.controls["detail"].setValue(trdata.detail);
@@ -234,20 +234,27 @@ export class ManageTvComponent implements OnInit {
   }
 
   onFileChange(event) {
-    const reader = new FileReader();
+    try {
+      var file = event.target.files[0];
+      console.log(file);
+      this.photo = file;
+      const reader = new FileReader();
 
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
+      if (event.target.files && event.target.files.length) {
+        const [avatar] = event.target.files;
+        // this.add_air_form.setValue({avatar : avatar})
 
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(avatar);
 
-      reader.onload = () => {
-        this.imageSrc = reader.result as string;
+        reader.onload = () => {
+          this.imageSrc = reader.result as string;
 
-        this.add_tv_form.patchValue({
-          fileSource: reader.result,
-        });
-      };
-    }
+          this.add_tv_form.patchValue({
+            fileSource: reader.result,
+          });
+        };
+      }
+    } catch (e) {}
   }
+
 }

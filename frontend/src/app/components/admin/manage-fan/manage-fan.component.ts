@@ -17,7 +17,7 @@ import Swal from "sweetalert2";
   styleUrls: ['./manage-fan.component.css']
 })
 export class ManageFanComponent implements OnInit {
-
+  photo: File;
   edit_fan_form: FormGroup;
   add_fan_form: FormGroup;
 
@@ -57,7 +57,7 @@ export class ManageFanComponent implements OnInit {
       (Math.floor(Math.random() * 9999) + 1);
 
     (<HTMLInputElement>document.getElementById("code")).value = ICODE;
-    this.add_fan_form.patchValue({ icode: ICODE });
+    this.add_fan_form.patchValue({ code: ICODE });
   }
 
   constructor(
@@ -67,7 +67,7 @@ export class ManageFanComponent implements OnInit {
   ) {
     this.add_fan_form = this.formBuilder.group({
       type: new FormControl("", [Validators.required]),
-      icode: new FormControl("", [Validators.required]),
+      code: new FormControl("", [Validators.required]),
       name: new FormControl("", [Validators.required]),
       brand: new FormControl("", [Validators.required]),
       size: new FormControl("", [Validators.required]),
@@ -78,13 +78,13 @@ export class ManageFanComponent implements OnInit {
         Validators.min(1),
         Validators.max(100000),
       ]),
-      file: ["", Validators.required],
+      avatar: ["", Validators.required],
     });
 
     this.edit_fan_form = this.formBuilder.group({
       fan_sys_id: ["", Validators.required],
       type: new FormControl("", [Validators.required]),
-      icode: new FormControl("", [Validators.required]),
+      code: new FormControl("", [Validators.required]),
       name: new FormControl("", [Validators.required]),
       brand: new FormControl("", [Validators.required]),
       size: new FormControl("", [Validators.required]),
@@ -95,7 +95,7 @@ export class ManageFanComponent implements OnInit {
         Validators.min(1),
         Validators.max(100000),
       ]),
-      file: ["", Validators.required],
+      avatar: ["", Validators.required],
       isvoid: 0,
     });
   }
@@ -125,14 +125,14 @@ export class ManageFanComponent implements OnInit {
       this.masterService
         .addMasterFan(
           form.value.type,
-          form.value.icode,
+          form.value.code,
           form.value.name,
           form.value.brand,
           form.value.detail,
           form.value.price,
           form.value.amount,
           form.value.size,
-          form.value.file
+          this.photo
         )
         .subscribe(
           (res: any) => {
@@ -161,14 +161,14 @@ export class ManageFanComponent implements OnInit {
         .updateMasterFan(
           form.value.fan_sys_id,
           form.value.type,
-          form.value.icode,
+          form.value.code,
           form.value.name,
           form.value.brand,
           form.value.detail,
           form.value.price,
           form.value.amount,
           form.value.size,
-          form.value.file,
+          this.photo,
           form.value.isvoid
         )
 
@@ -194,7 +194,7 @@ export class ManageFanComponent implements OnInit {
   editcate(trdata) {
     this.edit_fan_form.controls["fan_sys_id"].setValue(trdata.fan_sys_id);
     this.edit_fan_form.controls["name"].setValue(trdata.name);
-    this.edit_fan_form.controls["icode"].setValue(trdata.icode);
+    this.edit_fan_form.controls["code"].setValue(trdata.code);
     this.edit_fan_form.controls["brand"].setValue(trdata.brand);
     this.edit_fan_form.controls["type"].setValue(trdata.type);
     this.edit_fan_form.controls["detail"].setValue(trdata.detail);
@@ -230,20 +230,27 @@ export class ManageFanComponent implements OnInit {
   }
 
   onFileChange(event) {
-    const reader = new FileReader();
+    try {
+      var file = event.target.files[0];
+      console.log(file);
+      this.photo = file;
+      const reader = new FileReader();
 
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
+      if (event.target.files && event.target.files.length) {
+        const [avatar] = event.target.files;
+        // this.add_air_form.setValue({avatar : avatar})
 
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(avatar);
 
-      reader.onload = () => {
-        this.imageSrc = reader.result as string;
+        reader.onload = () => {
+          this.imageSrc = reader.result as string;
 
-        this.add_fan_form.patchValue({
-          fileSource: reader.result,
-        });
-      };
-    }
+          this.add_fan_form.patchValue({
+            fileSource: reader.result,
+          });
+        };
+      }
+    } catch (e) {}
   }
+
 }
