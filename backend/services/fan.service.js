@@ -6,9 +6,10 @@ const methods = {
     findAll() {
         return new Promise((resolve, reject) => {
             db.query('SELECT * FROM `manage-fan`', function(error, result, fields) {
-                if (error) return reject(error);
-                return resolve(result);
-            })
+                    if (error) return reject(error);
+                    return resolve(result);
+                })
+                //db.end();
         })
     },
     findById: function(id) {
@@ -36,15 +37,15 @@ const methods = {
         })
     },
     putItemFanById: function(id, body) {
-        return new Promise((resolve, reject) => {
-            let sql = "UPDATE `manage-fan` SET ? WHERE `fan_sys_id` = " + id;
-            db.query(sql, [body, id], function(error, result) {
-                if (error) return reject(error);
-                return resolve(result);
+            return new Promise((resolve, reject) => {
+                let sql = "UPDATE `manage-fan` SET ? WHERE `fan_sys_id` = " + id;
+                db.query(sql, [body, id], function(error, result) {
+                    if (error) return reject(error);
+                    return resolve(result);
+                })
             })
-        })
-    }
-    // post
+        }
+        // post
 }
 
 module.exports = {...methods }

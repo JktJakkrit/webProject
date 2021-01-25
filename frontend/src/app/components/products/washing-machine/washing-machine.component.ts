@@ -16,6 +16,7 @@ export class WashingMachineComponent implements OnInit {
     private masterService: MasterService) { }
 
   ngOnInit(): void {
+    this.loadWashing();
   }
   loadWashing() {
     this.masterService. getMasterWashings().subscribe(

@@ -6,10 +6,10 @@ const methods = {
     findAll() {
         return new Promise((resolve, reject) => {
             db.query('SELECT * FROM `manage-tv`', function(error, result, fields) {
-                if (error) return reject(error);
-                return resolve(result);
-            })
-            //db.end();
+                    if (error) return reject(error);
+                    return resolve(result);
+                })
+                //db.end();
         })
     },
     findById: function(id) {

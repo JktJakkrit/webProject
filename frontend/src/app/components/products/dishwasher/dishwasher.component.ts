@@ -16,6 +16,7 @@ export class DishwasherComponent implements OnInit {
     private masterService: MasterService) { }
 
   ngOnInit(): void {
+    this.loadDishwasher();
   }
   loadDishwasher() {
     this.masterService. getMasterDishs().subscribe(

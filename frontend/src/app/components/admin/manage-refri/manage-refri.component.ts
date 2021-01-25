@@ -71,7 +71,6 @@ export class ManageRefriComponent implements OnInit {
     code: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required]),
     brand: new FormControl('', [Validators.required]),
-    size: new FormControl('', [Validators.required]),
     capa: new FormControl('', [Validators.required]),
     detail: new FormControl('', [Validators.required]),
     amount: new FormControl('', [Validators.required]),
@@ -80,16 +79,16 @@ export class ManageRefriComponent implements OnInit {
       Validators.min(1),
       Validators.max(100000),
     ]),
-      file: ['', Validators.required],
+      avatar: ['', Validators.required],
     });
 
     this.edit_refri_form = this.formBuilder.group({
-      fan_sys_id: ["", Validators.required],
+      refri_sys_id: ["", Validators.required],
       type: new FormControl('', [Validators.required]),
       code: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
       brand: new FormControl('', [Validators.required]),
-      size: new FormControl('', [Validators.required]),
+     
       capa: new FormControl('', [Validators.required]),
       detail: new FormControl('', [Validators.required]),
       amount: new FormControl('', [Validators.required]),
@@ -98,7 +97,7 @@ export class ManageRefriComponent implements OnInit {
         Validators.min(1),
         Validators.max(100000),
       ]),
-      file: ['', Validators.required],
+      avatar: ['', Validators.required],
       isvoid: 0,
     });
   }
@@ -130,17 +129,16 @@ export class ManageRefriComponent implements OnInit {
         form.value.code,
         form.value.name,
         form.value.brand,
-        form.value.detail,
-        form.value.price,
-        form.value.amount,
         form.value.capa,
-        form.value.size,
+        form.value.detail,
+        form.value.amount,
+        form.value.price,
         this.photo
         )
         .subscribe(
           (res: any) => {
             console.log(res);
-            Swal.fire('Successful!', 'Fan added successful.', 'success');
+            Swal.fire('Successful!', 'Refrigerator added successful.', 'success');
           },
           (error) => {
             if (error.status === 200 || error.status === 201) {
@@ -164,14 +162,13 @@ export class ManageRefriComponent implements OnInit {
         .updateMasterRefri(
           form.value.refri_sys_id,
           form.value.type,
-          form.value.code,
-          form.value.name,
-          form.value.brand,
-          form.value.detail,
-          form.value.price,
-          form.value.amount,
-          form.value.capa,
-          form.value.size,
+        form.value.code,
+        form.value.name,
+        form.value.brand,
+        form.value.capa,
+        form.value.detail,
+        form.value.amount,
+        form.value.price,
           this.photo,
           form.value.isvoid
         )
@@ -204,9 +201,8 @@ export class ManageRefriComponent implements OnInit {
     this.edit_refri_form.controls['detail'].setValue(trdata.detail);
     this.edit_refri_form.controls['capa'].setValue(trdata.capa);
     this.edit_refri_form.controls['price'].setValue(trdata.price);
-    this.edit_refri_form.controls['size'].setValue(trdata.size);
     this.edit_refri_form.controls['amount'].setValue(trdata.amount);
-    this.edit_refri_form.controls['file'].setValue(trdata.file);
+    this.edit_refri_form.controls['avatar'].setValue(trdata.avatar);
     this.edit_refri_form.controls['isvoid'].setValue(
       trdata.isvoid.toString()
     );

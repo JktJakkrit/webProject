@@ -16,6 +16,7 @@ export class ElectricFanComponent implements OnInit {
     private masterService: MasterService) { }
 
   ngOnInit(): void {
+    this.loadElectricFan();
   }
   loadElectricFan() {
     this.masterService. getMasterFans().subscribe(

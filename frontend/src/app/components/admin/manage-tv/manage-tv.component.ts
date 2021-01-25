@@ -78,7 +78,7 @@ export class ManageTvComponent implements OnInit {
         Validators.min(1),
         Validators.max(100000),
       ]),
-      file: ["", Validators.required],
+      avatar: ["", Validators.required],
     });
 
     this.edit_tv_form = this.formBuilder.group({
@@ -95,7 +95,7 @@ export class ManageTvComponent implements OnInit {
         Validators.min(1),
         Validators.max(100000),
       ]),
-      file: ["", Validators.required],
+      avatar: ["", Validators.required],
       isvoid: 0,
     });
   }
@@ -205,7 +205,7 @@ export class ManageTvComponent implements OnInit {
     this.edit_tv_form.controls["price"].setValue(trdata.price);
     this.edit_tv_form.controls["scsize"].setValue(trdata.scsize);
     this.edit_tv_form.controls["amount"].setValue(trdata.amount);
-    this.edit_tv_form.controls["file"].setValue(trdata.file);
+    this.edit_tv_form.controls["avatar"].setValue(trdata.avatar);
     this.edit_tv_form.controls["isvoid"].setValue(trdata.isvoid.toString());
 
     this.modalService.open("modal_editcate");

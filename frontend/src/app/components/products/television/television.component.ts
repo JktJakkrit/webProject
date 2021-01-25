@@ -16,6 +16,7 @@ export class TelevisionComponent implements OnInit {
     private masterService: MasterService) { }
 
   ngOnInit(): void {
+    this.loadTelevision();
   }
   loadTelevision() {
     this.masterService. getMasterTvs().subscribe(

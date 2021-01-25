@@ -255,9 +255,8 @@ export class MasterService {
     brand: string,
     capa: string,
     detail: string,
-    price: string,
     amount: string,
-    size: string,
+    price: string,
     avatar: File
   ) {
     var isvoid = 0;
@@ -272,7 +271,6 @@ export class MasterService {
     f.append('detail', detail);
     f.append('price', price);
     f.append('amount', amount);
-    f.append('size', size);
     f.append('avatar', avatar, avatar.name);
     f.append('isvoid', isvoid.toFixed());
     f.forEach((v, k) => {
@@ -295,7 +293,6 @@ export class MasterService {
     brand: string,
     detail: string,
     price: string,
-    size: string,
     amount: string,
     avatar: File,
     isvoid
@@ -309,7 +306,6 @@ export class MasterService {
       price,
       capa,
       amount,
-      size,
       avatar,
       isvoid,
     };

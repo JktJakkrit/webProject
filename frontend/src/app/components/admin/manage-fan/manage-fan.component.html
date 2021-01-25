@@ -127,7 +127,7 @@
 
                         <div class="form-group col-md-6">
                             <div class="form-group">
-                                <label for="">Fan Type</label>
+                                <label for="">Fan Size</label>
                                 <label style="color: red"> * </label>
                                 <select name="size" class="form-control" formControlName="size" (change)="select('size', $event)">
                   <option value="">Please select</option>
@@ -209,6 +209,15 @@
                       </button>
                 </div>
                 <p>Status: {{ add_fan_form.status }}</p>
+                <p>Status: {{ add_fan_form.value.name }}</p>
+                <p>Status: {{ add_fan_form.value.type }}</p>
+                <p>Status: {{ add_fan_form.value.size }}</p>
+                <p>Status: {{ add_fan_form.value.code }}</p>
+                <p>Status: {{ add_fan_form.value.brand }}</p>
+                <p>Status: {{ add_fan_form.value.detail }}</p>
+                <p>Status: {{ add_fan_form.value.amount }}</p>
+                <p>Status: {{ add_fan_form.value.price }}</p>
+                <p>Status: {{ add_fan_form.value.avatar }}</p>
             </div>
         </form>
     </div>

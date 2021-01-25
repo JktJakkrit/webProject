@@ -30,7 +30,7 @@
                                     <th>Code</th>
                                     <th>Name</th>
                                     <th>Brand</th>
-                                    <th>Size</th>
+
                                     <th>Capacity</th>
                                     <th>Price</th>
                                     <th>Amount</th>
@@ -45,7 +45,7 @@
                                     <td>{{ t.code }}</td>
                                     <td>{{ t.name }}</td>
                                     <td>{{ t.brand }}</td>
-                                    <td>{{ t.size }}</td>
+
                                     <td>{{ t.capa }}</td>
                                     <td>{{ t.price }}</td>
                                     <td>{{ t.amount }}</td>
@@ -66,7 +66,7 @@
                                     <th>Code</th>
                                     <th>Name</th>
                                     <th>Brand</th>
-                                    <th>Size</th>
+
                                     <th>Capacity</th>
                                     <th>Price</th>
                                     <th>Amount</th>
@@ -92,7 +92,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">
-                        Add Fan
+                        Add Refrigerator
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('modal_addcate')">
             <span aria-hidden="true">&times;</span>
@@ -212,6 +212,15 @@
                       </button>
                 </div>
                 <p>Status: {{ add_refri_form.status }}</p>
+                <p>name: {{ add_refri_form.value.name }}</p>
+                <p>type: {{ add_refri_form.value.type }}</p>
+                <p>capa: {{ add_refri_form.value.capa }}</p>
+                <p>code: {{ add_refri_form.value.code }}</p>
+                <p>brand: {{ add_refri_form.value.brand }}</p>
+                <p>detaili: {{ add_refri_form.value.detail }}</p>
+                <p>amount: {{ add_refri_form.value.amount }}</p>
+                <p>price: {{ add_refri_form.value.price }}</p>
+                <p>avatar: {{ add_refri_form.value.avatar }}</p>
             </div>
         </form>
     </div>

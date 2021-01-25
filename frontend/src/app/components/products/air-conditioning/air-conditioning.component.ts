@@ -16,10 +16,13 @@ export class AirConditioningComponent implements OnInit {
     private masterService: MasterService) { }
 
   ngOnInit(): void {
+    this.loadAirCondition();
   }
   loadAirCondition() {
     this.masterService. getMasterAirs().subscribe(
       (res: any) => {
+        console.log(res);
+        
         this.masterAir = res;
       },
       (error) => {

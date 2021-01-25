@@ -16,6 +16,7 @@ export class RefrigeratorComponent implements OnInit {
     private masterService: MasterService) { }
 
   ngOnInit(): void {
+    this.loadRefrigerator();
   }
   loadRefrigerator() {
     this.masterService. getMasterRefri().subscribe(

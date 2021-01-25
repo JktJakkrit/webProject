@@ -178,7 +178,7 @@ export class ManageDishComponent implements OnInit {
     this.edit_dish_form.controls['detail'].setValue(trdata.detail);
     this.edit_dish_form.controls['price'].setValue(trdata.price);
     this.edit_dish_form.controls['amount'].setValue(trdata.amount);
-    this.edit_dish_form.controls['avatar'].setValue(trdata.avatar);
+    this.edit_dish_form.controls['this.photo'].setValue(trdata.this.photo);
     this.edit_dish_form.controls['isvoid'].setValue(
       trdata.isvoid.toString()
     );
@@ -231,5 +231,4 @@ export class ManageDishComponent implements OnInit {
       }
     } catch (e) {}
   }
-
 }

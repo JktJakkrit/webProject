@@ -17,7 +17,7 @@ import Swal from "sweetalert2";
   styleUrls: ['./manage-wash.component.css']
 })
 export class ManageWashComponent implements OnInit {
-
+  photo: File;
   edit_wash_form: FormGroup;
   add_wash_form: FormGroup;
 
@@ -56,7 +56,7 @@ export class ManageWashComponent implements OnInit {
       (Math.floor(Math.random() * 9999) + 1);
     (<HTMLInputElement>document.getElementById('code')).value = ICODE;
 
-    this.add_wash_form.patchValue({ icode: ICODE });
+    this.add_wash_form.patchValue({ code: ICODE });
   }
 
   constructor(
@@ -66,7 +66,7 @@ export class ManageWashComponent implements OnInit {
   ) {
     this.add_wash_form = this.formBuilder.group({
       type: new FormControl("", [Validators.required]),
-      icode: new FormControl("", [Validators.required]),
+      code: new FormControl("", [Validators.required]),
       name: new FormControl("", [Validators.required]),
       brand: new FormControl("", [Validators.required]),
       cap: new FormControl("", [Validators.required]),
@@ -77,13 +77,13 @@ export class ManageWashComponent implements OnInit {
         Validators.min(1),
         Validators.max(100000),
       ]),
-      file: ["", Validators.required],
+      avatar: ["", Validators.required],
     });
 
     this.edit_wash_form = this.formBuilder.group({
       wash_sys_id: ["", Validators.required],
       type: new FormControl("", [Validators.required]),
-      icode: new FormControl("", [Validators.required]),
+      code: new FormControl("", [Validators.required]),
       name: new FormControl("", [Validators.required]),
       brand: new FormControl("", [Validators.required]),
       cap: new FormControl("", [Validators.required]),
@@ -94,7 +94,7 @@ export class ManageWashComponent implements OnInit {
         Validators.min(1),
         Validators.max(100000),
       ]),
-      file: ["", Validators.required],
+      avatar: ["", Validators.required],
       isvoid: 0,
     });
   }
@@ -122,16 +122,16 @@ export class ManageWashComponent implements OnInit {
       Swal.fire("Input Valid!", "Please enter require input", "info");
     } else {
       this.masterService
-        .addMasterTv(
+        .addMasterWashings(
           form.value.type,
-          form.value.icode,
+          form.value.code,
           form.value.name,
           form.value.brand,
           form.value.detail,
           form.value.price,
           form.value.amount,
           form.value.cap,
-          form.value.file
+          this.photo
         )
         .subscribe(
           (res: any) => {
@@ -160,14 +160,14 @@ export class ManageWashComponent implements OnInit {
         .updateMasterWash(
           form.value.wash_sys_id,
           form.value.type,
-          form.value.icode,
+          form.value.code,
           form.value.name,
           form.value.brand,
           form.value.detail,
           form.value.price,
           form.value.amount,
           form.value.cap,
-          form.value.file,
+          this.photo,
           form.value.isvoid
         )
 
@@ -197,14 +197,14 @@ export class ManageWashComponent implements OnInit {
   editcate(trdata) {
     this.edit_wash_form.controls["wash_sys_id"].setValue(trdata.wash_sys_id);
     this.edit_wash_form.controls["name"].setValue(trdata.name);
-    this.edit_wash_form.controls["icode"].setValue(trdata.icode);
+    this.edit_wash_form.controls["code"].setValue(trdata.code);
     this.edit_wash_form.controls["brand"].setValue(trdata.brand);
     this.edit_wash_form.controls["type"].setValue(trdata.type);
     this.edit_wash_form.controls["detail"].setValue(trdata.detail);
     this.edit_wash_form.controls["price"].setValue(trdata.price);
     this.edit_wash_form.controls["cap"].setValue(trdata.cap);
     this.edit_wash_form.controls["amount"].setValue(trdata.amount);
-    this.edit_wash_form.controls["file"].setValue(trdata.file);
+    this.edit_wash_form.controls["avatar"].setValue(trdata.avatar);
     this.edit_wash_form.controls["isvoid"].setValue(trdata.isvoid.toString());
 
     this.modalService.open("modal_editcate");
@@ -233,20 +233,27 @@ export class ManageWashComponent implements OnInit {
   }
 
   onFileChange(event) {
-    const reader = new FileReader();
+    try {
+      var file = event.target.files[0];
+      console.log(file);
+      this.photo = file;
+      const reader = new FileReader();
 
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
+      if (event.target.files && event.target.files.length) {
+        const [avatar] = event.target.files;
+        // this.add_air_form.setValue({avatar : avatar})
 
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(avatar);
 
-      reader.onload = () => {
-        this.imageSrc = reader.result as string;
+        reader.onload = () => {
+          this.imageSrc = reader.result as string;
 
-        this.add_wash_form.patchValue({
-          fileSource: reader.result,
-        });
-      };
-    }
+          this.add_wash_form.patchValue({
+            fileSource: reader.result,
+          });
+        };
+      }
+    } catch (e) {}
   }
+
 }
