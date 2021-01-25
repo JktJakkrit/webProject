@@ -45,7 +45,7 @@ const methods = {
             })
         })
     }
-    / post
+    // post
 }
 
 module.exports = {...methods }
