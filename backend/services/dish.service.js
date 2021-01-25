@@ -9,7 +9,6 @@ const methods = {
                 if(error) return reject(error);
                 return resolve(result);
             })
-            db.end();
         })
     },
     findById: function (id) {
@@ -28,7 +27,6 @@ const methods = {
             let pic = {'file': newPath}
             let data = {...body, ...pic}
             let sql = "INSERT INTO `manage-dish` SET ?";
-            // return resolve(data);
             db.query(sql, data, function (error, result) {
                 if (error) return reject(error);
                 return resolve(result);

@@ -9,7 +9,7 @@ const methods = {
                 if(error) return reject(error);
                 return resolve(result);
             })
-            db.end();
+            //db.end();
         })
     },
     findById: function (id) {

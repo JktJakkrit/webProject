@@ -28,7 +28,6 @@ const methods = {
             let pic = {'file': newPath}
             let data = {...body, ...pic}
             let sql = "INSERT INTO `manage-wash` SET ?";
-            // return resolve(data);
             db.query(sql, data, function (error, result) {
                 if (error) return reject(error);
                 return resolve(result);
