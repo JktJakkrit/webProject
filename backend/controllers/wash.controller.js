@@ -32,7 +32,15 @@ const methods = {
         } catch (error) {
             res.json(error).end();
         }
+    },
+    async DeleteWashById(req, res) {
+        try {
+            let result = await service.deleteItemWashById(req.params.id)
+            res.status(200).send(result)
+        } catch (error) {
+            res.json(error).end();
+        }
     }
 }
 
-module.exports = {...methods }
+module.exports = {...methods}

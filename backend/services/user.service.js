@@ -19,8 +19,8 @@ const methods = {
                     if (error) return reject(error);
                     return resolve(result);
                 })
-                // db.end();
         })
     },
+
 }
 module.exports = {...methods };

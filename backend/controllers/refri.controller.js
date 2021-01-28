@@ -32,8 +32,16 @@ const methods = {
         } catch (error) {
             res.json(error).end();
         }
+    },
+    async DeleteRefriById(req, res) {
+        try {
+            let result = await service.deleteItemRefriById(req.params.id)
+            res.status(200).send(result)
+        } catch (error) {
+            res.json(error).end();
+        }
     }
 
 }
 
-module.exports = {...methods }
+module.exports = {...methods}

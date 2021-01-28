@@ -32,6 +32,14 @@ const methods = {
         } catch (error) {
             res.json(error).end();
         }
+    },
+    async DeleteTVById(req, res) {
+        try {
+            let result = await service.deleteItemTVById(req.params.id)
+            res.status(200).send(result)
+        } catch (error) {
+            res.json(error).end();
+        }
     }
 }
 

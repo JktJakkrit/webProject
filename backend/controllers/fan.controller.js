@@ -32,8 +32,15 @@ const methods = {
         } catch (error) {
             res.json(error).end();
         }
-
+    },
+    async DeleteFanById(req, res) {
+        try {
+            let result = await service.deleteItemFanById(req.params.id)
+            res.status(200).send(result)
+        } catch (error) {
+            res.json(error).end();
+        }
     }
 }
 
-module.exports = {...methods }
+module.exports = {...methods}

@@ -32,7 +32,15 @@ const methods = {
         } catch (error) {
             res.json(error).end();
         }
+    },
+    async DeleteDishById(req, res) {
+        try {
+            let result = await service.deleteItemDishById(req.params.id)
+            res.status(200).send(result)
+        } catch (error) {
+            res.json(error).end();
+        }
     }
 }
 
-module.exports = {...methods }
+module.exports = {...methods}

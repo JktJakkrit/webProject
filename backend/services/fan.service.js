@@ -44,8 +44,16 @@ const methods = {
                     return resolve(result);
                 })
             })
-        }
-        // post
+        },
+    deleteItemFanById: function (id) {
+        return new Promise((resolve, reject) => {
+            let sql = "DELETE FROM `manage-fan` WHERE `fan_sys_id` = " + id;
+            db.query(sql, function (error, result) {
+                if (error) return reject(error);
+                return resolve("delete successfully");
+            })
+        })
+    }
 }
 
 module.exports = {...methods }

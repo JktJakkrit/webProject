@@ -44,6 +44,15 @@ const methods = {
                 return resolve(result);
             })
         })
+    },
+    deleteItemDishById: function (id) {
+        return new Promise((resolve, reject) => {
+            let sql = "DELETE FROM `manage-dish` WHERE `dish_sys_id` = " + id;
+            db.query(sql, function (error, result) {
+                if (error) return reject(error);
+                return resolve("delete successfully");
+            })
+        })
     }
 }
 
