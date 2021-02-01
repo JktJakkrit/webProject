@@ -20,7 +20,7 @@ export class ManageDishComponent implements OnInit {
   photo: File;
   edit_dish_form: FormGroup;
   add_dish_form: FormGroup;
-
+  
   imageSrc: string;
 
   productType = [
@@ -54,7 +54,7 @@ export class ManageDishComponent implements OnInit {
       name: new FormControl("", [Validators.required]),
       brand: new FormControl("", [Validators.required]),
       detail: new FormControl("", [Validators.required]),
-      amount: new FormControl("", [Validators.required]),
+      // amount: new FormControl("", [Validators.required]),
       price: new FormControl("", [
         Validators.required,
         Validators.min(1),
@@ -70,7 +70,7 @@ export class ManageDishComponent implements OnInit {
       name: new FormControl("", [Validators.required]),
       brand: new FormControl("", [Validators.required]),
       detail: new FormControl("", [Validators.required]),
-      amount: new FormControl("", [Validators.required]),
+      // amount: new FormControl("", [Validators.required]),
       price: new FormControl("", [
         Validators.required,
         Validators.min(1),
@@ -85,7 +85,7 @@ export class ManageDishComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   isDtInitialized: boolean = false;
 
-  masterAir;
+  masterDish;
 
   ngOnInit(): void { this.loadDataMaster();
   }
@@ -110,7 +110,7 @@ export class ManageDishComponent implements OnInit {
         form.value.brand,
         form.value.detail,
         form.value.price,
-        form.value.amount,
+        // form.value.amount,
         this.photo
         )
         .subscribe(
@@ -145,7 +145,7 @@ export class ManageDishComponent implements OnInit {
           form.value.brand,
           form.value.detail,
           form.value.price,
-          form.value.amount,
+          // form.value.amount,
           this.photo,
           form.value.isvoid
         )
@@ -189,7 +189,7 @@ export class ManageDishComponent implements OnInit {
   loadDataMaster() {
     this.masterService.getMasterDishs().subscribe(
       (res: any) => {
-        this.masterAir = res;
+        this.masterDish = res;
         if (this.isDtInitialized) {
           this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
             dtInstance.destroy();

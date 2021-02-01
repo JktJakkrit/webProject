@@ -72,7 +72,7 @@ export class ManageFanComponent implements OnInit {
       brand: new FormControl("", [Validators.required]),
       size: new FormControl("", [Validators.required]),
       detail: new FormControl("", [Validators.required]),
-      amount: new FormControl("", [Validators.required]),
+      // amount: new FormControl("", [Validators.required]),
       price: new FormControl("", [
         Validators.required,
         Validators.min(1),
@@ -89,7 +89,7 @@ export class ManageFanComponent implements OnInit {
       brand: new FormControl("", [Validators.required]),
       size: new FormControl("", [Validators.required]),
       detail: new FormControl("", [Validators.required]),
-      amount: new FormControl("", [Validators.required]),
+      // amount: new FormControl("", [Validators.required]),
       price: new FormControl("", [
         Validators.required,
         Validators.min(1),
@@ -130,7 +130,7 @@ export class ManageFanComponent implements OnInit {
           form.value.brand,
           form.value.detail,
           form.value.price,
-          form.value.amount,
+          // form.value.amount,
           form.value.size,
           this.photo
         )
@@ -166,7 +166,7 @@ export class ManageFanComponent implements OnInit {
           form.value.brand,
           form.value.detail,
           form.value.price,
-          form.value.amount,
+          // form.value.amount,
           form.value.size,
           this.photo,
           form.value.isvoid
@@ -200,7 +200,7 @@ export class ManageFanComponent implements OnInit {
     this.edit_fan_form.controls["detail"].setValue(trdata.detail);
     this.edit_fan_form.controls["price"].setValue(trdata.price);
     this.edit_fan_form.controls["size"].setValue(trdata.size);
-    this.edit_fan_form.controls["amount"].setValue(trdata.amount);
+    // this.edit_fan_form.controls["amount"].setValue(trdata.amount);
     this.edit_fan_form.controls["file"].setValue(trdata.file);
     this.edit_fan_form.controls["isvoid"].setValue(trdata.isvoid.toString());
 

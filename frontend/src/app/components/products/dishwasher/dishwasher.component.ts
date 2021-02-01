@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { DishProduct } from 'src/app/models/dish.model';
+import { CartDataServiceService } from 'src/app/_services/cart-data-service.service';
 import { MasterService } from 'src/app/_services/master.service';
 import { ModalService } from 'src/app/_services/modal.service';
 import Swal from 'sweetalert2';
@@ -10,22 +12,27 @@ import Swal from 'sweetalert2';
 })
 export class DishwasherComponent implements OnInit {
 
-  masterDishwasher;
+  masterDishwasher: DishProduct[];
   constructor( private formBuilder: FormBuilder,
     private modalService: ModalService,
-    private masterService: MasterService) { }
+    private masterService: MasterService,
+    private cartDataService: CartDataServiceService) { }
 
   ngOnInit(): void {
     this.loadDishwasher();
   }
   loadDishwasher() {
     this.masterService. getMasterDishs().subscribe(
-      (res: any) => {
+      (res: DishProduct[]) => {
         this.masterDishwasher = res;
       },
       (error) => {
         Swal.fire('Error!', 'error : ' + error.status, 'error');
       }
     );
+  }
+  addToCart(data) {
+    console.log("34567890-=");
+    // this.cartDataService.changeAirProduct(data);
   }
 }

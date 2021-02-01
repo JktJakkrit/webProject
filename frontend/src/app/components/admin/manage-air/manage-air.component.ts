@@ -80,7 +80,7 @@ export class ManageAirComponent implements OnInit {
       btu: new FormControl('', [Validators.required]),
       room: new FormControl('', [Validators.required]),
       detail: new FormControl('', [Validators.required]),
-      amount: new FormControl('', [Validators.required]),
+      // amount: new FormControl('', [Validators.required]),
       price: new FormControl('', [
         Validators.required,
         Validators.min(1),
@@ -98,7 +98,7 @@ export class ManageAirComponent implements OnInit {
       btu: new FormControl('', [Validators.required]),
       room: new FormControl('', [Validators.required]),
       detail: new FormControl('', [Validators.required]),
-      amount: new FormControl('', [Validators.required]),
+      // amount: new FormControl('', [Validators.required]),
       price: new FormControl('', [
         Validators.required,
         Validators.min(1),
@@ -143,7 +143,7 @@ export class ManageAirComponent implements OnInit {
           form.value.room,
           form.value.detail,
           form.value.price,
-          form.value.amount,
+          // form.value.amount,
           this.photo
         )
         .subscribe(
@@ -180,7 +180,7 @@ export class ManageAirComponent implements OnInit {
           form.value.room,
           form.value.detail,
           form.value.price,
-          form.value.amount,
+          // form.value.amount,
           this.photo,
           form.value.isvoid
         )
@@ -214,7 +214,7 @@ export class ManageAirComponent implements OnInit {
     this.edit_air_form.controls['type'].setValue(trdata.type);
     this.edit_air_form.controls['detail'].setValue(trdata.detail);
     this.edit_air_form.controls['price'].setValue(trdata.price);
-    this.edit_air_form.controls['amount'].setValue(trdata.amount);
+    // this.edit_air_form.controls['amount'].setValue(trdata.amount);
     this.edit_air_form.controls['avatar'].setValue(trdata.avatar);
     this.edit_air_form.controls['isvoid'].setValue(trdata.isvoid.toString());
 

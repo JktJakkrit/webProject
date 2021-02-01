@@ -72,7 +72,7 @@ export class ManageTvComponent implements OnInit {
       brand: new FormControl("", [Validators.required]),
       scsize: new FormControl("", [Validators.required]),
       detail: new FormControl("", [Validators.required]),
-      amount: new FormControl("", [Validators.required]),
+      // amount: new FormControl("", [Validators.required]),
       price: new FormControl("", [
         Validators.required,
         Validators.min(1),
@@ -89,7 +89,7 @@ export class ManageTvComponent implements OnInit {
       brand: new FormControl("", [Validators.required]),
       scsize: new FormControl("", [Validators.required]),
       detail: new FormControl("", [Validators.required]),
-      amount: new FormControl("", [Validators.required]),
+      // amount: new FormControl("", [Validators.required]),
       price: new FormControl("", [
         Validators.required,
         Validators.min(1),
@@ -130,7 +130,7 @@ export class ManageTvComponent implements OnInit {
           form.value.brand,
           form.value.detail,
           form.value.price,
-          form.value.amount,
+          // form.value.amount,
           form.value.scsize,
           this.photo
         )
@@ -166,7 +166,7 @@ export class ManageTvComponent implements OnInit {
           form.value.brand,
           form.value.detail,
           form.value.price,
-          form.value.amount,
+          // form.value.amount,
           form.value.scsize,
           this.photo,
           form.value.isvoid
@@ -204,7 +204,7 @@ export class ManageTvComponent implements OnInit {
     this.edit_tv_form.controls["detail"].setValue(trdata.detail);
     this.edit_tv_form.controls["price"].setValue(trdata.price);
     this.edit_tv_form.controls["scsize"].setValue(trdata.scsize);
-    this.edit_tv_form.controls["amount"].setValue(trdata.amount);
+    // this.edit_tv_form.controls["amount"].setValue(trdata.amount);
     this.edit_tv_form.controls["avatar"].setValue(trdata.avatar);
     this.edit_tv_form.controls["isvoid"].setValue(trdata.isvoid.toString());
 

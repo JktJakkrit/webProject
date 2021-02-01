@@ -1,67 +1,68 @@
-<!-- ##### Header Area Start ##### -->
-<header class="header_area">
-    <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
-        <!-- Classy Menu -->
-        <nav class="classy-navbar" id="richNav">
-            <!-- Logo -->
-            <a class="nav-brand" href="#">Shop</a>
-            <!-- Navbar Toggler -->
-            <div class="classy-navbar-toggler">
-                <span class="navbarToggler"><span></span><span></span><span></span></span>
-            </div>
-            <!-- Menu -->
-            <div class="classy-menu">
-                <!-- close btn -->
-                <div class="classycloseIcon">
-                    <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                </div>
-                <!-- Nav Start -->
-                <div class="classynav">
-                    <ul>
-                        <li><a href="#">Shop</a>
-                            <div class="megamenu">
-                                <ul class="single-mega cn-col-4">
-                                    <li class="title">Collection</li>
-                                    <li><a [routerLink]="['/air']" href="#">Air Conditioning</a></li>
-                                    <li><a [routerLink]="['/dish']" href="#">Dishwasher</a></li>
-                                    <li><a [routerLink]="['/fan']" href="#">Electric Fan</a></li>
-                                    <li><a [routerLink]="['/refri']" href="#">Refrigerator</a></li>
-                                    <li><a [routerLink]="['/tv']" href="#">Television</a></li>
-                                    <li><a [routerLink]="['/wash']" href="#">Washing Machines</a></li>
-                                </ul>
+<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">SHOPPING</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-                                <div class="single-mega cn-col-4">
-                                    <img src="assets/img/bg-img/Untitled-1.png" alt="">
-                                </div>
-                            </div>
-                        </li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-home"></i> Home
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-th-list">
+              <!-- <span class="badge badge-primary">11</span> -->
+            </i> Products
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#" [routerLink]="['/air']">Air-Conditioning</a>
+                    <a class="dropdown-item" href="#" [routerLink]="['/dish']">Dishwasher</a>
+                    <a class="dropdown-item" href="#" [routerLink]="['/fan']">Electric-Fan</a>
+                    <a class="dropdown-item" href="#" [routerLink]="['/refri']">Refrigerator</a>
+                    <a class="dropdown-item" href="#" [routerLink]="['/tv']">Television</a>
+                    <a class="dropdown-item" href="#" [routerLink]="['/wash']">Washing-Machines</a>
+                    <a class="dropdown-item" href="#" [routerLink]="['/other']">Other</a>
                 </div>
-                <!-- Nav End -->
-            </div>
-        </nav>
-        <!-- Header Meta Data -->
-        <div class="header-meta d-flex clearfix justify-content-end">
-            <!-- Search Area -->
-            <div class="search-area">
-                <form ngNoForm method="post">
-                    <input type="search" name="search" id="headerSearch" placeholder="Type for search" />
-                    <button type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-                </form>
-            </div>
-            <!-- Favourite Area -->
-            <div class="favourite-area">
-                <a href="#"><img src="assets/img/core-img/heart.svg" alt=""></a>
-            </div>
-            <!-- User Login Info -->
-            <div class="user-login-info">
-                <a href="#"><img src="assets/img/core-img/user.svg" alt=""></a>
-            </div>
-            <!-- Cart Area -->
-            <div class="cart-area">
-                <a href="#" id="richCartBtn"><img src="assets/img/core-img/bag.svg" alt=""> <span>3</span></a>
-            </div>
-        </div>
+            </li>
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav ">
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-bell">
+              <span class="badge badge-info">11</span>
+            </i> Test
+                </a>
+            </li> -->
+            <li class="nav-item">
+                <a class="nav-link" href="#" [routerLink]="['/cart']">
+                    <i class="fa fa-shopping-cart">
+              <span class="badge badge-success">11</span>
+            </i> Cart
+                </a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user-circle-o">
+              <!-- <span class="badge badge-primary">11</span> -->
+            </i> Account
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Login</a>
+                    <a class="dropdown-item" href="#">Register</a>
+
+                </div>
+            </li>
+        </ul>
     </div>
-</header>
+</nav>

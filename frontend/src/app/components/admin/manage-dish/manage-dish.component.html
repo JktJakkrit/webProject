@@ -1,3 +1,5 @@
+<app-admin-nav>
+</app-admin-nav>
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
@@ -33,13 +35,13 @@
                                     <th>Price</th>
                                     <th>Amount</th>
                                     <th>Detail</th>
-                                    <th>Stutus</th>
-                                    <th>Action</th>
+                                    <!-- <th>Stutus</th>
+                                    <th>Action</th> -->
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let t of masterAir">
-                                    <td>{{ t.air_sys_id }}</td>
+                                <tr *ngFor="let t of masterDish">
+                                    <td>{{ t.dish_sys_id }}</td>
                                     <td>{{ t.code }}</td>
                                     <td>{{ t.name }}</td>
                                     <td>{{ t.brand }}</td>
@@ -47,13 +49,13 @@
                                     <td>{{ t.amount }}</td>
                                     <td>{{ t.detail }}</td>
                                     <!-- <td>{{ t.createddate | date:"dd/MM/yyyy" }}</td> -->
-                                    <td>{{ t.isvoid == 0 ?"Active" :"Void" }}</td>
+                                    <!-- <td>{{ t.isvoid == 0 ?"Active" :"Void" }}</td>
 
                                     <td>
                                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal_editcate" (click)="editcate(t)" style="color: white">
                       Edit
                     </button>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -65,8 +67,8 @@
                                     <th>Price</th>
                                     <th>Amount</th>
                                     <th>Detail</th>
-                                    <th>Stutus</th>
-                                    <th>Action</th>
+                                    <!-- <th>Stutus</th>
+                                    <th>Action</th> -->
                                 </tr>
                             </tfoot>
                         </table>
@@ -152,13 +154,13 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <!-- <div class="form-group col-md-4">
                             <div class="form-group">
                                 <label for="">Dishwasher Amount</label>
                                 <label style="color: red"> * </label>
                                 <input type="text" name="amount" class="form-control" formControlName="amount" />
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group col-md-4">
                             <div class="form-group">
@@ -187,7 +189,7 @@
                         Close
                       </button>
                 </div>
-                <p>Status: {{ add_dish_form.status }}</p>
+                <!-- <p>Status: {{ add_dish_form.status }}</p>
                 <p>Status: {{ add_dish_form.value.name }}</p>
                 <p>Status: {{ add_dish_form.value.type }}</p>
                 <p>Status: {{ add_dish_form.value.code }}</p>
@@ -195,7 +197,7 @@
                 <p>Status: {{ add_dish_form.value.detail }}</p>
                 <p>Status: {{ add_dish_form.value.amount }}</p>
                 <p>Status: {{ add_dish_form.value.peice }}</p>
-                <p>Status: {{ add_dish_form.value.avatar }}</p>
+                <p>Status: {{ add_dish_form.value.avatar }}</p> -->
 
             </div>
         </form>
@@ -277,13 +279,13 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <!-- <div class="form-group col-md-4">
                             <div class="form-group">
                                 <label for="">Dishwasher Amount</label>
                                 <label style="color: red"> * </label>
                                 <input type="text" name="amount" class="form-control" formControlName="amount" />
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group col-md-4">
                             <div class="form-group">

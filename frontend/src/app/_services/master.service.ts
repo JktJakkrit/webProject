@@ -1,3 +1,4 @@
+import { AirProduct } from './../models/air.model';
 import { Injectable } from '@angular/core';
 import {
   HttpClient,
@@ -21,7 +22,7 @@ export class MasterService {
   }
 
   getMasterAirs() {
-    return this.http.get<any>(this.url + '/air/all');
+    return this.http.get<AirProduct[]>(this.url + '/air/all');
   }
 
   addMasterAirs(
@@ -33,10 +34,11 @@ export class MasterService {
     room: string,
     detail: string,
     price: string,
-    amount: string,
+    // amount: string,
     avatar: File
   ) {
     var isvoid = 0;
+    var amount = 1;
     console.log(avatar);
     var f = new FormData();
     f.append('type', type);
@@ -47,7 +49,7 @@ export class MasterService {
     f.append('room', room);
     f.append('detail', detail);
     f.append('price', price);
-    f.append('amount', amount);
+    f.append('amount', amount.toFixed());
     f.append('avatar', avatar, avatar.name);
     f.append('isvoid', isvoid.toFixed());
     f.forEach((v, k) => {
@@ -70,7 +72,7 @@ export class MasterService {
     room: string,
     detail: string,
     price: string,
-    amount: string,
+    // amount: string,
     avatar: File,
     isvoid
   ) {
@@ -83,7 +85,7 @@ export class MasterService {
       room,
       detail,
       price,
-      amount,
+      // amount,
       avatar,
       isvoid,
     };
@@ -107,10 +109,11 @@ export class MasterService {
     brand: string,
     detail: string,
     price: string,
-    amount: string,
+    // amount: string,
     avatar: File
   ) {
     var isvoid = 0;
+    var amount = 1;
     // const token_head = this.getHeader()
     console.log(avatar);
     var f = new FormData();
@@ -120,7 +123,7 @@ export class MasterService {
     f.append('brand', brand);
     f.append('detail', detail);
     f.append('price', price);
-    f.append('amount', amount);
+    f.append('amount', amount.toFixed());
     f.append('avatar', avatar, avatar.name);
     f.append('isvoid', isvoid.toFixed());
     f.forEach((v, k) => {
@@ -142,7 +145,7 @@ export class MasterService {
     brand: string,
     detail: string,
     price: string,
-    amount: string,
+    // amount: string,
     avatar: File,
     isvoid
   ) {
@@ -153,7 +156,7 @@ export class MasterService {
       brand,
       detail,
       price,
-      amount,
+      // amount,
       avatar,
       isvoid,
     };
@@ -179,11 +182,12 @@ export class MasterService {
     brand: string,
     detail: string,
     price: string,
-    amount: string,
+    // amount: string,
     size: string,
     avatar: File
   ) {
     var isvoid = 0;
+    var amount = 1;
     // const token_head = this.getHeader()
     console.log(avatar);
     var f = new FormData();
@@ -193,7 +197,7 @@ export class MasterService {
     f.append('brand', brand);
     f.append('detail', detail);
     f.append('price', price);
-    f.append('amount', amount);
+    f.append('amount', amount.toFixed());
     f.append('size', size);
     f.append('avatar', avatar, avatar.name);
     f.append('isvoid', isvoid.toFixed());
@@ -217,7 +221,7 @@ export class MasterService {
     detail: string,
     price: string,
     size: string,
-    amount: string,
+    // amount: string,
     avatar: File,
     isvoid
   ) {
@@ -228,7 +232,7 @@ export class MasterService {
       brand,
       detail,
       price,
-      amount,
+      // amount,
       size,
       avatar,
       isvoid,
@@ -255,11 +259,12 @@ export class MasterService {
     brand: string,
     capa: string,
     detail: string,
-    amount: string,
+    // amount: string,
     price: string,
     avatar: File
   ) {
     var isvoid = 0;
+    var amount = 1;
     // const token_head = this.getHeader()
     console.log(avatar);
     var f = new FormData();
@@ -270,7 +275,7 @@ export class MasterService {
     f.append('capa', capa);
     f.append('detail', detail);
     f.append('price', price);
-    f.append('amount', amount);
+    f.append('amount', amount.toFixed());
     f.append('avatar', avatar, avatar.name);
     f.append('isvoid', isvoid.toFixed());
     f.forEach((v, k) => {
@@ -293,7 +298,7 @@ export class MasterService {
     brand: string,
     detail: string,
     price: string,
-    amount: string,
+    // amount: string,
     avatar: File,
     isvoid
   ) {
@@ -305,7 +310,7 @@ export class MasterService {
       detail,
       price,
       capa,
-      amount,
+      // amount,
       avatar,
       isvoid,
     };
@@ -331,11 +336,12 @@ export class MasterService {
     brand: string,
     detail: string,
     price: string,
-    amount: string,
+    // amount: string,
     scsize: string,
     avatar: File
   ) {
     var isvoid = 0;
+    var amount = 1;
     // const token_head = this.getHeader()
     console.log(avatar);
     var f = new FormData();
@@ -345,7 +351,7 @@ export class MasterService {
     f.append('brand', brand);
     f.append('detail', detail);
     f.append('price', price);
-    f.append('amount', amount);
+    f.append('amount', amount.toFixed());
     f.append('scsize', scsize);
     f.append('avatar', avatar, avatar.name);
     f.append('isvoid', isvoid.toFixed());
@@ -369,7 +375,7 @@ export class MasterService {
     detail: string,
     price: string,
     scsize: string,
-    amount: string,
+    // amount: string,
     avatar: File,
     isvoid
   ) {
@@ -380,7 +386,7 @@ export class MasterService {
       brand,
       detail,
       price,
-      amount,
+      // amount,
       scsize,
       avatar,
       isvoid,
@@ -407,11 +413,12 @@ export class MasterService {
     brand: string,
     detail: string,
     price: string,
-    amount: string,
+    // amount: string,
     cap: string,
     avatar: File
   ) {
     var isvoid = 0;
+    var amount = 1;
     // const token_head = this.getHeader()
     console.log(avatar);
     var f = new FormData();
@@ -421,7 +428,7 @@ export class MasterService {
     f.append('brand', brand);
     f.append('detail', detail);
     f.append('price', price);
-    f.append('amount', amount);
+    f.append('amount', amount.toFixed());
     f.append('cap', cap);
     f.append('avatar', avatar, avatar.name);
     f.append('isvoid', isvoid.toFixed());
@@ -445,7 +452,7 @@ export class MasterService {
     detail: string,
     price: string,
     cap: string,
-    amount: string,
+    // amount: string,
     avatar: File,
     isvoid
   ) {
@@ -456,7 +463,7 @@ export class MasterService {
       brand,
       detail,
       price,
-      amount,
+      // amount,
       cap,
       avatar,
       isvoid,

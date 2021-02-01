@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 
@@ -32,6 +32,19 @@ import { CheckoutComponent } from './components/pages/checkout/checkout.componen
 import {DataTablesModule} from 'angular-datatables';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ManageOtherComponent } from './components/admin/manage-other/manage-other.component';
+import { ManagementsComponent } from './components/admin/managements/managements.component';
+import { AdminLoginComponent } from './components/admin/admin-login/admin-login.component';
+import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
+import { HttpConfigInterceptor } from './components/pages/auth/httpconfig.interceptor';
+import { CommonDataService } from './common-data.service';
+import { ModalService } from './_services/modal.service';
+import { AdminNavComponent } from './components/admin/admin-nav/admin-nav.component';
+import { OtherComponent } from './components/products/other/other.component';
+
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import { CounterState } from './_services/ngxs-store/store/counter.store';
 
 @NgModule({
   declarations: [
@@ -54,7 +67,14 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     RegisterComponent,
     HomeComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    ManageOtherComponent,
+    ManagementsComponent,
+    AdminLoginComponent,
+    AdminHomeComponent,
+    AdminNavComponent,
+    OtherComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -66,9 +86,22 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ReactiveFormsModule,
     FormsModule,
     DataTablesModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatCardModule,
+    MatIconModule
+   
+   
   ],
-  providers: [],
+  providers: [
+    ModalService, 
+    CommonDataService, 
+ 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpConfigInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
