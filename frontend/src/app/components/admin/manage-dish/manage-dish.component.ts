@@ -1,3 +1,4 @@
+import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import {
   FormBuilder,
@@ -46,7 +47,8 @@ export class ManageDishComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalService: ModalService,
-    private masterService: MasterService
+    private masterService: MasterService,
+    private http: HttpClient
   ) {
     this.add_dish_form = this.formBuilder.group({
       type: new FormControl("", [Validators.required]),
@@ -110,7 +112,7 @@ export class ManageDishComponent implements OnInit {
         form.value.brand,
         form.value.detail,
         form.value.price,
-        // form.value.amount,
+        form.value.amount,
         this.photo
         )
         .subscribe(
@@ -145,7 +147,7 @@ export class ManageDishComponent implements OnInit {
           form.value.brand,
           form.value.detail,
           form.value.price,
-          // form.value.amount,
+          form.value.amount,
           this.photo,
           form.value.isvoid
         )
@@ -231,4 +233,14 @@ export class ManageDishComponent implements OnInit {
       }
     } catch (e) {}
   }
+
+  deleteProduct(){
+    console.log("............");
+    // this.httpClient.delete(this.url + endPoints).subscribe(data => {
+    //   console.log(data);
+    // });
+    
+  }
+
+
 }

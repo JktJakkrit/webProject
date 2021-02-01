@@ -1,5 +1,4 @@
-<app-admin-nav>
-</app-admin-nav>
+<app-admin-nav> </app-admin-nav>
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
@@ -21,7 +20,7 @@
         <div class="card card-statistics h-100">
             <div class="card-body">
                 <button type="button" class="btn btn-sm btn-primary mb-2" data-toggle="modal" data-target="#modal_addcate" (click)="openModal('modal_addcate')">
-          <i class="fa fa-plus"></i> Add  Washing-Machines
+          <i class="fa fa-plus"></i> Add Washing-Machines
         </button>
                 <div class="d-block d-md-flex justify-content-between">
                     <div class="table-responsive mt-15">
@@ -36,8 +35,8 @@
                                     <th>Price</th>
                                     <th>Amount</th>
                                     <th>Detail</th>
-                                    <!-- <th>Stutus</th>
-                                    <th>Action</th> -->
+                                    <th>Stutus</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,70 +50,95 @@
                                     <td>{{ t.amount }}</td>
                                     <td>{{ t.detail }}</td>
                                     <!-- <td>{{ t.createddate | date:"dd/MM/yyyy" }}</td> -->
-                                    <!-- <td>{{ t.isvoid == 0 ?"Active" :"Void" }}</td>
+                                    <td>{{ t.isvoid == 0 ? "Active" : "Void" }}</td>
 
                                     <td>
                                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal_editcate" (click)="editcate(t)" style="color: white">
-                      Edit
-                    </button>
-                                    </td> -->
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Washing-Machines ID</th>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Brand</th>
-                                    <th>Capacity</th>
-                                    <th>Price</th>
-                                    <th>Amount</th>
-                                    <th>Detail</th>
-                                    <!-- <th>Stutus</th>
-                                    <th>Action</th> -->
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
+                      Edit</button
+                    >&nbsp;
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      data-toggle="modal"
+                      data-target="#modal_delete"
+                      style="color: white"
+                    >
+                      Delete</button
+                    >&nbsp;
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Washing-Machines ID</th>
+                  <th>Code</th>
+                  <th>Name</th>
+                  <th>Brand</th>
+                  <th>Capacity</th>
+                  <th>Price</th>
+                  <th>Amount</th>
+                  <th>Detail</th>
+                  <th>Stutus</th>
+                  <th>Action</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <!--modal-->
 
 <!-- add -->
-<div class="modal fade" id="modal_addcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <form [formGroup]="add_wash_form" (ngSubmit)="dishOnSubmit(this.add_wash_form)">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">
-                        Add Washing-Machines
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('modal_addcate')">
+<div
+  class="modal fade"
+  id="modal_addcate"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <form
+      [formGroup]="add_wash_form"
+      (ngSubmit)="dishOnSubmit(this.add_wash_form)"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">
+            Add Washing-Machines
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="closeModal('modal_addcate')"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
-                </div>
-
-                <div class="modal-body">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Washing-Machines Name</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" name="name" class="form-control" formControlName="name" />
-                            </div>
-                        </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Washing-Machines Type</label>
-                                <label style="color: red"> * </label>
-                                <select name="type" class="form-control" formControlName="type" (change)="select('type', $event)">
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="">Washing-Machines Name</label>
+                                    <label style="color: red"> * </label>
+                                    <input type="text" name="name" class="form-control" formControlName="name" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="">Washing-Machines Type</label>
+                                    <label style="color: red"> * </label>
+                                    <select name="type" class="form-control" formControlName="type" (change)="select('type', $event)">
                   <option value="">Please select</option>
                   <option
                     *ngFor="let m of productType"
@@ -124,14 +148,14 @@
                     {{ m.title }}
                   </option>
                 </select>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Washing-Machines Capacity</label>
-                                <label style="color: red"> * </label>
-                                <select name="cap" class="form-control" formControlName="cap" (change)="select('cap', $event)">
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="">Washing-Machines Capacity</label>
+                                    <label style="color: red"> * </label>
+                                    <select name="cap" class="form-control" formControlName="cap" (change)="select('cap', $event)">
                   <option value="">Please select</option>
                   <option
                     *ngFor="let m of productCap"
@@ -141,76 +165,74 @@
                     {{ m.title }}
                   </option>
                 </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="">Washing-Machines CODE</label>
+                                    <label style="color: red"> * </label>
+                                    <input type="text" id="code" [readonly]="true" class="form-control" formControlName="code" />
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Washing-Machines CODE</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" id="code" [readonly]="true" class="form-control" formControlName="code" />
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="">Washing-Machines Brand</label>
+                                    <label style="color: red"> * </label>
+                                    <input type="text" name="brand" class="form-control" formControlName="brand" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="">Washing-Machines Detail</label>
+                                    <label style="color: red"> * </label>
+                                    <textarea type="text" name="detail" class="form-control" rows="7" cols="5" formControlName="detail"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <div class="form-group">
+                                    <label for="">Washing-Machines Amount</label>
+                                    <label style="color: red"> * </label>
+                                    <input type="text" name="amount" class="form-control" formControlName="amount" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <div class="form-group">
+                                    <label for="">Washing-Machines Price</label>
+                                    <label style="color: red"> * </label>
+                                    <input type="text" name="price" class="form-control" formControlName="price" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <div class="form-group">
+                                    <label for="avatar">Upload Image</label>
+                                    <input formControlName="avatar" type="file" class="form-control" (change)="onFileChange($event)" />
+                                </div>
+                                <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width: 150px" />
                             </div>
                         </div>
                     </div>
 
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Washing-Machines Brand</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" name="brand" class="form-control" formControlName="brand" />
-                            </div>
-                        </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal('modal_addcate')">
+            Close
+          </button>
                     </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Washing-Machines Detail</label>
-                                <label style="color: red"> * </label>
-                                <textarea type="text" name="detail" class="form-control" rows="7" cols="5" formControlName="detail"></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <!-- <div class="form-group col-md-4">
-                            <div class="form-group">
-                                <label for="">Washing-Machines Amount</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" name="amount" class="form-control" formControlName="amount" />
-                            </div>
-                        </div> -->
-
-                        <div class="form-group col-md-4">
-                            <div class="form-group">
-                                <label for="">Washing-Machines Price</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" name="price" class="form-control" formControlName="price" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <div class="form-group">
-                                <label for="avatar">Upload Image</label>
-                                <input formControlName="avatar" type="file" class="form-control" (change)="onFileChange($event)" />
-                            </div>
-                            <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width: 150px" />
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal('modal_addcate')">
-                        Close
-                      </button>
-                </div>
-                <!-- <p>Status: {{ add_wash_form.status }}</p>
+                    <!-- <p>Status: {{ add_wash_form.status }}</p>
                 <p>Name: {{ add_wash_form.value.name }}</p>
                 <p>type: {{ add_wash_form.value.type }}</p>
                 <p>cap: {{ add_wash_form.value.cap }}</p>
@@ -220,40 +242,42 @@
                 <p>amount: {{ add_wash_form.value.amount }}</p>
                 <p>price: {{ add_wash_form.value.price }}</p>
                 <p>avatar: {{ add_wash_form.value.avatar }}</p> -->
+                </div>
+                </form>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
 
-<!-- edit -->
-<div class="modal fade" id="modal_editcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <form [formGroup]="edit_wash_form" (ngSubmit)="dishEditOnSubmit(this.edit_wash_form)">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Refrigerator</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('modal_editcate')">
+        <!-- edit -->
+        <div class="modal fade" id="modal_editcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <form [formGroup]="edit_wash_form" (ngSubmit)="dishEditOnSubmit(this.edit_wash_form)">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">
+                                Edit Refrigerator
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('modal_editcate')">
             <span aria-hidden="true">&times;</span>
           </button>
-                </div>
-
-                <div class="modal-body">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Washing-Machines Name</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" name="name" class="form-control" formControlName="name" />
-                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Washing-Machines Type</label>
-                                <label style="color: red"> * </label>
-                                <select name="type" class="form-control" formControlName="type" (change)="select('type', $event)">
+                        <div class="modal-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Washing-Machines Name</label>
+                                        <label style="color: red"> * </label>
+                                        <input type="text" name="name" class="form-control" formControlName="name" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Washing-Machines Type</label>
+                                        <label style="color: red"> * </label>
+                                        <select name="type" class="form-control" formControlName="type" (change)="select('type', $event)">
                   <option value="">Please select</option>
                   <option
                     *ngFor="let m of productType"
@@ -263,14 +287,14 @@
                     {{ m.title }}
                   </option>
                 </select>
-                            </div>
-                        </div>
+                                    </div>
+                                </div>
 
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Washing-Machines Capacity</label>
-                                <label style="color: red"> * </label>
-                                <select name="cap" class="form-control" formControlName="cap" (change)="select('cap', $event)">
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Washing-Machines Capacity</label>
+                                        <label style="color: red"> * </label>
+                                        <select name="cap" class="form-control" formControlName="cap" (change)="select('cap', $event)">
                   <option value="">Please select</option>
                   <option
                     *ngFor="let m of productCap"
@@ -280,73 +304,72 @@
                     {{ m.title }}
                   </option>
                 </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Washing-Machines CODE</label>
+                                        <label style="color: red"> * </label>
+                                        <input type="text" id="code" [readonly]="true" class="form-control" formControlName="code" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Washing-Machines CODE</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" id="code" [readonly]="true" class="form-control" formControlName="code" />
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Washing-Machines Brand</label>
+                                        <label style="color: red"> * </label>
+                                        <input type="text" name="brand" class="form-control" formControlName="brand" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Washing-Machines Brand</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" name="brand" class="form-control" formControlName="brand" />
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Washing-Machines Detail</label>
+                                        <label style="color: red"> * </label>
+                                        <textarea type="text" name="detail" class="form-control" rows="7" cols="5" formControlName="detail"></textarea>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Washing-Machines Detail</label>
-                                <label style="color: red"> * </label>
-                                <textarea type="text" name="detail" class="form-control" rows="7" cols="5" formControlName="detail"></textarea>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Washing-Machines Amount</label>
+                                        <label style="color: red"> * </label>
+                                        <input type="text" name="amount" class="form-control" formControlName="amount" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Washing-Machines Price</label>
+                                        <label style="color: red"> * </label>
+                                        <input type="text" name="price" class="form-control" formControlName="price" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="form-row">
-                        <!-- <div class="form-group col-md-4">
-                            <div class="form-group">
-                                <label for="">Washing-Machines Amount</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" name="amount" class="form-control" formControlName="amount" />
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <div class="form-group">
+                                        <label for="avatar">Upload Image</label>
+                                        <input formControlName="avatar" type="file" class="form-control" (change)="onFileChange($event)" />
+                                    </div>
+                                    <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width: 150px" />
+                                </div>
                             </div>
-                        </div> -->
 
-                        <div class="form-group col-md-4">
-                            <div class="form-group">
-                                <label for="">Washing-Machines Price</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" name="price" class="form-control" formControlName="price" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <div class="form-group">
-                                <label for="avatar">Upload Image</label>
-                                <input formControlName="avatar" type="file" class="form-control" (change)="onFileChange($event)" />
-                            </div>
-                            <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width: 150px" />
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="">Status</label>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="isvoid_0" name="isvoid" formControlName="isvoid" value="0" />
-                                <label class="custom-control-label" for="isvoid_0">Active</label
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Status</label>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="isvoid_0" name="isvoid" formControlName="isvoid" value="0" />
+                                        <label class="custom-control-label" for="isvoid_0">Active</label
                 >
               </div>
 
@@ -360,17 +383,40 @@
                   value="1"
                 />
                 <label class="custom-control-label" for="isvoid_1">Void</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal('modal_editcate')">
+            Close
+          </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- delete -->
+        <div class="modal fade" id="modal_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                    </div>
+                    <div class="modal-body">Are you sure you want to delete this item?</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+                        <button type="button" class="btn btn-danger" (click)="deleteProduct()">
+          Delete
+        </button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal('modal_editcate')">
-                        Close
-                      </button>
-                </div>
             </div>
-        </form>
-    </div>
-</div>
+        </div>

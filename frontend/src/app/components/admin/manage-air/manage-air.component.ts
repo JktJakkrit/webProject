@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -10,6 +11,7 @@ import { Subject } from 'rxjs';
 import { MasterService } from 'src/app/_services/master.service';
 import { ModalService } from 'src/app/_services/modal.service';
 import Swal from 'sweetalert2';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-manage-air',
   templateUrl: './manage-air.component.html',
@@ -21,6 +23,7 @@ export class ManageAirComponent implements OnInit {
   photo: File;
 
   imageSrc: string;
+  private url = environment.serverURL;
 
   productType = [
     { id: 1, code: 'AIR01', title: 'แบบติดผนัง' },
@@ -70,7 +73,8 @@ export class ManageAirComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalService: ModalService,
-    private masterService: MasterService
+    private masterService: MasterService,
+    private http: HttpClient
   ) {
     this.add_air_form = this.formBuilder.group({
       type: new FormControl('', [Validators.required]),
@@ -80,7 +84,7 @@ export class ManageAirComponent implements OnInit {
       btu: new FormControl('', [Validators.required]),
       room: new FormControl('', [Validators.required]),
       detail: new FormControl('', [Validators.required]),
-      // amount: new FormControl('', [Validators.required]),
+      amount: new FormControl('', [Validators.required]),
       price: new FormControl('', [
         Validators.required,
         Validators.min(1),
@@ -98,7 +102,7 @@ export class ManageAirComponent implements OnInit {
       btu: new FormControl('', [Validators.required]),
       room: new FormControl('', [Validators.required]),
       detail: new FormControl('', [Validators.required]),
-      // amount: new FormControl('', [Validators.required]),
+      amount: new FormControl('', [Validators.required]),
       price: new FormControl('', [
         Validators.required,
         Validators.min(1),
@@ -143,7 +147,7 @@ export class ManageAirComponent implements OnInit {
           form.value.room,
           form.value.detail,
           form.value.price,
-          // form.value.amount,
+          form.value.amount,
           this.photo
         )
         .subscribe(
@@ -180,7 +184,7 @@ export class ManageAirComponent implements OnInit {
           form.value.room,
           form.value.detail,
           form.value.price,
-          // form.value.amount,
+          form.value.amount,
           this.photo,
           form.value.isvoid
         )
@@ -214,7 +218,7 @@ export class ManageAirComponent implements OnInit {
     this.edit_air_form.controls['type'].setValue(trdata.type);
     this.edit_air_form.controls['detail'].setValue(trdata.detail);
     this.edit_air_form.controls['price'].setValue(trdata.price);
-    // this.edit_air_form.controls['amount'].setValue(trdata.amount);
+    this.edit_air_form.controls['amount'].setValue(trdata.amount);
     this.edit_air_form.controls['avatar'].setValue(trdata.avatar);
     this.edit_air_form.controls['isvoid'].setValue(trdata.isvoid.toString());
 
@@ -266,21 +270,12 @@ export class ManageAirComponent implements OnInit {
       }
     } catch (e) {}
   }
-  //   const reader = new FileReader();
-
-  //   if (event.target.files && event.target.files.length) {
-  //     const [avatar] = event.target.files;
-  //     // this.add_air_form.setValue({avatar : avatar})
-
-  //     reader.readAsDataURL(avatar);
-
-  //     reader.onload = () => {
-  //       this.imageSrc = reader.result as string;
-
-  //       this.add_air_form.patchValue({
-  //         fileSource: reader.result,
-  //       });
-  //     };
-  //   }
-  // }
+  
+  deleteProduct(air_sys_id){
+    console.log("............");
+    // this.http.delete(this.url + '/air/' + air_sys_id).subscribe(data => {
+    //   console.log(data);
+    // });
+    
+  }
 }

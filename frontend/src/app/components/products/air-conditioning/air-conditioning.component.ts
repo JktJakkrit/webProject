@@ -40,6 +40,6 @@ export class AirConditioningComponent implements OnInit {
 
   addToCart(data) {
     console.log("34567890-=");
-    // this.cartDataService.changeAirProduct(data);
+    this.cartDataService.changeAirProduct(data);
   }
 }

@@ -1,5 +1,4 @@
-<app-admin-nav>
-</app-admin-nav>
+<app-admin-nav> </app-admin-nav>
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
@@ -37,8 +36,8 @@
                                     <th>Price</th>
                                     <th>Amount</th>
                                     <th>Detail</th>
-                                    <!-- <th>Stutus</th>
-                                    <th>Action</th> -->
+                                    <th>Stutus</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,71 +52,96 @@
                                     <td>{{ t.amount }}</td>
                                     <td>{{ t.detail }}</td>
                                     <!-- <td>{{ t.createddate | date: "dd/MM/yyyy" }}</td> -->
-                                    <!-- <td>{{ t.isvoid == 0 ? "Active" : "Void" }}</td>
+                                    <td>{{ t.isvoid == 0 ? "Active" : "Void" }}</td>
 
                                     <td>
                                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal_editcate" (click)="editcate(t)" style="color: white">
-                      Edit
-                    </button>
-                                    </td> -->
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Air-Conditioning ID</th>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Brand</th>
-                                    <th>BTU</th>
-                                    <th>Room</th>
-                                    <th>Price</th>
-                                    <th>Amount</th>
-                                    <th>Detail</th>
-                                    <!-- <th>Stutus</th>
-                                    <th>Action</th> -->
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
+                      Edit</button
+                    >&nbsp;
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      data-toggle="modal"
+                      data-target="#modal_delete"
+                      style="color: white"
+                    >
+                      Delete</button
+                    >&nbsp;
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Air-Conditioning ID</th>
+                  <th>Code</th>
+                  <th>Name</th>
+                  <th>Brand</th>
+                  <th>BTU</th>
+                  <th>Room</th>
+                  <th>Price</th>
+                  <th>Amount</th>
+                  <th>Detail</th>
+                  <th>Stutus</th>
+                  <th>Action</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <!--modal-->
 
 <!-- add -->
-<div class="modal fade" id="modal_addcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <form [formGroup]="add_air_form" (ngSubmit)="airOnSubmit(this.add_air_form)">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">
-                        Add Air-Conditioning
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('modal_addcate')">
+<div
+  class="modal fade"
+  id="modal_addcate"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <form
+      [formGroup]="add_air_form"
+      (ngSubmit)="airOnSubmit(this.add_air_form)"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">
+            Add Air-Conditioning
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="closeModal('modal_addcate')"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
-                </div>
-
-                <div class="modal-body">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Air-Conditioning Name</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" name="name" class="form-control" formControlName="name" />
-                            </div>
-                        </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Air-Conditioning Type</label>
-                                <label style="color: red"> * </label>
-                                <select name="type" class="form-control" formControlName="type" (change)="select('type', $event)">
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="">Air-Conditioning Name</label>
+                                    <label style="color: red"> * </label>
+                                    <input type="text" name="name" class="form-control" formControlName="name" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="">Air-Conditioning Type</label>
+                                    <label style="color: red"> * </label>
+                                    <select name="type" class="form-control" formControlName="type" (change)="select('type', $event)">
                   <option value=" ">Please select</option>
                   <option
                     *ngFor="let m of productType"
@@ -127,13 +151,13 @@
                     {{ m.title }}
                   </option>
                 </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for=" ">BTU Group</label>
-                                <label style="color: red"> * </label>
-                                <select name="btu" class="form-control" formControlName="btu" (change)="select('btu', $event)">
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for=" ">BTU Group</label>
+                                    <label style="color: red"> * </label>
+                                    <select name="btu" class="form-control" formControlName="btu" (change)="select('btu', $event)">
                   <option value=" ">Please select</option>
                   <option
                     *ngFor="let m of productBtu"
@@ -143,26 +167,26 @@
                     {{ m.title }}
                   </option>
                 </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="code">Air-Conditioning CODE</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" id="code" [readonly]="true" class="form-control" formControlName="code" />
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="code">Air-Conditioning CODE</label>
+                                    <label style="color: red"> * </label>
+                                    <input type="text" id="code" [readonly]="true" class="form-control" formControlName="code" />
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Room size with Sun (sqm.)</label>
-                                <label style="color: red"> * </label>
-                                <select name="room" class="form-control" formControlName="room">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="">Room size with Sun (sqm.)</label>
+                                    <label style="color: red"> * </label>
+                                    <select name="room" class="form-control" formControlName="room">
                   <option value=" ">Please select</option>
                   <option
                     *ngFor="let m of productRoom"
@@ -172,100 +196,100 @@
                     {{ m.title }}
                   </option>
                 </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="">Air-Conditioning Brand</label>
+                                    <label style="color: red"> * </label>
+                                    <input type="text" name="brand" class="form-control" formControlName="brand" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="">Air-Conditioning Detail</label>
+                                    <label style="color: red"> * </label>
+                                    <textarea type="text" name="detail" class="form-control" rows="7" cols="5" formControlName="detail"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <div class="form-group">
+                                    <label for=" ">Air-Conditioning Amount</label>
+                                    <label style="color: red"> * </label>
+                                    <input type="text" name="amount" class="form-control" formControlName="amount" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <div class="form-group">
+                                    <label for=" ">Air-Conditioning Price</label>
+                                    <label style="color: red"> * </label>
+                                    <input type="text" name="price" class="form-control" formControlName="price" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <div class="form-group">
+                                    <label for="avatar">Upload Image</label>
+                                    <input formControlName="avatar" type="file" class="form-control" (change)="onFileChange($event)" />
+                                </div>
+                                <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width: 150px" />
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Air-Conditioning Brand</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" name="brand" class="form-control" formControlName="brand" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Air-Conditioning Detail</label>
-                                <label style="color: red"> * </label>
-                                <textarea type="text" name="detail" class="form-control" rows="7" cols="5" formControlName="detail"></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <!-- <div class="form-group col-md-4">
-                            <div class="form-group">
-                                <label for=" ">Air-Conditioning Amount</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" name="amount" class="form-control" formControlName="amount" />
-                            </div>
-                        </div> -->
-
-                        <div class="form-group col-md-4">
-                            <div class="form-group">
-                                <label for=" ">Air-Conditioning Price</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" name="price" class="form-control" formControlName="price" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <div class="form-group">
-                                <label for="avatar">Upload Image</label>
-                                <input formControlName="avatar" type="file" class="form-control" (change)="onFileChange($event)" />
-                            </div>
-                            <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width: 150px" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit ">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal('modal_addcate')">
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit ">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal('modal_addcate')">
             Close
           </button>
+                    </div>
+                    <p>Status: {{ this.add_air_form.status }}</p>
+                    <p>BTU: {{ this.add_air_form.value.btu }}</p>
                 </div>
-                <p>Status: {{ this.add_air_form.status }}</p>
-                <p>BTU: {{ this.add_air_form.value.btu }}</p>
+                </form>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
 
-<!-- edit -->
-<div class="modal fade" id="modal_editcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document ">
-        <form [formGroup]="edit_air_form" (ngSubmit)="airEditOnSubmit(this.edit_air_form)">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Building</h5>
-                    <button type="button " class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('modal_editcate')">
+        <!-- edit -->
+        <div class="modal fade" id="modal_editcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document ">
+                <form [formGroup]="edit_air_form" (ngSubmit)="airEditOnSubmit(this.edit_air_form)">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Edit Building</h5>
+                            <button type="button " class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('modal_editcate')">
             <span aria-hidden="true ">&times;</span>
           </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Air-Conditioning Name</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" name="name" class="form-control" formControlName="name" />
-                            </div>
                         </div>
-                    </div>
+                        <div class="modal-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Air-Conditioning Name</label>
+                                        <label style="color: red"> * </label>
+                                        <input type="text" name="name" class="form-control" formControlName="name" />
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Air-Conditioning Type</label>
-                                <label style="color: red"> * </label>
-                                <select name="type" class="form-control" formControlName="type" (change)="select('type', $event)">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Air-Conditioning Type</label>
+                                        <label style="color: red"> * </label>
+                                        <select name="type" class="form-control" formControlName="type" (change)="select('type', $event)">
                   <option value=" ">Please select</option>
                   <option
                     *ngFor="let m of productType"
@@ -275,13 +299,13 @@
                     {{ m.title }}
                   </option>
                 </select>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for=" ">BTU Group</label>
-                                <label style="color: red"> * </label>
-                                <select name="btu " class="form-control" formControlName="btu" (change)="select('btu', $event)">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label for=" ">BTU Group</label>
+                                        <label style="color: red"> * </label>
+                                        <select name="btu " class="form-control" formControlName="btu" (change)="select('btu', $event)">
                   <option value=" ">Please select</option>
                   <option
                     *ngFor="let m of productBtu"
@@ -291,26 +315,26 @@
                     {{ m.title }}
                   </option>
                 </select>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="code">Air-Conditioning CODE</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" [readonly]="true" class="form-control" formControlName="code" />
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label for="code">Air-Conditioning CODE</label>
+                                        <label style="color: red"> * </label>
+                                        <input type="text" [readonly]="true" class="form-control" formControlName="code" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Room size with Sun (sqm.)</label>
-                                <label style="color: red"> * </label>
-                                <select name="room" class="form-control" formControlName="room">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Room size with Sun (sqm.)</label>
+                                        <label style="color: red"> * </label>
+                                        <select name="room" class="form-control" formControlName="room">
                   <option value=" ">Please select</option>
                   <option
                     *ngFor="let m of productRoom"
@@ -320,64 +344,64 @@
                     {{ m.title }}
                   </option>
                 </select>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Air-Conditioning Brand</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" name="brand" class="form-control" formControlName="brand" />
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Air-Conditioning Brand</label>
+                                        <label style="color: red"> * </label>
+                                        <input type="text" name="brand" class="form-control" formControlName="brand" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="form-group">
-                                <label for="">Air-Conditioning Detail</label>
-                                <label style="color: red"> * </label>
-                                <textarea type="text" name="detail" class="form-control" rows="7" cols="5" formControlName="detail"></textarea>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Air-Conditioning Detail</label>
+                                        <label style="color: red"> * </label>
+                                        <textarea type="text" name="detail" class="form-control" rows="7" cols="5" formControlName="detail"></textarea>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="form-row">
-                        <!-- <div class="form-group col-md-4">
-                            <div class="form-group">
-                                <label for=" ">Air-Conditioning Amount</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" name="amount" class="form-control" formControlName="amount" />
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <div class="form-group">
+                                        <label for=" ">Air-Conditioning Amount</label>
+                                        <label style="color: red"> * </label>
+                                        <input type="text" name="amount" class="form-control" formControlName="amount" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <div class="form-group">
+                                        <label for=" ">Air-Conditioning Price</label>
+                                        <label style="color: red"> * </label>
+                                        <input type="text" name="price" class="form-control" formControlName="price" />
+                                    </div>
+                                </div>
                             </div>
-                        </div> -->
 
-                        <div class="form-group col-md-4">
-                            <div class="form-group">
-                                <label for=" ">Air-Conditioning Price</label>
-                                <label style="color: red"> * </label>
-                                <input type="text" name="price" class="form-control" formControlName="price" />
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <div class="form-group">
+                                        <label for="avatar">Upload Image</label>
+                                        <input formControlName="avatar" type="file" class="form-control" (change)="onFileChange($event)" />
+                                    </div>
+                                    <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width: 150px" />
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <div class="form-group">
-                                <label for="avatar">Upload Image</label>
-                                <input formControlName="avatar" type="file" class="form-control" (change)="onFileChange($event)" />
-                            </div>
-                            <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width: 150px" />
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for=" ">Status</label>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="isvoid_0" name="isvoid" formControlName="isvoid" value="0" />
-                                <label class="custom-control-label" for="isvoid_0">Active</label
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for=" ">Status</label>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="isvoid_0" name="isvoid" formControlName="isvoid" value="0" />
+                                        <label class="custom-control-label" for="isvoid_0">Active</label
                 >
               </div>
               <div class="custom-control custom-radio">
@@ -390,17 +414,40 @@
                   value="1"
                 />
                 <label class="custom-control-label" for="isvoid_1">Void</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal('modal_editcate')">
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal('modal_editcate')">
             Close
           </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- delete -->
+        <div class="modal fade" id="modal_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                    </div>
+                    <div class="modal-body">Are you sure you want to delete this item?</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+                        <button type="button" class="btn btn-danger">
+          Delete
+        </button>
+                    </div>
                 </div>
             </div>
-        </form>
-    </div>
-</div>
+        </div>

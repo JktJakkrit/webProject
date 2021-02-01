@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from "@angular/core";
 import {
   FormBuilder,
@@ -64,7 +65,8 @@ export class ManageRefriComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalService: ModalService,
-    private masterService: MasterService
+    private masterService: MasterService,
+    private http: HttpClient
   ) {
     this.add_refri_form = this.formBuilder.group({
       type: new FormControl('', [Validators.required]),
@@ -73,7 +75,7 @@ export class ManageRefriComponent implements OnInit {
     brand: new FormControl('', [Validators.required]),
     capa: new FormControl('', [Validators.required]),
     detail: new FormControl('', [Validators.required]),
-    // amount: new FormControl('', [Validators.required]),
+    amount: new FormControl('', [Validators.required]),
     price: new FormControl("", [
       Validators.required,
       Validators.min(1),
@@ -91,7 +93,7 @@ export class ManageRefriComponent implements OnInit {
      
       capa: new FormControl('', [Validators.required]),
       detail: new FormControl('', [Validators.required]),
-      // amount: new FormControl('', [Validators.required]),
+      amount: new FormControl('', [Validators.required]),
       price: new FormControl("", [
         Validators.required,
         Validators.min(1),
@@ -131,7 +133,7 @@ export class ManageRefriComponent implements OnInit {
         form.value.brand,
         form.value.capa,
         form.value.detail,
-        // form.value.amount,
+        form.value.amount,
         form.value.price,
         this.photo
         )
@@ -167,7 +169,7 @@ export class ManageRefriComponent implements OnInit {
         form.value.brand,
         form.value.capa,
         form.value.detail,
-        // form.value.amount,
+        form.value.amount,
         form.value.price,
           this.photo,
           form.value.isvoid
@@ -201,7 +203,7 @@ export class ManageRefriComponent implements OnInit {
     this.edit_refri_form.controls['detail'].setValue(trdata.detail);
     this.edit_refri_form.controls['capa'].setValue(trdata.capa);
     this.edit_refri_form.controls['price'].setValue(trdata.price);
-    // this.edit_refri_form.controls['amount'].setValue(trdata.amount);
+    this.edit_refri_form.controls['amount'].setValue(trdata.amount);
     this.edit_refri_form.controls['avatar'].setValue(trdata.avatar);
     this.edit_refri_form.controls['isvoid'].setValue(
       trdata.isvoid.toString()
@@ -254,6 +256,14 @@ export class ManageRefriComponent implements OnInit {
         };
       }
     } catch (e) {}
+  }
+
+  deleteProduct(){
+    console.log("............");
+    // this.httpClient.delete(this.url + endPoints).subscribe(data => {
+    //   console.log(data);
+    // });
+    
   }
 
 }

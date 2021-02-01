@@ -1,3 +1,4 @@
+import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import {
   FormBuilder,
@@ -63,7 +64,8 @@ export class ManageFanComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalService: ModalService,
-    private masterService: MasterService
+    private masterService: MasterService,
+    private http: HttpClient
   ) {
     this.add_fan_form = this.formBuilder.group({
       type: new FormControl("", [Validators.required]),
@@ -72,7 +74,7 @@ export class ManageFanComponent implements OnInit {
       brand: new FormControl("", [Validators.required]),
       size: new FormControl("", [Validators.required]),
       detail: new FormControl("", [Validators.required]),
-      // amount: new FormControl("", [Validators.required]),
+      amount: new FormControl("", [Validators.required]),
       price: new FormControl("", [
         Validators.required,
         Validators.min(1),
@@ -89,7 +91,7 @@ export class ManageFanComponent implements OnInit {
       brand: new FormControl("", [Validators.required]),
       size: new FormControl("", [Validators.required]),
       detail: new FormControl("", [Validators.required]),
-      // amount: new FormControl("", [Validators.required]),
+      amount: new FormControl("", [Validators.required]),
       price: new FormControl("", [
         Validators.required,
         Validators.min(1),
@@ -130,7 +132,7 @@ export class ManageFanComponent implements OnInit {
           form.value.brand,
           form.value.detail,
           form.value.price,
-          // form.value.amount,
+          form.value.amount,
           form.value.size,
           this.photo
         )
@@ -166,7 +168,7 @@ export class ManageFanComponent implements OnInit {
           form.value.brand,
           form.value.detail,
           form.value.price,
-          // form.value.amount,
+          form.value.amount,
           form.value.size,
           this.photo,
           form.value.isvoid
@@ -251,6 +253,14 @@ export class ManageFanComponent implements OnInit {
         };
       }
     } catch (e) {}
+  }
+
+  deleteProduct(){
+    console.log("............");
+    // this.httpClient.delete(this.url + endPoints).subscribe(data => {
+    //   console.log(data);
+    // });
+    
   }
 
 }

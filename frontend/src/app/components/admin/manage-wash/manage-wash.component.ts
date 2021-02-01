@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from "@angular/core";
 import {
   FormBuilder,
@@ -62,7 +63,8 @@ export class ManageWashComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalService: ModalService,
-    private masterService: MasterService
+    private masterService: MasterService,
+    private http: HttpClient
   ) {
     this.add_wash_form = this.formBuilder.group({
       type: new FormControl("", [Validators.required]),
@@ -71,7 +73,7 @@ export class ManageWashComponent implements OnInit {
       brand: new FormControl("", [Validators.required]),
       cap: new FormControl("", [Validators.required]),
       detail: new FormControl("", [Validators.required]),
-      // amount: new FormControl("", [Validators.required]),
+      amount: new FormControl("", [Validators.required]),
       price: new FormControl("", [
         Validators.required,
         Validators.min(1),
@@ -88,7 +90,7 @@ export class ManageWashComponent implements OnInit {
       brand: new FormControl("", [Validators.required]),
       cap: new FormControl("", [Validators.required]),
       detail: new FormControl("", [Validators.required]),
-      // amount: new FormControl("", [Validators.required]),
+      amount: new FormControl("", [Validators.required]),
       price: new FormControl("", [
         Validators.required,
         Validators.min(1),
@@ -129,7 +131,7 @@ export class ManageWashComponent implements OnInit {
           form.value.brand,
           form.value.detail,
           form.value.price,
-          // form.value.amount,
+          form.value.amount,
           form.value.cap,
           this.photo
         )
@@ -165,7 +167,7 @@ export class ManageWashComponent implements OnInit {
           form.value.brand,
           form.value.detail,
           form.value.price,
-          // form.value.amount,
+          form.value.amount,
           form.value.cap,
           this.photo,
           form.value.isvoid
@@ -203,7 +205,7 @@ export class ManageWashComponent implements OnInit {
     this.edit_wash_form.controls["detail"].setValue(trdata.detail);
     this.edit_wash_form.controls["price"].setValue(trdata.price);
     this.edit_wash_form.controls["cap"].setValue(trdata.cap);
-    // this.edit_wash_form.controls["amount"].setValue(trdata.amount);
+    this.edit_wash_form.controls["amount"].setValue(trdata.amount);
     this.edit_wash_form.controls["avatar"].setValue(trdata.avatar);
     this.edit_wash_form.controls["isvoid"].setValue(trdata.isvoid.toString());
 
@@ -254,6 +256,14 @@ export class ManageWashComponent implements OnInit {
         };
       }
     } catch (e) {}
+  }
+
+  deleteProduct(){
+    console.log("............");
+    // this.httpClient.delete(this.url + endPoints).subscribe(data => {
+    //   console.log(data);
+    // });
+    
   }
 
 }

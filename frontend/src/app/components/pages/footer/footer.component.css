@@ -4,3 +4,52 @@
     background-color: #2c3e50;
     color: #fff;
 }
+
+.text-uppercase {
+    text-transform: uppercase !important;
+}
+
+article,
+aside,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section {
+    display: block;
+}
+
+.blockquote-footer {
+    display: block;
+    font-size: 80%;
+    color: #6c757d;
+}
+
+.blockquote-footer::before {
+    content: "— ";
+}
+
+.card>.list-group+.card-footer {
+    border-top: 0;
+}
+
+.card-footer {
+    padding: 0.75rem 1.25rem;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-top: 0.125rem solid rgba(0, 0, 0, 0.125);
+}
+
+.card-footer:last-child {
+    border-radius: 0 0 0.375rem 0.375rem;
+}
+
+.card-group>.card:not(:last-child) .card-footer {
+    border-bottom-right-radius: 0;
+}
+
+.card-group>.card:not(:first-child) .card-footer {
+    border-bottom-left-radius: 0;
+}

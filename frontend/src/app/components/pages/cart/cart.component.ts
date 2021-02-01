@@ -10,55 +10,53 @@ import { WashProduct } from 'src/app/models/wash.model';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  countAir: AirProduct[];
-  countDish: DishProduct[];
-  countFan: FanProduct[];
-  countRefri: RefriProduct[];
-  countTv: TvProduct[];
-  countWash: WashProduct[];
-  constructor(private cartDataService: CartDataServiceService) { 
+  countAir: AirProduct[] = [];
+  countDish: DishProduct[] = [];
+  countFan: FanProduct[] = [];
+  countRefri: RefriProduct[] = [];
+  countTv: TvProduct[] = [];
+  countWash: WashProduct[] = [];
+  constructor(private cartDataService: CartDataServiceService) {
+    
     this.cartDataService.currentAirProduct.subscribe((data) => {
-    if (data) {
-      this.countAir = data;
-    }
-  });
+      if (data) {
+        this.countAir = data;
+      }
+    });
 
-  this.cartDataService.currentDishProduct.subscribe((data) =>{
-    if(data){
-      this.countDish = data;
-    }
-  });
+    this.cartDataService.currentDishProduct.subscribe((data) => {
+      if (data) {
+        this.countDish = data;
+      }
+    });
 
-  this.cartDataService.currentFanProduct.subscribe((data) =>{
-    if(data){
-      this.countFan = data;
-    }
-  });
+    this.cartDataService.currentFanProduct.subscribe((data) => {
+      if (data) {
+        this.countFan = data;
+      }
+    });
 
-  this.cartDataService.currentRefriProduct.subscribe((data)=>{
-    if(data){
-      this.countRefri = data;
-    }
-  });
+    this.cartDataService.currentRefriProduct.subscribe((data) => {
+      if (data) {
+        this.countRefri = data;
+      }
+    });
 
-  this.cartDataService.currentTvProduct.subscribe((data)=>{
-    if(data){
-      this.countTv = data;
-    }
-  })
-  
-  this.cartDataService.currentWashProduct.subscribe((data)=>{
-    if(data){
-      this.countWash = data;
-    }
-  })
+    this.cartDataService.currentTvProduct.subscribe((data) => {
+      if (data) {
+        this.countTv = data;
+      }
+    });
 
-}
-
-  ngOnInit(): void {
+    this.cartDataService.currentWashProduct.subscribe((data) => {
+      if (data) {
+        this.countWash = data;
+      }
+    });
   }
 
+  ngOnInit(): void {}
 }
