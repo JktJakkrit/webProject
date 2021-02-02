@@ -20,6 +20,46 @@ export class MasterService {
   private handleError(error: HttpErrorResponse) {
     return throwError(error);
   }
+  addCheckOut(
+    name: string,
+    email: string,
+    address: string,
+    city: string,
+    phone: string,
+    state: string,
+    zip: string,
+    card: string,
+    number_card: string,
+    expMonth: string,
+    expYear: string,
+    cvv: string,
+
+  ){
+    var isvoid = 0;
+    
+    var f = new FormData();
+    f.append('name', name);
+    f.append('email', email);
+    f.append('address', address);
+    f.append('city', city);
+    f.append('phone', phone);
+    f.append('state', state);
+    f.append('zip', zip);
+    f.append('card', card);
+    f.append('number_card', number_card);
+    f.append('expMonth', expMonth);
+    f.append('expYear', expYear);
+    f.append('cvv', cvv);
+    f.append('isvoid', isvoid.toFixed());
+    f.forEach((v, k) => {
+      console.log(k, ' :  ', v);
+    });
+
+    return this.http
+      .post<any>(this.url + '/checkout/post', f, {
+      })
+      .pipe(catchError(this.handleError));
+  }
 
   getMasterAirs() {
     return this.http.get<AirProduct[]>(this.url + '/air/all');
@@ -474,4 +514,7 @@ export class MasterService {
       .put<any>(REST_URL, body)
       .pipe(catchError(this.handleError));
   }
+
+
+
 }

@@ -31,8 +31,10 @@ export class RefrigeratorComponent implements OnInit {
       }
     );
   }
+  
   addToCart(data) {
     console.log("34567890-=");
-    this.cartDataService.changeRefriProduct(data);
+    this.cartDataService.changeAirProduct(data);
+    // this.cartDataService.AddProductToCart(data);
   }
 }

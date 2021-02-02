@@ -25,6 +25,7 @@ import { TelevisionComponent } from './components/products/television/television
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { ManageOtherComponent } from './components/admin/manage-other/manage-other.component';
 import { OtherComponent } from './components/products/other/other.component';
+import { CheckoutComponent } from './components/pages/checkout/checkout.component';
 
 
 
@@ -35,6 +36,10 @@ const routes: Routes = [
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent
   },
   {
     path: "cart",

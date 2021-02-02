@@ -31,8 +31,10 @@ export class ElectricFanComponent implements OnInit {
       }
     );
   }
+  
   addToCart(data) {
     console.log("34567890-=");
-    this.cartDataService.changeFanProduct(data);
+    this.cartDataService.changeAirProduct(data);
+    // this.cartDataService.AddProductToCart(data);
   }
 }

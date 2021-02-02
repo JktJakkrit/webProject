@@ -13,8 +13,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Air-Condition -->
-                    <tr *ngFor='let item of countAir'>
+
+                    <!-- Cart Product -->
+                    <!-- <tr *ngFor='let item of countProduct'>
                         <td class="col-sm-8 col-md-6">
                             <div class="media">
                                 <a class="thumbnail pull-left"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a>
@@ -30,6 +31,31 @@
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>....</strong></td>
+                        <td class="col-sm-1 col-md-1">
+                            <button type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove"></span> Remove
+                        </button></td>
+                    </tr> -->
+
+                    <!-- Air-Condition -->
+                    <tr *ngFor='let item of countAir'>
+                        <td class="col-sm-8 col-md-6">
+                            <div class="media">
+                                <a class="thumbnail pull-left"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a>{{item.name}}</a></h4>
+                                    <h5 class="media-heading"> by <a>{{item.brand}}</a></h5>
+
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-sm-2 col-md-2" style="text-align: center">
+
+                            <input type="number" class="form-control" [value]="1" (change)="totalPrice(item)">
+
+                        </td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price }}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong></strong></td>
                         <td class="col-sm-1 col-md-1">
                             <button type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span> Remove
@@ -189,11 +215,11 @@
                         <td>   </td>
                         <td>   </td>
                         <td>
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" class="btn btn-primary" [routerLink]="['/home']">
                             <span class="glyphicon glyphicon-shopping-cart"></span> Back to Shopping
                         </button></td>
                         <td>
-                            <button type="button" class="btn btn-success">
+                            <button type="button" class="btn btn-success" [routerLink]="['/checkout']">
                             Checkout <span class="glyphicon glyphicon-play"></span>
                         </button></td>
                     </tr>
