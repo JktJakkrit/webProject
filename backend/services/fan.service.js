@@ -5,46 +5,49 @@ const path = require('path');
 const methods = {
     findAll() {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM `manage-fan`', function(error, result, fields) {
-                    if (error) return reject(error);
-                    return resolve(result);
-                })
-                //db.end();
+            db.query('SELECT * FROM `manage-fan`', function (error, result, fields) {
+                if (error) return reject(error);
+                return resolve(result);
+            })
+            //db.end();
         })
     },
-    findById: function(id) {
+    findById: function (id) {
         return new Promise((resolve, reject) => {
             let sql = "SELECT * FROM `manage-fan` where `fan_sys_id` = " + id;
-            db.query(sql, function(error, result) {
-                    if (error) return reject(error);
-                    return resolve(result);
-                })
-                // db.end();
+            db.query(sql, function (error, result) {
+                if (error) return reject(error);
+                return resolve(result);
+            })
+            // db.end();
         })
     },
-    postItemFan: function(path_pic, body) {
+    postItemFan: function (path_pic, body) {
         return new Promise((resolve, reject) => {
             let newPath = config.file + path.basename(path_pic)
             let pic = { 'file': newPath }
-            let data = {...body, ...pic }
+            let data = { ...body, ...pic }
             let sql = "INSERT INTO `manage-fan` SET ?";
             // return resolve(data);
-            db.query(sql, data, function(error, result) {
+            db.query(sql, data, function (error, result) {
                 if (error) return reject(error);
                 return resolve(result);
             });
             // db.end();
         })
     },
-    putItemFanById: function(id, body) {
-            return new Promise((resolve, reject) => {
-                let sql = "UPDATE `manage-fan` SET ? WHERE `fan_sys_id` = " + id;
-                db.query(sql, [body, id], function(error, result) {
-                    if (error) return reject(error);
-                    return resolve(result);
-                })
+    putItemFanById: function (path_pic, id, body) {
+        return new Promise((resolve, reject) => {
+            let newPath = config.file + path.basename(path_pic)
+            let pic = { 'file': newPath }
+            let data = { ...body, ...pic };
+            let sql = "UPDATE `manage-fan` SET ? WHERE `fan_sys_id` = ?";
+            db.query(sql, [data, id], function (error, result) {
+                if (error) return reject(error);
+                return resolve("update successfully");
             })
-        },
+        })
+    },
     deleteItemFanById: function (id) {
         return new Promise((resolve, reject) => {
             let sql = "DELETE FROM `manage-fan` WHERE `fan_sys_id` = " + id;
@@ -56,4 +59,4 @@ const methods = {
     }
 }
 
-module.exports = {...methods }
+module.exports = { ...methods }

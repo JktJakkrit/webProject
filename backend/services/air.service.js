@@ -47,7 +47,7 @@ const methods = {
             let sql = "UPDATE `manage-air` SET ? WHERE `air_sys_id` = ?";
             db.query(sql, [data, id], function (error, result) {
                 if (error) return reject(error);
-                return resolve(result);
+                return resolve("update successfully");
             });
         });
     },

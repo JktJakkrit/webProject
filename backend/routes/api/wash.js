@@ -5,7 +5,7 @@ const upload = require('../../configs/uploadpic');
 router.get('/all', controller.GetWashAll)
 router.get('/id/:id', controller.GetById)
 router.post('/post', upload.single('avatar'), controller.PostWash)
-router.put('/id/:id', controller.UpdateWashById)
+router.put('/id/:id', upload.single('avatar'), controller.UpdateWashById)
 router.delete('/id/:id', controller.DeleteWashById)
 
 module.exports = router;

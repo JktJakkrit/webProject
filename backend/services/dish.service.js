@@ -36,12 +36,15 @@ const methods = {
             // db.end();
         })
     }, // post
-    putItemDishById: function(id, body) {
+    putItemDishById: function(path_pic,id, body) {
         return new Promise((resolve, reject) => {
-            let sql = "UPDATE `manage-dish` SET ? WHERE `dish_sys_id` = " + id;
-            db.query(sql, [body, id], function(error, result) {
+            let newPath = config.file + path.basename(path_pic)
+            let pic = {'file': newPath}
+            let data = {...body, ...pic};
+            let sql = "UPDATE `manage-dish` SET ? WHERE `dish_sys_id` = ?";
+            db.query(sql, [data, id], function(error, result) {
                 if (error) return reject(error);
-                return resolve(result);
+                return resolve("update successfully");
             })
         })
     },
