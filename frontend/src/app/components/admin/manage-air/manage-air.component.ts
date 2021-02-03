@@ -8,10 +8,11 @@ import {
 } from '@angular/forms';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
-import { MasterService } from 'src/app/_services/master.service';
+
 import { ModalService } from 'src/app/_services/modal.service';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
+import { AirService } from 'src/app/_services/air.service';
 @Component({
   selector: 'app-manage-air',
   templateUrl: './manage-air.component.html',
@@ -20,8 +21,9 @@ import { HttpClient } from '@angular/common/http';
 export class ManageAirComponent implements OnInit {
   edit_air_form: FormGroup;
   add_air_form: FormGroup;
+  deleteAir
   photo: File;
-
+  selected;
   imageSrc: string;
   private url = environment.serverURL;
 
@@ -53,7 +55,7 @@ export class ManageAirComponent implements OnInit {
     btu: '',
   };
 
-  select(type,_$event) {
+  select(type, _$event) {
     if (type == 'type') {
       this.productID.type = _$event.target.value;
     } else {
@@ -73,8 +75,9 @@ export class ManageAirComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalService: ModalService,
-    private masterService: MasterService,
-    private http: HttpClient
+
+    private http: HttpClient,
+    private airService: AirService
   ) {
     this.add_air_form = this.formBuilder.group({
       type: new FormControl('', [Validators.required]),
@@ -137,7 +140,7 @@ export class ManageAirComponent implements OnInit {
     if (!this.add_air_form.valid) {
       Swal.fire('Input Valid!', 'Please enter require input', 'info');
     } else {
-      this.masterService
+      this.airService
         .addMasterAirs(
           form.value.type,
           form.value.code,
@@ -173,7 +176,7 @@ export class ManageAirComponent implements OnInit {
     if (!this.edit_air_form.valid) {
       Swal.fire('Input Valid!', 'Please enter require input', 'info');
     } else {
-      this.masterService
+      this.airService
         .updateMasterAirs(
           form.value.air_sys_id,
           form.value.type,
@@ -226,7 +229,7 @@ export class ManageAirComponent implements OnInit {
   }
 
   loadDataMaster() {
-    this.masterService.getMasterAirs().subscribe(
+    this.airService.getMasterAirs().subscribe(
       (res: any) => {
         this.masterAir = res;
         if (this.isDtInitialized) {
@@ -270,12 +273,53 @@ export class ManageAirComponent implements OnInit {
       }
     } catch (e) {}
   }
-  
-  deleteProduct(air_sys_id){
-    console.log("............");
-    // this.http.delete(this.url + '/air/' + air_sys_id).subscribe(data => {
-    //   console.log(data);
-    // });
-    
+  setDeleteAir(air) {
+    this.deleteAir = air;
   }
+  deleteAirSubmit(){
+    console.log(this.deleteAir)
+        this.airService.deleteAir(this.deleteAir.air_sys_id)
+    .subscribe(
+      (res: any) => {
+        console.log(res);
+        Swal.fire('Successful!', 'Delete successful.', 'success');
+      },
+      (error) => {
+        if (error.status === 200 || error.status === 201) {
+          Swal.fire('Successful!', 'Delete successful.', 'success');
+          this.closeModal('modal_delete');
+
+        } else {
+          console.log(error.status);
+          Swal.fire('Error!', 'error : ' + error.status, 'error');
+        }
+      }
+    );
+  }
+  // deleteProduct(){
+  //   this.airService.deleteAir()
+  //   .subscribe(
+  //     (res: any) => {
+  //       console.log(res);
+  //       Swal.fire('Successful!', 'Delete successful.', 'success');
+  //     },
+  //     (error) => {
+  //       if (error.status === 200 || error.status === 201) {
+  //         Swal.fire('Error!', 'error : ' + error.status, 'error');
+  //         this.closeModal('modal_delete');
+
+  //       } else {
+  //         console.log(error.status);
+  //         Swal.fire('Error!', 'error : ' + error.status, 'error');
+  //       }
+  //     }
+  //   );
+
+  // }
+  // onOptionsSelected(event) {
+  //   const value = event.target.value;
+  //   this.selected = value;
+  //   console.log('the selected value is ' + value);
+  //   this.deleteProduct();
+  // }
 }

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ProductService} from "./product.service";
 import {BehaviorSubject} from "rxjs";
-import {CartModelPublic, CartModelServer} from "../models/cart.model";
+// import {CartModelPublic, CartModelServer} from "../models/cart.model";
 import {ProductModelServer} from "../models/product.model";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";

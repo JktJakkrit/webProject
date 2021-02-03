@@ -1,1 +1,246 @@
-<p>checkout works!</p>
+<app-header></app-header>
+
+<div class="row">
+    <div class="col-75">
+        <div class="container">
+            <form action="/action_page.php" [formGroup]="checkout_form" (ngSubmit)="onSubmit(this.checkout_form)">
+                <div class="row">
+                    <div class="col-50">
+                        <h3>Billing Address</h3>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <div class="form-group">
+                                    <label for="">Full Name</label>
+                                    <input type="text" name="name" class="form-control" formControlName="name" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="form-group">
+                                    <label for="">Email</label>
+                                    <input type="text" name="email" class="form-control" formControlName="email" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="form-group">
+                                    <label for=""><i class="fa fa-address-card-o"></i>Address</label>
+                                    <input type="text" name="address" class="form-control" formControlName="address" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="form-group">
+                                    <label for=""><i class="fa fa-institution"></i>City</label>
+                                    <input type="text" name="city" class="form-control" formControlName="city" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="form-group">
+                                    <label for=""><i class="fa fa-phone"></i>Phone</label>
+                                    <input type="text" name="phone" class="form-control" formControlName="phone" />
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="">State</label>
+                                    <input type="text" name="state" class="form-control" formControlName="state" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="">Zip Code</label>
+                                    <input type="text" name="zip" class="form-control" formControlName="zip" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-50">
+                        <h3>Payment</h3>
+                        <label for="fname">Accepted Cards</label>
+                        <div class="icon-container">
+                            <i class="fa fa-cc-visa" style="color: navy"></i>&nbsp;
+                            <i class="fa fa-cc-amex" style="color: blue"></i>&nbsp;
+                            <i class="fa fa-cc-mastercard" style="color: red"></i>&nbsp;
+                            <i class="fa fa-cc-paypal" style="color: green"></i>&nbsp;
+                            <i class="fa fa-cc-discover" style="color: orange"></i>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <div class="form-group">
+                                    <label for="">Name on Card</label>
+                                    <input type="text" name="card" class="form-control" formControlName="card" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="form-group">
+                                    <label for="">Credit card number</label>
+                                    <input type="text" name="number_card" class="form-control" formControlName="number_card" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="form-group">
+                                    <label for="">Exp Month</label>
+                                    <input type="text" name="expMonth" class="form-control" formControlName="expMonth" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="">Exp Year</label>
+                                    <input type="text" name="expYear" class="form-control" formControlName="expYear" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="">CVV</label>
+                                    <input type="text" name="cvv" class="form-control" formControlName="cvv" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <input type="submit" value="Continue to checkout" class="btn" />
+
+                <p>name: {{ this.checkout_form.value.name }}</p>
+                <p>email: {{ this.checkout_form.value.email }}</p>
+                <p>address: {{ this.checkout_form.value.address }}</p>
+                <p>city: {{ this.checkout_form.value.city }}</p>
+                <p>phone: {{ this.checkout_form.value.phone }}</p>
+                <p>state: {{ this.checkout_form.value.state }}</p>
+                <p>zip: {{ this.checkout_form.value.zip }}</p>
+
+                <p>card: {{ this.checkout_form.value.card }}</p>
+                <p>number_card: {{ this.checkout_form.value.number_card }}</p>
+                <p>expMonth: {{ this.checkout_form.value.expMonth }}</p>
+                <p>expYear: {{ this.checkout_form.value.expYear }}</p>
+                <p>cvv: {{ this.checkout_form.value.cvv }}</p>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="col-25">
+        <div class="container">
+            <h2>Cart
+                <span class="price" style="color:black">
+              <i class="fa fa-shopping-cart"></i>&nbsp;
+              <b>{{counter}}</b>
+            </span>
+            </h2>
+
+            <tr *ngFor='let item of countAir'>
+                <td class="col-sm-8 col-md-6">
+                    <div class="media">
+                        <!-- <a class="thumbnail pull-left"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a> -->
+                        <div class="media-body">
+                            <h4 class="media-heading"><a>{{item.name}}</a></h4>
+                        </div>
+                    </div>
+                </td>
+                <td class="col-sm-2 col-md-2" style="text-align: center">
+                    <input type="text" class="form-control" [value]='item.amount' readonly>
+                </td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>{{airTotalPrice(item.amount,item.price)}}</strong></td>
+            </tr>
+
+            <tr *ngFor='let item of countFan'>
+                <td class="col-sm-8 col-md-6">
+                    <div class="media">
+                        <!-- <a class="thumbnail pull-left"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a> -->
+                        <div class="media-body">
+                            <h4 class="media-heading"><a>{{item.name}}</a></h4>
+                        </div>
+                    </div>
+                </td>
+                <td class="col-sm-2 col-md-2" style="text-align: center">
+                    <input type="text" class="form-control" [value]='item.amount' readonly>
+                </td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>{{fanTotalPrice(item.amount,item.price)}}</strong></td>
+            </tr>
+
+            <tr *ngFor='let item of countTv'>
+                <td class="col-sm-8 col-md-6">
+                    <div class="media">
+                        <!-- <a class="thumbnail pull-left"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a> -->
+                        <div class="media-body">
+                            <h4 class="media-heading"><a>{{item.name}}</a></h4>
+                        </div>
+                    </div>
+                </td>
+                <td class="col-sm-2 col-md-2" style="text-align: center">
+                    <input type="text" class="form-control" [value]='item.amount' readonly>
+                </td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>{{tvTotalPrice(item.amount,item.price)}}</strong></td>
+            </tr>
+
+            <tr *ngFor='let item of countDish'>
+                <td class="col-sm-8 col-md-6">
+                    <div class="media">
+                        <!-- <a class="thumbnail pull-left"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a> -->
+                        <div class="media-body">
+                            <h4 class="media-heading"><a>{{item.name}}</a></h4>
+                        </div>
+                    </div>
+                </td>
+                <td class="col-sm-2 col-md-2" style="text-align: center">
+                    <input type="text" class="form-control" [value]='item.amount' readonly>
+                </td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>{{dishTotalPrice(item.amount,item.price)}}</strong></td>
+            </tr>
+
+            <tr *ngFor='let item of countWash'>
+                <td class="col-sm-8 col-md-6">
+                    <div class="media">
+                        <!-- <a class="thumbnail pull-left"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a> -->
+                        <div class="media-body">
+                            <h4 class="media-heading"><a>{{item.name}}</a></h4>
+                        </div>
+                    </div>
+                </td>
+                <td class="col-sm-2 col-md-2" style="text-align: center">
+                    <input type="text" class="form-control" [value]='item.amount' readonly>
+                </td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>{{washTotalPrice(item.amount,item.price)}}</strong></td>
+            </tr>
+
+            <tr *ngFor='let item of countRefri'>
+                <td class="col-sm-8 col-md-6">
+                    <div class="media">
+                        <!-- <a class="thumbnail pull-left"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a> -->
+                        <div class="media-body">
+                            <h4 class="media-heading"><a>{{item.name}}</a></h4>
+                        </div>
+                    </div>
+                </td>
+                <td class="col-sm-2 col-md-2" style="text-align: center">
+                    <input type="text" class="form-control" [value]='item.amount' readonly>
+                </td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>{{refriTotalPrice(item.amount,item.price)}}</strong></td>
+            </tr>
+
+            <hr>
+            <p>Total Price: <span class="price" style="color:black"><b>.....</b></span></p>
+        </div>
+    </div>
+
+</div>

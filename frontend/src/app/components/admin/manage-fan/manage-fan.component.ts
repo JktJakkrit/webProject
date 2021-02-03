@@ -8,7 +8,8 @@ import {
 } from "@angular/forms";
 import { DataTableDirective } from "angular-datatables";
 import { Subject } from "rxjs";
-import { MasterService } from "src/app/_services/master.service";
+import { FanService } from "src/app/_services/fan.service";
+
 import { ModalService } from "src/app/_services/modal.service";
 
 import Swal from "sweetalert2";
@@ -21,7 +22,7 @@ export class ManageFanComponent implements OnInit {
   photo: File;
   edit_fan_form: FormGroup;
   add_fan_form: FormGroup;
-
+  deleteFan
   imageSrc: string;
 
   productType = [
@@ -64,8 +65,10 @@ export class ManageFanComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalService: ModalService,
-    private masterService: MasterService,
-    private http: HttpClient
+   
+    private http: HttpClient,
+    private fanService: FanService
+    
   ) {
     this.add_fan_form = this.formBuilder.group({
       type: new FormControl("", [Validators.required]),
@@ -124,7 +127,7 @@ export class ManageFanComponent implements OnInit {
     if (!this.add_fan_form.valid) {
       Swal.fire("Input Valid!", "Please enter require input", "info");
     } else {
-      this.masterService
+      this.fanService
         .addMasterFan(
           form.value.type,
           form.value.code,
@@ -159,7 +162,7 @@ export class ManageFanComponent implements OnInit {
     if (!this.edit_fan_form.valid) {
       Swal.fire("Input Valid!", "Please enter require input", "info");
     } else {
-      this.masterService
+      this.fanService
         .updateMasterFan(
           form.value.fan_sys_id,
           form.value.type,
@@ -202,15 +205,15 @@ export class ManageFanComponent implements OnInit {
     this.edit_fan_form.controls["detail"].setValue(trdata.detail);
     this.edit_fan_form.controls["price"].setValue(trdata.price);
     this.edit_fan_form.controls["size"].setValue(trdata.size);
-    // this.edit_fan_form.controls["amount"].setValue(trdata.amount);
-    this.edit_fan_form.controls["file"].setValue(trdata.file);
+    this.edit_fan_form.controls["amount"].setValue(trdata.amount);
+    this.edit_fan_form.controls["avatar"].setValue(trdata.avatar);
     this.edit_fan_form.controls["isvoid"].setValue(trdata.isvoid.toString());
 
     this.modalService.open("modal_editcate");
   }
 
   loadDataMaster() {
-    this.masterService.getMasterFans().subscribe(
+    this.fanService.getMasterFans().subscribe(
       (res: any) => {
         this.masterFans = res;
         if (this.isDtInitialized) {
@@ -255,12 +258,28 @@ export class ManageFanComponent implements OnInit {
     } catch (e) {}
   }
 
-  deleteProduct(){
-    console.log("............");
-    // this.httpClient.delete(this.url + endPoints).subscribe(data => {
-    //   console.log(data);
-    // });
-    
+  setDeleteFan(fan) {
+    this.deleteFan = fan;
+  }
+  deleteFanSubmit(){
+    console.log(this.deleteFan)
+        this.fanService.deleteFan(this.deleteFan.fan_sys_id)
+    .subscribe(
+      (res: any) => {
+        console.log(res);
+        Swal.fire('Successful!', 'Delete successful.', 'success');
+      },
+      (error) => {
+        if (error.status === 200 || error.status === 201) {
+          Swal.fire('Successful!', 'Delete successful.', 'success');
+          this.closeModal('modal_delete');
+
+        } else {
+          console.log(error.status);
+          Swal.fire('Error!', 'error : ' + error.status, 'error');
+        }
+      }
+    );
   }
 
 }

@@ -1,27 +1,28 @@
-import { HttpClient } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-} from "@angular/forms";
-import { DataTableDirective } from "angular-datatables";
-import { Subject } from "rxjs";
-import { MasterService } from "src/app/_services/master.service";
-import { ModalService } from "src/app/_services/modal.service";
+} from '@angular/forms';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
+import { DishService } from 'src/app/_services/dish.service';
 
-import Swal from "sweetalert2";
+import { ModalService } from 'src/app/_services/modal.service';
+
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-manage-dish',
   templateUrl: './manage-dish.component.html',
-  styleUrls: ['./manage-dish.component.css']
+  styleUrls: ['./manage-dish.component.css'],
 })
 export class ManageDishComponent implements OnInit {
   photo: File;
   edit_dish_form: FormGroup;
   add_dish_form: FormGroup;
-  
+  deleteDish
   imageSrc: string;
 
   productType = [
@@ -47,17 +48,17 @@ export class ManageDishComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalService: ModalService,
-    private masterService: MasterService,
-    private http: HttpClient
+    private http: HttpClient,
+    private dishService: DishService
   ) {
     this.add_dish_form = this.formBuilder.group({
-      type: new FormControl("", [Validators.required]),
-      code: new FormControl("", [Validators.required]),
-      name: new FormControl("", [Validators.required]),
-      brand: new FormControl("", [Validators.required]),
-      detail: new FormControl("", [Validators.required]),
-      // amount: new FormControl("", [Validators.required]),
-      price: new FormControl("", [
+      type: new FormControl('', [Validators.required]),
+      code: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
+      brand: new FormControl('', [Validators.required]),
+      detail: new FormControl('', [Validators.required]),
+      amount: new FormControl("", [Validators.required]),
+      price: new FormControl('', [
         Validators.required,
         Validators.min(1),
         Validators.max(100000),
@@ -66,14 +67,14 @@ export class ManageDishComponent implements OnInit {
     });
 
     this.edit_dish_form = this.formBuilder.group({
-      dish_sys_id: ["", Validators.required],
-      type: new FormControl("", [Validators.required]),
-      code: new FormControl("", [Validators.required]),
-      name: new FormControl("", [Validators.required]),
-      brand: new FormControl("", [Validators.required]),
-      detail: new FormControl("", [Validators.required]),
-      // amount: new FormControl("", [Validators.required]),
-      price: new FormControl("", [
+      dish_sys_id: ['', Validators.required],
+      type: new FormControl('', [Validators.required]),
+      code: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
+      brand: new FormControl('', [Validators.required]),
+      detail: new FormControl('', [Validators.required]),
+      amount: new FormControl("", [Validators.required]),
+      price: new FormControl('', [
         Validators.required,
         Validators.min(1),
         Validators.max(100000),
@@ -89,7 +90,8 @@ export class ManageDishComponent implements OnInit {
 
   masterDish;
 
-  ngOnInit(): void { this.loadDataMaster();
+  ngOnInit(): void {
+    this.loadDataMaster();
   }
 
   openModal(id: string) {
@@ -104,16 +106,16 @@ export class ManageDishComponent implements OnInit {
     if (!this.add_dish_form.valid) {
       Swal.fire('Input Valid!', 'Please enter require input', 'info');
     } else {
-      this.masterService
-        .addMasterDishs( 
-        form.value.type,
-        form.value.code,
-        form.value.name,
-        form.value.brand,
-        form.value.detail,
-        form.value.price,
-        form.value.amount,
-        this.photo
+      this.dishService
+        .addMasterDishs(
+          form.value.type,
+          form.value.code,
+          form.value.name,
+          form.value.brand,
+          form.value.detail,
+          form.value.price,
+          form.value.amount,
+          this.photo
         )
         .subscribe(
           (res: any) => {
@@ -138,7 +140,7 @@ export class ManageDishComponent implements OnInit {
     if (!this.edit_dish_form.valid) {
       Swal.fire('Input Valid!', 'Please enter require input', 'info');
     } else {
-      this.masterService
+      this.dishService
         .updateMasterDishs(
           form.value.dish_sys_id,
           form.value.type,
@@ -181,15 +183,13 @@ export class ManageDishComponent implements OnInit {
     this.edit_dish_form.controls['price'].setValue(trdata.price);
     this.edit_dish_form.controls['amount'].setValue(trdata.amount);
     this.edit_dish_form.controls['this.photo'].setValue(trdata.this.photo);
-    this.edit_dish_form.controls['isvoid'].setValue(
-      trdata.isvoid.toString()
-    );
+    this.edit_dish_form.controls['isvoid'].setValue(trdata.isvoid.toString());
 
     this.modalService.open('modal_editcate');
   }
 
   loadDataMaster() {
-    this.masterService.getMasterDishs().subscribe(
+    this.dishService.getMasterDishs().subscribe(
       (res: any) => {
         this.masterDish = res;
         if (this.isDtInitialized) {
@@ -234,13 +234,27 @@ export class ManageDishComponent implements OnInit {
     } catch (e) {}
   }
 
-  deleteProduct(){
-    console.log("............");
-    // this.httpClient.delete(this.url + endPoints).subscribe(data => {
-    //   console.log(data);
-    // });
-    
+  setDeleteDish(dish) {
+    this.deleteDish = dish;
   }
+  deleteDishSubmit(){
+    console.log(this.deleteDish)
+        this.dishService.deleteDish(this.deleteDish.dish_sys_id)
+    .subscribe(
+      (res: any) => {
+        console.log(res);
+        Swal.fire('Successful!', 'Delete successful.', 'success');
+      },
+      (error) => {
+        if (error.status === 200 || error.status === 201) {
+          Swal.fire('Successful!', 'Delete successful.', 'success');
+          this.closeModal('modal_delete');
 
-
+        } else {
+          console.log(error.status);
+          Swal.fire('Error!', 'error : ' + error.status, 'error');
+        }
+      }
+    );
+  }
 }

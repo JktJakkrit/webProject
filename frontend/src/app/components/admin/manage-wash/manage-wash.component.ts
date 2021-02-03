@@ -8,8 +8,9 @@ import {
 } from "@angular/forms";
 import { DataTableDirective } from "angular-datatables";
 import { Subject } from "rxjs";
-import { MasterService } from "src/app/_services/master.service";
+
 import { ModalService } from "src/app/_services/modal.service";
+import { WashService } from 'src/app/_services/wash.service';
 
 import Swal from "sweetalert2";
 @Component({
@@ -21,7 +22,7 @@ export class ManageWashComponent implements OnInit {
   photo: File;
   edit_wash_form: FormGroup;
   add_wash_form: FormGroup;
-
+  deleteWash;
   imageSrc: string;
   
   productCap = [
@@ -63,8 +64,9 @@ export class ManageWashComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalService: ModalService,
-    private masterService: MasterService,
-    private http: HttpClient
+   
+    private http: HttpClient,
+    private washService: WashService
   ) {
     this.add_wash_form = this.formBuilder.group({
       type: new FormControl("", [Validators.required]),
@@ -123,7 +125,7 @@ export class ManageWashComponent implements OnInit {
     if (!this.add_wash_form.valid) {
       Swal.fire("Input Valid!", "Please enter require input", "info");
     } else {
-      this.masterService
+      this.washService
         .addMasterWashings(
           form.value.type,
           form.value.code,
@@ -158,7 +160,7 @@ export class ManageWashComponent implements OnInit {
     if (!this.edit_wash_form.valid) {
       Swal.fire("Input Valid!", "Please enter require input", "info");
     } else {
-      this.masterService
+      this.washService
         .updateMasterWash(
           form.value.wash_sys_id,
           form.value.type,
@@ -213,7 +215,7 @@ export class ManageWashComponent implements OnInit {
   }
 
   loadDataMaster() {
-    this.masterService.getMasterWashings().subscribe(
+    this.washService.getMasterWashings().subscribe(
       (res: any) => {
         this.masterWash = res;
         if (this.isDtInitialized) {
@@ -258,12 +260,29 @@ export class ManageWashComponent implements OnInit {
     } catch (e) {}
   }
 
-  deleteProduct(){
-    console.log("............");
-    // this.httpClient.delete(this.url + endPoints).subscribe(data => {
-    //   console.log(data);
-    // });
-    
+  
+  setDeleteWash(wash) {
+    this.deleteWash = wash;
+  }
+  deleteWashSubmit(){
+    console.log(this.deleteWash)
+        this.washService.deleteWash(this.deleteWash.wash_sys_id)
+    .subscribe(
+      (res: any) => {
+        console.log(res);
+        Swal.fire('Successful!', 'Delete successful.', 'success');
+      },
+      (error) => {
+        if (error.status === 200 || error.status === 201) {
+          Swal.fire('Successful!', 'Delete successful.', 'success');
+          this.closeModal('modal_delete');
+
+        } else {
+          console.log(error.status);
+          Swal.fire('Error!', 'error : ' + error.status, 'error');
+        }
+      }
+    );
   }
 
 }

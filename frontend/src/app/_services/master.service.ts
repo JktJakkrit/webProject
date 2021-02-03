@@ -20,6 +20,82 @@ export class MasterService {
   private handleError(error: HttpErrorResponse) {
     return throwError(error);
   }
+  // addCheckOut(
+  //   name: string,
+  //   email: string,
+  //   address: string,
+  //   city: string,
+  //   phone: string,
+  //   state: string,
+  //   zip: string,
+  //   card: string,
+  //   number_card: string,
+  //   expMonth: string,
+  //   expYear: string,
+  //   cvv: string,
+
+  // ){
+  //   var isvoid = 0;
+
+  //   var f = new FormData();
+  //   f.append('name', name);
+  //   f.append('email', email);
+  //   f.append('address', address);
+  //   f.append('city', city);
+  //   f.append('phone', phone);
+  //   f.append('state', state);
+  //   f.append('zip', zip);
+  //   f.append('card', card);
+  //   f.append('number_card', number_card);
+  //   f.append('expMonth', expMonth);
+  //   f.append('expYear', expYear);
+  //   f.append('cvv', cvv);
+  //   f.append('isvoid', isvoid.toFixed());
+  //   f.forEach((v, k) => {
+  //     console.log(k, ' :  ', v);
+  //   });
+
+  //   return this.http
+  //     .post<any>(this.url + '/bill/post', f, {
+  //     })
+  //     .pipe(catchError(this.handleError));
+  // }
+  addCheckOut(
+    name: string,
+    email: string,
+    address: string,
+    city: string,
+    phone: string,
+    state: string,
+    zip: string,
+    card: string,
+    number_card: string,
+    expMonth: string,
+    expYear: string,
+    cvv: string
+  ) {
+    var isvoid = 0;
+
+    const body = {
+      name,
+      email,
+      address,
+      city,
+      phone,
+      state,
+      zip,
+      card,
+      number_card,
+      expMonth,
+      expYear,
+      cvv,
+      isvoid,
+    };
+
+    return this.http
+      .post<any>(this.url + '/bill/post', body, {})
+      .pipe(catchError(this.handleError));
+  }
 
   getMasterAirs() {
     return this.http.get<AirProduct[]>(this.url + '/air/all');
@@ -56,8 +132,7 @@ export class MasterService {
     });
 
     return this.http
-      .post<any>(this.url + '/air/post', f, {
-      })
+      .post<any>(this.url + '/air/post', f, {})
       .pipe(catchError(this.handleError));
   }
 
@@ -130,8 +205,7 @@ export class MasterService {
     // return this.http.post<any>('http://localhost:3000/building/add-building', body, { headers: token_head }).pipe(
     //   catchError(this.handleError)
     return this.http
-      .post<any>(this.url + '/dish/post', f, {
-      })
+      .post<any>(this.url + '/dish/post', f, {})
       .pipe(catchError(this.handleError));
   }
 
@@ -160,8 +234,7 @@ export class MasterService {
     };
     // return this.http.post<any>('http://localhost:3000/building/update-building', body, { headers: token_head }).pipe(
     //   catchError(this.handleError)
-    var REST_URL =
-      this.url + '/dish/id/' + dish_sys_id;
+    var REST_URL = this.url + '/dish/id/' + dish_sys_id;
     return this.http
       .put<any>(REST_URL, body)
       .pipe(catchError(this.handleError));
@@ -185,7 +258,7 @@ export class MasterService {
     avatar: File
   ) {
     var isvoid = 0;
-    
+
     // const token_head = this.getHeader()
     console.log(avatar);
     var f = new FormData();
@@ -205,8 +278,7 @@ export class MasterService {
     // return this.http.post<any>('http://localhost:3000/building/add-building', body, { headers: token_head }).pipe(
     //   catchError(this.handleError)
     return this.http
-      .post<any>(this.url + '/fan/post', f, {
-      })
+      .post<any>(this.url + '/fan/post', f, {})
       .pipe(catchError(this.handleError));
   }
 
@@ -237,8 +309,7 @@ export class MasterService {
     };
     // return this.http.post<any>('http://localhost:3000/building/update-building', body, { headers: token_head }).pipe(
     //   catchError(this.handleError)
-    var REST_URL =
-      this.url + '/fan/id/' + fan_sys_id;
+    var REST_URL = this.url + '/fan/id/' + fan_sys_id;
     return this.http
       .put<any>(REST_URL, body)
       .pipe(catchError(this.handleError));
@@ -262,7 +333,7 @@ export class MasterService {
     avatar: File
   ) {
     var isvoid = 0;
-  
+
     // const token_head = this.getHeader()
     console.log(avatar);
     var f = new FormData();
@@ -282,8 +353,7 @@ export class MasterService {
     // return this.http.post<any>('http://localhost:3000/building/add-building', body, { headers: token_head }).pipe(
     //   catchError(this.handleError)
     return this.http
-      .post<any>(this.url + '/refri/post', f, {
-      })
+      .post<any>(this.url + '/refri/post', f, {})
       .pipe(catchError(this.handleError));
   }
 
@@ -314,8 +384,7 @@ export class MasterService {
     };
     // return this.http.post<any>('http://localhost:3000/building/update-building', body, { headers: token_head }).pipe(
     //   catchError(this.handleError)
-    var REST_URL =
-      this.url + '/refri/id' + refri_sys_id;
+    var REST_URL = this.url + '/refri/id' + refri_sys_id;
     return this.http
       .put<any>(REST_URL, body)
       .pipe(catchError(this.handleError));
@@ -359,8 +428,7 @@ export class MasterService {
     // return this.http.post<any>('http://localhost:3000/building/add-building', body, { headers: token_head }).pipe(
     //   catchError(this.handleError)
     return this.http
-      .post<any>(this.url + '/tv/post', f, {
-      })
+      .post<any>(this.url + '/tv/post', f, {})
       .pipe(catchError(this.handleError));
   }
 
@@ -391,8 +459,7 @@ export class MasterService {
     };
     // return this.http.post<any>('http://localhost:3000/building/update-building', body, { headers: token_head }).pipe(
     //   catchError(this.handleError)
-    var REST_URL =
-      this.url + '/tv/id/' + tv_sys_id;
+    var REST_URL = this.url + '/tv/id/' + tv_sys_id;
     return this.http
       .put<any>(REST_URL, body)
       .pipe(catchError(this.handleError));
@@ -436,8 +503,7 @@ export class MasterService {
     // return this.http.post<any>('http://localhost:3000/building/add-building', body, { headers: token_head }).pipe(
     //   catchError(this.handleError)
     return this.http
-      .post<any>(this.url + '/wash/post', f, {
-      })
+      .post<any>(this.url + '/wash/post', f, {})
       .pipe(catchError(this.handleError));
   }
 
@@ -468,8 +534,7 @@ export class MasterService {
     };
     // return this.http.post<any>('http://localhost:3000/building/update-building', body, { headers: token_head }).pipe(
     //   catchError(this.handleError)
-    var REST_URL =
-      this.url + '/wash/id/' + wash_sys_id;
+    var REST_URL = this.url + '/wash/id/' + wash_sys_id;
     return this.http
       .put<any>(REST_URL, body)
       .pipe(catchError(this.handleError));
