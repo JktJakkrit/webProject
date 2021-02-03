@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 
-router.use('/users',require('./user'))
+router.use('/login',require('./admin_user'))
 router.use('/air',require('./air'))
 router.use('/dish',require('./dish'))
 router.use('/fan',require('./fan'))
