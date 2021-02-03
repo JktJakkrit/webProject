@@ -23,9 +23,9 @@ export class CartComponent implements OnInit {
 
   totalAir: number = 0;
   // countProduct: CartProduct[] = [];
-to
+  to;
+  TOTALVAR :number = 0 ;
   constructor(private cartDataService: CartDataServiceService) {
-
     this.cartDataService.currentAirProduct.subscribe((data) => {
       if (data) {
         this.countAir = data;
@@ -63,58 +63,62 @@ to
     });
   }
 
+  airTotalPrice(amount, price): number {
+    this.TOTALVAR +=  amount * price;
+    return amount * price;
+  }
+  airChangeAmount(event, airItem) {
+    console.log(event.target.value);
+    this.cartDataService.updateAmountAirProduct(airItem, event.target.value);
+  }
+  //-----------------------------
+  dishTotalPrice(amount, price): number {
+    this.TOTALVAR +=  amount * price;
+    return amount * price;
+  }
+  dishChangeAmount(event, dishItem) {
+    console.log(event.target.value);
+    this.cartDataService.updateAmountDishProduct(dishItem, event.target.value);
+  }
+  //-----------------------------
+  fanTotalPrice(amount, price): number {
+    this.TOTALVAR +=  amount * price;
+    return amount * price;
+  }
+  fanChangeAmount(event, fanItem) {
+    console.log(event.target.value);
+    this.cartDataService.updateAmountFanProduct(fanItem, event.target.value);
+  }
+  //-----------------------------
+  refriTotalPrice(amount, price): number {
+    this.TOTALVAR +=  amount * price;
+    return amount * price;
+  }
+  refriChangeAmount(event, refriItem) {
+    console.log(event.target.value);
+    this.cartDataService.updateAmountRefriProduct(
+      refriItem,
+      event.target.value
+    );
+  }
+  //-----------------------------
+  washTotalPrice(amount, price): number {
+    this.TOTALVAR +=  amount * price;
+    return amount * price;
+  }
+  washChangeAmount(event, washItem) {
+    console.log(event.target.value);
+    this.cartDataService.updateAmountWashProduct(washItem, event.target.value);
+  }
+  //-----------------------------
+  tvTotalPrice(amount, price): number {
+    this.TOTALVAR +=  amount * price;
+    return amount * price;
+  }
+  tvChangeAmount(event, tvItem) {
+    console.log(event.target.value);
+    this.cartDataService.updateAmountTvProduct(tvItem, event.target.value);
+  }
 
-  airTotalPrice(amount,price) : number {
-    return amount * price;
-  }
-  airChangeAmount(event,airItem) {
-    console.log(event.target.value );
-    this.cartDataService.updateAmountAirProduct(airItem,event.target.value);
-  }
-//-----------------------------
-  dishTotalPrice(amount,price) : number {
-    return amount * price;
-  }
-  dishChangeAmount(event,dishItem) {
-    console.log(event.target.value );
-    this.cartDataService.updateAmountDishProduct(dishItem,event.target.value);
-  }
-  //-----------------------------
-  fanTotalPrice(amount,price) : number {
-    return amount * price;
-  }
-  fanChangeAmount(event,fanItem) {
-    console.log(event.target.value );
-    this.cartDataService.updateAmountFanProduct(fanItem,event.target.value);
-  }
-  //-----------------------------
-  refriTotalPrice(amount,price) : number {
-    return amount * price;
-  }
-  refriChangeAmount(event,refriItem) {
-    console.log(event.target.value );
-    this.cartDataService.updateAmountRefriProduct(refriItem,event.target.value);
-  }
-  //-----------------------------
-  washTotalPrice(amount,price) : number {
-    return amount * price;
-  }
-  washChangeAmount(event,washItem) {
-    console.log(event.target.value );
-    this.cartDataService.updateAmountWashProduct(washItem,event.target.value);
-  }
-  //-----------------------------
-  tvTotalPrice(amount,price) : number {
-    return amount * price;
-  }
-  tvChangeAmount(event,tvItem) {
-    console.log(event.target.value );
-    this.cartDataService.updateAmountTvProduct(tvItem,event.target.value);
-  }
-
- 
   ngOnInit(): void {}
-
-
-  
 }
