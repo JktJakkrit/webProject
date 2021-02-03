@@ -205,8 +205,8 @@ export class ManageFanComponent implements OnInit {
     this.edit_fan_form.controls["detail"].setValue(trdata.detail);
     this.edit_fan_form.controls["price"].setValue(trdata.price);
     this.edit_fan_form.controls["size"].setValue(trdata.size);
-    // this.edit_fan_form.controls["amount"].setValue(trdata.amount);
-    this.edit_fan_form.controls["file"].setValue(trdata.file);
+    this.edit_fan_form.controls["amount"].setValue(trdata.amount);
+    this.edit_fan_form.controls["avatar"].setValue(trdata.avatar);
     this.edit_fan_form.controls["isvoid"].setValue(trdata.isvoid.toString());
 
     this.modalService.open("modal_editcate");

@@ -1,22 +1,22 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-} from "@angular/forms";
-import { DataTableDirective } from "angular-datatables";
-import { Subject } from "rxjs";
+} from '@angular/forms';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
 
-import { ModalService } from "src/app/_services/modal.service";
+import { ModalService } from 'src/app/_services/modal.service';
 import { RefriService } from 'src/app/_services/refri.service';
 
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-manage-refri',
   templateUrl: './manage-refri.component.html',
-  styleUrls: ['./manage-refri.component.css']
+  styleUrls: ['./manage-refri.component.css'],
 })
 export class ManageRefriComponent implements OnInit {
   photo: File;
@@ -66,37 +66,37 @@ export class ManageRefriComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalService: ModalService,
-    
+
     private http: HttpClient,
     private refriService: RefriService
   ) {
     this.add_refri_form = this.formBuilder.group({
       type: new FormControl('', [Validators.required]),
-    code: new FormControl('', [Validators.required]),
-    name: new FormControl('', [Validators.required]),
-    brand: new FormControl('', [Validators.required]),
-    capa: new FormControl('', [Validators.required]),
-    detail: new FormControl('', [Validators.required]),
-    amount: new FormControl('', [Validators.required]),
-    price: new FormControl("", [
-      Validators.required,
-      Validators.min(1),
-      Validators.max(100000),
-    ]),
+      code: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
+      brand: new FormControl('', [Validators.required]),
+      capa: new FormControl('', [Validators.required]),
+      detail: new FormControl('', [Validators.required]),
+      amount: new FormControl('', [Validators.required]),
+      price: new FormControl('', [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(100000),
+      ]),
       avatar: ['', Validators.required],
     });
 
     this.edit_refri_form = this.formBuilder.group({
-      refri_sys_id: ["", Validators.required],
+      refri_sys_id: ['', Validators.required],
       type: new FormControl('', [Validators.required]),
       code: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
       brand: new FormControl('', [Validators.required]),
-     
+
       capa: new FormControl('', [Validators.required]),
       detail: new FormControl('', [Validators.required]),
       amount: new FormControl('', [Validators.required]),
-      price: new FormControl("", [
+      price: new FormControl('', [
         Validators.required,
         Validators.min(1),
         Validators.max(100000),
@@ -112,7 +112,8 @@ export class ManageRefriComponent implements OnInit {
 
   masterRefri;
 
-  ngOnInit(): void { this.loadDataMaster();
+  ngOnInit(){
+    this.loadDataMaster();
   }
 
   openModal(id: string) {
@@ -123,26 +124,30 @@ export class ManageRefriComponent implements OnInit {
     this.modalService.close(id);
   }
 
-  dishOnSubmit(form: any) {
+  refriOnSubmit(form: any) {
     if (!this.add_refri_form.valid) {
       Swal.fire('Input Valid!', 'Please enter require input', 'info');
     } else {
       this.refriService
-        .addMasterRefri( 
-        form.value.type,
-        form.value.code,
-        form.value.name,
-        form.value.brand,
-        form.value.capa,
-        form.value.detail,
-        form.value.amount,
-        form.value.price,
-        this.photo
+        .addMasterRefri(
+          form.value.type,
+          form.value.code,
+          form.value.name,
+          form.value.brand,
+          form.value.capa,
+          form.value.detail,
+          form.value.amount,
+          form.value.price,
+          this.photo
         )
         .subscribe(
           (res: any) => {
             console.log(res);
-            Swal.fire('Successful!', 'Refrigerator added successful.', 'success');
+            Swal.fire(
+              'Successful!',
+              'Refrigerator added successful.',
+              'success'
+            );
           },
           (error) => {
             if (error.status === 200 || error.status === 201) {
@@ -166,13 +171,13 @@ export class ManageRefriComponent implements OnInit {
         .updateMasterRefri(
           form.value.refri_sys_id,
           form.value.type,
-        form.value.code,
-        form.value.name,
-        form.value.brand,
-        form.value.capa,
-        form.value.detail,
-        form.value.amount,
-        form.value.price,
+          form.value.code,
+          form.value.name,
+          form.value.brand,
+          form.value.capa,
+          form.value.detail,
+          form.value.amount,
+          form.value.price,
           this.photo,
           form.value.isvoid
         )
@@ -180,7 +185,11 @@ export class ManageRefriComponent implements OnInit {
         .subscribe(
           (res: any) => {
             console.log(res);
-            Swal.fire('Successful!', 'Refrigerator edited successful.', 'success');
+            Swal.fire(
+              'Successful!',
+              'Refrigerator edited successful.',
+              'success'
+            );
           },
           (error) => {
             if (error.status === 200 || error.status === 201) {
@@ -207,9 +216,7 @@ export class ManageRefriComponent implements OnInit {
     this.edit_refri_form.controls['price'].setValue(trdata.price);
     this.edit_refri_form.controls['amount'].setValue(trdata.amount);
     this.edit_refri_form.controls['avatar'].setValue(trdata.avatar);
-    this.edit_refri_form.controls['isvoid'].setValue(
-      trdata.isvoid.toString()
-    );
+    this.edit_refri_form.controls['isvoid'].setValue(trdata.isvoid.toString());
 
     this.modalService.open('modal_editcate');
   }
@@ -263,10 +270,9 @@ export class ManageRefriComponent implements OnInit {
   setDeleteRefri(refri) {
     this.deleteRefri = refri;
   }
-  deleteRefriSubmit(){
-    console.log(this.deleteRefri)
-        this.refriService.deleteRefri(this.deleteRefri.refri_sys_id)
-    .subscribe(
+  deleteRefriSubmit() {
+    console.log(this.deleteRefri);
+    this.refriService.deleteRefri(this.deleteRefri.refri_sys_id).subscribe(
       (res: any) => {
         console.log(res);
         Swal.fire('Successful!', 'Delete successful.', 'success');
@@ -275,7 +281,6 @@ export class ManageRefriComponent implements OnInit {
         if (error.status === 200 || error.status === 201) {
           Swal.fire('Successful!', 'Delete successful.', 'success');
           this.closeModal('modal_delete');
-
         } else {
           console.log(error.status);
           Swal.fire('Error!', 'error : ' + error.status, 'error');
@@ -283,5 +288,4 @@ export class ManageRefriComponent implements OnInit {
       }
     );
   }
-
 }

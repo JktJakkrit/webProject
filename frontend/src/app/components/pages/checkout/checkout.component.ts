@@ -19,6 +19,7 @@ import { WashProduct } from 'src/app/models/wash.model';
 import { CartDataServiceService } from 'src/app/_services/cart-data-service.service';
 import { CheckoutService } from 'src/app/_services/checkout.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs; 
+import { DataUser, DataProduct } from 'src/app/models/checkout.model';
 
 @Component({
   selector: 'app-checkout',
@@ -27,8 +28,6 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class CheckoutComponent implements OnInit {
   checkout_form: FormGroup;
-
-
   countAir: AirProduct[] = [];
   countDish: DishProduct[] = [];
   countFan: FanProduct[] = [];
@@ -36,6 +35,7 @@ export class CheckoutComponent implements OnInit {
   countTv: TvProduct[] = [];
   countWash: WashProduct[] = [];
 
+  
   public get counter() {
     var counters: number = 0;
     counters += this.countAir.length || 0;
@@ -47,6 +47,9 @@ export class CheckoutComponent implements OnInit {
     // counters += this.countProduct.length || 0;
     return counters;
   }
+
+  dataUser = new DataUser();
+  degrees = ['B.E.', 'M.E.', 'B.Com', 'M.Com'];
   constructor(
     private formBuilder: FormBuilder,
     private cartDataService: CartDataServiceService,
@@ -103,108 +106,144 @@ export class CheckoutComponent implements OnInit {
       }
     });
 
+    this.dataUser = JSON.parse(sessionStorage.getItem('resume')) || new DataUser();
+    if (!this.dataUser.dataProduct || this.dataUser.dataProduct.length === 0) {
+      this.dataUser.dataProduct = [];
+      this.dataUser.dataProduct.push(new DataProduct());
+    }
 
   }
   mastercheckout;
-
-  // invoice = new Invoice(); 
-  
-  generatePDF() {
-    let docDefinition = {
+  addExperience() {
+    this.dataUser.dataProduct.push(new DataProduct());
+  }
+  generatePdf(action = 'open') {
+    const documentDefinition = this.getDocumentDefinition();
+    switch (action) {
+      case 'open': pdfMake.createPdf(documentDefinition).open(); break;
+      case 'print': pdfMake.createPdf(documentDefinition).print(); break;
+      case 'download': pdfMake.createPdf(documentDefinition).download(); break;
+      default: pdfMake.createPdf(documentDefinition).open(); break;
+    }
+  }
+  resetForm() {
+    this.dataUser = new DataUser();
+  }
+  getDocumentDefinition() {
+    sessionStorage.setItem('resume', JSON.stringify(this.dataUser));
+    return {
       content: [
         {
-          text: 'ELECTRONIC SHOP',
-          fontSize: 16,
-          alignment: 'center',
-          color: '#047886'
-        },
-        {
-          text: 'INVOICE',
-          fontSize: 20,
+          text: 'RECEIPT',
           bold: true,
+          fontSize: 20,
           alignment: 'center',
-          decoration: 'underline',
-          color: 'skyblue'
-        },
-        {
-          text: 'Customer Details',
-          style: 'sectionHeader'
+          margin: [0, 0, 0, 20]
         },
         {
           columns: [
-            // [
-            //   {
-            //     text: this.invoice.customerName,
-            //     bold:true
-            //   },
-            //   { text: this.invoice.address },
-            //   { text: this.invoice.email },
-            //   { text: this.invoice.contactNo }
-            // ],
-            [
-              {
-                text: `Date: ${new Date().toLocaleString()}`,
-                alignment: 'right'
-              },
-              { 
-                text: `Bill No : ${((Math.random() *1000).toFixed(0))}`,
-                alignment: 'right'
-              }
-            ]
-          ]
-        },
-        {
-          text: 'Order Details',
-          style: 'sectionHeader'
-        },
-        {
-          table: {
-            headerRows: 1,
-            widths: ['*', 'auto', 'auto', 'auto'],
-            body: [
-              ['Product', 'Price', 'Quantity', 'Amount'],
-              // ...this.invoice.products.map(p => ([p.name, p.price, p.qty, (p.price*p.qty).toFixed(2)])),
-              // [{text: 'Total Amount', colSpan: 3}, {}, {}, this.invoice.products.reduce((sum, p)=> sum + (p.qty * p.price), 0).toFixed(2)]
-            ]
-          }
-        },
-        {
-          text: 'Additional Details',
-          style: 'sectionHeader'
-        },
-        {
-            // text: this.invoice.additionalDetails,
-            margin: [0, 0 ,0, 15]          
-        },
-        {
-          columns: [
-            // [{ qr: `${this.invoice.customerName}`, fit: '50' }],
-            [{ text: 'Signature', alignment: 'right', italics: true}],
-          ]
-        },
-        {
-          text: 'Terms and Conditions',
-          style: 'sectionHeader'
-        },
-        {
-            ul: [
-              'Order can be return in max 10 days.',
-              'Warrenty of the product will be subject to the manufacturer terms and conditions.',
-              'This is system generated invoice.',
+            [{
+              text: this.dataUser.name,
+              style: 'name'
+            },
+            {
+              text: this.dataUser.address
+            },
+            {
+              text: 'Email : ' + this.dataUser.email,
+            },
+            {
+              text: 'City : ' + this.dataUser.city,
+            },
+            {
+              text: 'Phone No : ' + this.dataUser.phone,
+            },
+            
             ],
+            
+          ]
+        },
+        
+        {
+          text: 'Product',
+          style: 'header'
+        },
+        this.getDataProductObject(this.dataUser.dataProduct),
+       
+        {
+         
         }
       ],
-      styles: {
-        sectionHeader: {
-          bold: true,
-          decoration: 'underline',
-          fontSize: 14,
-          margin: [0, 15,0, 15]          
+      info: {
+        title: this.dataUser.name + '_RESUME',
+        author: this.dataUser.name,
+        subject: 'RESUME',
+        keywords: 'RESUME, ONLINE RESUME',
+      },
+        styles: {
+          header: {
+            fontSize: 18,
+            bold: true,
+            margin: [0, 20, 0, 10],
+            decoration: 'underline'
+          },
+          name: {
+            fontSize: 16,
+            bold: true
+          },
+          jobTitle: {
+            fontSize: 14,
+            bold: true,
+            italics: true
+          },
+          sign: {
+            margin: [0, 50, 0, 10],
+            alignment: 'right',
+            italics: true
+          },
+          tableHeader: {
+            bold: true,
+          }
         }
+    };
+  }
+  getDataProductObject(dataProduct: DataProduct[]) {
+    const exs = [];
+    dataProduct.forEach(dataProduct => {
+      exs.push(
+        [{
+          columns: [
+            [{
+              text: dataProduct.name,
+              style: 'jobTitle'
+            },
+            {
+              text: dataProduct.amout,
+            },
+            {
+              text: dataProduct.price,
+            }
+            ,
+            {
+              text: dataProduct.totalPrice,
+            }
+          ],
+           
+          ]
+        }]
+      );
+    });
+    return {
+      table: {
+        widths: ['*'],
+        body: [
+          ...exs
+        ]
       }
     };
-    pdfMake.createPdf(docDefinition).open();  
   }
+  
+  
 
   
   ngOnInit() {}
@@ -234,7 +273,7 @@ export class CheckoutComponent implements OnInit {
           (res: any) => {
             console.log(res);
             Swal.fire('Successful!', 'checkout successful.', 'success');
-            this.generatePDF();
+            this.generatePdf();
           },
           (error) => {
             if (error.status === 200 || error.status === 201) {
@@ -249,6 +288,56 @@ export class CheckoutComponent implements OnInit {
         );
     }
   }
+
+ 
+  airTotalPrice(amount,price) : number {
+    return amount * price;
+  }
+  airChangeAmount(event,airItem) {
+    console.log(event.target.value );
+    this.cartDataService.updateAmountAirProduct(airItem,event.target.value);
+  }
+//-----------------------------
+  dishTotalPrice(amount,price) : number {
+    return amount * price;
+  }
+  dishChangeAmount(event,dishItem) {
+    console.log(event.target.value );
+    this.cartDataService.updateAmountDishProduct(dishItem,event.target.value);
+  }
+  //-----------------------------
+  fanTotalPrice(amount,price) : number {
+    return amount * price;
+  }
+  fanChangeAmount(event,fanItem) {
+    console.log(event.target.value );
+    this.cartDataService.updateAmountFanProduct(fanItem,event.target.value);
+  }
+  //-----------------------------
+  refriTotalPrice(amount,price) : number {
+    return amount * price;
+  }
+  refriChangeAmount(event,refriItem) {
+    console.log(event.target.value );
+    this.cartDataService.updateAmountRefriProduct(refriItem,event.target.value);
+  }
+  //-----------------------------
+  washTotalPrice(amount,price) : number {
+    return amount * price;
+  }
+  washChangeAmount(event,washItem) {
+    console.log(event.target.value );
+    this.cartDataService.updateAmountWashProduct(washItem,event.target.value);
+  }
+  //-----------------------------
+  tvTotalPrice(amount,price) : number {
+    return amount * price;
+  }
+  tvChangeAmount(event,tvItem) {
+    console.log(event.target.value );
+    this.cartDataService.updateAmountTvProduct(tvItem,event.target.value);
+  }
+
 
 
   

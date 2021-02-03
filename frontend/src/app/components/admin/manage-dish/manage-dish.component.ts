@@ -57,7 +57,7 @@ export class ManageDishComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       brand: new FormControl('', [Validators.required]),
       detail: new FormControl('', [Validators.required]),
-      // amount: new FormControl("", [Validators.required]),
+      amount: new FormControl("", [Validators.required]),
       price: new FormControl('', [
         Validators.required,
         Validators.min(1),
@@ -73,7 +73,7 @@ export class ManageDishComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       brand: new FormControl('', [Validators.required]),
       detail: new FormControl('', [Validators.required]),
-      // amount: new FormControl("", [Validators.required]),
+      amount: new FormControl("", [Validators.required]),
       price: new FormControl('', [
         Validators.required,
         Validators.min(1),

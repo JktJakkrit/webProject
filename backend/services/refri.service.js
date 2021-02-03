@@ -45,10 +45,10 @@ const methods = {
             })
         })
     },
-    deleteItemRefriById: function (id) {
+    deleteItemRefriById: function(id) {
         return new Promise((resolve, reject) => {
-            let sql = "DELETE FROM `manage-refri` WHERE `manage-refri` = " + id;
-            db.query(sql, function (error, result) {
+            let sql = "DELETE FROM `manage-refri` WHERE `refri_sys_id` = " + id;
+            db.query(sql, function(error, result) {
                 if (error) return reject(error);
                 return resolve("delete successfully");
             })

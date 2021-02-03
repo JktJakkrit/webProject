@@ -64,6 +64,7 @@
                       data-toggle="modal"
                       data-target="#modal_delete"
                       style="color: white"
+                      (click)='setDeleteRefri(t)'
                     >
                       Delete</button
                     >&nbsp;
@@ -107,7 +108,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <form
       [formGroup]="add_refri_form"
-      (ngSubmit)="dishOnSubmit(this.add_refri_form)"
+      (ngSubmit)="refriOnSubmit(this.add_refri_form)"
     >
       <div class="modal-content">
         <div class="modal-header">

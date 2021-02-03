@@ -36,7 +36,7 @@ export class DishwasherComponent implements OnInit {
 
   addToCart(data) {
     console.log("34567890-=");
-    this.cartDataService.changeAirProduct(data);
+    this.cartDataService.changeDishProduct(data);
     // this.cartDataService.AddProductToCart(data);
   }
 }

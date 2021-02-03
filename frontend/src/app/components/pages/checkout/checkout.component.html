@@ -158,9 +158,9 @@
                     </div>
                 </td>
                 <td class="col-sm-2 col-md-2" style="text-align: center">
-                    <!-- <input type="number" class="form-control" [value]="1" (change)="totalPrice(item)"> -->
+                    <input type="text" class="form-control" [value]='item.amount' readonly>
                 </td>
-                <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price }}</strong></td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>{{airTotalPrice(item.amount,item.price)}}</strong></td>
             </tr>
 
             <tr *ngFor='let item of countFan'>
@@ -173,9 +173,9 @@
                     </div>
                 </td>
                 <td class="col-sm-2 col-md-2" style="text-align: center">
-                    <!-- <input type="number" class="form-control" [value]="1" (change)="totalPrice(item)"> -->
+                    <input type="text" class="form-control" [value]='item.amount' readonly>
                 </td>
-                <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price }}</strong></td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>{{fanTotalPrice(item.amount,item.price)}}</strong></td>
             </tr>
 
             <tr *ngFor='let item of countTv'>
@@ -188,9 +188,9 @@
                     </div>
                 </td>
                 <td class="col-sm-2 col-md-2" style="text-align: center">
-                    <!-- <input type="number" class="form-control" [value]="1" (change)="totalPrice(item)"> -->
+                    <input type="text" class="form-control" [value]='item.amount' readonly>
                 </td>
-                <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price }}</strong></td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>{{tvTotalPrice(item.amount,item.price)}}</strong></td>
             </tr>
 
             <tr *ngFor='let item of countDish'>
@@ -203,9 +203,9 @@
                     </div>
                 </td>
                 <td class="col-sm-2 col-md-2" style="text-align: center">
-                    <!-- <input type="number" class="form-control" [value]="1" (change)="totalPrice(item)"> -->
+                    <input type="text" class="form-control" [value]='item.amount' readonly>
                 </td>
-                <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price }}</strong></td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>{{dishTotalPrice(item.amount,item.price)}}</strong></td>
             </tr>
 
             <tr *ngFor='let item of countWash'>
@@ -218,9 +218,9 @@
                     </div>
                 </td>
                 <td class="col-sm-2 col-md-2" style="text-align: center">
-                    <!-- <input type="number" class="form-control" [value]="1" (change)="totalPrice(item)"> -->
+                    <input type="text" class="form-control" [value]='item.amount' readonly>
                 </td>
-                <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price }}</strong></td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>{{washTotalPrice(item.amount,item.price)}}</strong></td>
             </tr>
 
             <tr *ngFor='let item of countRefri'>
@@ -233,9 +233,9 @@
                     </div>
                 </td>
                 <td class="col-sm-2 col-md-2" style="text-align: center">
-                    <!-- <input type="number" class="form-control" [value]="1" (change)="totalPrice(item)"> -->
+                    <input type="text" class="form-control" [value]='item.amount' readonly>
                 </td>
-                <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price }}</strong></td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>{{refriTotalPrice(item.amount,item.price)}}</strong></td>
             </tr>
 
             <hr>

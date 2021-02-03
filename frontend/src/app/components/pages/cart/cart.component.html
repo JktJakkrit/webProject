@@ -14,29 +14,6 @@
                 </thead>
                 <tbody>
 
-                    <!-- Cart Product -->
-                    <!-- <tr *ngFor='let item of countProduct'>
-                        <td class="col-sm-8 col-md-6">
-                            <div class="media">
-                                <a class="thumbnail pull-left"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a>{{item.name}}</a></h4>
-                                    <h5 class="media-heading"> by <a>{{item.brand}}</a></h5>
-
-                                </div>
-                            </div>
-                        </td>
-                        <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="text" class="form-control" id="exampleInputEmail1" value="3">
-                        </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>....</strong></td>
-                        <td class="col-sm-1 col-md-1">
-                            <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button></td>
-                    </tr> -->
-
                     <!-- Air-Condition -->
                     <tr *ngFor='let item of countAir'>
                         <td class="col-sm-8 col-md-6">
@@ -55,7 +32,7 @@
 
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price }}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{totalPrice(item.amount,item.price)}}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{airTotalPrice(item.amount,item.price)}}</strong></td>
                         <td class="col-sm-1 col-md-1">
                             <button type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span> Remove
@@ -75,10 +52,10 @@
                             </div>
                         </td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="text" class="form-control" id="exampleInputEmail1" value="3">
+                            <input type="text" class="form-control" [value]='item.amount' (change)="fanChangeAmount($event,item)">
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>....</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{fanTotalPrice(item.amount,item.price)}}</strong></td>
                         <td class="col-sm-1 col-md-1">
                             <button type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span> Remove
@@ -98,10 +75,10 @@
                             </div>
                         </td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="text" class="form-control" id="exampleInputEmail1" value="3">
+                            <input type="text" class="form-control" [value]='item.amount' (change)="dishChangeAmount($event,item)">
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>....</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{dishTotalPrice(item.amount,item.price)}}</strong></td>
                         <td class="col-sm-1 col-md-1">
                             <button type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span> Remove
@@ -121,10 +98,10 @@
                             </div>
                         </td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="text" class="form-control" id="exampleInputEmail1" value="3">
+                            <input type="text" class="form-control" [value]='item.amount' (change)="refriChangeAmount($event,item)">
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>....</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{refriTotalPrice(item.amount,item.price)}}</strong></td>
                         <td class="col-sm-1 col-md-1">
                             <button type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span> Remove
@@ -144,10 +121,10 @@
                             </div>
                         </td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="text" class="form-control" id="exampleInputEmail1" value="3">
+                            <input type="text" class="form-control" [value]='item.amount' (change)="tvChangeAmount($event,item)">
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>....</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{tvTotalPrice(item.amount,item.price)}}</strong></td>
                         <td class="col-sm-1 col-md-1">
                             <button type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span> Remove
@@ -167,10 +144,10 @@
                             </div>
                         </td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="text" class="form-control" id="exampleInputEmail1" value="3">
+                            <input type="text" class="form-control" [value]='item.amount' (change)="washChangeAmount($event,item)">
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>....</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{washTotalPrice(item.amount,item.price)}}</strong></td>
                         <td class="col-sm-1 col-md-1">
                             <button type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span> Remove
