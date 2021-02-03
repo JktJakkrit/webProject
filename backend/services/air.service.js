@@ -38,10 +38,13 @@ const methods = {
             // db.end();
         })
     }, // post
-    putItemAirById: function (id, body) {
+    putItemAirById: function (path_pic,id, body) {
         return new Promise((resolve, reject) => {
-            let sql = "UPDATE `manage-air` SET ? WHERE `air_sys_id` = " + id;
-            db.query(sql, [body, id], function (error, result) {
+            let newPath = config.file + path.basename(path_pic)
+            let pic = {'file': newPath}
+            let data = {...body, ...pic};
+            let sql = "UPDATE `manage-air` SET ? WHERE `air_sys_id` = ?";
+            db.query(sql, [data, id], function (error, result) {
                 if (error) return reject(error);
                 return resolve(result);
             })
