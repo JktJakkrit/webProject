@@ -1,10 +1,10 @@
 import { CartDataServiceService } from './../../../_services/cart-data-service.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MasterService } from 'src/app/_services/master.service';
 import { ModalService } from 'src/app/_services/modal.service';
 import Swal from 'sweetalert2';
 import { TvProduct } from 'src/app/models/tv.model';
+import { TvService } from 'src/app/_services/tv.service';
 @Component({
   selector: 'app-television',
   templateUrl: './television.component.html',
@@ -15,14 +15,15 @@ export class TelevisionComponent implements OnInit {
   masterTelevision: TvProduct[];
   constructor( private formBuilder: FormBuilder,
     private modalService: ModalService,
-    private masterService: MasterService,
-    private cartDataService: CartDataServiceService) { }
+    
+    private cartDataService: CartDataServiceService,
+    private tvService: TvService) { }
 
   ngOnInit(): void {
     this.loadTelevision();
   }
   loadTelevision() {
-    this.masterService. getMasterTvs().subscribe(
+    this.tvService. getMasterTvs().subscribe(
       (res: TvProduct[]) => {
         this.masterTelevision = res;
       },

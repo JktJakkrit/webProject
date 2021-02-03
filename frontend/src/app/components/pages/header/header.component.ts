@@ -8,7 +8,7 @@ import { RefriProduct } from 'src/app/models/refri.model';
 import { TvProduct } from 'src/app/models/tv.model';
 import { WashProduct } from 'src/app/models/wash.model';
 import { CartDataServiceService } from 'src/app/_services/cart-data-service.service';
-import { CartService } from 'src/app/_services/cart.service';
+
 
 @Component({
   selector: 'app-header',

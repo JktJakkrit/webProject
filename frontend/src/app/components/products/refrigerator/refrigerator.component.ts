@@ -1,10 +1,11 @@
 import { CartDataServiceService } from './../../../_services/cart-data-service.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MasterService } from 'src/app/_services/master.service';
+
 import { ModalService } from 'src/app/_services/modal.service';
 import Swal from 'sweetalert2';
 import { RefriProduct } from 'src/app/models/refri.model';
+import { RefriService } from 'src/app/_services/refri.service';
 @Component({
   selector: 'app-refrigerator',
   templateUrl: './refrigerator.component.html',
@@ -15,14 +16,15 @@ export class RefrigeratorComponent implements OnInit {
   masterRefrigerator: RefriProduct[];
   constructor( private formBuilder: FormBuilder,
     private modalService: ModalService,
-    private masterService: MasterService,
-    private cartDataService: CartDataServiceService) { }
+   
+    private cartDataService: CartDataServiceService,
+    private refriService: RefriService) { }
 
   ngOnInit(): void {
     this.loadRefrigerator();
   }
   loadRefrigerator() {
-    this.masterService. getMasterRefri().subscribe(
+    this.refriService. getMasterRefri().subscribe(
       (res: RefriProduct[]) => {
         this.masterRefrigerator = res;
       },

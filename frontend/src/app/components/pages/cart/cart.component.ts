@@ -13,7 +13,7 @@ import { CartProduct } from 'src/app/models/cart.model';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
-export class CartComponent implements OnInit, OnChanges {
+export class CartComponent implements OnInit {
   countAir: AirProduct[] = [];
   countDish: DishProduct[] = [];
   countFan: FanProduct[] = [];
@@ -71,21 +71,16 @@ to
   }
 
 
-  totalPrice(event) {
-      // console.log(event);
-
+  totalPrice(amount,price) : number {
+    return amount * price;
+  }
+  airChangeAmount(event,airItem) {
+    console.log(event.target.value );
+    this.cartDataService.updateAmountAirProduct(airItem,event.target.value);
   }
  
   ngOnInit(): void {}
 
 
-  ngOnChanges(changes: SimpleChanges) {
-    for (const propName in changes) {
-      const chng = changes[propName];
-      const cur  = JSON.stringify(chng.currentValue);
-      const prev = JSON.stringify(chng.previousValue);
-     console.log(cur + prev);
-    
-    }
-  }
+  
 }

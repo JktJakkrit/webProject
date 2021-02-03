@@ -8,8 +8,9 @@ import {
 } from "@angular/forms";
 import { DataTableDirective } from "angular-datatables";
 import { Subject } from "rxjs";
-import { MasterService } from "src/app/_services/master.service";
+
 import { ModalService } from "src/app/_services/modal.service";
+import { TvService } from 'src/app/_services/tv.service';
 
 import Swal from "sweetalert2";
 @Component({
@@ -22,7 +23,7 @@ export class ManageTvComponent implements OnInit {
   add_tv_form: FormGroup;
   photo: File;
   imageSrc: string;
-  
+  deleteTv;
   productScsize = [
     { id: 1, code: "SC01", title: "14 - 31 inches" },
     { id: 2, code: "SC02", title: "32 - 43 inches" },
@@ -64,8 +65,9 @@ export class ManageTvComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalService: ModalService,
-    private masterService: MasterService,
-    private http: HttpClient
+  
+    private http: HttpClient,
+    private tvService: TvService
   ) {
     this.add_tv_form = this.formBuilder.group({
       type: new FormControl("", [Validators.required]),
@@ -124,7 +126,7 @@ export class ManageTvComponent implements OnInit {
     if (!this.add_tv_form.valid) {
       Swal.fire("Input Valid!", "Please enter require input", "info");
     } else {
-      this.masterService
+      this.tvService
         .addMasterTv(
           form.value.type,
           form.value.code,
@@ -159,7 +161,7 @@ export class ManageTvComponent implements OnInit {
     if (!this.edit_tv_form.valid) {
       Swal.fire("Input Valid!", "Please enter require input", "info");
     } else {
-      this.masterService
+      this.tvService
         .updateMasterTv(
           form.value.tv_sys_id,
           form.value.type,
@@ -214,7 +216,7 @@ export class ManageTvComponent implements OnInit {
   }
 
   loadDataMaster() {
-    this.masterService.getMasterTvs().subscribe(
+    this.tvService.getMasterTvs().subscribe(
       (res: any) => {
         this.masterTv = res;
         if (this.isDtInitialized) {
@@ -259,12 +261,28 @@ export class ManageTvComponent implements OnInit {
     } catch (e) {}
   }
 
-  deleteProduct(){
-    console.log("............");
-    // this.httpClient.delete(this.url + endPoints).subscribe(data => {
-    //   console.log(data);
-    // });
-    
+  setDeleteTv(tv) {
+    this.deleteTv = tv;
+  }
+  deleteTvSubmit(){
+    console.log(this.deleteTv)
+        this.tvService.deleteTv(this.deleteTv.tv_sys_id)
+    .subscribe(
+      (res: any) => {
+        console.log(res);
+        Swal.fire('Successful!', 'Delete successful.', 'success');
+      },
+      (error) => {
+        if (error.status === 200 || error.status === 201) {
+          Swal.fire('Successful!', 'Delete successful.', 'success');
+          this.closeModal('modal_delete');
+
+        } else {
+          console.log(error.status);
+          Swal.fire('Error!', 'error : ' + error.status, 'error');
+        }
+      }
+    );
   }
 
 }

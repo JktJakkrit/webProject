@@ -8,8 +8,9 @@ import {
 } from "@angular/forms";
 import { DataTableDirective } from "angular-datatables";
 import { Subject } from "rxjs";
-import { MasterService } from "src/app/_services/master.service";
+
 import { ModalService } from "src/app/_services/modal.service";
+import { RefriService } from 'src/app/_services/refri.service';
 
 import Swal from "sweetalert2";
 @Component({
@@ -21,7 +22,7 @@ export class ManageRefriComponent implements OnInit {
   photo: File;
   edit_refri_form: FormGroup;
   add_refri_form: FormGroup;
-
+  deleteRefri;
   imageSrc: string;
 
   Capa = [
@@ -65,8 +66,9 @@ export class ManageRefriComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalService: ModalService,
-    private masterService: MasterService,
-    private http: HttpClient
+    
+    private http: HttpClient,
+    private refriService: RefriService
   ) {
     this.add_refri_form = this.formBuilder.group({
       type: new FormControl('', [Validators.required]),
@@ -125,7 +127,7 @@ export class ManageRefriComponent implements OnInit {
     if (!this.add_refri_form.valid) {
       Swal.fire('Input Valid!', 'Please enter require input', 'info');
     } else {
-      this.masterService
+      this.refriService
         .addMasterRefri( 
         form.value.type,
         form.value.code,
@@ -160,7 +162,7 @@ export class ManageRefriComponent implements OnInit {
     if (!this.edit_refri_form.valid) {
       Swal.fire('Input Valid!', 'Please enter require input', 'info');
     } else {
-      this.masterService
+      this.refriService
         .updateMasterRefri(
           form.value.refri_sys_id,
           form.value.type,
@@ -213,7 +215,7 @@ export class ManageRefriComponent implements OnInit {
   }
 
   loadDataMaster() {
-    this.masterService.getMasterRefri().subscribe(
+    this.refriService.getMasterRefri().subscribe(
       (res: any) => {
         this.masterRefri = res;
         if (this.isDtInitialized) {
@@ -258,12 +260,28 @@ export class ManageRefriComponent implements OnInit {
     } catch (e) {}
   }
 
-  deleteProduct(){
-    console.log("............");
-    // this.httpClient.delete(this.url + endPoints).subscribe(data => {
-    //   console.log(data);
-    // });
-    
+  setDeleteRefri(refri) {
+    this.deleteRefri = refri;
+  }
+  deleteRefriSubmit(){
+    console.log(this.deleteRefri)
+        this.refriService.deleteRefri(this.deleteRefri.refri_sys_id)
+    .subscribe(
+      (res: any) => {
+        console.log(res);
+        Swal.fire('Successful!', 'Delete successful.', 'success');
+      },
+      (error) => {
+        if (error.status === 200 || error.status === 201) {
+          Swal.fire('Successful!', 'Delete successful.', 'success');
+          this.closeModal('modal_delete');
+
+        } else {
+          console.log(error.status);
+          Swal.fire('Error!', 'error : ' + error.status, 'error');
+        }
+      }
+    );
   }
 
 }

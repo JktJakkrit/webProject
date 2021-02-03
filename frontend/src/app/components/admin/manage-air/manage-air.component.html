@@ -64,6 +64,7 @@
                       data-toggle="modal"
                       data-target="#modal_delete"
                       style="color: white"
+                      (click)='setDeleteAir(t)'
                     >
                       Delete</button
                     >&nbsp;
@@ -444,7 +445,7 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Close
         </button>
-                        <button type="button" class="btn btn-danger">
+                        <button type="button" class="btn btn-danger" (click)="deleteAirSubmit()">
           Delete
         </button>
                     </div>

@@ -29,6 +29,7 @@
     "jquery": "^3.5.1",
     "ngx-spinner": "^10.0.1",
     "ngx-toastr": "^13.2.0",
+    "pdfmake": "^0.1.70",
     "popper.js": "^1.16.1",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.12.7",
