@@ -10,5 +10,6 @@ export class WashProduct {
     public price: number;
     public file: string;
     public isvoid: boolean;
+    public count: number;
   }
   

@@ -19,7 +19,7 @@ export class AuthService {
       username,
       password
     };
-    return this.http.post<any>( this.url + '/'+ 'api/login', body).pipe(
+    return this.http.post<any>( this.url + '/'+ 'admin_user/', body).pipe(
       catchError(this.handleError)
     );
   }

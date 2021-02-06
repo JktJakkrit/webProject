@@ -28,13 +28,13 @@
                         </td>
                         <td class="col-sm-6 col-md-6" style="text-align: center">
 
-                            <input type="number" class="form-control" [value]='item.amount' (change)="airChangeAmount($event,item)">
+                            <input type="number" class="form-control" [value]='item.count' min="1" max="{{item.amount}}" (change)="airChangeAmount($event,item)">
 
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price }}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{airTotalPrice(item.amount,item.price)}}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{airTotalPrice(item.count,item.price)}}</strong></td>
                         <td class="col-sm-1 col-md-1">
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger" (click)="removeAirItem(item)">
                             <span class="glyphicon glyphicon-remove"></span> Remove
                         </button></td>
                     </tr>
@@ -52,13 +52,13 @@
                             </div>
                         </td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="text" class="form-control" [value]='item.amount' (change)="fanChangeAmount($event,item)">
+                            <input type="number" class="form-control" [value]='item.count' min="1" max="{{item.amount}}" (change)="fanChangeAmount($event,item)">
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{fanTotalPrice(item.amount,item.price)}}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{fanTotalPrice(item.count,item.price)}}</strong></td>
                         <td class="col-sm-1 col-md-1">
-                            <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
+                            <button type="button" class="btn btn-danger" (click)="removeFanItem(item)">
+                            <span class="glyphicon glyphicon-remove" ></span> Remove
                         </button></td>
                     </tr>
 
@@ -75,12 +75,12 @@
                             </div>
                         </td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="text" class="form-control" [value]='item.amount' (change)="dishChangeAmount($event,item)">
+                            <input type="number" class="form-control" [value]='item.count' min="1" max="{{item.amount}}" (change)="dishChangeAmount($event,item)">
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{dishTotalPrice(item.amount,item.price)}}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{dishTotalPrice(item.count,item.price)}}</strong></td>
                         <td class="col-sm-1 col-md-1">
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger" (click)="removeDishItem(item)">
                             <span class="glyphicon glyphicon-remove"></span> Remove
                         </button></td>
                     </tr>
@@ -98,12 +98,12 @@
                             </div>
                         </td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="text" class="form-control" [value]='item.amount' (change)="refriChangeAmount($event,item)">
+                            <input type="number" class="form-control" [value]='item.count' min="1" max="{{item.amount}}" (change)="refriChangeAmount($event,item)">
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{refriTotalPrice(item.amount,item.price)}}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{refriTotalPrice(item.count,item.price)}}</strong></td>
                         <td class="col-sm-1 col-md-1">
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger" (click)="removeRefriItem(item)">
                             <span class="glyphicon glyphicon-remove"></span> Remove
                         </button></td>
                     </tr>
@@ -121,12 +121,12 @@
                             </div>
                         </td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="text" class="form-control" [value]='item.amount' (change)="tvChangeAmount($event,item)">
+                            <input type="number" class="form-control" [value]='item.count' min="1" max="{{item.amount}}" (change)="tvChangeAmount($event,item)">
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{tvTotalPrice(item.amount,item.price)}}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{tvTotalPrice(item.count,item.price)}}</strong></td>
                         <td class="col-sm-1 col-md-1">
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger" (click)="removeTvItem(item)">
                             <span class="glyphicon glyphicon-remove"></span> Remove
                         </button></td>
                     </tr>
@@ -144,12 +144,35 @@
                             </div>
                         </td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="text" class="form-control" [value]='item.amount' (change)="washChangeAmount($event,item)">
+                            <input type="number" class="form-control" [value]='item.count' min="1" max="{{item.amount}}" (change)="washChangeAmount($event,item)">
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{washTotalPrice(item.amount,item.price)}}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{washTotalPrice(item.count,item.price)}}</strong></td>
                         <td class="col-sm-1 col-md-1">
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger" (click)="removeWashItem(item)">
+                            <span class="glyphicon glyphicon-remove"></span> Remove
+                        </button></td>
+                    </tr>
+
+                    <!-- Other -->
+                    <tr *ngFor='let item of countOther'>
+                        <td class="col-sm-8 col-md-6">
+                            <div class="media">
+                                <a class="thumbnail pull-left"> <img class="img-fluid" src="{{ item.file }}" style="width: 100px; height: 100px;" /> </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a>{{item.name}}</a></h4>
+                                    <h5 class="media-heading"> by <a>{{item.brand}}</a></h5>
+
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-sm-1 col-md-1" style="text-align: center">
+                            <input type="number" class="form-control" [value]='item.count' min="1" max="{{item.amount}}" (change)="otherChangeAmount($event,item)">
+                        </td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{otherTotalPrice(item.count,item.price)}}</strong></td>
+                        <td class="col-sm-1 col-md-1">
+                            <button type="button" class="btn btn-danger" (click)="removeOtherItem(item)">
                             <span class="glyphicon glyphicon-remove"></span> Remove
                         </button></td>
                     </tr>
@@ -159,21 +182,11 @@
                         <td>   </td>
                         <td>   </td>
                         <td>
-                            <h5>Subtotal</h5>
-                        </td>
-                        <td class="text-right">
-                            <h5><strong>$24.59</strong></h5>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>
                             <h5>Estimated shipping</h5>
                         </td>
                         <td class="text-right">
-                            <h5><strong>$6.94</strong></h5>
+                            <h5>VAT (7%)</h5>
+                            <h5><strong>{{calTotalVAT7().toFixed(2)}}</strong></h5>
                         </td>
                     </tr>
                     <tr>
@@ -184,7 +197,7 @@
                             <h3>Total</h3>
                         </td>
                         <td class="text-right">
-                            <h3><strong>{{TOTALVAR}}</strong></h3>
+                            <h3><strong>{{calTotalPriceAllProduct()}}</strong></h3>
                         </td>
                     </tr>
                     <tr>

@@ -26,6 +26,7 @@ import { AdminHomeComponent } from './components/admin/admin-home/admin-home.com
 import { ManageOtherComponent } from './components/admin/manage-other/manage-other.component';
 import { OtherComponent } from './components/products/other/other.component';
 import { CheckoutComponent } from './components/pages/checkout/checkout.component';
+import { AllProductComponent } from './components/products/all-product/all-product.component';
 
 
 
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: "footer",
     component: FooterComponent,
+  },
+  {
+    path: "all-product",
+    component: AllProductComponent,
   },
   {
     path: "air",

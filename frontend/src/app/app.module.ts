@@ -45,6 +45,8 @@ import { OtherComponent } from './components/products/other/other.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import { CounterState } from './_services/ngxs-store/store/counter.store';
+import { AllProductComponent } from './components/products/all-product/all-product.component';
+
 
 @NgModule({
   declarations: [
@@ -74,6 +76,8 @@ import { CounterState } from './_services/ngxs-store/store/counter.store';
     AdminHomeComponent,
     AdminNavComponent,
     OtherComponent,
+    AllProductComponent,
+   
 
   ],
   imports: [

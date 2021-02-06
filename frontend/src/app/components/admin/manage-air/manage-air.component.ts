@@ -123,6 +123,7 @@ export class ManageAirComponent implements OnInit {
   masterAir;
 
   ngOnInit(): void {
+    
     this.loadDataMaster();
   }
 

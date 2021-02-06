@@ -16,13 +16,12 @@ export class OtherService {
     return throwError(error);
   }
 
-  getMasterAirs() {
-    return this.http.get<OtherProduct[]>(this.url + '/air/all');
+  getMasterOther() {
+    return this.http.get<OtherProduct[]>(this.url + '/other/all');
   }
 
   addMasterOther(
     type: string,
-    code: string,
     name: string,
     brand: string,
     detail: string,
@@ -34,7 +33,6 @@ export class OtherService {
     console.log(avatar);
     var f = new FormData();
     f.append('type', type);
-    f.append('code', code);
     f.append('name', name);
     f.append('brand', brand);
     f.append('detail', detail);
@@ -54,7 +52,6 @@ export class OtherService {
   updateMasterOther(
     other_sys_id: string,
     type: string,
-    code: string,
     name: string,
     brand: string,
     detail: string,
@@ -65,7 +62,6 @@ export class OtherService {
   ) {
     const body = {
       type,
-      code,
       name,
       brand,
       detail,

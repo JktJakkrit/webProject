@@ -4,6 +4,7 @@ import { CartProduct } from 'src/app/models/cart.model';
 
 import { DishProduct } from 'src/app/models/dish.model';
 import { FanProduct } from 'src/app/models/fan.model';
+import { OtherProduct } from 'src/app/models/other.model';
 import { RefriProduct } from 'src/app/models/refri.model';
 import { TvProduct } from 'src/app/models/tv.model';
 import { WashProduct } from 'src/app/models/wash.model';
@@ -24,7 +25,7 @@ export class HeaderComponent implements OnInit {
   countTv: TvProduct[] = [];
   countWash: WashProduct[] = [];
 
-  // countProduct: CartProduct[] = [];
+  countOther: OtherProduct[] = [];
   public get counter() {
     var counters: number = 0;
     counters += this.countAir.length || 0;
@@ -33,7 +34,7 @@ export class HeaderComponent implements OnInit {
     counters += this.countRefri.length || 0;
     counters += this.countTv.length || 0;
     counters += this.countWash.length || 0;
-    // counters += this.countProduct.length || 0;
+    counters += this.countOther.length || 0;
     return counters;
   }
 
@@ -83,6 +84,13 @@ export class HeaderComponent implements OnInit {
         this.countWash = data;
       }
     });
+
+    this.cartDataService.currentOtherProduct.subscribe((data) => {
+      if (data) {
+        this.countOther = data;
+      }
+    });
+
   }
   ngOnInit() {}
 }

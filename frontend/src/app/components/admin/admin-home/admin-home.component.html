@@ -2,3 +2,98 @@
 </app-admin-nav>
 
 <app-managements></app-managements>
+
+<!-- table -->
+
+
+
+<div class="row">
+    <div class="col-xl-12 mb-30">
+        <div class="card card-statistics h-100">
+            <div class="card-body">
+                <!-- <button type="button" class="btn btn-sm btn-primary mb-2" data-toggle="modal" data-target="#modal_addcate" (click)="openModal('modal_addcate')">
+          <i class="fa fa-plus"></i> Add Air-Conditioning
+        </button> -->
+                <div class="d-block d-md-flex justify-content-between">
+                    <div class="table-responsive mt-15">
+                        <table class="table table-hover table-bordered flex-md-nowrap" datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Total Amount</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Air-Conditioning</td>
+                                    <td></td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning" [routerLink]="['/manage-air']" style="color: white">
+                      Detail</button
+                    >&nbsp;
+                  </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Electric-Fan</td>
+                                    <td></td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning" [routerLink]="['/manage-fan']" style="color: white">
+                      Detail</button
+                    >&nbsp;
+                  </td>
+                                </tr>
+                                <tr>
+                                    <td>Dishwasher</td>
+                                    <td></td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning" [routerLink]="['/manage-dish']" style="color: white">
+                      Detail</button
+                    >&nbsp;
+                  </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Refrigerator</td>
+                                    <td></td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning" [routerLink]="['/manage-refri']" style="color: white">
+                      Detail</button
+                    >&nbsp;
+                  </td>
+                                </tr>
+                                <tr>
+                                    <td>Television</td>
+                                    <td></td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning" [routerLink]="['/manage-tv']" style="color: white">
+                      Detail</button
+                    >&nbsp;
+                  </td>
+                                </tr>
+                                <tr>
+                                    <td>Washing-Machines</td>
+                                    <td></td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning" [routerLink]="['/manage-wash']" style="color: white">
+                      Detail</button
+                    >&nbsp;
+                  </td>
+                                </tr>
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Total Amount</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

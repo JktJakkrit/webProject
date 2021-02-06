@@ -120,7 +120,7 @@ export class ManageDishComponent implements OnInit {
         .subscribe(
           (res: any) => {
             console.log(res);
-            Swal.fire('Successful!', 'Air added successful.', 'success');
+            Swal.fire('Successful!', 'Dish added successful.', 'success');
           },
           (error) => {
             if (error.status === 200 || error.status === 201) {

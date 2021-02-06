@@ -12,4 +12,5 @@ export class ManagementsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
 }

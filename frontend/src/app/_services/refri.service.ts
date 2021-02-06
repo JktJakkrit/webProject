@@ -85,7 +85,7 @@ export class RefriService {
     };
     // return this.http.post<any>('http://localhost:3000/building/update-building', body, { headers: token_head }).pipe(
     //   catchError(this.handleError)
-    var REST_URL = this.url + '/refri/id' + refri_sys_id;
+    var REST_URL = this.url + '/refri/id/' + refri_sys_id;
     return this.http
       .put<any>(REST_URL, body)
       .pipe(catchError(this.handleError));

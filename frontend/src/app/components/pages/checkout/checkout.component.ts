@@ -20,6 +20,7 @@ import { CartDataServiceService } from 'src/app/_services/cart-data-service.serv
 import { CheckoutService } from 'src/app/_services/checkout.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs; 
 import { DataUser, DataProduct } from 'src/app/models/checkout.model';
+import { OtherProduct } from 'src/app/models/other.model';
 
 @Component({
   selector: 'app-checkout',
@@ -34,7 +35,7 @@ export class CheckoutComponent implements OnInit {
   countRefri: RefriProduct[] = [];
   countTv: TvProduct[] = [];
   countWash: WashProduct[] = [];
-
+countOther: OtherProduct[] = [];
   
   public get counter() {
     var counters: number = 0;
@@ -44,6 +45,7 @@ export class CheckoutComponent implements OnInit {
     counters += this.countRefri.length || 0;
     counters += this.countTv.length || 0;
     counters += this.countWash.length || 0;
+    counters += this.countOther.length || 0;
     // counters += this.countProduct.length || 0;
     return counters;
   }
@@ -105,6 +107,12 @@ export class CheckoutComponent implements OnInit {
         this.countWash = data;
       }
     });
+
+    this.cartDataService.currentOtherProduct.subscribe((data) =>{
+      if(data){
+        this.countOther = data;
+      }
+    })
 
     this.dataUser = JSON.parse(sessionStorage.getItem('resume')) || new DataUser();
     if (!this.dataUser.dataProduct || this.dataUser.dataProduct.length === 0) {
@@ -337,6 +345,15 @@ export class CheckoutComponent implements OnInit {
     console.log(event.target.value );
     this.cartDataService.updateAmountTvProduct(tvItem,event.target.value);
   }
+  //-----------------------------
+  otherTotalPrice(amount,price) : number {
+    return amount * price;
+  }
+  otherChangeAmount(event,otherItem) {
+    console.log(event.target.value );
+    this.cartDataService.updateAmountOtherProduct(otherItem,event.target.value);
+  }
+
 
 
 
