@@ -9,6 +9,9 @@ router.use('/refri',require('./refri'))
 router.use('/tv',require('./tv'))
 router.use('/wash',require('./wash'))
 router.use('/bill',require('./bill'))
+router.use('/register',require('./register'))
+router.use('/manager',require('./manage-other'))
+
 // ถ้ามีตัวอื่นอีกก็เอามาใส่
 
 
