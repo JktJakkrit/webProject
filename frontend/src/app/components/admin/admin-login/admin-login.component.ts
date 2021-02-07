@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonDataService } from 'src/app/common-data.service';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -9,12 +10,19 @@ import Swal from 'sweetalert2';
   styleUrls: ['./admin-login.component.css']
 })
 export class AdminLoginComponent implements OnInit {
+  admin_form: FormGroup;
+  constructor(private authService: AuthService, private _commondata: CommonDataService, private router: Router, private formBuilder: FormBuilder) {
+    this.admin_form = this.formBuilder.group({
+      username: new FormControl("", [Validators.required]),
+      password: new FormControl("", [Validators.required]),
+      status: new FormControl("admin", [Validators.required]),
+     
+    });
+   }
 
-  constructor(private authService: AuthService, private _commondata: CommonDataService, private router: Router) { }
-
-  ngOnInit() {
+   ngOnInit() {
     if (this.authService.isLogin()) {
-      this.router.navigate(['login']);
+      this.router.navigate(['admin-login']);
     }
     setTimeout((_) => this._commondata.showLoader(false), 200);
   }
@@ -22,7 +30,9 @@ export class AdminLoginComponent implements OnInit {
   isLogin = false;
 
   public onSubmit(form: any) {
-    this.authService.login(form.username, form.password).subscribe(
+    // this.authService.login("test","test").subscribe(
+      
+      this.authService.adminLogin(form.value.username,form.value.password,form.value.status).subscribe(
       (token: any) => {
         Swal.fire({
           icon: 'success',
@@ -30,12 +40,14 @@ export class AdminLoginComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         })
-       console.log("======================= On Login ==============================");
-        console.log(token.token);
+      //  console.log("======================= On Login ==============================");
+      //  console.log(token);
+      //  this.authService.isLogin();
+      //   console.log(token.token);
       
-        localStorage.setItem('token', token.token);
-        this.isLogin = true;
-
+        // localStorage.setItem('currentUser', token.token);
+        // this.isLogin = true;
+       
         // after login success
         this.router.navigate(['admin-home']);
       },
@@ -50,4 +62,10 @@ export class AdminLoginComponent implements OnInit {
       () => {}
     );
   }
+
+  logout(){
+    this.authService.logOut();
+  }
+
+ 
 }

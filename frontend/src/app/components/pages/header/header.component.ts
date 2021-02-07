@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonDataService } from 'src/app/common-data.service';
 import { AirProduct } from 'src/app/models/air.model';
@@ -31,8 +36,12 @@ export class HeaderComponent implements OnInit {
   countTv: TvProduct[] = [];
   countWash: WashProduct[] = [];
   countOther: OtherProduct[] = [];
-
+  currentUser: any;
   register_form: FormGroup;
+  Islogin: boolean;
+
+  
+
   public get counter() {
     var counters: number = 0;
     counters += this.countAir.length || 0;
@@ -53,15 +62,15 @@ export class HeaderComponent implements OnInit {
   }
 
   constructor(
-    private cartDataService: CartDataServiceService, 
+    private cartDataService: CartDataServiceService,
     private modalService: ModalService,
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     private registerService: RegisterService,
-    private authService: AuthService, 
-    private _commondata: CommonDataService, 
+    private authService: AuthService,
+    private _commondata: CommonDataService,
     private router: Router
-    ) {
-
+  ) {
+    
     this.register_form = this.formBuilder.group({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
@@ -73,7 +82,6 @@ export class HeaderComponent implements OnInit {
       state: new FormControl('', [Validators.required]),
       zip: new FormControl('', [Validators.required]),
     });
-
 
     this.cartDataService.currentAirProduct.subscribe((data) => {
       if (data) {
@@ -117,9 +125,10 @@ export class HeaderComponent implements OnInit {
       }
     });
 
+    // this.authService.isLogin.subscribe(x => this.isLogin = x);
   }
- 
-  OnSubmit(form: any){
+  
+  OnSubmit(form: any) {
     console.log(this.register_form);
 
     if (!this.register_form.valid) {
@@ -156,13 +165,12 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-
- 
   ngOnInit() {
-   
+    this.Islogin = this.authService.isLogin();
+    console.log(this.Islogin);
   }
 
-  editcate(trdata){
+  editcate(trdata) {
     this.register_form.controls['regis_sys_id'].setValue(trdata.regis_sys_id);
     this.register_form.controls['name'].setValue(trdata.name);
     this.register_form.controls['email'].setValue(trdata.email);
@@ -171,12 +179,16 @@ export class HeaderComponent implements OnInit {
     this.register_form.controls['phone'].setValue(trdata.phone);
     this.register_form.controls['state'].setValue(trdata.state);
     this.register_form.controls['zip'].setValue(trdata.zip);
-    
-  // this.modalService.open('modal_editcate');
+
+    // this.modalService.open('modal_editcate');
   }
-
+  logout() {
+    this.authService.logOut();
+    Swal.fire('Logout!', 'Your is Logout..', 'info');
+    window.location.reload();
+    this.router.navigate(['home']);
+  }
+  login(): void {
+    this.router.navigate(['login']);
+  }
 }
-
-
-  
-

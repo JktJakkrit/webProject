@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AirProduct } from 'src/app/models/air.model';
 import { DishProduct } from 'src/app/models/dish.model';
 import { FanProduct } from 'src/app/models/fan.model';
@@ -8,6 +9,7 @@ import { RefriProduct } from 'src/app/models/refri.model';
 import { TvProduct } from 'src/app/models/tv.model';
 import { WashProduct } from 'src/app/models/wash.model';
 import { AirService } from 'src/app/_services/air.service';
+import { AuthService } from 'src/app/_services/auth.service';
 import { CartDataServiceService } from 'src/app/_services/cart-data-service.service';
 import { DishService } from 'src/app/_services/dish.service';
 import { FanService } from 'src/app/_services/fan.service';
@@ -20,10 +22,9 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-all-product',
   templateUrl: './all-product.component.html',
-  styleUrls: ['./all-product.component.css']
+  styleUrls: ['./all-product.component.css'],
 })
 export class AllProductComponent implements OnInit {
-
   masterAir: AirProduct[];
   masterDishwasher: DishProduct[];
   masterFans: FanProduct[];
@@ -42,7 +43,9 @@ export class AllProductComponent implements OnInit {
     private refriService: RefriService,
     private washService: WashService,
     private tvService: TvService,
-    private otherService: OtherService
+    private otherService: OtherService,
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -67,7 +70,7 @@ export class AllProductComponent implements OnInit {
     );
   }
   loadDishwasher() {
-    this.dishService. getMasterDishs().subscribe(
+    this.dishService.getMasterDishs().subscribe(
       (res: DishProduct[]) => {
         this.masterDishwasher = res;
       },
@@ -77,7 +80,7 @@ export class AllProductComponent implements OnInit {
     );
   }
   loadElectricFan() {
-    this.fanService. getMasterFans().subscribe(
+    this.fanService.getMasterFans().subscribe(
       (res: FanProduct[]) => {
         this.masterFans = res;
       },
@@ -99,7 +102,7 @@ export class AllProductComponent implements OnInit {
     );
   }
   loadRefrigerator() {
-    this.refriService. getMasterRefri().subscribe(
+    this.refriService.getMasterRefri().subscribe(
       (res: RefriProduct[]) => {
         this.masterRefrigerator = res;
       },
@@ -109,7 +112,7 @@ export class AllProductComponent implements OnInit {
     );
   }
   loadTelevision() {
-    this.tvService. getMasterTvs().subscribe(
+    this.tvService.getMasterTvs().subscribe(
       (res: TvProduct[]) => {
         this.masterTelevision = res;
       },
@@ -119,7 +122,7 @@ export class AllProductComponent implements OnInit {
     );
   }
   loadWashing() {
-    this.washService. getMasterWashings().subscribe(
+    this.washService.getMasterWashings().subscribe(
       (res: WashProduct[]) => {
         this.masterWashingMachine = res;
       },
@@ -130,38 +133,66 @@ export class AllProductComponent implements OnInit {
   }
 
   addAirToCart(data) {
-    console.log("34567890-=");
-    this.cartDataService.changeAirProduct(data);
-    // this.cartDataService.AddProductToCart(data);
+    if (this.authService.isLogin()) {
+      console.log('34567890-=');
+      console.log('<----- Select this item ----->', data);
+      this.cartDataService.changeAirProduct(data);
+    } else {
+      this.router.navigate(['login']);
+    }
   }
   addFanToCart(data) {
-    console.log("34567890-=");
-    this.cartDataService.changeFanProduct(data);
-    // this.cartDataService.AddProductToCart(data);
+    if (this.authService.isLogin()) {
+      console.log('34567890-=');
+      console.log('<----- Select this item ----->', data);
+      this.cartDataService.changeFanProduct(data);
+    } else {
+      this.router.navigate(['login']);
+    }
   }
   addDishToCart(data) {
-    console.log("34567890-=");
-    this.cartDataService.changeDishProduct(data);
-    // this.cartDataService.AddProductToCart(data);
+    if (this.authService.isLogin()) {
+      console.log('34567890-=');
+      console.log('<----- Select this item ----->', data);
+      this.cartDataService.changeDishProduct(data);
+    } else {
+      this.router.navigate(['login']);
+    }
   }
   addRefriToCart(data) {
-    console.log("34567890-=");
-    this.cartDataService.changeRefriProduct(data);
-    // this.cartDataService.AddProductToCart(data);
+    if (this.authService.isLogin()) {
+      console.log('34567890-=');
+      console.log('<----- Select this item ----->', data);
+      this.cartDataService.changeRefriProduct(data);
+    } else {
+      this.router.navigate(['login']);
+    }
   }
   addTvToCart(data) {
-    console.log("34567890-=");
-    this.cartDataService.changeTvProduct(data);
-    // this.cartDataService.AddProductToCart(data);
+    if (this.authService.isLogin()) {
+      console.log('34567890-=');
+      console.log('<----- Select this item ----->', data);
+      this.cartDataService.changeTvProduct(data);
+    } else {
+      this.router.navigate(['login']);
+    }
   }
   addWashToCart(data) {
-    console.log("34567890-=");
-    this.cartDataService.changeWashProduct(data);
-    // this.cartDataService.AddProductToCart(data);
+    if (this.authService.isLogin()) {
+      console.log('34567890-=');
+      console.log('<----- Select this item ----->', data);
+      this.cartDataService.changeWashProduct(data);
+    } else {
+      this.router.navigate(['login']);
+    }
   }
   addOtherToCart(data) {
-    console.log("34567890-=");
-    this.cartDataService.changeOtherProduct(data);
-    // this.cartDataService.AddProductToCart(data);
+    if (this.authService.isLogin()) {
+      console.log('34567890-=');
+      console.log('<----- Select this item ----->', data);
+      this.cartDataService.changeOtherProduct(data);
+    } else {
+      this.router.navigate(['login']);
+    }
   }
 }

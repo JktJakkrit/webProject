@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
+import { AuthService } from 'src/app/_services/auth.service';
 import { ModalService } from 'src/app/_services/modal.service';
 import { OtherService } from 'src/app/_services/other.service';
 import Swal from 'sweetalert2';
@@ -17,12 +19,15 @@ export class AdminNavComponent implements OnInit {
   edit_other_form: FormGroup;
   imageSrc: string;
   deleteOther;
+  AdminIslogin: boolean;
   constructor(
     private formBuilder: FormBuilder,
     private modalService: ModalService,
 
     private http: HttpClient,
-    private otherService: OtherService
+    private otherService: OtherService,
+    private router: Router,
+    private authService: AuthService,
   ) {
     this.add_other_form = this.formBuilder.group({
       type: new FormControl('', [Validators.required]),
@@ -62,6 +67,8 @@ export class AdminNavComponent implements OnInit {
   masterOther;
 
   ngOnInit() {
+    this.AdminIslogin = this.authService.AdminIsLogin();
+    console.log(this.AdminIslogin);
     this.loadDataMaster();
   }
 
@@ -230,5 +237,12 @@ export class AdminNavComponent implements OnInit {
         }
       }
     );
+  }
+
+  logout() {
+    this.authService.AdminLogOut();
+    Swal.fire('Logout!', 'Your is Logout..', 'info');
+    // window.location.reload();
+    this.router.navigate(['admin-login']);
   }
 }

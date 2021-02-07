@@ -16,7 +16,7 @@ import { HeaderComponent } from './components/pages/header/header.component';
 import { AdminLoginComponent } from './components/admin/admin-login/admin-login.component';
 // ---------------------------------------------------------------
 
-import { HomeComponent } from './components/pages/home/home.component';
+
 import { AirConditioningComponent } from './components/products/air-conditioning/air-conditioning.component';
 import { DishwasherComponent } from './components/products/dishwasher/dishwasher.component';
 import { ElectricFanComponent } from './components/products/electric-fan/electric-fan.component';
@@ -28,6 +28,8 @@ import { OtherComponent } from './components/products/other/other.component';
 import { CheckoutComponent } from './components/pages/checkout/checkout.component';
 import { AllProductComponent } from './components/products/all-product/all-product.component';
 import { LoginComponent } from './components/pages/auth/login/login.component';
+import { SuccessComponent } from './components/pages/success/success.component';
+import { HomeComponent } from './components/pages/home/home.component';
 
 
 
@@ -38,6 +40,10 @@ const routes: Routes = [
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
+  },
+  {
+    path: 'success',
+    component: SuccessComponent
   },
   {
     path:"login",

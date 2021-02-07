@@ -3,9 +3,11 @@
         <div id="output"></div>
         <div class="avatar"></div>
         <div class="form-box">
-            <form method="post" #f="ngForm" (ngSubmit)="onSubmit(f.value)">
-                <input id="username" name="username" type="text" placeholder="username">
-                <input id="password" name="password" type="password" placeholder="password ">
+            <form [formGroup]="admin_form" (ngSubmit)="onSubmit(this.admin_form)">
+
+                <input id="username" name="username" type="text" placeholder="username" formControlName="username">
+                <input id="password" name="password" type="password" placeholder="password" formControlName="password">&nbsp;
+                <input id="status" name="status" type="text" formControlName="status" readonly>
                 <button class="btn btn-info btn-block login " type="submit ">Login</button>
             </form>
         </div>

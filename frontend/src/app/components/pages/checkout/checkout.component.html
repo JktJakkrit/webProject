@@ -5,42 +5,42 @@
         <div class="container">
             <form action="/action_page.php" [formGroup]="checkout_form" (ngSubmit)="onSubmit(this.checkout_form)">
                 <div class="row">
-                    <div class="col-50">
+                    <div class="col-50" *ngFor="let field of dataUser">
                         <h3>Billing Address</h3>
 
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <div class="form-group">
                                     <label for="">Full Name</label>
-                                    <input type="text" name="name" class="form-control" formControlName="name" />
+                                    <input type="text" name="name" class="form-control" [value]="field.name" formControlName="name" />
                                 </div>
                             </div>
 
                             <div class="form-group col-md-12">
                                 <div class="form-group">
                                     <label for="">Email</label>
-                                    <input type="text" name="email" class="form-control" formControlName="email" />
+                                    <input type="text" name="email" class="form-control" [value]="field.email" formControlName="email" />
                                 </div>
                             </div>
 
                             <div class="form-group col-md-12">
                                 <div class="form-group">
                                     <label for=""><i class="fa fa-address-card-o"></i>Address</label>
-                                    <input type="text" name="address" class="form-control" formControlName="address" />
+                                    <input type="text" name="address" class="form-control" [value]="field.address" formControlName="address" />
                                 </div>
                             </div>
 
                             <div class="form-group col-md-12">
                                 <div class="form-group">
                                     <label for=""><i class="fa fa-institution"></i>City</label>
-                                    <input type="text" name="city" class="form-control" formControlName="city" />
+                                    <input type="text" name="city" class="form-control" [value]="field.city" formControlName="city" />
                                 </div>
                             </div>
 
                             <div class="form-group col-md-12">
                                 <div class="form-group">
                                     <label for=""><i class="fa fa-phone"></i>Phone</label>
-                                    <input type="text" name="phone" class="form-control" formControlName="phone" />
+                                    <input type="text" name="phone" class="form-control" [value]="field.phone" formControlName="phone" />
                                 </div>
                             </div>
                         </div>
@@ -50,14 +50,14 @@
                             <div class="form-group col-md-6">
                                 <div class="form-group">
                                     <label for="">State</label>
-                                    <input type="text" name="state" class="form-control" formControlName="state" />
+                                    <input type="text" name="state" class="form-control" [value]="field.state" formControlName="state" />
                                 </div>
                             </div>
 
                             <div class="form-group col-md-6">
                                 <div class="form-group">
                                     <label for="">Zip Code</label>
-                                    <input type="text" name="zip" class="form-control" formControlName="zip" />
+                                    <input type="text" name="zip" class="form-control" [value]="field.zip" formControlName="zip" />
                                 </div>
                             </div>
 

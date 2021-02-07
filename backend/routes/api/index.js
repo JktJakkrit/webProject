@@ -12,6 +12,7 @@ router.use('/bill', require('./bill'))
 router.use('/register', require('./register'))
 router.use('/other', require('./other'))
 router.use('/user_login', require('./user_login'))
+router.use('/admin_login', require('./admin_login'))
 
 // ถ้ามีตัวอื่นอีกก็เอามาใส่
 

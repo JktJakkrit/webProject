@@ -46,6 +46,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import { CounterState } from './_services/ngxs-store/store/counter.store';
 import { AllProductComponent } from './components/products/all-product/all-product.component';
+import { SuccessComponent } from './components/pages/success/success.component';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { AllProductComponent } from './components/products/all-product/all-produ
     AdminNavComponent,
     OtherComponent,
     AllProductComponent,
+    SuccessComponent,
    
 
   ],

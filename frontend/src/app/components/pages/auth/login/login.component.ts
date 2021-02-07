@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonDataService } from 'src/app/common-data.service';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -9,9 +10,15 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+login_form: FormGroup;
 
-
-  constructor(private authService: AuthService, private _commondata: CommonDataService, private router: Router) { }
+  constructor(private authService: AuthService, private _commondata: CommonDataService, private router: Router, private formBuilder: FormBuilder) {
+    this.login_form = this.formBuilder.group({
+      username: new FormControl("", [Validators.required]),
+      password: new FormControl("", [Validators.required]),
+     
+    });
+  }
 
   ngOnInit() {
     if (this.authService.isLogin()) {
@@ -23,7 +30,9 @@ export class LoginComponent implements OnInit {
   isLogin = false;
 
   public onSubmit(form: any) {
-    this.authService.login("test","test").subscribe(
+    // this.authService.login("test","test").subscribe(
+      
+      this.authService.login(form.value.username,form.value.password).subscribe(
       (token: any) => {
         Swal.fire({
           icon: 'success',
@@ -31,14 +40,7 @@ export class LoginComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         })
-       console.log("======================= On Login ==============================");
-       console.log(token);
        
-        console.log(token.regis_sys_id);
-      
-        localStorage.setItem('token', token.regis_sys_id);
-        this.isLogin = true;
-
         // after login success
         this.router.navigate(['home']);
       },
@@ -53,4 +55,10 @@ export class LoginComponent implements OnInit {
       () => {}
     );
   }
+
+  logout(){
+    this.authService.logOut();
+  }
+
+ 
 }

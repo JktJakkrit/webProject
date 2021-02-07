@@ -43,8 +43,8 @@ export class RegisterService {
     }
 
    
-    getUser() {
-       return this.http.get<any>(this.url + '/user' + 'ms-building', {
+    getDataUser() {
+       return this.http.get<any>(this.url + '/register' + 'ms-building', {
          // headers: token_head,
        });
      }
