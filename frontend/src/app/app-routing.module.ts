@@ -27,6 +27,7 @@ import { ManageOtherComponent } from './components/admin/manage-other/manage-oth
 import { OtherComponent } from './components/products/other/other.component';
 import { CheckoutComponent } from './components/pages/checkout/checkout.component';
 import { AllProductComponent } from './components/products/all-product/all-product.component';
+import { LoginComponent } from './components/pages/auth/login/login.component';
 
 
 
@@ -37,6 +38,10 @@ const routes: Routes = [
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
+  },
+  {
+    path:"login",
+    component: LoginComponent
   },
   {
     path: 'checkout',

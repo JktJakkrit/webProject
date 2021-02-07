@@ -157,7 +157,7 @@ export class ManageDishComponent implements OnInit {
         .subscribe(
           (res: any) => {
             console.log(res);
-            Swal.fire('Successful!', 'Air edited successful.', 'success');
+            Swal.fire('Successful!', 'Dishwaher edited successful.', 'success');
           },
           (error) => {
             if (error.status === 200 || error.status === 201) {
@@ -174,7 +174,7 @@ export class ManageDishComponent implements OnInit {
   }
 
   editcate(trdata) {
-    this.edit_dish_form.controls['air_sys_id'].setValue(trdata.dish_sys_id);
+    this.edit_dish_form.controls['dish_sys_id'].setValue(trdata.dish_sys_id);
     this.edit_dish_form.controls['name'].setValue(trdata.name);
     this.edit_dish_form.controls['code'].setValue(trdata.code);
     this.edit_dish_form.controls['brand'].setValue(trdata.brand);
@@ -182,7 +182,7 @@ export class ManageDishComponent implements OnInit {
     this.edit_dish_form.controls['detail'].setValue(trdata.detail);
     this.edit_dish_form.controls['price'].setValue(trdata.price);
     this.edit_dish_form.controls['amount'].setValue(trdata.amount);
-    this.edit_dish_form.controls['this.photo'].setValue(trdata.this.photo);
+    this.edit_dish_form.controls['avatar'].setValue(trdata.avatar);
     this.edit_dish_form.controls['isvoid'].setValue(trdata.isvoid.toString());
 
     this.modalService.open('modal_editcate');

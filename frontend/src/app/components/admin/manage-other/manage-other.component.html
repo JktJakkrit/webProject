@@ -19,7 +19,7 @@
     <div class="col-xl-12 mb-30">
         <div class="card card-statistics h-100">
             <div class="card-body">
-                <button type="button" class="btn btn-sm btn-primary mb-2" data-toggle="modal" data-target="#modal_addcate" (click)="openModal('modal_addcate')">
+                <button type="button" class="btn btn-sm btn-primary mb-2" data-toggle="modal" data-target="#modal_new" (click)="openModal('modal_new')">
           <i class="fa fa-plus"></i> Add NewProduct
         </button>
                 <div class="d-block d-md-flex justify-content-between">
@@ -40,7 +40,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let t of masterOther">
-                                    <td>{{ t.refri_sys_id }}</td>
+                                    <td>{{ t.other_sys_id }}</td>
                                     <td>{{ t.type }}</td>
                                     <td>{{ t.name }}</td>
                                     <td>{{ t.brand }}</td>
@@ -93,7 +93,7 @@
 <!-- add -->
 <div
   class="modal fade"
-  id="modal_addcate"
+  id="modal_new"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalCenterTitle"
@@ -227,6 +227,14 @@
                         </div>
 
                         <div class="modal-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label for=""> ID</label>
+                                        <input type="text" class="form-control" name="other_sys_id" formControlName="other_sys_id" readonly>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <div class="form-group">

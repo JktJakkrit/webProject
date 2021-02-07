@@ -27,7 +27,7 @@ const methods = {
     },
     async UpdateRedriById(req, res) {
         try {
-            let result = await service.putItemRefriById(req.params.id, req.body)
+            let result = await service.putItemRefriById(req.file.path, req.params.id, req.body)
             res.status(200).send(result)
         } catch (error) {
             res.json(error).end();
@@ -44,4 +44,4 @@ const methods = {
 
 }
 
-module.exports = {...methods}
+module.exports = {...methods }

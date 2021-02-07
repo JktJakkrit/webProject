@@ -122,6 +122,8 @@ countOther: OtherProduct[] = [];
 
   }
   mastercheckout;
+
+
   addExperience() {
     this.dataUser.dataProduct.push(new DataProduct());
   }
@@ -298,62 +300,109 @@ countOther: OtherProduct[] = [];
   }
 
  
-  airTotalPrice(amount,price) : number {
-    return amount * price;
+  airTotalPrice(count, price) : number {
+    return count * price;
   }
+
   airChangeAmount(event,airItem) {
     console.log(event.target.value );
     this.cartDataService.updateAmountAirProduct(airItem,event.target.value);
+    this.calTotalPriceAllProduct().toFixed(2);
+    this.calTotalVAT7().toFixed(2)
   }
+
+  
 //-----------------------------
-  dishTotalPrice(amount,price) : number {
-    return amount * price;
+  dishTotalPrice(count, price) : number {
+    
+    return count * price;
   }
   dishChangeAmount(event,dishItem) {
     console.log(event.target.value );
     this.cartDataService.updateAmountDishProduct(dishItem,event.target.value);
+    this.calTotalPriceAllProduct().toFixed(2);
+    this.calTotalVAT7().toFixed(2)
   }
+ 
   //-----------------------------
-  fanTotalPrice(amount,price) : number {
-    return amount * price;
+  fanTotalPrice(count, price) : number {
+    
+    return count * price;
   }
   fanChangeAmount(event,fanItem) {
     console.log(event.target.value );
     this.cartDataService.updateAmountFanProduct(fanItem,event.target.value);
+    this.calTotalPriceAllProduct().toFixed(2);
+    this.calTotalVAT7().toFixed(2)
   }
+ 
   //-----------------------------
-  refriTotalPrice(amount,price) : number {
-    return amount * price;
+  refriTotalPrice(count, price) : number {
+    
+    return count * price;
   }
   refriChangeAmount(event,refriItem) {
     console.log(event.target.value );
     this.cartDataService.updateAmountRefriProduct(refriItem,event.target.value);
+    this.calTotalPriceAllProduct().toFixed(2);
+    this.calTotalVAT7().toFixed(2)
   }
+ 
   //-----------------------------
-  washTotalPrice(amount,price) : number {
-    return amount * price;
+  washTotalPrice(count, price) : number {
+    
+    return count * price;
   }
   washChangeAmount(event,washItem) {
     console.log(event.target.value );
     this.cartDataService.updateAmountWashProduct(washItem,event.target.value);
+    this.calTotalPriceAllProduct().toFixed(2);
+    this.calTotalVAT7().toFixed(2)
   }
+  
   //-----------------------------
-  tvTotalPrice(amount,price) : number {
-    return amount * price;
+  tvTotalPrice(count,price) : number {
+    
+    return count * price;
   }
   tvChangeAmount(event,tvItem) {
     console.log(event.target.value );
     this.cartDataService.updateAmountTvProduct(tvItem,event.target.value);
+    this.calTotalPriceAllProduct().toFixed(2);
+    this.calTotalVAT7().toFixed(2)
   }
-  //-----------------------------
-  otherTotalPrice(amount,price) : number {
-    return amount * price;
-  }
-  otherChangeAmount(event,otherItem) {
-    console.log(event.target.value );
-    this.cartDataService.updateAmountOtherProduct(otherItem,event.target.value);
-  }
+  
+ //-----------------------------
+ otherTotalPrice(count,price) : number {
+  
+  return count * price;
+}
+otherChangeAmount(event,otherItem) {
+  console.log(event.target.value );
+  this.cartDataService.updateAmountOtherProduct(otherItem,event.target.value);
+  this.calTotalPriceAllProduct().toFixed(2);
+  this.calTotalVAT7().toFixed(2)
+}
 
+  
+
+calTotalPriceAllProduct() {
+  const callBack = (sum, curr) => sum + (curr.price * curr.count);
+  const allProduct = [...this.countAir, ...this.countDish, ...this.countFan, ...this.countRefri, ...this.countTv, ...this.countWash, ...this.countOther]
+  const sum = !!allProduct.length ? allProduct.reduce(callBack, 0) : 0;
+
+  // return sum + (sum * 0.07) + (sum * 0.93);
+  return sum + (sum * 0.07);
+}
+
+calTotalVAT7() {
+  const callBack = (sum, curr) => sum + (curr.price * curr.count);
+  const allProduct = [...this.countAir, ...this.countDish, ...this.countFan, ...this.countRefri, ...this.countTv, ...this.countWash, ...this.countOther]
+  const sum = !!allProduct.length ? allProduct.reduce(callBack, 0) : 0;
+
+  // return sum + (sum * 0.07) + (sum * 0.93);
+  return sum * 0.07;
+}
 
 
 

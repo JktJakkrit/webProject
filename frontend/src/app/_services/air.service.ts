@@ -99,9 +99,9 @@ export class AirService {
     });
     // return this.http.post<any>('http://localhost:3000/building/update-building', body, { headers: token_head }).pipe(
     //   catchError(this.handleError)
-    var REST_URL = this.url + '/air/id' + '/' + air_sys_id;
+    var REST_URL = this.url + '/air/id/' + air_sys_id;
     return this.http
-      .put<any>(REST_URL, f, {})
+      .put<any>(REST_URL, f)
       .pipe(catchError(this.handleError));
   }
 

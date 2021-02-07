@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { CartDataServiceService } from 'src/app/_services/cart-data-service.service';
 import { AirProduct } from 'src/app/models/air.model';
 import { AirService } from 'src/app/_services/air.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-air-conditioning',
   templateUrl: './air-conditioning.component.html',
@@ -21,6 +22,7 @@ export class AirConditioningComponent implements OnInit {
     private modalService: ModalService,
     private cartDataService: CartDataServiceService,
     private airService: AirService
+    , private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -40,9 +42,15 @@ export class AirConditioningComponent implements OnInit {
   }
 
   addToCart(data) {
-    console.log("34567890-=");
+   var token =  localStorage.getItem('token');
+   if(token) {
+      console.log("34567890-=");
     console.log("<----- Select this item ----->",data);
     this.cartDataService.changeAirProduct(data);
+   }else{
+    this.router.navigate(['login']);
+   }
+   
     // this.cartDataService.AddProductToCart(data);
   }
 }

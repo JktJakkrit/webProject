@@ -200,7 +200,7 @@ export class ManageTvComponent implements OnInit {
   }
 
   editcate(trdata) {
-    this.edit_tv_form.controls["refri_sys_id"].setValue(trdata.refri_sys_id);
+    this.edit_tv_form.controls["tv_sys_id"].setValue(trdata.tv_sys_id);
     this.edit_tv_form.controls["name"].setValue(trdata.name);
     this.edit_tv_form.controls["code"].setValue(trdata.code);
     this.edit_tv_form.controls["brand"].setValue(trdata.brand);

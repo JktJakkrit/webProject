@@ -262,6 +262,15 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <div class="form-group">
+                                        <label for=""> ID</label>
+                                        <input type="text" class="form-control" name="fan_sys_id" formControlName="fan_sys_id" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
                                         <label for="">Fan Name</label>
                                         <label style="color: red"> * </label>
                                         <input type="text" name="name" class="form-control" formControlName="name" />
@@ -289,7 +298,7 @@
 
                                 <div class="form-group col-md-6">
                                     <div class="form-group">
-                                        <label for="">Fan Type</label>
+                                        <label for="">Fan Size</label>
                                         <label style="color: red"> * </label>
                                         <select name="size" class="form-control" formControlName="size" (change)="select('size', $event)">
                   <option value="">Please select</option>

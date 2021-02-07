@@ -15,7 +15,7 @@
             <li class="nav-item"><a class="nav-link" [routerLink]="['/manage-tv']"> Television </a></li>
             <li class="nav-item"><a class="nav-link" [routerLink]="['/manage-wash']"> Washing-Machines </a></li>
             <li class="nav-item"><a class="nav-link" [routerLink]="['/manage-other']"> Product Other </a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#modal_addcate" (click)="openModal('modal_addcate')"> Add New Product </a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#modal_new" (click)="openModal('modal_new')"> Add New Product </a></li>
         </ul>
     </div>
     <!-- navbar-collapse.// -->
@@ -23,7 +23,7 @@
 
 
 <!-- add -->
-<div class="modal fade" id="modal_addcate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="modal_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <form [formGroup]="add_other_form" (ngSubmit)="otherOnSubmit(this.add_other_form)">
             <div class="modal-content">

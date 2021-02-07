@@ -63,7 +63,7 @@ export class CartDataServiceService {
   updateAmountAirProduct(data: AirProduct, amonut: number) {
     var air = this.airProduct.value;
     const index = air.findIndex((val) => val.air_sys_id === data.air_sys_id);
-    air[index].count++;
+    air[index].count > amonut ? air[index].count-- : air[index].count++;
 
     this.airProduct.next(air);
   }
@@ -97,7 +97,7 @@ export class CartDataServiceService {
   updateAmountDishProduct(data: DishProduct, amonut: number) {
     var dish = this.dishProduct.value;
     const index = dish.findIndex((val) => val.dish_sys_id === data.dish_sys_id);
-    dish[index].count++;
+    dish[index].count > amonut ? dish[index].count-- : dish[index].count++;
 
     this.dishProduct.next(dish);
   }
@@ -131,7 +131,7 @@ export class CartDataServiceService {
   updateAmountFanProduct(data: FanProduct, amonut: number) {
     var fan = this.fanProduct.value;
     const index = fan.findIndex((val) => val.fan_sys_id === data.fan_sys_id);
-    fan[index].count++;
+    fan[index].count > amonut ? fan[index].count-- : fan[index].count++;
 
     this.fanProduct.next(fan);
   }
@@ -168,7 +168,7 @@ export class CartDataServiceService {
     const index = refri.findIndex(
       (val) => val.refri_sys_id === data.refri_sys_id
     );
-    refri[index].count++;
+    refri[index].count > amonut ? refri[index].count-- : refri[index].count++;
 
     this.refriProduct.next(refri);
   }
@@ -203,7 +203,7 @@ export class CartDataServiceService {
   updateAmountTvProduct(data: TvProduct, amonut: number) {
     var tv = this.tvProduct.value;
     const index = tv.findIndex((val) => val.tv_sys_id === data.tv_sys_id);
-    tv[index].count++;
+    tv[index].count > amonut ? tv[index].count-- : tv[index].count++;
 
     this.tvProduct.next(tv);
   }
@@ -237,7 +237,7 @@ export class CartDataServiceService {
   updateAmountWashProduct(data: WashProduct, amonut: number) {
     var wash = this.washProduct.value;
     const index = wash.findIndex((val) => val.wash_sys_id === data.wash_sys_id);
-    wash[index].count++;
+    wash[index].count > amonut ? wash[index].count-- : wash[index].count++;
 
     this.washProduct.next(wash);
   }
@@ -275,7 +275,7 @@ export class CartDataServiceService {
     const index = other.findIndex(
       (val) => val.other_sys_id === data.other_sys_id
     );
-    other[index].count++;
+    other[index].count > amonut ? other[index].count-- : other[index].count++;
 
     this.otherProduct.next(other);
   }

@@ -65,8 +65,9 @@ export class TvService {
     brand: string,
     detail: string,
     price: string,
-    scsize: string,
     amount: string,
+    scsize: string,
+    
     avatar: File,
     isvoid
   ) {
@@ -82,11 +83,25 @@ export class TvService {
       avatar,
       isvoid,
     };
+    var f = new FormData();
+    f.append('type', type);
+    f.append('code', code);
+    f.append('name', name);
+    f.append('brand', brand);
+    f.append('detail', detail);
+    f.append('price', price);
+    f.append('amount', amount);
+    f.append('scsize', scsize);
+    f.append('avatar', avatar, avatar.name);
+    f.append('isvoid', isvoid);
+    f.forEach((v, k) => {
+      console.log(k, ' :  ', v);
+    });
     // return this.http.post<any>('http://localhost:3000/building/update-building', body, { headers: token_head }).pipe(
     //   catchError(this.handleError)
     var REST_URL = this.url + '/tv/id/' + tv_sys_id;
     return this.http
-      .put<any>(REST_URL, body)
+      .put<any>(REST_URL, f)
       .pipe(catchError(this.handleError));
   }
 

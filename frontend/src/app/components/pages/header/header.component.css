@@ -118,13 +118,20 @@
     border: none;
 }
 
-     
-                      
-      
-         
-      
-           
-                    
-         
-                    
-      
+.modal-footer .btn {
+    font-weight: bold;
+}
+
+.modal-footer .progress {
+    display: none;
+    height: 32px;
+    margin: 0;
+}
+
+.input-group-addon {
+    color: #fff;
+    background: #3276B1;
+}
+
+
+/* ------------------------------------------------------------------------------ */

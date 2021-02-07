@@ -161,8 +161,8 @@ export class ManageOtherComponent implements OnInit {
     this.edit_other_form.controls['brand'].setValue(trdata.brand);
     this.edit_other_form.controls['type'].setValue(trdata.type);
     this.edit_other_form.controls['detail'].setValue(trdata.detail);
-    this.edit_other_form.controls['price'].setValue(trdata.price);
     this.edit_other_form.controls['amount'].setValue(trdata.amount);
+    this.edit_other_form.controls['price'].setValue(trdata.price);
     this.edit_other_form.controls['avatar'].setValue(trdata.avatar);
     this.edit_other_form.controls['isvoid'].setValue(trdata.isvoid.toString());
 

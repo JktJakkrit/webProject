@@ -1,7 +1,7 @@
-const service = require('../services/dish.service')
+const service = require('../services/other.service')
 
 const methods = {
-    async GetDishAll(req, res) {
+    async GetManageAll(req, res) {
         try {
             let result = await service.findAll()
             res.status(200).send(result)
@@ -17,33 +17,31 @@ const methods = {
             res.json(error).end();
         }
     },
-    async PostDish(req, res) {
+    async PostManage(req, res) {
         try {
-            let result = await service.postItemDish(req.file.path, req.body)
+            let result = await service.postManageOther(req.file.path, req.body)
             res.status(200).send(result)
         } catch (error) {
             res.json(error).end();
         }
     },
-    async UpdateDishById(req, res) {
-        //console.log('Id', req.params.id)
-        // console.log('Update', req.body);
+    async UpdateManageById(req, res) {
         try {
-            let result = await service.putItemDishById(req.file.path, req.params.id, req.body)
-            console.log(result)
+            let result = await service.putManageOtherById(req.file.path, req.params.id, req.body)
             res.status(200).send(result)
         } catch (error) {
             res.json(error).end();
         }
     },
-    async DeleteDishById(req, res) {
+    async DeleteManageOtherById(req, res) {
         try {
-            let result = await service.deleteItemDishById(req.params.id)
+            let result = await service.deleteItemFanById(req.params.id)
             res.status(200).send(result)
         } catch (error) {
             res.json(error).end();
         }
     }
+
 }
 
 module.exports = {...methods }

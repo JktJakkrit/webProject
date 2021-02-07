@@ -27,7 +27,7 @@ const methods = {
     },
     async UpdateFanById(req, res) {
         try {
-            let result = await service.putItemFanById(req.params.id, req.body)
+            let result = await service.putItemFanById(req.file.path, req.params.id, req.body)
             res.status(200).send(result)
         } catch (error) {
             res.json(error).end();
@@ -43,4 +43,4 @@ const methods = {
     }
 }
 
-module.exports = {...methods}
+module.exports = {...methods }
