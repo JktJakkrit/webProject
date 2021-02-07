@@ -24,7 +24,7 @@ const methods = {
     },
     postRegister: function (body) {
         return new Promise((resolve, reject) => {
-            let sql = "INSERT INTO `manage-refri` SET ?";
+            let sql = "INSERT INTO `register` SET ?";
             // return resolve(data);
             db.query(sql, body, function (error, result) {
                 if (error) return reject(error);
