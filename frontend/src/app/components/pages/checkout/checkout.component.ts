@@ -19,10 +19,11 @@ import { WashProduct } from 'src/app/models/wash.model';
 import { CartDataServiceService } from 'src/app/_services/cart-data-service.service';
 import { CheckoutService } from 'src/app/_services/checkout.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
-import { DataUser, DataProduct } from 'src/app/models/checkout.model';
+import { DataUser } from 'src/app/models/user.model';
 import { OtherProduct } from 'src/app/models/other.model';
 import { Router } from '@angular/router';
 import { RegisterService } from 'src/app/_services/register.service';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-checkout',
@@ -38,8 +39,8 @@ export class CheckoutComponent implements OnInit {
   countTv: TvProduct[] = [];
   countWash: WashProduct[] = [];
   countOther: OtherProduct[] = [];
-
-  dataUser;
+  userData: DataUser;
+  // dataUser;
   public get counter() {
     var counters: number = 0;
     counters += this.countAir.length || 0;
@@ -58,7 +59,8 @@ export class CheckoutComponent implements OnInit {
     private cartDataService: CartDataServiceService,
     private checkoutService: CheckoutService,
     private router: Router,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private userService: UserService
   ) {
     this.checkout_form = this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
@@ -119,7 +121,24 @@ export class CheckoutComponent implements OnInit {
   }
   mastercheckout;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userService.currentDataUser.subscribe((data) => {
+      if (data) {
+        console.log(data);
+
+        this.userData = data;
+        this.checkout_form.patchValue({
+          name: data.name,
+          email: data.email,
+          address: data.address,
+          city: data.city,
+          phone: data.phone,
+          state: data.state,
+          zip: data.zip,
+        });
+      }
+    });
+  }
 
   onSubmit(form: any) {
     console.log(this.checkout_form);
@@ -160,6 +179,10 @@ export class CheckoutComponent implements OnInit {
           }
         );
     }
+  }
+
+  loadUser(event) {
+    this.userService.changeDataUser(event.target.value);
   }
 
   airTotalPrice(count, price): number {
@@ -277,16 +300,5 @@ export class CheckoutComponent implements OnInit {
 
     // return sum + (sum * 0.07) + (sum * 0.93);
     return sum * 0.07;
-  }
-
-  loadUser() {
-    this.registerService.getDataUser().subscribe(
-      (res: any) => {
-        this.dataUser = res;
-      },
-      (error) => {
-        Swal.fire('Error!', 'error : ' + error.status, 'error');
-      }
-    );
   }
 }

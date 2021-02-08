@@ -44,8 +44,8 @@ export class RefriService {
     f.append('brand', brand);
     f.append('capa', capa);
     f.append('detail', detail);
-    f.append('price', price);
     f.append('amount', amount);
+    f.append('price', price);
     f.append('avatar', avatar, avatar.name);
     f.append('isvoid', isvoid.toFixed());
     f.forEach((v, k) => {
@@ -66,8 +66,9 @@ export class RefriService {
     name: string,
     brand: string,
     detail: string,
-    price: string,
     amount: string,
+    price: string,
+    
     avatar: File,
     isvoid
   ) {
@@ -89,10 +90,10 @@ export class RefriService {
     f.append('code', code);
     f.append('name', name);
     f.append('brand', brand);
-    f.append('detail', detail);
-    f.append('price', price);
     f.append('capa', capa);
+    f.append('detail', detail);
     f.append('amount', amount);
+    f.append('price', price);
     f.append('avatar', avatar, avatar.name);
     f.append('isvoid', isvoid);
     f.forEach((v, k) => {

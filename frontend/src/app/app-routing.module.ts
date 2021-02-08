@@ -30,6 +30,7 @@ import { AllProductComponent } from './components/products/all-product/all-produ
 import { LoginComponent } from './components/pages/auth/login/login.component';
 import { SuccessComponent } from './components/pages/success/success.component';
 import { HomeComponent } from './components/pages/home/home.component';
+import { RegisterComponent } from './components/pages/auth/register/register.component';
 
 
 
@@ -44,6 +45,10 @@ const routes: Routes = [
   {
     path: 'success',
     component: SuccessComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path:"login",

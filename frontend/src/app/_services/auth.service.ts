@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   private url = environment.serverURL;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private userService: UserService) {}
 
   login(username: string, password: string): Observable<any> {
     const body = {
@@ -27,11 +28,13 @@ export class AuthService {
           delete user.password;
           delete user.isvoid;
           localStorage.setItem('currentUser', JSON.stringify(user));
+          
+          this.userService.changeDataUser(user);
         }
       }),
       catchError(this.handleError)
     );
-  
+    
   }
 
   isLogin(): boolean {

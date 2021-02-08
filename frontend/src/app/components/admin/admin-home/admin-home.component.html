@@ -25,9 +25,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr *ngFor="let amount of amountAir">
                                     <td>Air-Conditioning</td>
-                                    <td></td>
+                                    <td>{{amount.total}}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning" [routerLink]="['/manage-air']" style="color: white">
                       Detail</button
@@ -35,18 +35,18 @@
                   </td>
                                 </tr>
 
-                                <tr>
+                                <tr *ngFor="let amount of amountFan">
                                     <td>Electric-Fan</td>
-                                    <td></td>
+                                    <td>{{amount.total}}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning" [routerLink]="['/manage-fan']" style="color: white">
                       Detail</button
                     >&nbsp;
                   </td>
                                 </tr>
-                                <tr>
+                                <tr *ngFor="let amount of amountDish">
                                     <td>Dishwasher</td>
-                                    <td></td>
+                                    <td>{{amount.total}}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning" [routerLink]="['/manage-dish']" style="color: white">
                       Detail</button
@@ -54,29 +54,39 @@
                   </td>
                                 </tr>
 
-                                <tr>
+                                <tr *ngFor="let amount of amountRefri">
                                     <td>Refrigerator</td>
-                                    <td></td>
+                                    <td>{{amount.total}}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning" [routerLink]="['/manage-refri']" style="color: white">
                       Detail</button
                     >&nbsp;
                   </td>
                                 </tr>
-                                <tr>
+                                <tr *ngFor="let amount of amountTv">
                                     <td>Television</td>
-                                    <td></td>
+                                    <td>{{amount.total}}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning" [routerLink]="['/manage-tv']" style="color: white">
                       Detail</button
                     >&nbsp;
                   </td>
                                 </tr>
-                                <tr>
+                                <tr *ngFor="let amount of amountWash">
                                     <td>Washing-Machines</td>
-                                    <td></td>
+                                    <td>{{amount.total}}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning" [routerLink]="['/manage-wash']" style="color: white">
+                      Detail</button
+                    >&nbsp;
+                  </td>
+                                </tr>
+
+                                <tr *ngFor="let amount of amountOther">
+                                    <td>Product Other</td>
+                                    <td>{{amount.total}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning" [routerLink]="['/manage-other']" style="color: white">
                       Detail</button
                     >&nbsp;
                   </td>

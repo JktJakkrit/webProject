@@ -11,14 +11,14 @@ const methods = {
         }
     },
 
-    async adminLogin(req, res) {
-        try {
-            let result = await service.adminLogin(req.params.id, req.body)
-            res.status(200).send(result)
-        } catch (error) {
-            res.json(error).end();
-        }
-    },
+    // async adminLogin(req, res) {
+    //     try {
+    //         let result = await service.adminLogin(req.params.id, req.body)
+    //         res.status(200).send(result)
+    //     } catch (error) {
+    //         res.json(error).end();
+    //     }
+    // },
 
 }
 

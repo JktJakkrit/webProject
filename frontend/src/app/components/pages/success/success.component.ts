@@ -1,8 +1,8 @@
 import { FanProduct } from './../../../models/fan.model';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CartDataServiceService } from 'src/app/_services/cart-data-service.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AirProduct } from 'src/app/models/air.model';
 import { DishProduct } from 'src/app/models/dish.model';
 import { RefriProduct } from 'src/app/models/refri.model';
@@ -10,14 +10,20 @@ import { TvProduct } from 'src/app/models/tv.model';
 import { WashProduct } from 'src/app/models/wash.model';
 import { OtherProduct } from 'src/app/models/other.model';
 import Swal from 'sweetalert2';
+
+import { jsPDF } from 'jspdf'
+import html2canvas from 'html2canvas';
 import { RegisterService } from 'src/app/_services/register.service';
+import { DataUser } from 'src/app/models/user.model';
+import { UserService } from 'src/app/_services/user.service';
+
 @Component({
   selector: 'app-success',
   templateUrl: './success.component.html',
   styleUrls: ['./success.component.css'],
 })
 export class SuccessComponent implements OnInit {
-  dataUser;
+  success_form: FormGroup;
   countAir: AirProduct[] = [];
   countDish: DishProduct[] = [];
   countFan: FanProduct[] = [];
@@ -25,6 +31,19 @@ export class SuccessComponent implements OnInit {
   countTv: TvProduct[] = [];
   countWash: WashProduct[] = [];
   countOther: OtherProduct[] = [];
+  userData: DataUser;
+  currentDate = new Date();
+  codeReceipt = this.makeid();
+
+  makeid() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  
+    for (var i = 0; i < 10; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+  
+    return text;
+  }
 
   public get counter() {
     var counters: number = 0;
@@ -38,10 +57,13 @@ export class SuccessComponent implements OnInit {
     // counters += this.countProduct.length || 0;
     return counters;
   }
+
+  
   constructor(
     private formBuilder: FormBuilder,
     private cartDataService: CartDataServiceService,
     private registerService: RegisterService,
+    private userService: UserService,
 
     private router: Router
   ) {
@@ -86,9 +108,21 @@ export class SuccessComponent implements OnInit {
         this.countOther = data;
       }
     });
+
+    
+
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userService.currentDataUser.subscribe((data) => {
+      if (data) {
+        console.log("<------",data,"------>");
+
+        this.userData = data;
+       
+      }
+    });
+  }
 
   airTotalPrice(count, price): number {
     return count * price;
@@ -207,14 +241,20 @@ export class SuccessComponent implements OnInit {
     return sum * 0.07;
   }
 
-  loadUser() {
-    this.registerService.getDataUser().subscribe(
-      (res: any) => {
-        this.dataUser = res;
-      },
-      (error) => {
-        Swal.fire('Error!', 'error : ' + error.status, 'error');
-      }
-    );
+  public downloadAsPDF() {
+    var element = document.getElementById('pdfTable');
+
+    html2canvas(element).then((canvas) => {
+      console.log(canvas);
+
+      const imgData = canvas.toDataURL('image/png');
+      const doc = new jsPDF();
+
+      // doc.addImage(imgData, 0, 0, 208, 500);
+
+      doc.save('image.pdf');
+
+    })
+    
   }
 }

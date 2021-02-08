@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -42,11 +42,9 @@ export class RegisterService {
       .pipe(catchError(this.handleError));
     }
 
-   
-    getDataUser() {
-       return this.http.get<any>(this.url + '/register' + 'ms-building', {
-         // headers: token_head,
-       });
-     }
+
+    //  getDataUser(regis_sys_id: string) {
+    //   return this.http.get<any>(this.url + '/register/id/' + regis_sys_id, )
+    // }
     
 }

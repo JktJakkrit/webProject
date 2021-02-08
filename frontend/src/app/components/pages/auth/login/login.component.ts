@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { CommonDataService } from 'src/app/common-data.service';
 import { AuthService } from 'src/app/_services/auth.service';
+import { UserService } from 'src/app/_services/user.service';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
 login_form: FormGroup;
 
-  constructor(private authService: AuthService, private _commondata: CommonDataService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private authService: AuthService, private _commondata: CommonDataService, private router: Router, private formBuilder: FormBuilder, private userService: UserService) {
     this.login_form = this.formBuilder.group({
       username: new FormControl("", [Validators.required]),
       password: new FormControl("", [Validators.required]),
@@ -40,7 +41,9 @@ login_form: FormGroup;
           showConfirmButton: false,
           timer: 1500
         })
-       
+        console.log(token);
+        
+        
         // after login success
         this.router.navigate(['home']);
       },

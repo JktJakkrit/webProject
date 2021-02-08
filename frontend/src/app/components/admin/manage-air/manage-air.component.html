@@ -36,7 +36,7 @@
                                     <th>Price</th>
                                     <th>Amount</th>
                                     <th>Detail</th>
-                                    <th>Stutus</th>
+                                    <!-- <th>Stutus</th> -->
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -52,7 +52,7 @@
                                     <td>{{ t.amount }}</td>
                                     <td>{{ t.detail }}</td>
                                     <!-- <td>{{ t.createddate | date: "dd/MM/yyyy" }}</td> -->
-                                    <td>{{ t.isvoid == 0 ? "Active" : "Void" }}</td>
+                                    <!-- <td>{{ t.isvoid == 0 ? "Active" : "Void" }}</td> -->
 
                                     <td>
                                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal_editcate" (click)="editcate(t)" style="color: white">
@@ -82,7 +82,7 @@
                   <th>Price</th>
                   <th>Amount</th>
                   <th>Detail</th>
-                  <th>Stutus</th>
+                  <!-- <th>Stutus</th> -->
                   <th>Action</th>
                 </tr>
               </tfoot>
