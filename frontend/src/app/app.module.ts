@@ -48,7 +48,7 @@ import { CounterState } from './_services/ngxs-store/store/counter.store';
 import { AllProductComponent } from './components/products/all-product/all-product.component';
 import { SuccessComponent } from './components/pages/success/success.component';
 
-
+import { ExportAsModule } from 'ngx-export-as';
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,7 +94,8 @@ import { SuccessComponent } from './components/pages/success/success.component';
     DataTablesModule,
     ToastrModule.forRoot(),
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    ExportAsModule
    
    
   ],

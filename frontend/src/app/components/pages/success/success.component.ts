@@ -10,13 +10,13 @@ import { TvProduct } from 'src/app/models/tv.model';
 import { WashProduct } from 'src/app/models/wash.model';
 import { OtherProduct } from 'src/app/models/other.model';
 import Swal from 'sweetalert2';
-
-import { jsPDF } from 'jspdf'
+declare var jsPDF: any;
+// import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { RegisterService } from 'src/app/_services/register.service';
 import { DataUser } from 'src/app/models/user.model';
 import { UserService } from 'src/app/_services/user.service';
-
+import { ExportAsService, ExportAsConfig, SupportedExtensions } from 'ngx-export-as';
 @Component({
   selector: 'app-success',
   templateUrl: './success.component.html',
@@ -35,13 +35,32 @@ export class SuccessComponent implements OnInit {
   currentDate = new Date();
   codeReceipt = this.makeid();
 
-  makeid() {
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+  downloadAsPDF() {
+    var element = document.getElementById('pdfTable');
+
+    html2canvas(element).then((canvas) => {
+      console.log(canvas);
+      const ta = document.getElementById('pdfTable');
+      const imgData = canvas.toDataURL('image/png');
+      const doc = new jsPDF();
+
+      var imgHeight = canvas.height * 208 / canvas.width;
+      // doc.fromHTML(ta, 15, 15);
+      //(ข้อมูล, ชอบซ้าย, บน ,.....)
+      doc.addImage(imgData, 1, 20, 208, imgHeight)
+      doc.save('image.pdf');
+    });
+  }
+
   
+  makeid() {
+    var text = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
     for (var i = 0; i < 10; i++)
       text += possible.charAt(Math.floor(Math.random() * possible.length));
-  
+
     return text;
   }
 
@@ -58,13 +77,12 @@ export class SuccessComponent implements OnInit {
     return counters;
   }
 
-  
   constructor(
     private formBuilder: FormBuilder,
     private cartDataService: CartDataServiceService,
     private registerService: RegisterService,
     private userService: UserService,
-
+    private exportAsService: ExportAsService,
     private router: Router
   ) {
     this.cartDataService.currentAirProduct.subscribe((data) => {
@@ -108,18 +126,20 @@ export class SuccessComponent implements OnInit {
         this.countOther = data;
       }
     });
+  }
 
-    
 
+
+  loadUser(event) {
+    this.userService.changeDataUser(event.target.value);
   }
 
   ngOnInit(): void {
     this.userService.currentDataUser.subscribe((data) => {
       if (data) {
-        console.log("<------",data,"------>");
+        console.log('<---success---', data);
 
         this.userData = data;
-       
       }
     });
   }
@@ -241,20 +261,9 @@ export class SuccessComponent implements OnInit {
     return sum * 0.07;
   }
 
-  public downloadAsPDF() {
-    var element = document.getElementById('pdfTable');
+  
 
-    html2canvas(element).then((canvas) => {
-      console.log(canvas);
+  
 
-      const imgData = canvas.toDataURL('image/png');
-      const doc = new jsPDF();
 
-      // doc.addImage(imgData, 0, 0, 208, 500);
-
-      doc.save('image.pdf');
-
-    })
-    
-  }
 }
