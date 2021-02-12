@@ -1,0 +1,100 @@
+<div class="row">
+    <div class="col-sm-6">
+        <nb-card>
+            <nb-card-header>Manage Product</nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="manage_add_form" (ngSubmit)="OnSubmit(this.manage_add_form)">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Product</label>&nbsp;
+                                <nb-select placeholder="Select Product" id="product_sys_id" formControlName="product_sys_id">
+                                    <nb-option *ngFor="let item of product_option" [value]="item.product_sys_id">{{ item.product_name }}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Type</label>&nbsp;
+                                <nb-select placeholder="Select Product" id="product_sys_id" formControlName="product_sys_id">
+                                    <nb-option *ngFor="let item of product_option" [value]="item.product_sys_id">{{ item.product_name }}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Brand</label>&nbsp;
+                                <nb-select placeholder="Select Product" id="product_sys_id" formControlName="product_sys_id">
+                                    <nb-option *ngFor="let item of product_option" [value]="item.product_sys_id">{{ item.product_name }}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="" class="label">Sub Name</label>
+                                <input type="text" nbInput fullWidth id="mn_name" placeholder="SubProduct Name" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="" class="label">Detail</label>&nbsp;
+                                <textarea nbInput id="detail" placeholder="Detail"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="" class="label">Amount</label>
+                                <input type="text" nbInput fullWidth id="mn_amount" placeholder="Amount" />
+                            </div>
+                        </div> -->
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="" class="label">Price</label>
+                                <input type="text" nbInput fullWidth id="mn_price" placeholder="Price" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="" class="label">Photo</label>&nbsp;
+                                <input type="file" nbInput id="avatar" placeholder="Photo" formControlName="avatar" (change)="onFileChange($event)" />
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" nbButton style="float: right" [disabled]="!manage_add_form.valid">
+            Submit
+          </button>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-header>
+                DATA
+            </nb-card-header>
+
+            <nb-card-body>
+                <ng2-smart-table [settings]="settings" [source]="masterManage" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onEditConfirm($event)">
+                </ng2-smart-table>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

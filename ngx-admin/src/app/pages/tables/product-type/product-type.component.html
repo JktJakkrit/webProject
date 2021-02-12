@@ -1,0 +1,78 @@
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <nb-card>
+            <nb-card-header>Add Type</nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="type_add_form" (ngSubmit)="OnSubmit(this.type_add_form)">
+                    <div class="form-group row">
+                        <label for="" class="label col-sm-2 form-control-label">Type</label>
+                        <input type="text" nbInput id="type_name" placeholder="Type Name" formControlName="type_name" />
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="label col-sm-2 form-control-label">Catagory</label
+            >
+            <nb-select
+              placeholder="Select Catagory"
+              id="category_sys_id"
+              formControlName="category_sys_id"
+              [(ngModel)]="selectedCategory"
+              (selectedChange)="onSelectedCategory($event)"
+            >
+              <nb-option
+                *ngFor="let item of category_option"
+                [value]="item.category_sys_id"
+                >{{ item.category_name }}</nb-option
+              >
+            </nb-select>
+          </div>
+
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label"
+              >Group</label
+            >
+            <nb-select
+              placeholder="Select Group"
+              id="group_sys_id"
+              formControlName="group_sys_id"
+            >
+              <nb-option
+                *ngFor="let item of findGroup"
+                [value]="item.group_sys_id"
+                >{{ item.group_name }}</nb-option
+              >
+            </nb-select>
+          </div>
+
+          <button
+            type="submit"
+            nbButton
+            status="success"
+            style="float: right"
+            [disabled]="!type_add_form.valid"
+          >
+            Submit
+          </button>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-header> DATA </nb-card-header>
+
+      <nb-card-body>
+        <ng2-smart-table
+          [settings]="settings"
+          [source]="masterType"
+          (deleteConfirm)="onDeleteConfirm($event)"
+          (editConfirm)="onEditConfirm($event)"
+        >
+        </ng2-smart-table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
