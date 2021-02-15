@@ -17,8 +17,7 @@ import { LocalDataSource } from "ng2-smart-table";
 import Swal from "sweetalert2";
 import { environment } from "../../../../environments/environment";
 import { MasterService } from "../../../_services/master.service";
-import { DialogNamePromptComponent } from "../../modal-overlays/dialog/dialog-name-prompt/dialog-name-prompt.component";
-import { ShowcaseDialogComponent } from "../../modal-overlays/dialog/showcase-dialog/showcase-dialog.component";
+
 @Component({
   selector: "ngx-product",
   templateUrl: "./product.component.html",
@@ -261,26 +260,6 @@ export class ProductComponent implements OnInit {
     );
   }
 
-  // loadDataGroup() {
-  //   this.masterService.getMasterGroup().subscribe(
-  //     (res: any) => {
-  //       this.group_option = res;
-  //     },
-  //     (error) => {
-  //       console.log("error" + error.status);
-  //     }
-  //   );
-  // }
-  // loadDataType() {
-  //   this.masterService.getMasterType().subscribe(
-  //     (res: any) => {
-  //       this.type_option = res;
-  //     },
-  //     (error) => {
-  //       console.log("error" + error.status);
-  //     }
-  //   );
-  // }
 
   loadDataMaster() {
     this.masterService.getMasterProduct().subscribe(

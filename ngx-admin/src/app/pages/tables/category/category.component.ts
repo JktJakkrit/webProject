@@ -48,11 +48,11 @@ export class CategoryComponent implements OnInit {
       confirmDelete: true,
     },
     columns: {
-      category_sys_id: {
-        title: "ID",
-        type: "number",
-        editable: false,
-      },
+      // category_sys_id: {
+      //   title: "ID",
+      //   type: "number",
+      //   editable: false,
+      // },
       category_name: {
         title: "Category",
         type: "string",
@@ -100,9 +100,9 @@ export class CategoryComponent implements OnInit {
   onCreateConfirm(event): void {
     console.log("create");
     var data = {
-      category_sys_id: event.newData.category_sys_id,
+      // category_sys_id: event.newData.category_sys_id,
       category_name: event.newData.category_name,
-      status: event.newData.status,
+      // status: event.newData.status,
     };
     this.http.post<any>(this.url + "/category/post", data).subscribe(
       (res) => {
