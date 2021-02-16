@@ -32,17 +32,18 @@ export class ProductComponent implements OnInit {
   findGroup;
   selectedGroup;
   findType;
+  defaultRowPerPage = 10;
   product_add_form: FormGroup;
   product_edit_form: FormGroup;
   photo: File;
   imageSrc: string;
   
   private url = environment.serverURL;
-
+  
   settings = {
     pager: {
       display: true,
-      perPage: 5,
+      perPage: this.defaultRowPerPage
     },
     actions: {
       position: "right",
@@ -110,8 +111,6 @@ export class ProductComponent implements OnInit {
         editable: false,
         valuePrepareFunction: (avatar) => { return `<img class='table-thumbnail-img' src="${avatar}" height="100" width="100"/>` }
       },
-     
-
       
     },
   };

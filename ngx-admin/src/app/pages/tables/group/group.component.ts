@@ -20,11 +20,11 @@ export class GroupComponent implements OnInit {
   photo: File;
   imageSrc: string;
   private url = environment.serverURL;
-
+  defaultRowPerPage = 10;
   settings = {
     pager: {
       display: true,
-      perPage: 5,
+      perPage: this.defaultRowPerPage
     },
     actions: {
       position: "right",

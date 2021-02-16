@@ -14,8 +14,9 @@ import Swal from "sweetalert2";
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-
-  categoty_add_form: FormGroup;
+  photo: File;
+  imageSrc: string;
+  category_add_form: FormGroup;
   category_edit_form: FormGroup;
   private url = environment.serverURL;
   settings = {
@@ -25,7 +26,7 @@ export class CategoryComponent implements OnInit {
     },
     actions: {
       position: 'right',
-      add: true,
+      add: false,
       edit:true,
       editable:false,
       columnTitle: 'Action',
@@ -57,10 +58,12 @@ export class CategoryComponent implements OnInit {
         title: "Category",
         type: "string",
       },
-      // isvoid: {
-      //   title: "Status",
-      //   type: "string",
-      // },
+      file: {
+        title: "Picture",
+        type: "html",
+        edit: false,
+        valuePrepareFunction: (avatar) => { return `<img class='table-thumbnail-img' src="${avatar}" height="100" width="100"/>` }
+      },
     },
   };
 
@@ -72,8 +75,10 @@ export class CategoryComponent implements OnInit {
     private dialogService: NbDialogService,
     private http: HttpClient
   ) {
-    this.categoty_add_form = this.formBuilder.group({
+    this.category_add_form = this.formBuilder.group({
+      avatar: ["", Validators.required],
       category_name: new FormControl("", [Validators.required]),
+      // avatar: new FormControl("", [Validators.required]),
     });
     this.category_edit_form = this.formBuilder.group({
       category_sys_id: new FormControl("", [Validators.required]),
@@ -97,6 +102,37 @@ export class CategoryComponent implements OnInit {
       }
     );
   }
+ 
+  OnSubmit(form: any) {
+    console.log(this.category_add_form);
+    console.log(this.photo);
+
+    if (!this.category_add_form.valid) {
+      Swal.fire("Input Valid!", "Please enter require input", "info");
+    } else {
+      this.masterService
+        .addMasterCategory(
+          form.value.category_name,
+          this.photo
+        )
+        .subscribe(
+          (res: any) => {
+            console.log(res);
+            Swal.fire("Successful!", "added successful.", "success");
+          },
+          (error) => {
+            if (error.status === 200 || error.status === 201) {
+              Swal.fire("Error!", "error : " + error.status, "error");
+              this.loadDataMasterCategory();
+            } else {
+              console.log(error.status);
+              Swal.fire("Error!", "error : " + error.status, "error");
+            }
+          }
+        );
+    }
+  }
+
   onCreateConfirm(event): void {
     console.log("create");
     var data = {
@@ -127,9 +163,9 @@ export class CategoryComponent implements OnInit {
   onEditConfirm(event): void {
     console.log("edit");
     var data = {
-      category_sys_id: event.newData.category_sys_id,
+      // category_sys_id: event.newData.category_sys_id,
       category_name: event.newData.category_name,
-      status: event.newData.status,
+      file: event.newData.file,
     };
     this.http
       .put<any>(this.url + "/category/edit/" + event.newData.category_sys_id, data)
@@ -177,4 +213,29 @@ export class CategoryComponent implements OnInit {
       }
     );
   }
+
+  onFileChange(event) {
+    try {
+      var file = event.target.files[0];
+      console.log(file);
+      this.photo = file;
+      const reader = new FileReader();
+
+      if (event.target.files && event.target.files.length) {
+        const [avatar] = event.target.files;
+        // this.add_air_form.setValue({avatar : avatar})
+
+        reader.readAsDataURL(avatar);
+
+        reader.onload = () => {
+          this.imageSrc = reader.result as string;
+
+          this.category_add_form.patchValue({
+            fileSource: reader.result,
+          });
+        };
+      }
+    } catch (e) {}
+  }
+
 }

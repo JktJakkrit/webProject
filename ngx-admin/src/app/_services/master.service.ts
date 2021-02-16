@@ -41,14 +41,28 @@ export class MasterService {
   getMasterBrand() {
     return this.http.get<any>(this.url + "/brand/all");
   }
-  addMasterCategory(category_name: string) {
+  addMasterCategory(category_name: string, avatar: File) {
     var isvoid = 0;
     const body = {
       category_name,
       isvoid,
     };
+    var isvoid = 0;
+    // const body = {
+    //   category_sys_id,
+    //   product_name,
+    //   isvoid,
+    // };
+    console.log("รูปจ้า....รูป", avatar);
+    var f = new FormData();
+    f.append("category_name", category_name);
+    f.append("avatar", avatar, avatar.name);
+    f.append("isvoid", isvoid.toFixed());
+    f.forEach((v, k) => {
+      console.log(k, " :  ", v);
+    });
     return this.http
-      .post<any>(this.url + "/category/post", body)
+      .post<any>(this.url + "/category/post", f)
       .pipe(catchError(this.handleError));
   }
   addMasterGroup(category_sys_id: string, group_name: string) {
@@ -58,6 +72,7 @@ export class MasterService {
       group_name,
       isvoid,
     };
+    
     return this.http
       .post<any>(this.url + "/group/post", body)
       .pipe(catchError(this.handleError));

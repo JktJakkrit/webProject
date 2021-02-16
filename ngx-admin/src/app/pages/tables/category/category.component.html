@@ -1,3 +1,35 @@
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <!-- <div class="row">
+            <div class="col-sm-6" style="margin:auto"> -->
+        <nb-card>
+            <nb-card-header>Add Category</nb-card-header>
+            <nb-card-body>
+                <form class="form-horizontal" [formGroup]="category_add_form" (ngSubmit)="OnSubmit(this.category_add_form)">
+
+
+                    <div class="form-group row">
+                        <label for="" class="label col-sm-2 form-control-label">Category Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" nbInput id="category_name" placeholder="Category Name" formControlName="category_name" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="label col-sm-2 form-control-label">Photo</label>
+                        <div class="col-sm-9">
+                            <input type="file" nbInput id="avatar" placeholder="Photo" formControlName="avatar" (change)="onFileChange($event)" />
+                        </div>
+                    </div>
+
+
+                    <button type="submit" nbButton status="success" style="float: right;" [disabled]="!category_add_form.valid">Submit</button>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+
 <nb-card>
     <nb-card-header>
         Category

@@ -64,7 +64,7 @@
           <div class="form-group row">
             <label for="" class="label col-sm-2 form-control-label">Type</label>
                         <div class="col-sm-9">
-                            <nb-select placeholder="Select Group" id="type_sys_id" formControlName="type_sys_id">
+                            <nb-select placeholder="Select Type" id="type_sys_id" formControlName="type_sys_id">
                                 <nb-option *ngFor="let item of findType" [value]="item.type_sys_id">{{ item.type_name }}</nb-option>
                             </nb-select>
                         </div>
@@ -145,5 +145,6 @@
                 </ng2-smart-table>
             </nb-card-body>
         </nb-card>
+
     </div>
 </div>

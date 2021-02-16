@@ -14,6 +14,15 @@ router.use('/other', require('./other'))
 router.use('/user_login', require('./user_login'))
 router.use('/admin_login', require('./admin_login'))
 router.use('/amount', require('./amount'))
+router.use('/name', require('./name_all'))
+
+
+router.use('/category', require('./category'))
+router.use('/product', require('./product'))
+router.use('/type', require('./product-type'))
+router.use('/group', require('./group'))
+router.use('/brand', require('./brand'))
+router.use('/find', require('./findBy'))
     // ถ้ามีตัวอื่นอีกก็เอามาใส่
 
 
