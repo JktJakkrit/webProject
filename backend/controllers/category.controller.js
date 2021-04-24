@@ -2,9 +2,18 @@ const categoryServices = require('../services/category.service');
 
 const methods = {
 
+    // async PostCategory(req, res) {
+    //     try {
+    //         let result = await categoryServices.postCategory(req.file.path, req.body)
+    //         res.status(200).send(result)
+    //     } catch (error) {
+    //         res.json(error).end();
+    //     }
+    // },
+
     async PostCategory(req, res) {
         try {
-            let result = await categoryServices.postCategory(req.file.path, req.body)
+            let result = await categoryServices.postCategory(req.body)
             res.status(200).send(result)
         } catch (error) {
             res.json(error).end();
@@ -31,7 +40,8 @@ const methods = {
     async UpdateCategoryById(req, res) {
         console.log(req.params.id, req.body);
         try {
-            let result = await categoryServices.putItemCategoryById(req.file.path, req.params.id, req.body)
+            // let result = await categoryServices.putItemCategoryById(req.file.path, req.params.id, req.body)
+            let result = await categoryServices.putItemCategoryById(req.params.id, req.body)
             res.status(200).send(result)
         } catch (error) {
             res.json(error).end();

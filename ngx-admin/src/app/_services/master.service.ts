@@ -41,12 +41,24 @@ export class MasterService {
   getMasterBrand() {
     return this.http.get<any>(this.url + "/brand/all");
   }
-  addMasterCategory(category_name: string, avatar: File) {
+  addMasterCategory(category_name: string) {
     var isvoid = 0;
     const body = {
       category_name,
       isvoid,
     };
+    return this.http
+    .post<any>(this.url + "/category/post", body)
+    .pipe(catchError(this.handleError));
+
+  }
+  addMasterGroup( group_name: string, category_sys_id: string, avatar: File) {
+    // var isvoid = 0;
+    // const body = {
+    //   category_sys_id,
+    //   group_name,
+    //   isvoid,
+    // };
     var isvoid = 0;
     // const body = {
     //   category_sys_id,
@@ -55,26 +67,16 @@ export class MasterService {
     // };
     console.log("รูปจ้า....รูป", avatar);
     var f = new FormData();
-    f.append("category_name", category_name);
+    
+    f.append("group_name", group_name);
+    f.append("category_sys_id", category_sys_id);
     f.append("avatar", avatar, avatar.name);
     f.append("isvoid", isvoid.toFixed());
     f.forEach((v, k) => {
       console.log(k, " :  ", v);
     });
     return this.http
-      .post<any>(this.url + "/category/post", f)
-      .pipe(catchError(this.handleError));
-  }
-  addMasterGroup(category_sys_id: string, group_name: string) {
-    var isvoid = 0;
-    const body = {
-      category_sys_id,
-      group_name,
-      isvoid,
-    };
-    
-    return this.http
-      .post<any>(this.url + "/group/post", body)
+      .post<any>(this.url + "/group/post", f)
       .pipe(catchError(this.handleError));
   }
 
@@ -160,7 +162,7 @@ export class MasterService {
   addMasterBrand(product_sys_id: string, brand_name: string) {
     var isvoid = 0;
     const body = {
-      product_sys_id,
+      // product_sys_id,
       brand_name,
       isvoid,
     };
@@ -168,33 +170,95 @@ export class MasterService {
       .post<any>(this.url + "/brand/post", body)
       .pipe(catchError(this.handleError));
   }
-  updateMasterCategory(category_sys_id: string, category_name: string, isvoid) {
+  updateMasterCategory(category_sys_id: string, category_name: string, avatar: File, isvoid) {
     const body = {
+      category_sys_id,
       category_name,
+      avatar,
       isvoid,
     };
+    var f = new FormData();
+    f.append("category_sys_id",category_sys_id);
+    f.append("category_name",category_name);
+    f.append("avatar",avatar, avatar.name);
+    f.append("isvoid",isvoid.toFixed());
+
+    f.forEach((v, k)=>{
+      console.log(k, " : ",v);
+      
+    });
     var REST_URL = this.url + "/category/edit/" + category_sys_id;
     return this.http
-      .put<any>(REST_URL, body)
+      .put<any>(REST_URL, f)
       .pipe(catchError(this.handleError));
   }
 
+  updateMasterGroup(
+    group_sys_id: string, 
+    group_name: string, 
+    category_sys_id: string, 
+    avatar: File,
+    isvoid
+    ){
+      const body = {
+        group_sys_id,
+        group_name,
+        category_sys_id,
+        avatar,
+        isvoid,
+      }
+    var f = new FormData();
+    f.append("group_sys_id", group_sys_id);
+    f.append("group_name", group_name);
+    f.append("category_sys_id", category_sys_id);
+    f.append("avatar", avatar, avatar.name);
+    f.append("isvoid", isvoid.toFixed());
+    f.forEach((v, k) => {
+      console.log(k, " :  ", v);
+    });
+
+    var REST_URL = this.url + "/group/edit/" + group_sys_id;
+    return this.http
+      .put<any>(REST_URL, f)
+      .pipe(catchError(this.handleError));
+    
+  }
   updateMasterProduct(
     product_sys_id: string,
     category_sys_id: string,
-    product_name: string,
+    group_sys_id: string,
+    type_sys_id: string,
+    brand_sys_id: string,
+    name: string,
+    detail: string,
+    price: string,
+    amount: string,
     avatar: File,
     isvoid
   ) {
     const body = {
+      product_sys_id,
       category_sys_id,
-      product_name,
-      isvoid,
+      group_sys_id,
+      type_sys_id,
+      brand_sys_id,
+      name,
+      detail,
+      price,
+      amount,
+      avatar,
+      isvoid
     };
     var f = new FormData();
     f.append("product_sys_id", product_sys_id);
+    f.append("name", name);
     f.append("category_sys_id", category_sys_id);
-    f.append("product_name", product_name);
+    f.append("group_sys_id", group_sys_id);
+    f.append("type_sys_id", type_sys_id);
+    f.append("brand_sys_id", brand_sys_id);
+    f.append("detail", detail);
+    f.append("price", price);
+    f.append("amount", amount);
     f.append("avatar", avatar, avatar.name);
     f.append("isvoid", isvoid.toFixed());
     f.forEach((v, k) => {
@@ -206,13 +270,16 @@ export class MasterService {
 
   updateMasterType(
     type_sys_id: string,
-    product_sys_id: string,
     type_name: string,
+    category_sys_id,
+    group_sys_id,
     isvoid
   ) {
     const body = {
-      product_sys_id,
+      type_sys_id,
       type_name,
+      category_sys_id,
+      group_sys_id,
       isvoid,
     };
     var REST_URL = this.url + "/type/edit/" + type_sys_id;

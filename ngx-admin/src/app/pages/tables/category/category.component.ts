@@ -14,6 +14,8 @@ import Swal from "sweetalert2";
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
+
+  edit_category_option;
   photo: File;
   imageSrc: string;
   category_add_form: FormGroup;
@@ -26,7 +28,7 @@ export class CategoryComponent implements OnInit {
     },
     actions: {
       position: 'right',
-      add: false,
+      add: true,
       edit:true,
       editable:false,
       columnTitle: 'Action',
@@ -58,12 +60,12 @@ export class CategoryComponent implements OnInit {
         title: "Category",
         type: "string",
       },
-      file: {
-        title: "Picture",
-        type: "html",
-        edit: false,
-        valuePrepareFunction: (avatar) => { return `<img class='table-thumbnail-img' src="${avatar}" height="100" width="100"/>` }
-      },
+      // file: {
+      //   title: "Picture",
+      //   type: "html",
+      //   edit: false,
+      //   valuePrepareFunction: (avatar) => { return `<img class='table-thumbnail-img' src="${avatar}" height="100" width="100"/>` }
+      // },
     },
   };
 
@@ -76,19 +78,21 @@ export class CategoryComponent implements OnInit {
     private http: HttpClient
   ) {
     this.category_add_form = this.formBuilder.group({
-      avatar: ["", Validators.required],
+      // avatar: ["", Validators.required],
       category_name: new FormControl("", [Validators.required]),
       // avatar: new FormControl("", [Validators.required]),
     });
     this.category_edit_form = this.formBuilder.group({
       category_sys_id: new FormControl("", [Validators.required]),
       category_name: new FormControl("", [Validators.required]),
+      // avatar: ["", Validators.required],
       isvoid: 0,
     });
   }
   masterCategory;
 
   ngOnInit(): void {
+    this.loadDataCategory();
     this.loadDataMasterCategory();
   }
 
@@ -102,6 +106,18 @@ export class CategoryComponent implements OnInit {
       }
     );
   }
+
+  loadDataCategory() {
+    this.masterService.getMasterCatagory().subscribe(
+      (res: any) => {
+        this.edit_category_option = res;
+      },
+      (error) => {
+        console.log("error" + error.status);
+      }
+    );
+  }
+
  
   OnSubmit(form: any) {
     console.log(this.category_add_form);
@@ -113,7 +129,7 @@ export class CategoryComponent implements OnInit {
       this.masterService
         .addMasterCategory(
           form.value.category_name,
-          this.photo
+          // this.photo
         )
         .subscribe(
           (res: any) => {
@@ -133,10 +149,45 @@ export class CategoryComponent implements OnInit {
     }
   }
 
+  EditOnSubmit(form: any) {
+    console.log("-----------------------");
+    
+    console.log(this.category_edit_form);
+    
+    if (!this.category_edit_form.valid) {
+      Swal.fire('Input Valid!', 'Please enter require input', 'info');
+    } else {
+      this.masterService
+        .updateMasterCategory(
+          form.value.category_sys_id,
+          form.value.category_name,
+          this.photo,
+          form.value.isvoid
+        )
+        .subscribe(
+          (res: any) => {
+            console.log(res);
+            Swal.fire('Successful!', 'Category edited successful.', 'success');
+            // this.loader = false;
+          },
+          (error) => {
+            if (error.status === 200 || error.status === 201) {
+              Swal.fire('Error!', 'error : ' + error.status, 'error');
+              this.loadDataMasterCategory();
+              // this.loader = false;
+            } else {
+              console.log(error.status);
+              Swal.fire('Error!', 'error : ' + error.status, 'error');
+            }
+          }
+        );
+    }
+  }
+
   onCreateConfirm(event): void {
     console.log("create");
     var data = {
-      // category_sys_id: event.newData.category_sys_id,
+      category_sys_id: event.newData.category_sys_id,
       category_name: event.newData.category_name,
       // status: event.newData.status,
     };
@@ -160,12 +211,13 @@ export class CategoryComponent implements OnInit {
       }
     );
   }
+
   onEditConfirm(event): void {
     console.log("edit");
     var data = {
       // category_sys_id: event.newData.category_sys_id,
       category_name: event.newData.category_name,
-      file: event.newData.file,
+      // file: event.newData.file,
     };
     this.http
       .put<any>(this.url + "/category/edit/" + event.newData.category_sys_id, data)

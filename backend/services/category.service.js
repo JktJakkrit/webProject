@@ -3,21 +3,34 @@ const config = require("../configs/app");
 const path = require("path");
 
 const methods = {
-    postCategory: function(path_pic, body) {
-        return new Promise((resolve, reject) => {
-            let newPath = config.file + path.basename(path_pic);
-            let pic = { file: newPath };
-            let data = {...body, ...pic };
-            let sql = "INSERT INTO `category` SET ?";
-            // return resolve(data);
-            db.query(sql, data, function(error, result) {
+    // postCategory: function(path_pic, body) {
+    //     return new Promise((resolve, reject) => {
+    //         let newPath = config.file + path.basename(path_pic);
+    //         let pic = { file: newPath };
+    //         let data = {...body, ...pic };
+    //         let sql = "INSERT INTO `category` SET ?";
+    //         // return resolve(data);
+    //         db.query(sql, data, function(error, result) {
 
+    //             if (error) return reject(error);
+    //             return resolve(result);
+    //         });
+    //         // db.end();
+    //     });
+    // }, // post
+
+    postCategory: function(body) {
+        return new Promise((resolve, reject) => {
+            let sql = 'INSERT INTO `category` SET ?';
+
+            console.log(body);
+            db.query(sql, body, function(error, result) {
                 if (error) return reject(error);
                 return resolve(result);
-            });
-            // db.end();
-        });
-    }, // post
+            })
+        })
+    },
+
     findAll: function() {
         return new Promise((resolve, reject) => {
             // db.connect(function(err){ console.log(err)});
@@ -40,14 +53,15 @@ const methods = {
             // db.end();
         });
     },
-    putItemCategoryById: function(path_pic, id, body) {
+    putItemCategoryById: function(id, body) {
         return new Promise((resolve, reject) => {
-            let newPath = config.file + path.basename(path_pic)
-            let pic = { file: newPath };
-            let data = [{...body, ...pic }, id];
+            // let newPath = config.file + path.basename(path_pic)
+            // let pic = { file: newPath };
+            // let data = [{...body, ...pic }, id];
+            let data = [{...body }, id];
             // let sql = SqlString.format('UPDATE `manage-air` SET ?', data);
             // sql = sql + "where `air_sys_id` = " + id;
-            let sql = "UPDATE `product` SET ? where product_sys_id = ?";
+            let sql = "UPDATE `category` SET ? where `category_sys_id` = ?";
             db.query(sql, data, function(err, rows, fields) {
                 if (err) return reject(err);
                 return resolve(rows);

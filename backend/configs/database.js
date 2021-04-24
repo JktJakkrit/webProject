@@ -10,7 +10,7 @@ const connection = mysql.createConnection({
 })
 
 connection.connect();
-connection.query('SELECT 1 + 1 AS solution', function(error, rows, fields) { if (error) throw error; });
+// connection.query('SELECT 1 + 1 AS solution', function(error, rows, fields) { if (error) throw error; });
 // connection.pause();
 
 module.exports = connection;

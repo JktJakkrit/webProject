@@ -12,11 +12,14 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./product-type.component.scss']
 })
 export class ProductTypeComponent implements OnInit {
+  edit_category_option;
+  findEditGroup;
   type_add_form: FormGroup;
   type_edit_form: FormGroup;
   findGroup;
   category_option;
   selectedCategory;
+  selectedEditCategory;
   private url = environment.serverURL;
 
   settings = {
@@ -27,23 +30,23 @@ export class ProductTypeComponent implements OnInit {
     actions: {
       position: 'right',
       add: false,
-      edit:true,
+      edit:false,
       editable:false,
       columnTitle: 'Action',
     },
     // selectMode: 'multi',
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmCreate: true,
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
-    },
+    // add: {
+    //   addButtonContent: '<i class="nb-plus"></i>',
+    //   createButtonContent: '<i class="nb-checkmark"></i>',
+    //   cancelButtonContent: '<i class="nb-close"></i>',
+    //   confirmCreate: true,
+    // },
+    // edit: {
+    //   editButtonContent: '<i class="nb-edit"></i>',
+    //   saveButtonContent: '<i class="nb-checkmark"></i>',
+    //   cancelButtonContent: '<i class="nb-close"></i>',
+    //   confirmSave: true,
+    // },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
@@ -96,6 +99,7 @@ export class ProductTypeComponent implements OnInit {
     });
     this.type_edit_form = this.formBuilder.group({
       type_sys_id: new FormControl("", [Validators.required]),
+      category_sys_id: new FormControl("", [Validators.required]),
       group_sys_id: new FormControl("", [Validators.required]),
       type_name: new FormControl("", [Validators.required]),
       isvoid: 0,
@@ -104,6 +108,7 @@ export class ProductTypeComponent implements OnInit {
   ngOnInit(): void {
     this.loadDataMaster();
     this.loadDataCategory();
+    this.loadDataEditCategory();
   }
 
   OnSubmit(form: any) {
@@ -139,6 +144,44 @@ export class ProductTypeComponent implements OnInit {
 
   }
 
+  EditOnSubmit(form: any) {
+    console.log("-----------------------");
+    
+    console.log(this.type_edit_form);
+    
+    if (!this.type_edit_form.valid) {
+      Swal.fire('Input Valid!', 'Please enter require input', 'info');
+    } else {
+      this.masterService
+        .updateMasterType(
+          form.value.type_sys_id,
+          form.value.type_name,
+          form.value.category_sys_id,
+          form.value.group_sys_id,
+          // this.photo,
+          form.value.isvoid
+        )
+        .subscribe(
+          (res: any) => {
+            console.log(res);
+            Swal.fire('Successful!', 'Type edited successful.', 'success');
+            // this.loader = false;
+          },
+          (error) => {
+            if (error.status === 200 || error.status === 201) {
+              Swal.fire('Error!', 'error : ' + error.status, 'error');
+              this.loadDataMaster();
+              // this.loader = false;
+            } else {
+              console.log(error.status);
+              Swal.fire('Error!', 'error : ' + error.status, 'error');
+            }
+          }
+        );
+    }
+  }
+
+
   loadDataCategory() {
     this.masterService.getMasterCatagory().subscribe(
       (res: any) => {
@@ -173,6 +216,50 @@ export class ProductTypeComponent implements OnInit {
         
         this.findGroup = res;
         console.log("find Group " + this.findGroup);
+      },
+      (error) => {
+        Swal.fire("Error!", "error : " + error.status, "error");
+      }
+    );
+  }
+
+  // edit
+
+  
+  loadDataEditCategory() {
+    this.masterService.getMasterCatagory().subscribe(
+      (res: any) => {
+        console.log(res);
+        
+        this.edit_category_option = res;
+      },
+      (error) => {
+        console.log("error" + error.status);
+      }
+    );
+  }
+
+  // load form select Category
+  onSelectedEditCategory(event) {
+    console.log(event);
+    console.log(event.target);
+    
+    const value = event;
+    this.selectedEditCategory = value;
+    console.log("the selectedCategory is " + value);
+    this.loadfindEditGroup();
+  }
+  loadfindEditGroup() {
+    console.log("===== loadfindGroup =====");
+    console.log(this.selectedEditCategory);
+    console.log("===== loadfindGroup =====");
+    
+    this.masterService.getGroup(this.selectedEditCategory).subscribe(
+      (res: any) => {
+        console.log(res);
+        
+        this.findEditGroup = res;
+        console.log("find Group " + this.findEditGroup);
       },
       (error) => {
         Swal.fire("Error!", "error : " + error.status, "error");

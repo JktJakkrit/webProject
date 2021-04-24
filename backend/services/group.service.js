@@ -3,17 +3,33 @@ const config = require("../configs/app");
 const path = require("path");
 
 const methods = {
-    postGroup: function(body) {
-        return new Promise((resolve, reject) => {
-            let sql = 'INSERT INTO `group` SET ?';
+    postGroup: function(path_pic, body) {
+            return new Promise((resolve, reject) => {
+                let newPath = config.file + path.basename(path_pic);
+                let pic = { file: newPath };
+                let data = {...body, ...pic };
+                let sql = "INSERT INTO `group` SET ?";
+                // return resolve(data);
+                db.query(sql, data, function(error, result) {
+    
+                    if (error) return reject(error);
+                    return resolve(result);
+                });
+                // db.end();
+            });
+        }, // post
 
-            console.log(body);
-            db.query(sql, body, function(error, result) {
-                if (error) return reject(error);
-                return resolve(result);
-            })
-        })
-    },
+    // postGroup: function(body) {
+    //     return new Promise((resolve, reject) => {
+    //         let sql = 'INSERT INTO `group` SET ?';
+
+    //         console.log(body);
+    //         db.query(sql, body, function(error, result) {
+    //             if (error) return reject(error);
+    //             return resolve(result);
+    //         })
+    //     })
+    // },
     findAll: function() {
         return new Promise((resolve, reject) => {
             // db.connect(function(err){ console.log(err)});
@@ -35,11 +51,11 @@ const methods = {
             // db.end();
         });
     },
-    putItemGroupById: function(id, body) {
+    putItemGroupById: function(path_pic, id, body) {
         return new Promise((resolve, reject) => {
-            // let newPath = config.file + path.basename(path_pic)
-            // let pic = { file: newPath };
-            let data = [{...body }, id];
+            let newPath = config.file + path.basename(path_pic)
+            let pic = { file: newPath };
+            let data = [{...body, ...pic }, id];
             // let sql = SqlString.format('UPDATE `manage-air` SET ?', data);
             // sql = sql + "where `air_sys_id` = " + id;
             let sql = "UPDATE `group` SET ? where `group_sys_id` = ?";

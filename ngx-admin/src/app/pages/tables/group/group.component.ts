@@ -13,7 +13,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./group.component.scss']
 })
 export class GroupComponent implements OnInit {
-
+  edit_category_option;
   category_option;
   group_add_form: FormGroup;
   group_edit_form: FormGroup;
@@ -29,23 +29,23 @@ export class GroupComponent implements OnInit {
     actions: {
       position: "right",
       add: false,
-      edit: true,
+      edit: false,
       editable: false,
       columnTitle: "Action",
     },
     // selectMode: 'multi',
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmCreate: true,
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
-    },
+    // add: {
+    //   addButtonContent: '<i class="nb-plus"></i>',
+    //   createButtonContent: '<i class="nb-checkmark"></i>',
+    //   cancelButtonContent: '<i class="nb-close"></i>',
+    //   confirmCreate: true,
+    // },
+    // edit: {
+    //   editButtonContent: '<i class="nb-edit"></i>',
+    //   saveButtonContent: '<i class="nb-checkmark"></i>',
+    //   cancelButtonContent: '<i class="nb-close"></i>',
+    //   confirmSave: true,
+    // },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
@@ -70,11 +70,12 @@ export class GroupComponent implements OnInit {
         title: "Group Name",
         type: "text",
       },
-      // avatar: {
-      //   title: "Picture",
-      //   type: "html",
-      //   valuePrepareFunction: (file) => { return '<img src= ' + file + '  />' }
-      // },
+       file: {
+        title: "Picture",
+        type: "html",
+        edit: false,
+        valuePrepareFunction: (avatar) => { return `<img class='table-thumbnail-img' src="${avatar}" height="100" width="100"/>` }
+      },
     },
   };
 
@@ -89,12 +90,14 @@ export class GroupComponent implements OnInit {
     this.group_add_form = this.formBuilder.group({
       category_sys_id: new FormControl("", [Validators.required]),
       group_name: new FormControl("", [Validators.required]),
+      avatar: ["", Validators.required],
      
     });
     this.group_edit_form = this.formBuilder.group({
       category_sys_id: new FormControl("", [Validators.required]),
-      gruoup_sys_id: new FormControl("", [Validators.required]),
+      group_sys_id: new FormControl("", [Validators.required]),
       group_name: new FormControl("", [Validators.required]),
+      avatar: ["", Validators.required],
       isvoid: 0,
     });
   }
@@ -102,6 +105,7 @@ export class GroupComponent implements OnInit {
   ngOnInit(): void {
     this.loadDataCategory();
     this.loadDataMaster();
+    this.loadDataEditCategory();
   }
 
   OnSubmit(form: any) {
@@ -114,9 +118,10 @@ export class GroupComponent implements OnInit {
     } else {
       this.masterService
         .addMasterGroup(
-          form.value.category_sys_id,
           form.value.group_name,
-       
+          form.value.category_sys_id,
+          
+          this.photo
         )
         .subscribe(
           (res: any) => {
@@ -136,10 +141,57 @@ export class GroupComponent implements OnInit {
     }
   }
 
+  EditOnSubmit(form: any) {
+    console.log("-----------------------");
+    
+    console.log(this.group_edit_form);
+    
+    if (!this.group_edit_form.valid) {
+      Swal.fire('Input Valid!', 'Please enter require input', 'info');
+    } else {
+      this.masterService
+        .updateMasterGroup(
+          form.value.group_sys_id,
+          form.value.group_name,
+          form.value.category_sys_id,
+          this.photo,
+          form.value.isvoid
+        )
+        .subscribe(
+          (res: any) => {
+            console.log(res);
+            Swal.fire('Successful!', 'Group edited successful.', 'success');
+            // this.loader = false;
+          },
+          (error) => {
+            if (error.status === 200 || error.status === 201) {
+              Swal.fire('Error!', 'error : ' + error.status, 'error');
+              this.loadDataMaster();
+              // this.loader = false;
+            } else {
+              console.log(error.status);
+              Swal.fire('Error!', 'error : ' + error.status, 'error');
+            }
+          }
+        );
+    }
+  }
+
   loadDataCategory() {
     this.masterService.getMasterCatagory().subscribe(
       (res: any) => {
         this.category_option = res;
+      },
+      (error) => {
+        console.log("error" + error.status);
+      }
+    );
+  }
+
+  loadDataEditCategory() {
+    this.masterService.getMasterCatagory().subscribe(
+      (res: any) => {
+        this.edit_category_option = res;
       },
       (error) => {
         console.log("error" + error.status);
@@ -241,27 +293,27 @@ export class GroupComponent implements OnInit {
     );
   }
 
-  // onFileChange(event) {
-  //   try {
-  //     var file = event.target.files[0];
-  //     console.log(file);
-  //     this.photo = file;
-  //     const reader = new FileReader();
+  onFileChange(event) {
+    try {
+      var file = event.target.files[0];
+      console.log(file);
+      this.photo = file;
+      const reader = new FileReader();
 
-  //     if (event.target.files && event.target.files.length) {
-  //       const [avatar] = event.target.files;
-  //       // this.add_air_form.setValue({avatar : avatar})
+      if (event.target.files && event.target.files.length) {
+        const [avatar] = event.target.files;
+        // this.add_air_form.setValue({avatar : avatar})
 
-  //       reader.readAsDataURL(avatar);
+        reader.readAsDataURL(avatar);
 
-  //       reader.onload = () => {
-  //         this.imageSrc = reader.result as string;
+        reader.onload = () => {
+          this.imageSrc = reader.result as string;
 
-  //         this.group_add_form.patchValue({
-  //           fileSource: reader.result,
-  //         });
-  //       };
-  //     }
-  //   } catch (e) {}
-  // }
+          this.group_add_form.patchValue({
+            fileSource: reader.result,
+          });
+        };
+      }
+    } catch (e) {}
+  }
 }

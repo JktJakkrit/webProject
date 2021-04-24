@@ -24,6 +24,12 @@ import { MasterService } from "../../../_services/master.service";
   styleUrls: ["./product.component.scss"],
 })
 export class ProductComponent implements OnInit {
+  masterEditProduct;
+  edit_category_option;
+  selectedEditCategory;
+  findEditGroup;
+  selectedEditGroup;
+  findEditType;
   type_option;
   category_option;
   brand_option;
@@ -37,34 +43,34 @@ export class ProductComponent implements OnInit {
   product_edit_form: FormGroup;
   photo: File;
   imageSrc: string;
-  
+
   private url = environment.serverURL;
-  
+
   settings = {
     pager: {
       display: true,
-      perPage: this.defaultRowPerPage
+      perPage: this.defaultRowPerPage,
     },
     actions: {
       position: "right",
       add: false,
-      edit: true,
+      edit: false,
       editable: false,
       columnTitle: "Action",
     },
     // selectMode: 'multi',
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmCreate: true,
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
-    },
+    // add: {
+    //   addButtonContent: '<i class="nb-plus"></i>',
+    //   createButtonContent: '<i class="nb-checkmark"></i>',
+    //   cancelButtonContent: '<i class="nb-close"></i>',
+    //   confirmCreate: true,
+    // },
+    // edit: {
+    //   editButtonContent: '<i class="nb-edit"></i>',
+    //   saveButtonContent: '<i class="nb-checkmark"></i>',
+    //   cancelButtonContent: '<i class="nb-close"></i>',
+    //   confirmSave: true,
+    // },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
@@ -109,9 +115,10 @@ export class ProductComponent implements OnInit {
         title: "Picture",
         type: "html",
         editable: false,
-        valuePrepareFunction: (avatar) => { return `<img class='table-thumbnail-img' src="${avatar}" height="100" width="100"/>` }
+        valuePrepareFunction: (avatar) => {
+          return `<img class='table-thumbnail-img' src="${avatar}" height="100" width="100"/>`;
+        },
       },
-      
     },
   };
 
@@ -135,9 +142,15 @@ export class ProductComponent implements OnInit {
       avatar: ["", Validators.required],
     });
     this.product_edit_form = this.formBuilder.group({
-      type_sys_id: new FormControl("", [Validators.required]),
       product_sys_id: new FormControl("", [Validators.required]),
+      category_sys_id: new FormControl("", [Validators.required]),
+      group_sys_id: new FormControl("", [Validators.required]),
+      type_sys_id: new FormControl("", [Validators.required]),
+      brand_sys_id: new FormControl("", [Validators.required]),
       name: new FormControl("", [Validators.required]),
+      detail: new FormControl("", [Validators.required]),
+      price: new FormControl("", [Validators.required]),
+      amount: new FormControl("", [Validators.required]),
       avatar: ["", Validators.required],
       isvoid: 0,
     });
@@ -147,6 +160,8 @@ export class ProductComponent implements OnInit {
     this.loadDataCategory();
     this.loadDataBrand();
     this.loadDataMaster();
+    this.loadDataEditMaster();
+    this.loadDataEditCategory();
   }
 
   OnSubmit(form: any) {
@@ -185,6 +200,49 @@ export class ProductComponent implements OnInit {
         );
     }
   }
+
+  EditOnSubmit(form: any) {
+    console.log("-----------------------");
+
+    console.log(this.product_edit_form);
+
+    if (!this.product_edit_form.valid) {
+      Swal.fire("Input Valid!", "Please enter require input", "info");
+    } else {
+      this.masterService
+        .updateMasterProduct(
+          form.value.product_sys_id,
+          form.value.category_sys_id,
+          form.value.group_sys_id,
+          form.value.type_sys_id,
+          form.value.brand_sys_id,
+          form.value.name,
+          form.value.detail,
+          form.value.price,
+          form.value.amount,
+          this.photo,
+          form.value.isvoid
+        )
+        .subscribe(
+          (res: any) => {
+            console.log(res);
+            Swal.fire("Successful!", "Product edited successful.", "success");
+            // this.loader = false;
+          },
+          (error) => {
+            if (error.status === 200 || error.status === 201) {
+              Swal.fire("Error!", "error : " + error.status, "error");
+              this.loadDataMaster();
+              // this.loader = false;
+            } else {
+              console.log(error.status);
+              Swal.fire("Error!", "error : " + error.status, "error");
+            }
+          }
+        );
+    }
+  }
+
   // load data
   loadDataBrand() {
     this.masterService.getMasterBrand().subscribe(
@@ -196,6 +254,7 @@ export class ProductComponent implements OnInit {
       }
     );
   }
+
   loadDataCategory() {
     this.masterService.getMasterCatagory().subscribe(
       (res: any) => {
@@ -206,11 +265,11 @@ export class ProductComponent implements OnInit {
       }
     );
   }
-   // load form select Category
-   onSelectedCategory(event) {
+  // load form select Category
+  onSelectedCategory(event) {
     console.log(event);
     // console.log(event.target);
-    
+
     const value = event;
     this.selectedCategory = value;
     console.log("the selectedCategory is " + value);
@@ -220,11 +279,11 @@ export class ProductComponent implements OnInit {
     console.log("===== loadfindGroup =====");
     console.log(this.selectedCategory);
     console.log("===== loadfindGroup =====");
-    
+
     this.masterService.getGroup(this.selectedCategory).subscribe(
       (res: any) => {
         console.log(res);
-        
+
         this.findGroup = res;
         console.log("find Group " + this.findGroup);
       },
@@ -239,7 +298,7 @@ export class ProductComponent implements OnInit {
     console.log(event);
     const value = event;
     this.selectedGroup = value;
-    
+
     console.log("the selectedGroup is " + value);
     this.loadfindType();
   }
@@ -259,7 +318,6 @@ export class ProductComponent implements OnInit {
     );
   }
 
-
   loadDataMaster() {
     this.masterService.getMasterProduct().subscribe(
       (res: any) => {
@@ -267,6 +325,82 @@ export class ProductComponent implements OnInit {
       },
       (error) => {
         console.log("error" + error.status);
+      }
+    );
+  }
+
+  // edit
+
+  loadDataEditMaster() {
+    this.masterService.getMasterProduct().subscribe(
+      (res: any) => {
+        this.masterEditProduct = res;
+      },
+      (error) => {
+        console.log("error" + error.status);
+      }
+    );
+  }
+
+  loadDataEditCategory() {
+    this.masterService.getMasterCatagory().subscribe(
+      (res: any) => {
+        this.edit_category_option = res;
+      },
+      (error) => {
+        console.log("error" + error.status);
+      }
+    );
+  }
+  // load form select Category
+  onSelectedEditCategory(event) {
+    console.log(event);
+    // console.log(event.target);
+
+    const value = event;
+    this.selectedEditCategory = value;
+    console.log("the selectedCategory is " + value);
+    this.loadfindEditGroup();
+  }
+  loadfindEditGroup() {
+    console.log("===== loadfindGroup =====");
+    console.log(this.selectedEditCategory);
+    console.log("===== loadfindGroup =====");
+
+    this.masterService.getGroup(this.selectedEditCategory).subscribe(
+      (res: any) => {
+        console.log(res);
+
+        this.findEditGroup = res;
+        console.log("find Group " + this.findEditGroup);
+      },
+      (error) => {
+        Swal.fire("Error!", "error : " + error.status, "error");
+      }
+    );
+  }
+
+  // load form select Category
+  onSelectedEditGroup(event) {
+    console.log(event);
+    const value = event;
+    this.selectedEditGroup = value;
+
+    console.log("the selectedGroup is " + value);
+    this.loadfindEditType();
+  }
+  loadfindEditType() {
+    console.log("===== loadfindType =====");
+    console.log(this.selectedEditGroup);
+    console.log("===== loadfindType =====");
+    this.masterService.getType(this.selectedEditGroup).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.findEditType = res;
+        console.log("find Type " + this.findEditType);
+      },
+      (error) => {
+        Swal.fire("Error!", "error : " + error.status, "error");
       }
     );
   }
@@ -301,7 +435,6 @@ export class ProductComponent implements OnInit {
   onEditConfirm(event): void {
     console.log("edit");
     var data = {
-      
       name: event.newData.name,
       detail: event.newData.detail,
       price: event.newData.price,

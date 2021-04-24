@@ -1,13 +1,17 @@
 <div class="row">
-    <div class="col-sm-6">
-        <!-- <div class="row">
+  <div class="col-sm-6">
+    <!-- <div class="row">
             <div class="col-sm-6" style="margin:auto"> -->
-        <nb-card>
-            <nb-card-header>Add Product</nb-card-header>
-            <nb-card-body>
-                <form [formGroup]="product_add_form" (ngSubmit)="OnSubmit(this.product_add_form)">
-                    <div class="form-group row">
-                        <label for="" class="label col-sm-2 form-control-label">Product Name</label
+    <nb-card>
+      <nb-card-header>Add Product</nb-card-header>
+      <nb-card-body>
+        <form
+          [formGroup]="product_add_form"
+          (ngSubmit)="OnSubmit(this.product_add_form)"
+        >
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label"
+              >Product Name</label
             >
             <div class="col-sm-9">
               <input
@@ -63,24 +67,43 @@
           </div>
           <div class="form-group row">
             <label for="" class="label col-sm-2 form-control-label">Type</label>
-                        <div class="col-sm-9">
-                            <nb-select placeholder="Select Type" id="type_sys_id" formControlName="type_sys_id">
-                                <nb-option *ngFor="let item of findType" [value]="item.type_sys_id">{{ item.type_name }}</nb-option>
-                            </nb-select>
-                        </div>
-                    </div>
+            <div class="col-sm-9">
+              <nb-select
+                placeholder="Select Type"
+                id="type_sys_id"
+                formControlName="type_sys_id"
+              >
+                <nb-option
+                  *ngFor="let item of findType"
+                  [value]="item.type_sys_id"
+                  >{{ item.type_name }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </div>
 
-                    <div class="form-group row">
-                        <label for="" class="label col-sm-2 form-control-label">Brand</label>
-                        <div class="col-sm-9">
-                            <nb-select placeholder="Select Brand" id="brand_sys_id" formControlName="brand_sys_id">
-                                <nb-option *ngFor="let item of brand_option" [value]="item.brand_sys_id">{{ item.brand_name }}</nb-option>
-                            </nb-select>
-                        </div>
-                    </div>
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label"
+              >Brand</label
+            >
+            <div class="col-sm-9">
+              <nb-select
+                placeholder="Select Brand"
+                id="brand_sys_id"
+                formControlName="brand_sys_id"
+              >
+                <nb-option
+                  *ngFor="let item of brand_option"
+                  [value]="item.brand_sys_id"
+                  >{{ item.brand_name }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </div>
 
-                    <div class="form-group row">
-                        <label for="" class="label col-sm-2 form-control-label">Detail</label
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label"
+              >Detail</label
             >
             <div class="col-sm-9">
               <textarea
@@ -121,30 +144,234 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="" class="label">Photo</label>&nbsp;
-                        <input type="file" nbInput id="avatar" placeholder="Photo" formControlName="avatar" (change)="onFileChange($event)" />
-                    </div>
-    </div>
-</div>
+                <input
+                  type="file"
+                  nbInput
+                  id="avatar"
+                  placeholder="Photo"
+                  formControlName="avatar"
+                  (change)="onFileChange($event)"
+                />
+              </div>
+            </div>
+          </div>
 
-<button type="submit" nbButton status="success" style="float: right" [disabled]="!product_add_form.valid">
+          <button
+            type="submit"
+            nbButton
+            status="success"
+            style="float: right"
+            [disabled]="!product_add_form.valid"
+          >
             Submit
           </button>
-</form>
-</nb-card-body>
-</nb-card>
-</div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+  <!-- edit -->
+
+  <div class="col-sm-6">
+    <!-- <div class="row">
+      <div class="col-sm-6" style="margin:auto"> -->
+    <nb-card>
+      <nb-card-header>Edit Product</nb-card-header>
+      <nb-card-body>
+        <form
+          [formGroup]="product_edit_form"
+          (ngSubmit)="EditOnSubmit(this.product_edit_form)"
+        >
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label"
+              >Product</label
+            >
+            <div class="col-sm-9">
+              <nb-select
+                placeholder="Select Product"
+                id="product_sys_id"
+                formControlName="product_sys_id"
+              >
+                <nb-option
+                  *ngFor="let item of masterEditProduct"
+                  [value]="item.product_sys_id"
+                  >{{ item.name }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label"
+              >Product Name</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                nbInput
+                id="name"
+                placeholder="Product Name"
+                formControlName="name"
+              />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label"
+              >Catagory</label
+            >
+            <div class="col-sm-9">
+              <nb-select
+                placeholder="Select Catagory"
+                id="category_sys_id"
+                formControlName="category_sys_id"
+                [(ngModel)]="selectedEditCategory"
+                (selectedChange)="onSelectedEditCategory($event)"
+              >
+                <nb-option
+                  *ngFor="let item of edit_category_option"
+                  [value]="item.category_sys_id"
+                  >{{ item.category_name }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label"
+              >Group</label
+            >
+            <div class="col-sm-9">
+              <nb-select
+                placeholder="Select Group"
+                id="group_sys_id"
+                formControlName="group_sys_id"
+                [(ngModel)]="selectedEditGroup"
+                (selectedChange)="onSelectedEditGroup($event)"
+              >
+                <nb-option
+                  *ngFor="let item of findEditGroup"
+                  [value]="item.group_sys_id"
+                  >{{ item.group_name }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label">Type</label>
+            <div class="col-sm-9">
+              <nb-select
+                placeholder="Select Type"
+                id="type_sys_id"
+                formControlName="type_sys_id"
+              >
+                <nb-option
+                  *ngFor="let item of findEditType"
+                  [value]="item.type_sys_id"
+                  >{{ item.type_name }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label"
+              >Brand</label
+            >
+            <div class="col-sm-9">
+              <nb-select
+                placeholder="Select Brand"
+                id="brand_sys_id"
+                formControlName="brand_sys_id"
+              >
+                <nb-option
+                  *ngFor="let item of brand_option"
+                  [value]="item.brand_sys_id"
+                  >{{ item.brand_name }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label"
+              >Detail</label
+            >
+            <div class="col-sm-9">
+              <textarea
+                type="text"
+                nbInput
+                id="detail"
+                placeholder="Detail"
+                formControlName="detail"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label">Price</label
+            >&nbsp;
+            <input
+              type="text"
+              nbInput
+              id="price"
+              placeholder="Price"
+              formControlName="price"
+            />
+          </div>
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label"
+              >Amount</label
+            >&nbsp;
+            <input
+              type="text"
+              nbInput
+              id="amount"
+              placeholder="Amount"
+              formControlName="amount"
+            />
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="" class="label">Photo</label>&nbsp;
+                <input
+                  type="file"
+                  nbInput
+                  id="avatar"
+                  placeholder="Photo"
+                  formControlName="avatar"
+                  (change)="onFileChange($event)"
+                />
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            nbButton
+            status="success"
+            style="float: right"
+            [disabled]="!product_edit_form.valid"
+          >
+            Submit
+          </button>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
 </div>
 
 <div class="row">
-    <div class="col-md-12">
-        <nb-card>
-            <nb-card-header> DATA </nb-card-header>
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-header> DATA </nb-card-header>
 
-            <nb-card-body>
-                <ng2-smart-table [settings]="settings" [source]="masterProduct" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onEditConfirm($event)">
-                </ng2-smart-table>
-            </nb-card-body>
-        </nb-card>
-
-    </div>
+      <nb-card-body>
+        <ng2-smart-table [settings]="settings" [source]="masterProduct" (deleteConfirm)="onDeleteConfirm($event)">
+        </ng2-smart-table>
+      </nb-card-body>
+    </nb-card>
+  </div>
 </div>

@@ -1,16 +1,26 @@
 <div class="form-row">
-    <div class="form-group col-md-6">
-        <nb-card>
-            <nb-card-header>Add Type</nb-card-header>
-            <nb-card-body>
-                <form [formGroup]="type_add_form" (ngSubmit)="OnSubmit(this.type_add_form)">
-                    <div class="form-group row">
-                        <label for="" class="label col-sm-2 form-control-label">Type</label>
-                        <input type="text" nbInput id="type_name" placeholder="Type Name" formControlName="type_name" />
-                    </div>
+  <div class="form-group col-md-6">
+    <nb-card>
+      <nb-card-header>Add Type</nb-card-header>
+      <nb-card-body>
+        <form
+          [formGroup]="type_add_form"
+          (ngSubmit)="OnSubmit(this.type_add_form)"
+        >
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label">Type</label>
+            <input
+              type="text"
+              nbInput
+              id="type_name"
+              placeholder="Type Name"
+              formControlName="type_name"
+            />
+          </div>
 
-                    <div class="form-group row">
-                        <label for="" class="label col-sm-2 form-control-label">Catagory</label
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label"
+              >Catagory</label
             >
             <nb-select
               placeholder="Select Catagory"
@@ -57,6 +67,94 @@
       </nb-card-body>
     </nb-card>
   </div>
+
+  <!-- edit -->
+
+  <div class="form-group col-md-6">
+    <nb-card>
+      <nb-card-header>Edit Type</nb-card-header>
+      <nb-card-body>
+        <form
+          [formGroup]="type_edit_form"
+          (ngSubmit)="EditOnSubmit(this.type_edit_form)"
+        >
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label">Type</label>
+            <div class="col-sm-9">
+              <nb-select
+                placeholder="Select Type"
+                id="type_sys_id"
+                formControlName="type_sys_id"
+              >
+                <nb-option
+                  *ngFor="let item of masterType"
+                  [value]="item.type_sys_id"
+                  >{{ item.type_name }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label">Type</label>
+            <input
+              type="text"
+              nbInput
+              id="type_name"
+              placeholder="Type Name"
+              formControlName="type_name"
+            />
+          </div>
+
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label"
+              >Catagory</label
+            >
+            <nb-select
+              placeholder="Select Catagory"
+              id="category_sys_id"
+              formControlName="category_sys_id"
+              [(ngModel)]="selectedEditCategory"
+              (selectedChange)="onSelectedEditCategory($event)"
+            >
+              <nb-option
+                *ngFor="let item of edit_category_option"
+                [value]="item.category_sys_id"
+                >{{ item.category_name }}</nb-option
+              >
+            </nb-select>
+          </div>
+
+          <div class="form-group row">
+            <label for="" class="label col-sm-2 form-control-label"
+              >Group</label
+            >
+            <nb-select
+              placeholder="Select Group"
+              id="group_sys_id"
+              formControlName="group_sys_id"
+            >
+              <nb-option
+                *ngFor="let item of findEditGroup"
+                [value]="item.group_sys_id"
+                >{{ item.group_name }}</nb-option
+              >
+            </nb-select>
+          </div>
+
+          <button
+            type="submit"
+            nbButton
+            status="warning"
+            style="float: right"
+            [disabled]="!type_edit_form.valid"
+          >
+            Edit
+          </button>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
 </div>
 
 <div class="row">
@@ -65,12 +163,7 @@
       <nb-card-header> DATA </nb-card-header>
 
       <nb-card-body>
-        <ng2-smart-table
-          [settings]="settings"
-          [source]="masterType"
-          (deleteConfirm)="onDeleteConfirm($event)"
-          (editConfirm)="onEditConfirm($event)"
-        >
+        <ng2-smart-table [settings]="settings" [source]="masterType" (deleteConfirm)="onDeleteConfirm($event)">
         </ng2-smart-table>
       </nb-card-body>
     </nb-card>

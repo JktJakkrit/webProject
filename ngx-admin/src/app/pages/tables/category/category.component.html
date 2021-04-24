@@ -1,8 +1,8 @@
-<div class="form-row">
-    <div class="form-group col-md-6">
+<!-- <div class="form-row"> -->
+    <!-- <div class="form-group col-md-6"> -->
         <!-- <div class="row">
             <div class="col-sm-6" style="margin:auto"> -->
-        <nb-card>
+        <!-- <nb-card>
             <nb-card-header>Add Category</nb-card-header>
             <nb-card-body>
                 <form class="form-horizontal" [formGroup]="category_add_form" (ngSubmit)="OnSubmit(this.category_add_form)">
@@ -27,8 +27,49 @@
                 </form>
             </nb-card-body>
         </nb-card>
-    </div>
-</div>
+    </div> -->
+
+    <!-- edit -->
+
+    <!-- <div class="form-group col-md-6">
+        <!-- <div class="row">
+            <div class="col-sm-6" style="margin:auto"> 
+        <nb-card>
+            <nb-card-header>Edit Category</nb-card-header>
+            <nb-card-body>
+                <form class="form-horizontal" [formGroup]="category_edit_form" (ngSubmit)="EditOnSubmit(this.category_edit_form)">
+
+                    <div class="form-group row">
+                        <label for="" class="label col-sm-2 form-control-label">Catagory</label>
+                        <div class="col-sm-9">
+                            <nb-select placeholder="Select Catagory" id="category_sys_id" formControlName="category_sys_id">
+                                <nb-option *ngFor="let item of edit_category_option" [value]="item.category_sys_id">{{item.category_name}}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="label col-sm-2 form-control-label">Edit/Category Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" nbInput id="category_name" placeholder="Category Name" formControlName="category_name" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="label col-sm-2 form-control-label">Photo</label>
+                        <div class="col-sm-9">
+                            <input type="file" nbInput id="avatar" placeholder="Photo" formControlName="avatar" (change)="onFileChange($event)" />
+                        </div>
+                    </div>
+
+
+                    <button type="submit" nbButton status="warning" style="float: right;" [disabled]="!category_edit_form.valid">Edit</button>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div> -->
+
+<!-- </div> -->
 
 <nb-card>
     <nb-card-header>
@@ -36,7 +77,7 @@
     </nb-card-header>
 
     <nb-card-body>
-        <ng2-smart-table [settings]="settings" [source]="masterCategory" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onEditConfirm($event)" (createConfirm)="onCreateConfirm($event)">
+        <ng2-smart-table [settings]="settings" [source]="masterCategory"(deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onEditConfirm($event)" (createConfirm)="onCreateConfirm($event)">
         </ng2-smart-table>
     </nb-card-body>
 </nb-card>

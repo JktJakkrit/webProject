@@ -9,6 +9,7 @@ import { ManagementComponent } from './management/management.component';
 import { ProductBrandComponent } from './product-brand/product-brand.component';
 import { GroupComponent } from './group/group.component';
 
+
 const routes: Routes = [{
   path: '',
   component: TablesComponent,
@@ -38,6 +39,7 @@ const routes: Routes = [{
       path: 'group',
       component: GroupComponent,
     },
+
   ],
 }];
 

@@ -26,10 +26,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Product',
         link: '/pages/tables/product',
       },
-     
-     
-    ]
-  },
 
+
+    ],
+
+    
+  },
   
 ];
