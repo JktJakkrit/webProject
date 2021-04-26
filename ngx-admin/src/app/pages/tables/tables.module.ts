@@ -12,6 +12,7 @@ import { ManagementComponent } from './management/management.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductBrandComponent } from './product-brand/product-brand.component';
 import { GroupComponent } from './group/group.component';
+import { ShowProductComponent } from './show-product/show-product.component';
 
 
 
@@ -38,6 +39,7 @@ import { GroupComponent } from './group/group.component';
     ManagementComponent,
     ProductBrandComponent,
     GroupComponent,
+    ShowProductComponent,
   
     
   ],

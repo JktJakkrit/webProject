@@ -8,6 +8,7 @@ import { ProductTypeComponent } from './product-type/product-type.component';
 import { ManagementComponent } from './management/management.component';
 import { ProductBrandComponent } from './product-brand/product-brand.component';
 import { GroupComponent } from './group/group.component';
+import { ShowProductComponent } from './show-product/show-product.component';
 
 
 const routes: Routes = [{
@@ -39,6 +40,10 @@ const routes: Routes = [{
       path: 'group',
       component: GroupComponent,
     },
+    {
+      path: 'show-product',
+      component: ShowProductComponent,
+    },
 
   ],
 }];
@@ -55,4 +60,5 @@ export const routedComponents = [
   ManagementComponent,
   ProductComponent,
   CategoryComponent,
+  ShowProductComponent
 ];

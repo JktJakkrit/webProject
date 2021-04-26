@@ -3,6 +3,7 @@ import {
   HttpErrorResponse,
   HttpParams,
 } from "@angular/common/http";
+import { ValueConverter } from "@angular/compiler/src/render3/view/template";
 import { Injectable } from "@angular/core";
 import { throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
@@ -344,5 +345,15 @@ export class MasterService {
     return this.http.post<any>(this.url + "/find/type", {
       group_sys_id: value,
     });
+  }
+  getProduct(value){
+    return this.http.post<any>(this.url + "/find/product", {
+      type_sys_id: value,
+    });
+  }
+  getSomeProduct(value){
+    return this.http.post<any>(this.url + "/find/some", {
+      group_sys_id: value,
+    })
   }
 }

@@ -9,6 +9,65 @@
           [formGroup]="product_add_form"
           (ngSubmit)="OnSubmit(this.product_add_form)"
         >
+
+        <div class="form-group row">
+          <label for="" class="label col-sm-2 form-control-label"
+            >Catagory</label
+          >
+          <div class="col-sm-9">
+            <nb-select
+              placeholder="Select Catagory"
+              id="category_sys_id"
+              formControlName="category_sys_id"
+              [(ngModel)]="selectedCategory"
+              (selectedChange)="onSelectedCategory($event)"
+            >
+              <nb-option
+                *ngFor="let item of category_option"
+                [value]="item.category_sys_id"
+                >{{ item.category_name }}</nb-option
+              >
+            </nb-select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="" class="label col-sm-2 form-control-label"
+            >Group</label
+          >
+          <div class="col-sm-9">
+            <nb-select
+              placeholder="Select Group"
+              id="group_sys_id"
+              formControlName="group_sys_id"
+              [(ngModel)]="selectedGroup"
+              (selectedChange)="onSelectedGroup($event)"
+            >
+              <nb-option
+                *ngFor="let item of findGroup"
+                [value]="item.group_sys_id"
+                >{{ item.group_name }}</nb-option
+              >
+            </nb-select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="" class="label col-sm-2 form-control-label">Type</label>
+          <div class="col-sm-9">
+            <nb-select
+              placeholder="Select Type"
+              id="type_sys_id"
+              formControlName="type_sys_id"
+            >
+              <nb-option
+                *ngFor="let item of findType"
+                [value]="item.type_sys_id"
+                >{{ item.type_name }}</nb-option
+              >
+            </nb-select>
+          </div>
+        </div>
+
           <div class="form-group row">
             <label for="" class="label col-sm-2 form-control-label"
               >Product Name</label
@@ -24,63 +83,7 @@
             </div>
           </div>
 
-          <div class="form-group row">
-            <label for="" class="label col-sm-2 form-control-label"
-              >Catagory</label
-            >
-            <div class="col-sm-9">
-              <nb-select
-                placeholder="Select Catagory"
-                id="category_sys_id"
-                formControlName="category_sys_id"
-                [(ngModel)]="selectedCategory"
-                (selectedChange)="onSelectedCategory($event)"
-              >
-                <nb-option
-                  *ngFor="let item of category_option"
-                  [value]="item.category_sys_id"
-                  >{{ item.category_name }}</nb-option
-                >
-              </nb-select>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="" class="label col-sm-2 form-control-label"
-              >Group</label
-            >
-            <div class="col-sm-9">
-              <nb-select
-                placeholder="Select Group"
-                id="group_sys_id"
-                formControlName="group_sys_id"
-                [(ngModel)]="selectedGroup"
-                (selectedChange)="onSelectedGroup($event)"
-              >
-                <nb-option
-                  *ngFor="let item of findGroup"
-                  [value]="item.group_sys_id"
-                  >{{ item.group_name }}</nb-option
-                >
-              </nb-select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="" class="label col-sm-2 form-control-label">Type</label>
-            <div class="col-sm-9">
-              <nb-select
-                placeholder="Select Type"
-                id="type_sys_id"
-                formControlName="type_sys_id"
-              >
-                <nb-option
-                  *ngFor="let item of findType"
-                  [value]="item.type_sys_id"
-                  >{{ item.type_name }}</nb-option
-                >
-              </nb-select>
-            </div>
-          </div>
+          
 
           <div class="form-group row">
             <label for="" class="label col-sm-2 form-control-label"
@@ -182,6 +185,66 @@
           [formGroup]="product_edit_form"
           (ngSubmit)="EditOnSubmit(this.product_edit_form)"
         >
+        <div class="form-group row">
+          <label for="" class="label col-sm-2 form-control-label"
+            >Catagory</label
+          >
+          <div class="col-sm-9">
+            <nb-select
+              placeholder="Select Catagory"
+              id="category_sys_id"
+              formControlName="category_sys_id"
+              [(ngModel)]="selectedEditCategory"
+              (selectedChange)="onSelectedEditCategory($event)"
+            >
+              <nb-option
+                *ngFor="let item of edit_category_option"
+                [value]="item.category_sys_id"
+                >{{ item.category_name }}</nb-option
+              >
+            </nb-select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="" class="label col-sm-2 form-control-label"
+            >Group</label
+          >
+          <div class="col-sm-9">
+            <nb-select
+              placeholder="Select Group"
+              id="group_sys_id"
+              formControlName="group_sys_id"
+              [(ngModel)]="selectedEditGroup"
+              (selectedChange)="onSelectedEditGroup($event)"
+            >
+              <nb-option
+                *ngFor="let item of findEditGroup"
+                [value]="item.group_sys_id"
+                >{{ item.group_name }}</nb-option
+              >
+            </nb-select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="" class="label col-sm-2 form-control-label">Type</label>
+          <div class="col-sm-9">
+            <nb-select
+              placeholder="Select Type"
+              id="type_sys_id"
+              formControlName="type_sys_id"
+              [(ngModel)]="selectedEditType"
+              (selectedChange)="onSelectedEditType($event)"
+            >
+              <nb-option
+                *ngFor="let item of findEditType"
+                [value]="item.type_sys_id"
+                >{{ item.type_name }}</nb-option
+              >
+            </nb-select>
+          </div>
+        </div>
+
           <div class="form-group row">
             <label for="" class="label col-sm-2 form-control-label"
               >Product</label
@@ -193,7 +256,7 @@
                 formControlName="product_sys_id"
               >
                 <nb-option
-                  *ngFor="let item of masterEditProduct"
+                  *ngFor="let item of findEditProduct"
                   [value]="item.product_sys_id"
                   >{{ item.name }}</nb-option
                 >
@@ -203,7 +266,7 @@
 
           <div class="form-group row">
             <label for="" class="label col-sm-2 form-control-label"
-              >Product Name</label
+              >Change Product Name</label
             >
             <div class="col-sm-9">
               <input
@@ -216,63 +279,7 @@
             </div>
           </div>
 
-          <div class="form-group row">
-            <label for="" class="label col-sm-2 form-control-label"
-              >Catagory</label
-            >
-            <div class="col-sm-9">
-              <nb-select
-                placeholder="Select Catagory"
-                id="category_sys_id"
-                formControlName="category_sys_id"
-                [(ngModel)]="selectedEditCategory"
-                (selectedChange)="onSelectedEditCategory($event)"
-              >
-                <nb-option
-                  *ngFor="let item of edit_category_option"
-                  [value]="item.category_sys_id"
-                  >{{ item.category_name }}</nb-option
-                >
-              </nb-select>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="" class="label col-sm-2 form-control-label"
-              >Group</label
-            >
-            <div class="col-sm-9">
-              <nb-select
-                placeholder="Select Group"
-                id="group_sys_id"
-                formControlName="group_sys_id"
-                [(ngModel)]="selectedEditGroup"
-                (selectedChange)="onSelectedEditGroup($event)"
-              >
-                <nb-option
-                  *ngFor="let item of findEditGroup"
-                  [value]="item.group_sys_id"
-                  >{{ item.group_name }}</nb-option
-                >
-              </nb-select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="" class="label col-sm-2 form-control-label">Type</label>
-            <div class="col-sm-9">
-              <nb-select
-                placeholder="Select Type"
-                id="type_sys_id"
-                formControlName="type_sys_id"
-              >
-                <nb-option
-                  *ngFor="let item of findEditType"
-                  [value]="item.type_sys_id"
-                  >{{ item.type_name }}</nb-option
-                >
-              </nb-select>
-            </div>
-          </div>
+          
 
           <div class="form-group row">
             <label for="" class="label col-sm-2 form-control-label"

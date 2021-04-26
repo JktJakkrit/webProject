@@ -13,6 +13,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./group.component.scss']
 })
 export class GroupComponent implements OnInit {
+  selectedEditCategory;
+  findEditGroup;
   edit_category_option;
   category_option;
   group_add_form: FormGroup;
@@ -188,9 +190,13 @@ export class GroupComponent implements OnInit {
     );
   }
 
+  
+  
   loadDataEditCategory() {
     this.masterService.getMasterCatagory().subscribe(
       (res: any) => {
+        console.log(res);
+        
         this.edit_category_option = res;
       },
       (error) => {
@@ -198,6 +204,35 @@ export class GroupComponent implements OnInit {
       }
     );
   }
+
+  // load form select Category
+  onSelectedEditCategory(event) {
+    console.log(event);
+    console.log(event.target);
+    
+    const value = event;
+    this.selectedEditCategory = value;
+    console.log("the selectedCategory is " + value);
+    this.loadfindEditGroup();
+  }
+  loadfindEditGroup() {
+    console.log("===== loadfindGroup =====");
+    console.log(this.selectedEditCategory);
+    console.log("===== loadfindGroup =====");
+    
+    this.masterService.getGroup(this.selectedEditCategory).subscribe(
+      (res: any) => {
+        console.log(res);
+        
+        this.findEditGroup = res;
+        console.log("find Group " + this.findEditGroup);
+      },
+      (error) => {
+        Swal.fire("Error!", "error : " + error.status, "error");
+      }
+    );
+  }
+
 
   loadDataMaster() {
     this.masterService.getMasterGroup().subscribe(

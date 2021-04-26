@@ -12,6 +12,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./product-type.component.scss']
 })
 export class ProductTypeComponent implements OnInit {
+  selectedEditGroup;
+  findEditType;
   edit_category_option;
   findEditGroup;
   type_add_form: FormGroup;
@@ -229,8 +231,6 @@ export class ProductTypeComponent implements OnInit {
   loadDataEditCategory() {
     this.masterService.getMasterCatagory().subscribe(
       (res: any) => {
-        console.log(res);
-        
         this.edit_category_option = res;
       },
       (error) => {
@@ -238,12 +238,11 @@ export class ProductTypeComponent implements OnInit {
       }
     );
   }
-
   // load form select Category
   onSelectedEditCategory(event) {
     console.log(event);
-    console.log(event.target);
-    
+    // console.log(event.target);
+
     const value = event;
     this.selectedEditCategory = value;
     console.log("the selectedCategory is " + value);
@@ -253,13 +252,38 @@ export class ProductTypeComponent implements OnInit {
     console.log("===== loadfindGroup =====");
     console.log(this.selectedEditCategory);
     console.log("===== loadfindGroup =====");
-    
+
     this.masterService.getGroup(this.selectedEditCategory).subscribe(
       (res: any) => {
         console.log(res);
-        
+
         this.findEditGroup = res;
         console.log("find Group " + this.findEditGroup);
+      },
+      (error) => {
+        Swal.fire("Error!", "error : " + error.status, "error");
+      }
+    );
+  }
+
+  // load form select Category
+  onSelectedEditGroup(event) {
+    console.log(event);
+    const value = event;
+    this.selectedEditGroup = value;
+
+    console.log("the selectedGroup is " + value);
+    this.loadfindEditType();
+  }
+  loadfindEditType() {
+    console.log("===== loadfindType =====");
+    console.log(this.selectedEditGroup);
+    console.log("===== loadfindType =====");
+    this.masterService.getType(this.selectedEditGroup).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.findEditType = res;
+        console.log("find Type " + this.findEditType);
       },
       (error) => {
         Swal.fire("Error!", "error : " + error.status, "error");

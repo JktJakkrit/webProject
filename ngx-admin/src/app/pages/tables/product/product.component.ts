@@ -24,6 +24,8 @@ import { MasterService } from "../../../_services/master.service";
   styleUrls: ["./product.component.scss"],
 })
 export class ProductComponent implements OnInit {
+  findEditProduct;
+  selectedEditType;
   masterEditProduct;
   edit_category_option;
   selectedEditCategory;
@@ -38,12 +40,12 @@ export class ProductComponent implements OnInit {
   findGroup;
   selectedGroup;
   findType;
-  defaultRowPerPage = 10;
+  
   product_add_form: FormGroup;
   product_edit_form: FormGroup;
   photo: File;
   imageSrc: string;
-
+  defaultRowPerPage = 10;
   private url = environment.serverURL;
 
   settings = {
@@ -76,6 +78,10 @@ export class ProductComponent implements OnInit {
       confirmDelete: true,
     },
     columns: {
+      product_sys_id: {
+        title: "ID",
+        sortDirection: 'desc'
+      },
       category_name: {
         title: "Category",
         type: "string",
@@ -404,6 +410,32 @@ export class ProductComponent implements OnInit {
       }
     );
   }
+
+  onSelectedEditType(event) {
+    console.log(event);
+    const value = event;
+    this.selectedEditType = value;
+
+    console.log("the selectedType is " + value);
+    this.loadfindEditProduct();
+  }
+  loadfindEditProduct() {
+    console.log("===== loadfindProduct =====");
+    console.log(this.selectedEditType);
+    console.log("===== loadfindProduct =====");
+    this.masterService.getProduct(this.selectedEditType).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.findEditProduct = res;
+        console.log("find Product " + this.findEditProduct);
+      },
+      (error) => {
+        Swal.fire("Error!", "error : " + error.status, "error");
+      }
+    );
+  }
+
+
 
   // onCreateConfirm(event): void {
   //   console.log("create");

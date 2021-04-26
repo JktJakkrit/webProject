@@ -1,3 +1,4 @@
+const { getProductByGroup } = require('../services/findBy.service');
 const findByServices = require('../services/findBy.service');
 
 const methods = {
@@ -19,7 +20,23 @@ const methods = {
             res.json(error).end();
         }
     },
-
+    async ProductByType(req, res) {
+        try {
+            let result = await findByServices.getProductByType(req.body)
+            res.status(200).send(result)
+        } catch (error) {
+            res.json(error).end();
+        }
+    },
+    async ProductByGroup(req, res) {
+        try {
+            let result = await findByServices.getProductByGroup(req.body)
+            res.status(200).send(result)
+        } catch (error) {
+            res.json(error).end();
+        }
+    },
+    
 }
 
 module.exports = {...methods }
