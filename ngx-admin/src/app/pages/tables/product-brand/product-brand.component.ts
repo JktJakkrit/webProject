@@ -37,7 +37,7 @@ export class ProductBrandComponent implements OnInit {
     },
     // selectMode: 'multi',
     add: {
-      addButtonContent: '<i class="nb-plus"></i>',
+      addButtonContent: '<i><h6>เพิ่ม Brand</h6></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
       confirmCreate: true,
@@ -275,9 +275,19 @@ export class ProductBrandComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         if (error.error instanceof Error) {
-          console.log("Client-side error occured.");
+          Swal.fire({
+            icon: 'success',
+            title: 'Brand deleted successful.',
+            showConfirmButton: false,
+            timer: 1500
+          })
         } else {
-          console.log("Server-side error occured.");
+          Swal.fire({
+            icon: 'success',
+            title: 'Brand deleted successful.',
+            showConfirmButton: false,
+            timer: 1500
+          })
         }
       }
     );

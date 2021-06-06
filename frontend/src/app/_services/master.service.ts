@@ -539,4 +539,27 @@ export class MasterService {
       .put<any>(REST_URL, body)
       .pipe(catchError(this.handleError));
   }
+
+  loadCategory(){
+    return this.http.get<any>(this.url + "/category/all");
+  }
+
+  loadGroup(){
+    return this.http.get<any>(this.url + "/group/all");
+  }
+  
+  getMasterProduct() {
+    const newParams = new HttpParams();
+    // .set('catagory_sys_id', categoty_sys_id)
+    return this.http.get<any>(this.url + "/product/all");
+  }
+
+  loadProductById(product_sys_id){
+    return this.http.get<any>(this.url + "/product/id/" + product_sys_id);
+  }
+  
+  loadGroupById(group_sys_id){
+    return this.http.get<any>(this.url + "/group/id/" + group_sys_id);
+  }
+
 }

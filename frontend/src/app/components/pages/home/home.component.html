@@ -1,8 +1,8 @@
 <app-header>
 </app-header>
 
-<!--  Section-->
-<section class="page-section shop" id="shop">
+<section class="py-5">
+
     <div class="container">
         <!--  Section Heading-->
         <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Electronic Shopping</h2>
@@ -12,72 +12,36 @@
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
         </div>
-        <!--  Grid Items-->
-        <div class="row justify-content-center">
-            <!--  Item 1-->
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="shop-item mx-auto" [routerLink]="['/air']">
-                    <div class="shop-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="shop-item-caption-content text-center text-white"><a>Air Conditioning</a></div>
+    </div>
+
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+            <div class="col mb-5" *ngFor='let item of masterProduct'>
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" src="{{item.file}}" alt="...">
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <a [routerLink]="['/product-details', item.product_sys_id]" ><h5 class="fw-bolder">{{item.name}}</h5></a>
+                            <!-- Product price-->
+                            {{item.price}} บาท
+                        </div>
                     </div>
-                    <img class="img-fluid" src="assets/img/air555.png" alt="" />
+                    
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><button type="button" class="btn btn-primary" (click)="addToCart(item)">
+                            Add to Cart
+                          </button></div>
+                    </div>
                 </div>
             </div>
-            <!--  Item 2-->
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="shop-item mx-auto" [routerLink]="['/fan']">
-                    <div class="shop-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="shop-item-caption-content text-center text-white"><a>Fan</a></div>
-                    </div>
-                    <img class="img-fluid" src="assets/img/fan555.png" alt="" />
-                </div>
-            </div>
-            <!--  Item 3-->
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="shop-item mx-auto" [routerLink]="['/dish']">
-                    <div class="shop-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="shop-item-caption-content text-center text-white"><a>Dishwasher</a></div>
-                    </div>
-                    <img class="img-fluid" src="assets/img/Dishwashers555.png" alt="" />
-                </div>
-            </div>
-            <!--  Item 4-->
-            <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
-                <div class="shop-item mx-auto" [routerLink]="['/wash']">
-                    <div class="shop-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="shop-item-caption-content text-center text-white"><a>Washing Machine</a></div>
-                    </div>
-                    <img class="img-fluid" src="assets/img/WashingMachines555.png" alt="" />
-                </div>
-            </div>
-            <!--  Item 5-->
-            <div class="col-md-6 col-lg-4 mb-5 mb-md-0">
-                <div class="shop-item mx-auto" [routerLink]="['/refri']">
-                    <div class="shop-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="shop-item-caption-content text-center text-white"><a>Refrigerator</a></div>
-                    </div>
-                    <img class="img-fluid" src="assets/img/Refrigerators555.png" alt="" />
-                </div>
-            </div>
-            <!--  Item 6-->
-            <div class="col-md-6 col-lg-4">
-                <div class="shop-item mx-auto" [routerLink]="['/tv']">
-                    <div class="shop-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="shop-item-caption-content text-center text-white"><a>Television</a></div>
-                    </div>
-                    <img class="img-fluid" src="assets/img/tv555.png" alt="" />
-                </div>
-            </div>
-            <!--  Item 6-->
-            <div class="col-md-6 col-lg-4">
-                <div class="shop-item mx-auto" [routerLink]="['/other']">
-                    <div class="shop-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="shop-item-caption-content text-center text-white"><a>Other</a></div>
-                    </div>
-                    <img class="img-fluid" src="assets/products/56e28f2aca9dd_thumb900.jpg" alt="" />
-                </div>
-            </div>
+           
         </div>
     </div>
-</section>
+  </section>
+
 <app-footer></app-footer>

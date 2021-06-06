@@ -1,220 +1,117 @@
 <app-header></app-header>
-<div class="container">
+
+<section class="section-content padding-y">
+  <div class="container">
+    <!--  Section Heading-->
+    <h2
+      class="
+        page-section-heading
+        text-center text-uppercase text-secondary
+        mb-0
+      "
+    >
+      Electronic Shopping
+    </h2>
+    <!-- Icon Divider-->
+
     <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th class="text-center">Price</th>
-                        <th class="text-center">Total</th>
-                        <th> </th>
-                    </tr>
-                </thead>
-                <tbody>
+      <main class="col-md-9">
+        <div class="card">
+          <table class="table table-borderless table-shopping-cart">
+            <thead class="text-muted">
+              <tr class="small text-uppercase">
+                <th scope="col">Product</th>
+                <th scope="col" width="120">Quantity</th>
+                <th scope="col" width="120">Price</th>
+                <th scope="col" class="text-right" width="200"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of countProduct">
+                <td>
+                  <figure class="itemside">
+                    <div class="aside">
+                      <img
+                        src="{{ item.file }}"
+                        class="img-sm"
+                        style="width: 100px; height: 100px"
+                      />
+                    </div>
+                    <figcaption class="info">
+                      <a class="title text-dark">{{ item.name }}</a>
+                      <p class="small text-muted">{{ item.detail }}</p>
+                    </figcaption>
+                  </figure>
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    class="form-control"
+                    [value]="item.count"
+                    min="1"
+                    max="{{ item.amount }}"
+                    (change)="ProductChangeAmount($event, item)"
+                  />
+                </td>
 
-                    <!-- Air-Condition -->
-                    <tr *ngFor='let item of countAir'>
-                        <td class="col-sm-8 col-md-6">
-                            <div class="media">
-                                <a class="thumbnail pull-left"> <img class="img-fluid" src="{{ item.file }}" style="width: 100px; height: 100px;" /> </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a>{{item.name}}</a></h4>
-                                    <h5 class="media-heading"> by <a>{{item.brand}}</a></h5>
+                <td>
+                  <div class="price-wrap">
+                    <var class="price">{{TotalProductPrice(item.count,item.price)}} บาท</var><br>
+                    <small class="text-muted">{{item.price}} บาท</small> 
+                  </div>
+                  <!-- price-wrap .// -->
+                </td>
+                <td class="text-right">
+                  <a class="btn btn-light btn-round" (click)="removeItem(item)">
+                    Remove</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
-                                </div>
-                            </div>
-                        </td>
-                        <td class="col-sm-6 col-md-6" style="text-align: center">
-
-                            <input type="number" class="form-control" [value]='item.count' min="1" max="{{item.amount}}" (change)="airChangeAmount($event,item)">
-
-                        </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price }}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{airTotalPrice(item.count,item.price)}}</strong></td>
-                        <td class="col-sm-1 col-md-1">
-                            <button type="button" class="btn btn-danger" (click)="removeAirItem(item)">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button></td>
-                    </tr>
-
-                    <!-- Fan -->
-                    <tr *ngFor='let item of countFan'>
-                        <td class="col-sm-8 col-md-6">
-                            <div class="media">
-                                <a class="thumbnail pull-left"> <img class="img-fluid" src="{{ item.file }}" style="width: 100px; height: 100px;" /> </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a>{{item.name}}</a></h4>
-                                    <h5 class="media-heading"> by <a>{{item.brand}}</a></h5>
-
-                                </div>
-                            </div>
-                        </td>
-                        <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="number" class="form-control" [value]='item.count' min="1" max="{{item.amount}}" (change)="fanChangeAmount($event,item)">
-                        </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{fanTotalPrice(item.count,item.price)}}</strong></td>
-                        <td class="col-sm-1 col-md-1">
-                            <button type="button" class="btn btn-danger" (click)="removeFanItem(item)">
-                            <span class="glyphicon glyphicon-remove" ></span> Remove
-                        </button></td>
-                    </tr>
-
-                    <!-- Dishwasher -->
-                    <tr *ngFor='let item of countDish'>
-                        <td class="col-sm-8 col-md-6">
-                            <div class="media">
-                                <a class="thumbnail pull-left"> <img class="img-fluid" src="{{ item.file }}" style="width: 100px; height: 100px;" /> </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a>{{item.name}}</a></h4>
-                                    <h5 class="media-heading"> by <a>{{item.brand}}</a></h5>
-
-                                </div>
-                            </div>
-                        </td>
-                        <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="number" class="form-control" [value]='item.count' min="1" max="{{item.amount}}" (change)="dishChangeAmount($event,item)">
-                        </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{dishTotalPrice(item.count,item.price)}}</strong></td>
-                        <td class="col-sm-1 col-md-1">
-                            <button type="button" class="btn btn-danger" (click)="removeDishItem(item)">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button></td>
-                    </tr>
-
-                    <!-- Refrigerator -->
-                    <tr *ngFor='let item of countRefri'>
-                        <td class="col-sm-8 col-md-6">
-                            <div class="media">
-                                <a class="thumbnail pull-left"> <img class="img-fluid" src="{{ item.file }}" style="width: 100px; height: 100px;" /> </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a>{{item.name}}</a></h4>
-                                    <h5 class="media-heading"> by <a>{{item.brand}}</a></h5>
-
-                                </div>
-                            </div>
-                        </td>
-                        <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="number" class="form-control" [value]='item.count' min="1" max="{{item.amount}}" (change)="refriChangeAmount($event,item)">
-                        </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{refriTotalPrice(item.count,item.price)}}</strong></td>
-                        <td class="col-sm-1 col-md-1">
-                            <button type="button" class="btn btn-danger" (click)="removeRefriItem(item)">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button></td>
-                    </tr>
-
-                    <!-- Tv -->
-                    <tr *ngFor='let item of countTv'>
-                        <td class="col-sm-8 col-md-6">
-                            <div class="media">
-                                <a class="thumbnail pull-left"> <img class="img-fluid" src="{{ item.file }}" style="width: 100px; height: 100px;" /> </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a>{{item.name}}</a></h4>
-                                    <h5 class="media-heading"> by <a>{{item.brand}}</a></h5>
-
-                                </div>
-                            </div>
-                        </td>
-                        <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="number" class="form-control" [value]='item.count' min="1" max="{{item.amount}}" (change)="tvChangeAmount($event,item)">
-                        </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{tvTotalPrice(item.count,item.price)}}</strong></td>
-                        <td class="col-sm-1 col-md-1">
-                            <button type="button" class="btn btn-danger" (click)="removeTvItem(item)">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button></td>
-                    </tr>
-
-                    <!-- WashingMachine -->
-                    <tr *ngFor='let item of countWash'>
-                        <td class="col-sm-8 col-md-6">
-                            <div class="media">
-                                <a class="thumbnail pull-left"> <img class="img-fluid" src="{{ item.file }}" style="width: 100px; height: 100px;" /> </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a>{{item.name}}</a></h4>
-                                    <h5 class="media-heading"> by <a>{{item.brand}}</a></h5>
-
-                                </div>
-                            </div>
-                        </td>
-                        <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="number" class="form-control" [value]='item.count' min="1" max="{{item.amount}}" (change)="washChangeAmount($event,item)">
-                        </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{washTotalPrice(item.count,item.price)}}</strong></td>
-                        <td class="col-sm-1 col-md-1">
-                            <button type="button" class="btn btn-danger" (click)="removeWashItem(item)">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button></td>
-                    </tr>
-
-                    <!-- Other -->
-                    <tr *ngFor='let item of countOther'>
-                        <td class="col-sm-8 col-md-6">
-                            <div class="media">
-                                <a class="thumbnail pull-left"> <img class="img-fluid" src="{{ item.file }}" style="width: 100px; height: 100px;" /> </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a>{{item.name}}</a></h4>
-                                    <h5 class="media-heading"> by <a>{{item.brand}}</a></h5>
-
-                                </div>
-                            </div>
-                        </td>
-                        <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="number" class="form-control" [value]='item.count' min="1" max="{{item.amount}}" (change)="otherChangeAmount($event,item)">
-                        </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{otherTotalPrice(item.count,item.price)}}</strong></td>
-                        <td class="col-sm-1 col-md-1">
-                            <button type="button" class="btn btn-danger" (click)="removeOtherItem(item)">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button></td>
-                    </tr>
-
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>
-                            <h5>Estimated shipping</h5>
-                        </td>
-                        <td class="text-right">
-                            <h5>VAT (7%)</h5>
-                            <h5><strong>{{calTotalVAT7().toFixed(2)}}</strong></h5>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>
-                            <h3>Total</h3>
-                        </td>
-                        <td class="text-right">
-                            <h3><strong>{{calTotalPriceAllProduct().toFixed(2)}}</strong></h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>
-                            <button type="button" class="btn btn-primary" [routerLink]="['/home']">
-                            <span class="glyphicon glyphicon-shopping-cart"></span> Back to Shopping
-                        </button></td>
-                        <td>
-                            <button type="button" class="btn btn-success" [routerLink]="['/checkout']">
-                            Checkout <span class="glyphicon glyphicon-play"></span>
-                        </button></td>
-                    </tr>
-                </tbody>
-            </table>
+          <div class="card-body border-top">
+            <a
+              class="btn btn-primary float-md-right"
+              [routerLink]="['/checkout']"
+              >Make Purchase <i class="fa fa-chevron-right"></i>
+            </a>
+            <a class="btn btn-light" [routerLink]="['/home']">
+              <i class="fa fa-chevron-left"></i> Continue shopping
+            </a>
+          </div>
         </div>
+        <!-- card.// -->
+      </main>
+      <!-- col.// -->
+      <aside class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <dl class="dlist-align">
+              <dt>Total price:</dt>
+              <dd class="text-right">....</dd>
+            </dl>
+            <dl class="dlist-align">
+              <dt>Discount:</dt>
+              <dd class="text-right">....</dd>
+            </dl>
+            <dl class="dlist-align">
+              <dt>Total:</dt>
+              <dd class="text-right h5"><strong>....</strong></dd>
+            </dl>
+            <hr />
+            <p class="text-center mb-3">
+              <img src="assets/misc/payments.png" height="26" />
+            </p>
+          </div>
+          <!-- card-body.// -->
+        </div>
+        <!-- card .// -->
+      </aside>
+      <!-- col.// -->
     </div>
-</div>
+  </div>
+  <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+<app-footer></app-footer>

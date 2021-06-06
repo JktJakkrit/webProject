@@ -12,9 +12,12 @@ const methods = {
             let data = [username, password];
             let sql = `SELECT * FROM register WHERE username = '${username}' AND password = '${password}'`;
             // return resolve(data);
-            db.query(sql, function(error, result) {
+            db.query(sql,[ username, password ], function(error, result) {
                 if (error) return reject(error);
+                
+                // if (error) return error.status(404).send({ message: "User Not found." });
                 return resolve(result[0]);
+                // return resolve(result);
             });
             // db.end();
         })

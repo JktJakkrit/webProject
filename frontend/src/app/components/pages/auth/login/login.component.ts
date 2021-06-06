@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonDataService } from 'src/app/common-data.service';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -8,16 +13,21 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-login_form: FormGroup;
+  login_form: FormGroup;
 
-  constructor(private authService: AuthService, private _commondata: CommonDataService, private router: Router, private formBuilder: FormBuilder, private userService: UserService) {
+  constructor(
+    private authService: AuthService,
+    private _commondata: CommonDataService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private userService: UserService
+  ) {
     this.login_form = this.formBuilder.group({
-      username: new FormControl("", [Validators.required]),
-      password: new FormControl("", [Validators.required]),
-     
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
     });
   }
 
@@ -32,18 +42,17 @@ login_form: FormGroup;
 
   public onSubmit(form: any) {
     // this.authService.login("test","test").subscribe(
-      
-      this.authService.login(form.value.username,form.value.password).subscribe(
+
+    this.authService.login(form.value.username, form.value.password).subscribe(
       (token: any) => {
         Swal.fire({
           icon: 'success',
           title: 'Login success!',
           showConfirmButton: false,
-          timer: 1500
-        })
+          timer: 1500,
+        });
         console.log(token);
-        
-        
+       
         // after login success
         this.router.navigate(['home']);
       },
@@ -52,16 +61,14 @@ login_form: FormGroup;
           icon: 'error',
           title: 'Login error!',
           showConfirmButton: false,
-          timer: 1500
-        })
+          timer: 1500,
+        });
       },
       () => {}
     );
   }
 
-  logout(){
+  logout() {
     this.authService.logOut();
   }
-
- 
 }

@@ -39,7 +39,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of countAir">
+                    <tr *ngFor="let item of countProduct">
                         <td class="col-md-9">
                             <em>{{ item.name }}</em>
                         </td>
@@ -48,87 +48,11 @@
                         </td>
                         <td class="col-md-1 text-center">{{ item.price }}</td>
                         <td class="col-md-1 text-center">
-                            {{ airTotalPrice(item.count, item.price) }}
+                            {{ TotalProductPrice(item.count, item.price) }}
                         </td>
                     </tr>
 
-                    <tr *ngFor="let item of countFan">
-                        <td class="col-md-9">
-                            <em>{{ item.name }}</em>
-                        </td>
-                        <td class="col-md-1" style="text-align: center">
-                            {{ item.count }}
-                        </td>
-                        <td class="col-md-1 text-center">{{ item.price }}</td>
-                        <td class="col-md-1 text-center">
-                            {{ fanTotalPrice(item.count, item.price) }}
-                        </td>
-                    </tr>
-
-                    <tr *ngFor="let item of countDish">
-                        <td class="col-md-9">
-                            <em>{{ item.name }}</em>
-                        </td>
-                        <td class="col-md-1" style="text-align: center">
-                            {{ item.count }}
-                        </td>
-                        <td class="col-md-1 text-center">{{ item.price }}</td>
-                        <td class="col-md-1 text-center">
-                            {{ dishTotalPrice(item.count, item.price) }}
-                        </td>
-                    </tr>
-
-                    <tr *ngFor="let item of countTv">
-                        <td class="col-md-9">
-                            <em>{{ item.name }}</em>
-                        </td>
-                        <td class="col-md-1" style="text-align: center">
-                            {{ item.count }}
-                        </td>
-                        <td class="col-md-1 text-center">{{ item.price }}</td>
-                        <td class="col-md-1 text-center">
-                            {{ tvTotalPrice(item.count, item.price) }}
-                        </td>
-                    </tr>
-
-                    <tr *ngFor="let item of countRefri">
-                        <td class="col-md-9">
-                            <em>{{ item.name }}</em>
-                        </td>
-                        <td class="col-md-1" style="text-align: center">
-                            {{ item.count }}
-                        </td>
-                        <td class="col-md-1 text-center">{{ item.price }}</td>
-                        <td class="col-md-1 text-center">
-                            {{ refriTotalPrice(item.count, item.price) }}
-                        </td>
-                    </tr>
-
-                    <tr *ngFor="let item of countWash">
-                        <td class="col-md-9">
-                            <em>{{ item.name }}</em>
-                        </td>
-                        <td class="col-md-1" style="text-align: center">
-                            {{ item.count }}
-                        </td>
-                        <td class="col-md-1 text-center">{{ item.price }}</td>
-                        <td class="col-md-1 text-center">
-                            {{ washTotalPrice(item.count, item.price) }}
-                        </td>
-                    </tr>
-
-                    <tr *ngFor="let item of countOther">
-                        <td class="col-md-9">
-                            <em>{{ item.name }}</em>
-                        </td>
-                        <td class="col-md-1" style="text-align: center">
-                            {{ item.count }}
-                        </td>
-                        <td class="col-md-1 text-center">{{ item.price }}</td>
-                        <td class="col-md-1 text-center">
-                            {{ otherTotalPrice(item.count, item.price) }}
-                        </td>
-                    </tr>
+                   
                     <tr>
                         <td> </td>
                         <td> </td>
@@ -139,7 +63,7 @@
                         </td>
                         <td class="text-center">
                             <p>
-                                <strong>{{ calTotalVAT7().toFixed(2) }}</strong>
+                                <strong>{{ calTotalVAT7all().toFixed(2) }}</strong>
                             </p>
                         </td>
                     </tr>
@@ -151,7 +75,7 @@
                         </td>
                         <td class="text-center text-danger">
                             <h4>
-                                <strong>{{ calTotalPriceAllProduct().toFixed(2) }}</strong>
+                                <strong>{{ calTotalAll().toFixed(2) }}</strong>
                             </h4>
                         </td>
                     </tr>

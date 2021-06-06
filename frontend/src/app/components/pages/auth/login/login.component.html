@@ -1,15 +1,42 @@
-<div class="container">
-    <div class="login-container">
-        <div id="output"></div>
-        <div class="avatar"></div>
-        <div class="form-box">
-            <form [formGroup]="login_form" (ngSubmit)="onSubmit(this.login_form)">
-
-                <input id="username" name="username" type="text" placeholder="username" formControlName="username">
-                <input id="password" name="password" type="password" placeholder="password" formControlName="password">
-                <button class="btn btn-info btn-block login " type="submit ">Login</button>
-            </form>
+<section class="section-conten padding-y" style="min-height: 84vh">
+  <!-- ============================ COMPONENT LOGIN   ================================= -->
+  <div class="card mx-auto" style="max-width: 380px; margin-top: 100px">
+    <div class="card-body">
+      <h4 class="card-title mb-4">Sign in</h4>
+      <form [formGroup]="login_form" (ngSubmit)="onSubmit(this.login_form)">
+        <div class="form-group">
+          <input
+            name="username"
+            class="form-control"
+            placeholder="Username"
+            type="text"
+            formControlName="username"
+          />
         </div>
-    </div>
+        <!-- form-group// -->
+        <div class="form-group">
+          <input
+            name="password"
+            class="form-control"
+            placeholder="Password"
+            type="password"
+            formControlName="password"
+          />
+        </div>
+        <!-- form-group// -->
 
-</div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </div>
+        <!-- form-group// -->
+      </form>
+    </div>
+    <!-- card-body.// -->
+  </div>
+  <!-- card .// -->
+
+  <!-- <p class="text-center mt-4">Don't have account? <a href="#">Sign up</a></p> -->
+  <br /><br />
+  <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->

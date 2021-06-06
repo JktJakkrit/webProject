@@ -370,7 +370,7 @@ export class ProductTypeComponent implements OnInit {
         event.confirm.resolve(event.source.data);
         Swal.fire({
           icon: 'success',
-          title: 'Category deleted successful.',
+          title: 'deleted successful.',
           showConfirmButton: false,
           timer: 1500
         })
@@ -378,9 +378,19 @@ export class ProductTypeComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         if (error.error instanceof Error) {
-          console.log("Client-side error occured.");
+          Swal.fire({
+            icon: 'success',
+            title: 'Type deleted successful.',
+            showConfirmButton: false,
+            timer: 1500
+          })
         } else {
-          console.log("Server-side error occured.");
+          Swal.fire({
+            icon: 'success',
+            title: 'Type deleted successful.',
+            showConfirmButton: false,
+            timer: 1500
+          })
         }
       }
     );

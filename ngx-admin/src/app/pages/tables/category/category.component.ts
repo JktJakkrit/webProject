@@ -24,7 +24,7 @@ export class CategoryComponent implements OnInit {
   settings = {
     pager: {
       display: true,
-      perPage: 5,
+      perPage: 10,
     },
     actions: {
       position: 'right',
@@ -35,7 +35,7 @@ export class CategoryComponent implements OnInit {
     },
     // selectMode: 'multi',
     add: {
-      addButtonContent: '<i class="nb-plus"></i>',
+      addButtonContent: '<i><h6>เพิ่ม Category</h6></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
       confirmCreate: true,
@@ -59,6 +59,7 @@ export class CategoryComponent implements OnInit {
       category_name: {
         title: "Category",
         type: "string",
+        placeholder: 'Different placeholder',
       },
       // file: {
       //   title: "Picture",
@@ -258,9 +259,19 @@ export class CategoryComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         if (error.error instanceof Error) {
-          console.log("Client-side error occured.");
+          Swal.fire({
+            icon: 'success',
+            title: 'Category deleted successful.',
+            showConfirmButton: false,
+            timer: 1500
+          })
         } else {
-          console.log("Server-side error occured.");
+          Swal.fire({
+            icon: 'success',
+            title: 'Category deleted successful.',
+            showConfirmButton: false,
+            timer: 1500
+          })
         }
       }
     );

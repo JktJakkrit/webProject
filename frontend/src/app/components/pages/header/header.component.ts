@@ -13,11 +13,13 @@ import { CartProduct } from 'src/app/models/cart.model';
 import { DishProduct } from 'src/app/models/dish.model';
 import { FanProduct } from 'src/app/models/fan.model';
 import { OtherProduct } from 'src/app/models/other.model';
+import { ProductsAll } from 'src/app/models/product.model';
 import { RefriProduct } from 'src/app/models/refri.model';
 import { TvProduct } from 'src/app/models/tv.model';
 import { WashProduct } from 'src/app/models/wash.model';
 import { AuthService } from 'src/app/_services/auth.service';
 import { CartDataServiceService } from 'src/app/_services/cart-data-service.service';
+import { MasterService } from 'src/app/_services/master.service';
 import { ModalService } from 'src/app/_services/modal.service';
 import { RegisterService } from 'src/app/_services/register.service';
 
@@ -29,28 +31,16 @@ import Swal from 'sweetalert2';
 })
 export class HeaderComponent implements OnInit {
   title: string = 'ANGULAR 10 ';
-  countAir: AirProduct[] = [];
-  countDish: DishProduct[] = [];
-  countFan: FanProduct[] = [];
-  countRefri: RefriProduct[] = [];
-  countTv: TvProduct[] = [];
-  countWash: WashProduct[] = [];
-  countOther: OtherProduct[] = [];
   currentUser: any;
   register_form: FormGroup;
   Islogin: boolean;
-
+  category;
   
-
+  countProduct: ProductsAll[] = [];
+  
   public get counter() {
     var counters: number = 0;
-    counters += this.countAir.length || 0;
-    counters += this.countDish.length || 0;
-    counters += this.countFan.length || 0;
-    counters += this.countRefri.length || 0;
-    counters += this.countTv.length || 0;
-    counters += this.countWash.length || 0;
-    counters += this.countOther.length || 0;
+    counters += this.countProduct.length || 0;
     return counters;
   }
   openModal(id: string) {
@@ -62,6 +52,7 @@ export class HeaderComponent implements OnInit {
   }
 
   constructor(
+    private masterService: MasterService,
     private cartDataService: CartDataServiceService,
     private modalService: ModalService,
     private formBuilder: FormBuilder,
@@ -75,53 +66,18 @@ export class HeaderComponent implements OnInit {
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
       address: new FormControl('', [Validators.required]),
       city: new FormControl('', [Validators.required]),
-      phone: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required, Validators.pattern("^((\\+91-?))?[0-9]{10}$")]),
       state: new FormControl('', [Validators.required]),
-      zip: new FormControl('', [Validators.required]),
+      zip: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     });
 
-    this.cartDataService.currentAirProduct.subscribe((data) => {
-      if (data) {
-        this.countAir = data;
-      }
-    });
 
-    this.cartDataService.currentDishProduct.subscribe((data) => {
+    this.cartDataService.currentProductsAll.subscribe((data) => {
       if (data) {
-        this.countDish = data;
-      }
-    });
-
-    this.cartDataService.currentFanProduct.subscribe((data) => {
-      if (data) {
-        this.countFan = data;
-      }
-    });
-
-    this.cartDataService.currentRefriProduct.subscribe((data) => {
-      if (data) {
-        this.countRefri = data;
-      }
-    });
-
-    this.cartDataService.currentTvProduct.subscribe((data) => {
-      if (data) {
-        this.countTv = data;
-      }
-    });
-
-    this.cartDataService.currentWashProduct.subscribe((data) => {
-      if (data) {
-        this.countWash = data;
-      }
-    });
-
-    this.cartDataService.currentOtherProduct.subscribe((data) => {
-      if (data) {
-        this.countOther = data;
+        this.countProduct = data;
       }
     });
 
@@ -168,6 +124,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.Islogin = this.authService.isLogin();
     console.log(this.Islogin);
+    this.loadCategoryList();
   }
 
   editcate(trdata) {
@@ -191,4 +148,23 @@ export class HeaderComponent implements OnInit {
   login(): void {
     this.router.navigate(['login']);
   }
+
+  loadCategoryList() {
+    this.masterService.loadCategory().subscribe(
+      (res: any) => {
+        console.log(res);
+
+        this.category = res;
+      },
+      (error) => {
+        Swal.fire('Error!', 'error : ' + error.status, 'error');
+      }
+    );
+  }
+
+  get f() { return this.register_form.controls; }
+
+  get email(){
+    return this.register_form.get('email');
+    }
 }

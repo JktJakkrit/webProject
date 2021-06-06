@@ -148,10 +148,10 @@
             </span>
             </h2>
 
-            <tr *ngFor='let item of countAir'>
+            <tr *ngFor='let item of countProduct'>
                 <td class="col-sm-8 col-md-6">
                     <div class="media">
-                        <!-- <a class="thumbnail pull-left"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a> -->
+                        <!-- <a class="thumbnail pull-left"> <img class="media-object" src="{{item.file}}" style="width: 72px; height: 72px;"> </a> -->
                         <div class="media-body">
                             <h4 class="media-heading"><a>{{item.name}}</a></h4>
                         </div>
@@ -160,86 +160,12 @@
                 <td class="col-sm-2 col-md-2" style="text-align: center">
                     <input type="text" class="form-control" [value]='item.count' readonly>
                 </td>
-                <td class="col-sm-1 col-md-1 text-center"><strong>{{airTotalPrice(item.count,item.price)}}</strong></td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>{{TotalProductPrice(item.count,item.price)}}</strong></td>
             </tr>
 
-            <tr *ngFor='let item of countFan'>
-                <td class="col-sm-8 col-md-6">
-                    <div class="media">
-                        <!-- <a class="thumbnail pull-left"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a> -->
-                        <div class="media-body">
-                            <h4 class="media-heading"><a>{{item.name}}</a></h4>
-                        </div>
-                    </div>
-                </td>
-                <td class="col-sm-2 col-md-2" style="text-align: center">
-                    <input type="text" class="form-control" [value]='item.count' readonly>
-                </td>
-                <td class="col-sm-1 col-md-1 text-center"><strong>{{fanTotalPrice(item.count,item.price)}}</strong></td>
-            </tr>
-
-            <tr *ngFor='let item of countTv'>
-                <td class="col-sm-8 col-md-6">
-                    <div class="media">
-                        <!-- <a class="thumbnail pull-left"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a> -->
-                        <div class="media-body">
-                            <h4 class="media-heading"><a>{{item.name}}</a></h4>
-                        </div>
-                    </div>
-                </td>
-                <td class="col-sm-2 col-md-2" style="text-align: center">
-                    <input type="text" class="form-control" [value]='item.count' readonly>
-                </td>
-                <td class="col-sm-1 col-md-1 text-center"><strong>{{tvTotalPrice(item.count,item.price)}}</strong></td>
-            </tr>
-
-            <tr *ngFor='let item of countDish'>
-                <td class="col-sm-8 col-md-6">
-                    <div class="media">
-                        <!-- <a class="thumbnail pull-left"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a> -->
-                        <div class="media-body">
-                            <h4 class="media-heading"><a>{{item.name}}</a></h4>
-                        </div>
-                    </div>
-                </td>
-                <td class="col-sm-2 col-md-2" style="text-align: center">
-                    <input type="text" class="form-control" [value]='item.count' readonly>
-                </td>
-                <td class="col-sm-1 col-md-1 text-center"><strong>{{dishTotalPrice(item.count,item.price)}}</strong></td>
-            </tr>
-
-            <tr *ngFor='let item of countWash'>
-                <td class="col-sm-8 col-md-6">
-                    <div class="media">
-                        <!-- <a class="thumbnail pull-left"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a> -->
-                        <div class="media-body">
-                            <h4 class="media-heading"><a>{{item.name}}</a></h4>
-                        </div>
-                    </div>
-                </td>
-                <td class="col-sm-2 col-md-2" style="text-align: center">
-                    <input type="text" class="form-control" [value]='item.count' readonly>
-                </td>
-                <td class="col-sm-1 col-md-1 text-center"><strong>{{washTotalPrice(item.count,item.price)}}</strong></td>
-            </tr>
-
-            <tr *ngFor='let item of countRefri'>
-                <td class="col-sm-8 col-md-6">
-                    <div class="media">
-                        <!-- <a class="thumbnail pull-left"> <img class="media-object" src="" style="width: 72px; height: 72px;"> </a> -->
-                        <div class="media-body">
-                            <h4 class="media-heading"><a>{{item.name}}</a></h4>
-                        </div>
-                    </div>
-                </td>
-                <td class="col-sm-2 col-md-2" style="text-align: center">
-                    <input type="text" class="form-control" [value]='item.count' readonly>
-                </td>
-                <td class="col-sm-1 col-md-1 text-center"><strong>{{refriTotalPrice(item.count,item.price)}}</strong></td>
-            </tr>
 
             <hr>
-            <p>Total Price: <span class="price" style="color:black"><b>{{calTotalPriceAllProduct()}}</b></span></p>
+            <p>Total Price: <span class="price" style="color:black"><b>{{calTotalAll().toFixed(2)}}</b></span></p>
         </div>
     </div>
 

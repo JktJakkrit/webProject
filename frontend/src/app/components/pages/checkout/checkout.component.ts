@@ -24,6 +24,7 @@ import { OtherProduct } from 'src/app/models/other.model';
 import { Router } from '@angular/router';
 import { RegisterService } from 'src/app/_services/register.service';
 import { UserService } from 'src/app/_services/user.service';
+import { ProductsAll } from 'src/app/models/product.model';
 
 @Component({
   selector: 'app-checkout',
@@ -39,17 +40,13 @@ export class CheckoutComponent implements OnInit {
   countTv: TvProduct[] = [];
   countWash: WashProduct[] = [];
   countOther: OtherProduct[] = [];
+
+  countProduct: ProductsAll[] = [];
   userData: DataUser;
   // dataUser;
   public get counter() {
     var counters: number = 0;
-    counters += this.countAir.length || 0;
-    counters += this.countDish.length || 0;
-    counters += this.countFan.length || 0;
-    counters += this.countRefri.length || 0;
-    counters += this.countTv.length || 0;
-    counters += this.countWash.length || 0;
-    counters += this.countOther.length || 0;
+    counters += this.countProduct.length || 0;
     // counters += this.countProduct.length || 0;
     return counters;
   }
@@ -77,45 +74,9 @@ export class CheckoutComponent implements OnInit {
       cvv: new FormControl('', [Validators.required]),
     });
 
-    this.cartDataService.currentAirProduct.subscribe((data) => {
+    this.cartDataService.currentProductsAll.subscribe((data) => {
       if (data) {
-        this.countAir = data;
-      }
-    });
-
-    this.cartDataService.currentDishProduct.subscribe((data) => {
-      if (data) {
-        this.countDish = data;
-      }
-    });
-
-    this.cartDataService.currentFanProduct.subscribe((data) => {
-      if (data) {
-        this.countFan = data;
-      }
-    });
-
-    this.cartDataService.currentRefriProduct.subscribe((data) => {
-      if (data) {
-        this.countRefri = data;
-      }
-    });
-
-    this.cartDataService.currentTvProduct.subscribe((data) => {
-      if (data) {
-        this.countTv = data;
-      }
-    });
-
-    this.cartDataService.currentWashProduct.subscribe((data) => {
-      if (data) {
-        this.countWash = data;
-      }
-    });
-
-    this.cartDataService.currentOtherProduct.subscribe((data) => {
-      if (data) {
-        this.countOther = data;
+        this.countProduct = data;
       }
     });
   }
@@ -185,120 +146,45 @@ export class CheckoutComponent implements OnInit {
     this.userService.changeDataUser(event.target.value);
   }
 
-  airTotalPrice(count, price): number {
+
+  TotalProductPrice(count, price): number {
     return count * price;
   }
 
-  airChangeAmount(event, airItem) {
+  ProductChangeAmount(event, ProductItem) {
     console.log(event.target.value);
-    this.cartDataService.updateAmountAirProduct(airItem, event.target.value);
-    this.calTotalPriceAllProduct().toFixed(2);
-    this.calTotalVAT7().toFixed(2);
-  }
-
-  //-----------------------------
-  dishTotalPrice(count, price): number {
-    return count * price;
-  }
-  dishChangeAmount(event, dishItem) {
-    console.log(event.target.value);
-    this.cartDataService.updateAmountDishProduct(dishItem, event.target.value);
-    this.calTotalPriceAllProduct().toFixed(2);
-    this.calTotalVAT7().toFixed(2);
-  }
-
-  //-----------------------------
-  fanTotalPrice(count, price): number {
-    return count * price;
-  }
-  fanChangeAmount(event, fanItem) {
-    console.log(event.target.value);
-    this.cartDataService.updateAmountFanProduct(fanItem, event.target.value);
-    this.calTotalPriceAllProduct().toFixed(2);
-    this.calTotalVAT7().toFixed(2);
-  }
-
-  //-----------------------------
-  refriTotalPrice(count, price): number {
-    return count * price;
-  }
-  refriChangeAmount(event, refriItem) {
-    console.log(event.target.value);
-    this.cartDataService.updateAmountRefriProduct(
-      refriItem,
+    this.cartDataService.updateAmountProductAll(
+      ProductItem,
       event.target.value
     );
-    this.calTotalPriceAllProduct().toFixed(2);
-    this.calTotalVAT7().toFixed(2);
+    this.calTotalAll().toFixed(2);
+    this.calTotalVAT7all().toFixed(2);
   }
 
-  //-----------------------------
-  washTotalPrice(count, price): number {
-    return count * price;
-  }
-  washChangeAmount(event, washItem) {
-    console.log(event.target.value);
-    this.cartDataService.updateAmountWashProduct(washItem, event.target.value);
-    this.calTotalPriceAllProduct().toFixed(2);
-    this.calTotalVAT7().toFixed(2);
+  removeItem(item) {
+    this.cartDataService.removeProductItem(item);
   }
 
-  //-----------------------------
-  tvTotalPrice(count, price): number {
-    return count * price;
-  }
-  tvChangeAmount(event, tvItem) {
-    console.log(event.target.value);
-    this.cartDataService.updateAmountTvProduct(tvItem, event.target.value);
-    this.calTotalPriceAllProduct().toFixed(2);
-    this.calTotalVAT7().toFixed(2);
-  }
-
-  //-----------------------------
-  otherTotalPrice(count, price): number {
-    return count * price;
-  }
-  otherChangeAmount(event, otherItem) {
-    console.log(event.target.value);
-    this.cartDataService.updateAmountOtherProduct(
-      otherItem,
-      event.target.value
-    );
-    this.calTotalPriceAllProduct().toFixed(2);
-    this.calTotalVAT7().toFixed(2);
-  }
-
-  calTotalPriceAllProduct() {
+  calTotalAll() {
     const callBack = (sum, curr) => sum + curr.price * curr.count;
-    const allProduct = [
-      ...this.countAir,
-      ...this.countDish,
-      ...this.countFan,
-      ...this.countRefri,
-      ...this.countTv,
-      ...this.countWash,
-      ...this.countOther,
-    ];
-    const sum = !!allProduct.length ? allProduct.reduce(callBack, 0) : 0;
+
+    const sum = !!this.countProduct.length
+      ? this.countProduct.reduce(callBack, 0)
+      : 0;
 
     // return sum + (sum * 0.07) + (sum * 0.93);
     return sum + sum * 0.07;
   }
-
-  calTotalVAT7() {
+  calTotalVAT7all() {
     const callBack = (sum, curr) => sum + curr.price * curr.count;
-    const allProduct = [
-      ...this.countAir,
-      ...this.countDish,
-      ...this.countFan,
-      ...this.countRefri,
-      ...this.countTv,
-      ...this.countWash,
-      ...this.countOther,
-    ];
-    const sum = !!allProduct.length ? allProduct.reduce(callBack, 0) : 0;
+
+    const sum = !!this.countProduct.length
+      ? this.countProduct.reduce(callBack, 0)
+      : 0;
 
     // return sum + (sum * 0.07) + (sum * 0.93);
     return sum * 0.07;
   }
+
+  //-----------------------------
 }

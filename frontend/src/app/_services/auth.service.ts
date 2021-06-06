@@ -23,6 +23,7 @@ export class AuthService {
 
     return this.http.post<any>(this.url + '/user_login/login', body).pipe(
       map((user) => {
+        console.log('user' + user)
         if (user) {
           delete user.regis_sys_id;
           delete user.password;
@@ -84,6 +85,7 @@ export class AuthService {
   }
 
   private handleError(error: HttpErrorResponse) {
+    console.log('Error ' + error)
     return throwError(error);
   }
 }
