@@ -540,26 +540,32 @@ export class MasterService {
       .pipe(catchError(this.handleError));
   }
 
-  loadCategory(){
-    return this.http.get<any>(this.url + "/category/all");
+  loadCategory() {
+    return this.http.get<any>(this.url + '/category/all');
   }
 
-  loadGroup(){
-    return this.http.get<any>(this.url + "/group/all");
+  loadGroup() {
+    return this.http.get<any>(this.url + '/group/all');
   }
-  
+
   getMasterProduct() {
     const newParams = new HttpParams();
     // .set('catagory_sys_id', categoty_sys_id)
-    return this.http.get<any>(this.url + "/product/all");
+    return this.http.get<any>(this.url + '/product/all');
   }
 
-  loadProductById(product_sys_id){
-    return this.http.get<any>(this.url + "/product/id/" + product_sys_id);
+  loadProductById(product_sys_id) {
+    return this.http.get<any>(this.url + '/product/id/' + product_sys_id);
+  }
+
+  loadGroupById(category_sys_id) {
+    return this.http.get<any>(
+      this.url + '/group/categoryId/' + category_sys_id
+    );
+  }
+
+  loadProductByGroupId(group_sys_id) {
+    return this.http.get<any>(this.url + '/product/groupId/' + group_sys_id);
   }
   
-  loadGroupById(group_sys_id){
-    return this.http.get<any>(this.url + "/group/id/" + group_sys_id);
-  }
-
 }

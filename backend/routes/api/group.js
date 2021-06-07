@@ -7,6 +7,8 @@ router.post('/post', upload.single('avatar'), controller.PostGroup)
 
 router.get('/all', controller.GetGroupAll)
 router.get('/id/:id', controller.GetGroupById)
+router.get('/categoryId/:id', controller.GetGroupByIdCategory)
+
 router.put('/edit/:id', upload.single('avatar'), controller.UpdateGroupById)
 router.delete('/delete/:id', controller.DeleteGroupById)
 

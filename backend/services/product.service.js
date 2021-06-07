@@ -19,9 +19,27 @@ const methods = {
             // db.end();
         });
     },
+
+    // findById: function(id) {
+    //     return new Promise((resolve, reject) => {
+    //         let sql = "SELECT * FROM `product` where `product_sys_id` = " + id;
+    //         // db.connect();
+    //         db.query(sql, function(error, result) {
+    //             if (error) return reject(error);
+    //             return resolve(result);
+    //         });
+    //         // db.end();
+    //     });
+    // },
+
     findById: function(id) {
         return new Promise((resolve, reject) => {
-            let sql = "SELECT * FROM `product` where `product_sys_id` = " + id;
+            let sql = "SELECT p.* , g.group_name , c.category_name, t.type_name ,b.brand_name FROM `product` p " +
+            "LEFT JOIN `type` t ON t.type_sys_id = p.type_sys_id " +
+            "LEFT JOIN `group` g ON g.group_sys_id = t.group_sys_id " +
+            "LEFT JOIN `category` c ON c.category_sys_id = g.category_sys_id " +
+            "LEFT JOIN `brand` b ON b.brand_sys_id = p.brand_sys_id " +
+            "where p.product_sys_id = " + id;
             // db.connect();
             db.query(sql, function(error, result) {
                 if (error) return reject(error);
@@ -30,6 +48,20 @@ const methods = {
             // db.end();
         });
     },
+
+    findByGroupId: function(id) {
+        return new Promise((resolve, reject) => {
+            let sql = "SELECT * FROM `product` where `group_sys_id` = " + id;
+            // db.connect();
+            db.query(sql, function(error, result) {
+                if (error) return reject(error);
+                return resolve(result);
+            });
+            // db.end();
+        });
+    },
+
+
     postItemProduct: function(path_pic, body) {
         return new Promise((resolve, reject) => {
             let newPath = config.file + path.basename(path_pic);

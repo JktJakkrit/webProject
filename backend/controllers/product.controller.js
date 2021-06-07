@@ -17,6 +17,15 @@ const methods = {
             res.json(error).end();
         }
     },
+    async GetByGroupId(req, res) {
+        try {
+            let result = await service.findByGroupId(req.params.id)
+            res.status(200).send(result)
+        } catch (error) {
+            res.json(error).end();
+        }
+    },
+    
     async PostProduct(req, res) {
         try {
             let result = await service.postItemProduct(req.file.path, req.body)

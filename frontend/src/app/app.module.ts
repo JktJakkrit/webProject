@@ -34,6 +34,7 @@ import { SuccessComponent } from './components/pages/success/success.component';
 import { ExportAsModule } from 'ngx-export-as';
 import { SingleitemComponent } from './components/pages/singleitem/singleitem.component';
 import { ShowgroupComponent } from './components/pages/showgroup/showgroup.component';
+import { ProductBygroupComponent } from './components/pages/product-bygroup/product-bygroup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +48,7 @@ import { ShowgroupComponent } from './components/pages/showgroup/showgroup.compo
     SuccessComponent,
     SingleitemComponent,
     ShowgroupComponent,
+    ProductBygroupComponent,
    
 
   ],

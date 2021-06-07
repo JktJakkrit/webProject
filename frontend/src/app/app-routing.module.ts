@@ -14,6 +14,7 @@ import { HeaderComponent } from './components/pages/header/header.component';
 import { FooterComponent } from './components/pages/footer/footer.component';
 import { SingleitemComponent } from './components/pages/singleitem/singleitem.component';
 import { ShowgroupComponent } from './components/pages/showgroup/showgroup.component';
+import { ProductBygroupComponent } from './components/pages/product-bygroup/product-bygroup.component';
 
 
 
@@ -66,6 +67,11 @@ const routes: Routes = [
   { 
     path: 'group/:id', 
     component: ShowgroupComponent 
+  },
+
+  { 
+    path: 'product-byGroup/:id', 
+    component: ProductBygroupComponent 
   }
   
 ];

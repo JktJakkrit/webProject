@@ -51,6 +51,20 @@ const methods = {
             // db.end();
         });
     },
+
+    findByIdCategory: function(id) {
+        return new Promise((resolve, reject) => {
+            let sql = "SELECT * FROM `group` where `category_sys_id` = " + id;
+            // db.connect();
+            db.query(sql, function(error, result) {
+                if (error) return reject(error);
+                return resolve(result);
+            });
+            // db.end();
+        });
+    },
+
+
     putItemGroupById: function(path_pic, id, body) {
         return new Promise((resolve, reject) => {
             let newPath = config.file + path.basename(path_pic)

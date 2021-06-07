@@ -27,6 +27,16 @@ const methods = {
         }
     },
 
+    async GetGroupByIdCategory(req, res) {
+        try {
+            let result = await groupServices.findByIdCategory(req.params.id)
+            res.status(200).send(result)
+        } catch (error) {
+            res.json(error).end();
+        }
+    },
+    
+
     async UpdateGroupById(req, res) {
         console.log(req.params.id, req.body);
         try {

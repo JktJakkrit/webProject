@@ -19,10 +19,10 @@ export interface ProductModelServer {
   export interface ProductsAll {
   
        product_sys_id: number;
-       category_sys_id: string;
-       group_sys_id: string;
-       type_sys_id: string;
-       brand_sys_id: string;
+       category_sys_id: number;
+       group_sys_id: number;
+       type_sys_id: number;
+       brand_sys_id: number;
        name:string;
        detail: string;
        amount: number;
