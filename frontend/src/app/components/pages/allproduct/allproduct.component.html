@@ -1,0 +1,51 @@
+<app-header>
+</app-header>
+
+<section class="py-5">
+
+    <div class="container">
+        <!--  Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Electronic Shopping</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+    </div>
+
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+            <div class="col mb-5" *ngFor='let item of loadProduct'>
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" src="{{item.file}}" alt="...">
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <a [routerLink]="['/product-details', item.product_sys_id]" ><h5 class="fw-bolder">{{item.name}}</h5></a>
+                            <!-- Product price-->
+                            {{item.price}} บาท
+                        </div>
+                    </div>
+                    
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="mb-4">
+                            <a [routerLink]="['/product-details', item.product_sys_id]" class="btn btn-primary mr-1">Detail</a>
+                            <a (click)="addToCart(item)" class="btn btn-light">Add to cart</a>
+                        </div>
+                    </div>
+
+                   
+
+                </div>
+            </div>
+           
+        </div>
+    </div>
+  </section>
+
+<app-footer></app-footer>

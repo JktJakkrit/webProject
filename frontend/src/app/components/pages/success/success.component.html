@@ -1,95 +1,146 @@
 <app-header></app-header>
 <br />
 <div class="container">
-    <div class="col-md-12" id="pdfTable" #pdfTable>
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6">
-                <address>
+  <div class="col-md-12" id="pdfTable" #pdfTable>
+    <div class="row">
+      <div class="center">
+        <p>Electronic Shopping</p>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6">
+        <address>
           <strong>{{ userData.name }}</strong>
           <br />
           {{ userData.address }}
           <br />
-          {{ userData.city }}, {{ userData.state }} {{ userData.zip }}
+          {{ userData.pname_in_thai }}, {{ userData.dname_in_thai }}
+          {{ userData.zip }}
           <br />
-          <abbr title="Phone">P:</abbr> {{ userData.phone }}
+          <abbr title="Phone">0</abbr> {{ userData.phone }}
         </address>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-6 text-right">
-                <p>
-                    <em>Date: {{ currentDate | date: "yyyy-MM-dd" }}</em>
-                </p>
-                <p>
-                    <em>Receipt #: {{ codeReceipt }}</em>
-                </p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="text-center">
-                <h1>Receipt</h1>
-            </div>
-
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>#</th>
-                        <th class="text-center">Price</th>
-                        <th class="text-center">Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of countProduct">
-                        <td class="col-md-9">
-                            <em>{{ item.name }}</em>
-                        </td>
-                        <td class="col-md-1" style="text-align: center">
-                            {{ item.count }}
-                        </td>
-                        <td class="col-md-1 text-center">{{ item.price }}</td>
-                        <td class="col-md-1 text-center">
-                            {{ TotalProductPrice(item.count, item.price) }}
-                        </td>
-                    </tr>
-
-                   
-                    <tr>
-                        <td> </td>
-                        <td> </td>
-                        <td class="text-right">
-                            <p>
-                                <strong>Vat: </strong>
-                            </p>
-                        </td>
-                        <td class="text-center">
-                            <p>
-                                <strong>{{ calTotalVAT7all().toFixed(2) }}</strong>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td> </td>
-                        <td> </td>
-                        <td class="text-right">
-                            <h4><strong>Total: </strong></h4>
-                        </td>
-                        <td class="text-center text-danger">
-                            <h4>
-                                <strong>{{ calTotalAll().toFixed(2) }}</strong>
-                            </h4>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+        <p>
+          <em>Date: {{ currentDate | date: "yyyy-MM-dd" }}</em>
+        </p>
+        <p>
+          <em>Receipt #: {{ codeReceipt }}</em>
+        </p>
+      </div>
     </div>
+
     <div class="row">
-        <div class="col-sm-3">
-            <button type="button" class="btn btn-success btn-lg btn-block" (click)="downloadAsPDF()">
+      <div class="text-center">
+        <h1>Receipt</h1>
+      </div>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>#</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of countProduct">
+            <td class="col-md-9">
+              <em>{{ item.name }}</em>
+            </td>
+            <td class="col-md-1" style="text-align: center">
+              {{ item.count }}
+            </td>
+            <td class="col-md-1 text-center">{{ item.price }}</td>
+            <td class="col-md-1 text-center">
+              {{ TotalProductPrice(item.count, item.price) }}
+            </td>
+          </tr>
+
+          <tr>
+            <td> </td>
+            <td> </td>
+            <td class="text-right">
+              <p>
+                <strong>Vat: </strong>
+              </p>
+            </td>
+            <td class="text-center">
+              <p>
+                <strong>{{ calTotalVAT7all().toFixed(2) }}</strong>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td> </td>
+            <td> </td>
+            <td class="text-right">
+              <h4><strong>Total: </strong></h4>
+            </td>
+            <td class="text-center text-danger">
+              <h4>
+                <strong>{{ calTotalAll().toFixed(2) }}</strong>
+              </h4>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <button
+        type="button"
+        class="btn btn-success btn-lg btn-block"
+        (click)="downloadAsPDF()"
+      >
         Download   <span class="glyphicon glyphicon-chevron-right"></span>
       </button>
-        </div>
     </div>
+  </div>
 </div>
 
 <br />
+<!-- 
+<section class="py-5">
+  <div class="container">
+    <form
+      class="form-horizontal"
+      [formGroup]="file_form"
+      (ngSubmit)="OnSubmit(this.file_form)"
+    >
+      <div class="form-group row">
+        <label for="" class="label col-sm-2 form-control-label">Name</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            id="name"
+            placeholder="Name"
+            formControlName="name"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="" class="label col-sm-2 form-control-label">Photo</label>
+        <div class="col-sm-9">
+          <input
+            type="file"
+            id="avatar"
+            placeholder="Photo"
+            formControlName="avatar"
+            (change)="onFileChange($event)"
+          />
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        status="success"
+        style="float: right"
+        [disabled]="!file_form.valid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</section> -->

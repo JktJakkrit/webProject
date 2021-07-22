@@ -1,47 +1,61 @@
-<app-header>
-</app-header>
+<app-header> </app-header>
 
 <section class="py-5">
-
-    <div class="container">
-        <!--  Section Heading-->
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Electronic Shopping</h2>
-        <!-- Icon Divider-->
-        <div class="divider-custom">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            <div class="divider-custom-line"></div>
-        </div>
+  <div class="container">
+    <!--  Section Heading-->
+    <h2
+      class="
+        page-section-heading
+        text-center text-uppercase text-secondary
+        mb-0
+      "
+    >
+      Electronic Shopping
+    </h2>
+    <!-- Icon Divider-->
+    <div class="divider-custom">
+      <div class="divider-custom-line"></div>
+      <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+      <div class="divider-custom-line"></div>
     </div>
+  </div>
 
-    <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+  <div class="container">
 
-            <div class="col mb-5" *ngFor='let item of masterProduct'>
-                <div class="card h-100">
-                    <!-- Product image-->
-                    <img class="card-img-top" src="{{item.file}}" alt="...">
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <a [routerLink]="['/product-details', item.product_sys_id]" ><h5 class="fw-bolder">{{item.name}}</h5></a>
-                            <!-- Product price-->
-                            {{item.price}} บาท
-                        </div>
-                    </div>
+
+    <form action="/action_page.php" >
+        
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+              <div class="hero-content">
+                <h1 class="wow fadeInUp" data-wow-delay=".2s">
+                  ยินดีต้อนรับ
+                </h1>
                     
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><button type="button" class="btn btn-primary" (click)="addToCart(item)">
-                            Add to Cart
-                          </button></div>
-                    </div>
-                </div>
+                <p class="wow fadeInUp" data-wow-delay=".4s">
+                  “90% ของลูกค้ายืนยันว่าบริการของเราดีที่สุด”
+                  “ลูกค้า 9 คนจาก 10 คนยืนยีนว่าบริการของเราดีที่สุด”
+                </p>
+                
+                <!-- <a
+                  href="javascript:void(0)"
+                  class="main-btn btn-hover wow fadeInUp"
+                  data-wow-delay=".6s"
+                  >Download App</a
+                > -->
+              </div>
             </div>
-           
-        </div>
-    </div>
-  </section>
+            <div class="col-lg-6">
+              <div class="hero-img wow fadeInUp" data-wow-delay=".5s">
+                <img src="assets/img/hero/hero-img.svg" alt="" />
+              </div>
+            </div>
+          </div>
+
+    </form>
+
+    
+  </div>
+</section>
 
 <app-footer></app-footer>

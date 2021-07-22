@@ -42,6 +42,7 @@ const methods = {
             // db.end();
         });
     },
+    
     findById: function(id) {
         return new Promise((resolve, reject) => {
             let sql = "SELECT * FROM `category` where `category_sys_id` = " + id;

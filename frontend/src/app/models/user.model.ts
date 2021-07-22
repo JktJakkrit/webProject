@@ -5,9 +5,14 @@ export class DataUser{
     public name: string; 
     public email: string; 
     public address: string;
-    public city: string;
+    public city: number;
     public phone: string;
-    public state: string; 
-    public zip: string; 
+    public state: number; 
+    public sub: number;
+    public zip: number; 
+    public pname_in_thai: string;
+    public dname_in_thai: string;
+    public sname_in_thai: string;
+    // public token?: string;    
     public isvoid: boolean; 
 }

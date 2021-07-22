@@ -24,6 +24,7 @@ export class RegisterService {
     city: string,
     phone: string,
     state: string,
+    sub: string,
     zip: string,  ){
     let body = {
       username,
@@ -34,6 +35,7 @@ export class RegisterService {
       city,
       phone,
       state,
+      sub,
       zip,
     }
     

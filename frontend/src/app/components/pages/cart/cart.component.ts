@@ -1,13 +1,5 @@
 import { CartDataServiceService } from './../../../_services/cart-data-service.service';
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { AirProduct } from 'src/app/models/air.model';
-import { DishProduct } from 'src/app/models/dish.model';
-import { FanProduct } from 'src/app/models/fan.model';
-import { RefriProduct } from 'src/app/models/refri.model';
-import { TvProduct } from 'src/app/models/tv.model';
-import { WashProduct } from 'src/app/models/wash.model';
-import { CartProduct } from 'src/app/models/cart.model';
-import { OtherProduct } from 'src/app/models/other.model';
 import { data } from 'jquery';
 import { ProductsAll } from 'src/app/models/product.model';
 
@@ -73,5 +65,15 @@ export class CartComponent implements OnInit {
 
     // return sum + (sum * 0.07) + (sum * 0.93);
     return sum * 0.07;
+  }
+
+  totalSum(){
+    const callBack = (sum, curr) => sum + curr.price * curr.count;
+
+    const sum = !!this.countProduct.length
+      ? this.countProduct.reduce(callBack, 0)
+      : 0;
+    return sum;
+
   }
 }

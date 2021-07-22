@@ -170,6 +170,17 @@ export class ProductComponent implements OnInit {
     this.loadDataEditCategory();
   }
 
+
+  editcate(trdata){
+  
+    this.product_edit_form.controls['name'].setValue(trdata.name);
+    this.product_edit_form.controls['detail'].setValue(trdata.detail);
+    this.product_edit_form.controls['brand_sys_id'].setValue(trdata.brand_sys_id);
+    this.product_edit_form.controls['price'].setValue(trdata.price);
+    this.product_edit_form.controls['amount'].setValue(trdata.amount);
+    
+  }
+
   OnSubmit(form: any) {
     console.log(this.product_add_form);
     console.log(this.photo);
@@ -546,4 +557,6 @@ export class ProductComponent implements OnInit {
       }
     } catch (e) {}
   }
+
+  
 }

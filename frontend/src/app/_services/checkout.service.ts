@@ -1,11 +1,16 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpEvent,
+  HttpRequest,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CheckoutService {
   private url = environment.serverURL;
@@ -21,6 +26,7 @@ export class CheckoutService {
     city: string,
     phone: string,
     state: string,
+    sub: string,
     zip: string,
     card: string,
     number_card: string,
@@ -37,6 +43,7 @@ export class CheckoutService {
       city,
       phone,
       state,
+      sub,
       zip,
       card,
       number_card,
@@ -51,4 +58,23 @@ export class CheckoutService {
       .pipe(catchError(this.handleError));
   }
 
+  upload(name: string, avatar: File) {
+    const body = {
+      name,
+      avatar
+    };
+    var isvoid = 0;
+    console.log('pic => ', avatar);
+
+    var f = new FormData();
+    f.append('name', name);
+    f.append('avatar', avatar, avatar.name);
+    f.append('isvoid', isvoid.toFixed());
+    f.forEach((v, k) => {
+      console.log(k, ' :  ', v);
+    });
+    return this.http
+      .post<any>(this.url + "/bill/savepdf", f)
+      .pipe(catchError(this.handleError));
+  }
 }

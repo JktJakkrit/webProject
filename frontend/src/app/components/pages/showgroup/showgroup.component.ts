@@ -43,6 +43,7 @@ export class ShowgroupComponent implements OnInit, OnDestroy {
         this.category = res;
       },
       (error) => {
+        console.log('show')
         Swal.fire('Error!', 'error : ' + error.status, 'error');
       }
     );
@@ -56,6 +57,7 @@ export class ShowgroupComponent implements OnInit, OnDestroy {
         this.group = res;
       },
       (error) => {
+        console.log('show')
         Swal.fire('Error!', 'error : ' + error.status, 'error');
       }
     );
@@ -69,6 +71,7 @@ export class ShowgroupComponent implements OnInit, OnDestroy {
         this.loadGroup = res;
       },
       (error) => {
+        console.log('show')
         Swal.fire('Error!', 'error : ' + error.status, 'error');
       }
     );

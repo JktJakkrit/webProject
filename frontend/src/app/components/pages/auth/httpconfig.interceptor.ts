@@ -17,9 +17,11 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('currentUser');
-    console.log(token);
-   
+    const token = JSON.parse(localStorage.getItem('currentUser')) || {};
+    delete token.pname_in_thai,
+      delete token.dname_in_thai,
+      delete token.sname_in_thai,
+      console.log('token ==>', token);
 
     request = request.clone({
       setHeaders: {

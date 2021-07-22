@@ -33,10 +33,14 @@
                     
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><button type="button" class="btn btn-primary" (click)="addToCart(item)">
-                            Add to Cart
-                          </button></div>
+                        <div class="mb-4">
+                            <a [routerLink]="['/product-details', item.product_sys_id]" class="btn btn-primary mr-1">Detail</a>
+                            <a (click)="addToCart(item)" class="btn btn-light">Add to cart</a>
+                        </div>
                     </div>
+
+                   
+
                 </div>
             </div>
            

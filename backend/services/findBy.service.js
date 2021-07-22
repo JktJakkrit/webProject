@@ -57,5 +57,76 @@ const methods = {
       });
     });
   },
+
+  findAll: function() {
+    return new Promise((resolve, reject) => {
+        // db.connect(function(err){ console.log(err)});
+        db.query("SELECT * FROM `provinces`",
+            function(error, result) {
+                if (error) return reject(error);
+                return resolve(result);
+            });
+        // db.end();
+    });
+},
+
+  //  เลือก districts จาก provinces
+  getDistrictsByProvinces: function (body) {
+    return new Promise((resolve, reject) => {
+      let sql =
+        "SELECT d.* FROM `districts` d  INNER JOIN `provinces` p ON d.province_id = p.id where p.id = ?";
+      console.log("======================");
+      console.log(body.id);
+      console.log("======================");
+      db.query(sql, body.id, function (error, result) {
+        if (error) return reject(error);
+        return resolve(result);
+      });
+    });
+  },
+
+  //  เลือก subdistricts จาก districts
+  getSubdistrictsByDistricts: function (body) {
+    return new Promise((resolve, reject) => {
+      let sql =
+        "SELECT s.* FROM `subdistricts` s INNER JOIN `districts` d ON s.district_id = d.id where d.id = ?";
+      console.log("======================");
+      console.log(body.id);
+      console.log("======================");
+      db.query(sql, body.id, function (error, result) {
+        if (error) return reject(error);
+        return resolve(result);
+      });
+    });
+  },
+
+   //  เลือก ZipCode จาก subdistrictsID
+   getZipCodeBySubdistricts: function (body) {
+    return new Promise((resolve, reject) => {
+      let sql =
+        "SELECT s.* FROM `subdistricts` s where s.id = ?";
+      console.log("======================");
+      console.log(body.id);
+      console.log("======================");
+      db.query(sql, body.id, function (error, result) {
+        if (error) return reject(error);
+        return resolve(result);
+      });
+    });
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 };
 module.exports = { ...methods };

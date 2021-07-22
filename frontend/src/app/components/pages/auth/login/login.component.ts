@@ -50,21 +50,20 @@ export class LoginComponent implements OnInit {
           title: 'Login success!',
           showConfirmButton: false,
           timer: 1500,
-        });
-        console.log(token);
+        }).then(()=> this.router.navigate(['/home']))
+        console.log("token ==> ", token);
        
         // after login success
-        this.router.navigate(['home']);
+        // this.router.navigate(['/home']);
       },
       (error: any) => {
         Swal.fire({
-          icon: 'error',
-          title: 'Login error!',
+          icon: 'info',
+          title: 'Please your check username or password again!',
           showConfirmButton: false,
           timer: 1500,
         });
-      },
-      () => {}
+      }
     );
   }
 

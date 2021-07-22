@@ -67,7 +67,12 @@ export class NgxLoginComponent implements OnInit {
           },
           (error) => {
             if (error.status) {
-              Swal.fire('Error!', 'error : ' + error.status, 'error');
+              Swal.fire({
+                icon: 'info',
+                title: 'Please your check username or password again!',
+                showConfirmButton: false,
+                timer: 1500,
+              });
               // this.closeModal('modal_add');
               // this.loadDataBooking();
               // this.loader = false;

@@ -25,12 +25,21 @@
             <a class="dropdown-item" [routerLink]="['/group', item.category_sys_id]" *ngFor = 'let item of category'>{{item.category_name}}</a>
           </div>
         </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/products']">
+            <i class="fa fa-home"></i>
+            See All Product
+            <span class="sr-only">(current)</span>
+            </a>
+        </li>
+
       </ul>
 
-      <form class="form-inline my-2 my-lg-0">
+      <!-- <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      </form> -->
 
       <ul class="navbar-nav ">
         <li class="nav-item">
@@ -41,22 +50,24 @@
             </a>
         </li>
 
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-user-circle-o">
-          <!-- <span class="badge badge-primary">11</span> -->
         </i> Account
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <!-- <a class="dropdown-item" [routerLink]="['/login']">Login</a> -->
+                
                 <a class="dropdown-item" data-toggle="modal" data-target="#register">Register</a>
-
             </div>
+        </li> -->
 
-           
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#register">
+            <i class="fa fa-home"></i>
+            Register
+            <span class="sr-only">(current)</span>
+            </a>
         </li>
-
-        
 
 
 
@@ -67,7 +78,7 @@
         </i> Logout
             </a>
         </li>
-        <li class="nav-item" *ngIf="Islogin === false">
+        <li class="nav-item active" *ngIf="Islogin === false">
             <a class="nav-link" (click)="login()">
                 <i class="fa fa-sign-in">
           <!-- <span class="badge badge-success">{{counter}}</span> -->
@@ -91,26 +102,26 @@
                     <!-- ============================ COMPONENT REGISTER   ================================= -->
                         <div class="card mx-auto" style="max-width:520px; margin-top:40px;">
                           <article class="card-body">
-                            <header class="mb-4"><h4 class="card-title">Sign up</h4></header>
+                            <header class="mb-4"><h4 class="card-title">สมัครสมาชิก</h4></header>
                             <form [formGroup]="register_form" (ngSubmit)="OnSubmit(this.register_form)">
                                     <div class="form-row">
                                         <div class="col form-group">
-                                            <label>Username</label>
+                                            <label>ชื่อผู้ใช้งาน | Username</label>
                                               <input type="text" name="username" class="form-control" placeholder="username" formControlName="username">
                                         </div> <!-- form-group end.// -->
                                         <div class="col form-group">
-                                            <label>Password</label>
+                                            <label>รหัสผ่าน | Password</label>
                                               <input type="password" name="password" class="form-control" placeholder="password" formControlName="password">
                                         </div> <!-- form-group end.// -->
                                     </div> <!-- form-row end.// -->
                                     <div class="form-group">
-                                        <label>Name</label>
+                                        <label>ชื่อ - นามสกุล | Name</label>
                                         <input type="text" name="name" class="form-control" placeholder="name" formControlName="name" formControlName="name">
                                     </div> <!-- form-group end.// -->
                 
                                     <div class="form-group">
-                                        <label>Email</label>
-                                        <input type="email" name="email" class="form-control" placeholder="" formControlName="email">
+                                        <label>อีเมล | Email</label>
+                                        <input type="email" name="email" class="form-control" placeholder="ex1234@gmail.com" formControlName="email">
                                         <div *ngIf="(email.invalid && email.touched) || email.dirty">
                                             <small *ngIf="email.errors?.required" class="text-danger">Secondary email is required</small>
                                             <small *ngIf="email.errors?.pattern" class="text-danger">Please provide a valid email address</small>
@@ -118,8 +129,8 @@
                                     </div> <!-- form-group end.// -->
                 
                                     <div class="form-group">
-                                        <label>Phone Number</label>
-                                        <input type="text" name="phone" class="form-control" placeholder="" formControlName="phone">
+                                        <label>เบอร์โทร | Phone-Number</label>
+                                        <input type="text" name="phone" class="form-control" placeholder="0xxxxxxxxx" formControlName="phone" maxlength="10" required>
                                         <div *ngIf="f.phone.touched && f.phone.invalid" class="alert alert-danger">
                                             <div *ngIf="f.phone.errors.required">Mobile Number is required.</div>
                                             <div *ngIf="f.phone.errors.pattern">Please, Enter 10 digit Mobile Number.</div>
@@ -127,22 +138,49 @@
                                     </div> <!-- form-group end.// -->
                 
                                     <div class="form-group">
-                                        <label>Address</label>
-                                        <textarea type="text" name="address" class="form-control" placeholder="" class="form-control" rows="7" cols="8" formControlName="address"></textarea>
+                                        <label>ที่อยู่ | Address</label>
+                                        <textarea type="text" name="address" class="form-control" placeholder="17/4 Village No.x Bamroongrat Road," class="form-control" rows="7" cols="8" formControlName="address"></textarea>
                                     </div> <!-- form-group end.// -->
                 
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                          <label>City</label>
-                                          <input type="text" name="city" class="form-control" formControlName="city">
+                                          <label>จังหวัด | Province</label>
+                                          <!-- <input type="text" name="city" class="form-control" formControlName="city"> -->
+                                          <select class="form-control" name="city" formControlName="city"  [(ngModel)]="selected" (change)='onOptionsSelected($event)' required>
+                                            <option
+                                              *ngFor="let m of listProvinces"
+                                              id="city"
+                                              [value]="m.id"
+                                            >
+                                              {{ m.pname_in_thai }}
+                                            </option>
+                                          </select>
+
                                         </div> <!-- form-group end.// -->
                                         <div class="form-group col-md-6">
-                                            <label>State</label>
-                                            <input type="text" name="state" class="form-control" formControlName="state">
+                                            <label>อำเภอ / เขต | District / Area</label>
+                                            <!-- <input type="text" name="state" class="form-control" formControlName="state">  -->
+                                            <select class="form-control" name="state" formControlName="state"  [(ngModel)]="selectedDistrict" (change)='onOptionsSelectedDistrict($event)' required>
+                                              <option *ngFor="let m of listDistrict" [value]="m.id">
+                                                {{ m.dname_in_thai }}
+                                              </option>
+                                            </select>
                                           </div> <!-- form-group end.// -->
+
                                           <div class="form-group col-md-6">
-                                            <label>Zip</label>
-                                            <input type="text" name="zip" class="form-control" formControlName="zip" maxlength="5">
+                                            <label>ตำบล / แขวง | Sub-district / Sub-area</label>
+                                            <!-- <input type="text" name="state" class="form-control" formControlName="state">  -->
+                                            <select class="form-control" name="sub" formControlName="sub" [(ngModel)]="selectedSubdistrict" (change)='onOptionsSelectedSubdistrict($event)' required>
+                                              <option *ngFor="let m of listSubdistrict" [value]="m.id" #m>
+                                                {{ m.sname_in_thai }}
+                                              </option>
+                                            </select>
+                                          </div> <!-- form-group end.// -->
+
+                                          <div class="form-group col-md-6" *ngFor="let m of listZip" [value]="m.id">
+                                            <label>รหัสไปรษณีย์ | Postal Code</label>
+                                            <input type="text" name="zip" class="form-control" [(ngModel)]="m.zip_code" formControlName="zip" maxlength="5" readonly >
+                                            
                                             <div *ngIf="f.zip.touched && f.zip.invalid" class="alert alert-danger">
                                                 <div *ngIf="f.zip.errors.required">Number is required.</div>
                                                 <div *ngIf="f.zip.errors.pattern">Enter only number.</div>

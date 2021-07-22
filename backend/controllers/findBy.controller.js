@@ -36,7 +36,46 @@ const methods = {
             res.json(error).end();
         }
     },
-    
+
+// ----------------------------------------
+
+async GetAll(req, res) {
+    try {
+        let result = await findByServices.findAll()
+        res.status(200).send(result)
+    } catch (error) {
+        res.json(error).end();
+    }
+},
+
+
+    async DistrictsByProvinces(req, res) {
+        try {
+            let result = await findByServices.getDistrictsByProvinces(req.body)
+            res.status(200).send(result)
+        } catch (error) {
+            res.json(error).end();
+        }
+    },
+
+    async SubdistrictsByDistricts(req, res) {
+        try {
+            let result = await findByServices.getSubdistrictsByDistricts(req.body)
+            res.status(200).send(result)
+        } catch (error) {
+            res.json(error).end();
+        }
+    },
+
+    async ZipCode(req, res) {
+        try {
+            let result = await findByServices.getZipCodeBySubdistricts(req.body)
+            res.status(200).send(result)
+        } catch (error) {
+            res.json(error).end();
+        }
+    },
+
 }
 
 module.exports = {...methods }

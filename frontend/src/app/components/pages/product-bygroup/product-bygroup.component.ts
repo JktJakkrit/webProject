@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/_services/auth.service';
+import { CartDataServiceService } from 'src/app/_services/cart-data-service.service';
 import { MasterService } from 'src/app/_services/master.service';
 import Swal from 'sweetalert2';
 
@@ -15,7 +17,10 @@ export class ProductBygroupComponent implements OnInit, OnDestroy {
 
   constructor(
     private masterService: MasterService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cartDataService: CartDataServiceService,
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -41,8 +46,21 @@ export class ProductBygroupComponent implements OnInit, OnDestroy {
         this.loadProductByG = res;
       },
       (error) => {
+        console.log('bygroup')
         Swal.fire('Error!', 'error : ' + error.status, 'error');
       }
     );
   }
+
+  addToCart(data) {
+    if (this.authService.isLogin()) {
+      console.log('34567890-=');
+      console.log('<----- Select this item ----->', data);
+      this.cartDataService.changeProductAll(data);
+    } else {
+      this.router.navigate(['login']);
+    }
+    // this.cartDataService.AddProductToCart(data);
+  }
+
 }

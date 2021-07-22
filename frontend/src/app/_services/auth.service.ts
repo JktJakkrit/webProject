@@ -1,8 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { DataUser } from '../models/user.model';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -11,7 +12,44 @@ import { UserService } from './user.service';
 export class AuthService {
   private url = environment.serverURL;
 
-  constructor(private http: HttpClient,private userService: UserService) {}
+  private currentUserSubject: BehaviorSubject<DataUser>;
+  public currentUser: Observable<DataUser>;
+
+  constructor(private http: HttpClient, private userService: UserService) {
+    // testlogin to have token
+    this.currentUserSubject = new BehaviorSubject<DataUser>(
+      JSON.parse(localStorage.getItem('currentUser'))
+    );
+    this.currentUser = this.currentUserSubject.asObservable();
+    // ---------------------------------------------------------------------
+  }
+
+  public get currentUserValue(): DataUser {
+    return this.currentUserSubject.value;
+  }
+
+  // loginToToken(username: string, password: string) {
+  //   const body = {
+  //     username: username,
+  //     password: password,
+  //   };
+
+  //   return this.http.post<any>(this.url + '/user_login/login', body).pipe(
+  //     map((user) => {
+  //       // store user details and jwt token in local storage to keep user logged in between page refreshes
+
+  //       if (user) {
+  //         delete user.regis_sys_id;
+  //         delete user.password;
+  //         delete user.isvoid;
+  //         localStorage.setItem('currentUser', JSON.stringify(user));
+  //         this.currentUserSubject.next(user);
+  //       }
+
+  //       return user;
+  //     })
+  //   );
+  // }
 
   login(username: string, password: string): Observable<any> {
     const body = {
@@ -22,24 +60,27 @@ export class AuthService {
     console.log(body);
 
     return this.http.post<any>(this.url + '/user_login/login', body).pipe(
-      map((user) => {
-        console.log('user' + user)
+      mergeMap((user: any) => {
+        console.log('user', user);
         if (user) {
           delete user.regis_sys_id;
           delete user.password;
+          // delete user.pname_in_thai,
+          // delete user.dname_in_thai,
+          // delete user.sname_in_thai,
           delete user.isvoid;
           localStorage.setItem('currentUser', JSON.stringify(user));
-          
+          // this.currentUserSubject.next(user);
           this.userService.changeDataUser(user);
+          return of(user)
         }
       }),
       catchError(this.handleError)
     );
-    
   }
 
   isLogin(): boolean {
-    const valueUser =  JSON.parse(localStorage.getItem('currentUser'));
+    const valueUser = JSON.parse(localStorage.getItem('currentUser'));
     if (valueUser) {
       return true;
     }
@@ -50,9 +91,11 @@ export class AuthService {
     localStorage.removeItem('currentUser');
   }
 
- 
-
-  adminLogin(username: string, password: string, status: string): Observable<any> {
+  adminLogin(
+    username: string,
+    password: string,
+    status: string
+  ): Observable<any> {
     const body = {
       username: username,
       password: password,
@@ -69,11 +112,10 @@ export class AuthService {
       }),
       catchError(this.handleError)
     );
-  
   }
 
   AdminIsLogin(): boolean {
-    const valueAdmin =  JSON.parse(localStorage.getItem('currentAdmin'));
+    const valueAdmin = JSON.parse(localStorage.getItem('currentAdmin'));
     if (valueAdmin) {
       return true;
     }
@@ -85,7 +127,7 @@ export class AuthService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    console.log('Error ' + error)
+    console.log('Error ' + error);
     return throwError(error);
   }
 }

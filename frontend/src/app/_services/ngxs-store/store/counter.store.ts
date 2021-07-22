@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { CartModel } from 'src/app/models/counter.state';
+// import { CartModel } from 'src/app/models/counter.state';
 import { AddCart } from 'src/app/_services/ngxs-store/action/cart-action'; 
 // @State<CartModel>({ 
 //     name :"",

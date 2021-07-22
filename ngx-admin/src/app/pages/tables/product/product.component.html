@@ -258,6 +258,7 @@
                 <nb-option
                   *ngFor="let item of findEditProduct"
                   [value]="item.product_sys_id"
+                  (click)="editcate(item)"
                   >{{ item.name }}</nb-option
                 >
               </nb-select>

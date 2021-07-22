@@ -15,6 +15,7 @@ import { FooterComponent } from './components/pages/footer/footer.component';
 import { SingleitemComponent } from './components/pages/singleitem/singleitem.component';
 import { ShowgroupComponent } from './components/pages/showgroup/showgroup.component';
 import { ProductBygroupComponent } from './components/pages/product-bygroup/product-bygroup.component';
+import { AllproductComponent } from './components/pages/allproduct/allproduct.component';
 
 
 
@@ -72,8 +73,13 @@ const routes: Routes = [
   { 
     path: 'product-byGroup/:id', 
     component: ProductBygroupComponent 
-  }
+  },
   
+  { 
+    path: 'products', 
+    component: AllproductComponent 
+  }
+
 ];
 
 @NgModule({

@@ -3,6 +3,7 @@
 <div class="row">
     <div class="col-75">
         <div class="container">
+            
             <form action="/action_page.php" [formGroup]="checkout_form" (ngSubmit)="onSubmit(this.checkout_form)">
                 <div class="row">
                     <div class="col-50">
@@ -11,69 +12,78 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <div class="form-group">
-                                    <label for="">Full Name</label>
-                                    <input type="text" name="name" class="form-control" formControlName="name" />
+                                    <label for="">ชื่อ - นามสกุล | Name</label>
+                                    <input type="text" name="name" class="form-control" formControlName="name" readonly/>
                                 </div>
                             </div>
 
                             <div class="form-group col-md-12">
                                 <div class="form-group">
-                                    <label for="">Email</label>
-                                    <input type="text" name="email" class="form-control" formControlName="email" />
+                                    <label for="">อีเมล | Email</label>
+                                    <input type="text" name="email" class="form-control" formControlName="email" readonly/>
                                 </div>
                             </div>
 
                             <div class="form-group col-md-12">
                                 <div class="form-group">
-                                    <label for=""><i class="fa fa-address-card-o"></i>Address</label>
-                                    <input type="text" name="address" class="form-control" formControlName="address" />
+                                    <label for=""><i class="fa fa-address-card-o"></i>ที่อยู่ | Address</label>
+                                    <input type="text" name="address" class="form-control" formControlName="address" readonly/>
                                 </div>
                             </div>
 
                             <div class="form-group col-md-12">
                                 <div class="form-group">
-                                    <label for=""><i class="fa fa-institution"></i>City</label>
-                                    <input type="text" name="city" class="form-control" formControlName="city" />
+                                    <label for=""><i class="fa fa-phone"></i>เบอร์โทร | Phone-Number</label>
+                                    <input type="text" name="phone" class="form-control" formControlName="phone" readonly/>
                                 </div>
                             </div>
 
                             <div class="form-group col-md-12">
                                 <div class="form-group">
-                                    <label for=""><i class="fa fa-phone"></i>Phone</label>
-                                    <input type="text" name="phone" class="form-control" formControlName="phone" />
+                                    <label for=""><i class="fa fa-institution"></i>จังหวัด | Province</label>
+                                    <input type="text" name="city" class="form-control" formControlName="city" readonly/>
                                 </div>
                             </div>
+
+                           
                         </div>
 
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <div class="form-group">
-                                    <label for="">State</label>
-                                    <input type="text" name="state" class="form-control" formControlName="state" />
+                                    <label for="">อำเภอ / เขต | District / Area</label>
+                                    <input type="text" name="state" class="form-control" formControlName="state" readonly/>
                                 </div>
                             </div>
 
                             <div class="form-group col-md-6">
                                 <div class="form-group">
-                                    <label for="">Zip Code</label>
-                                    <input type="text" name="zip" class="form-control" formControlName="zip" />
+                                    <label for="">ตำบล / แขวง | Sub-district / Sub-area</label>
+                                    <input type="text" name="sub" class="form-control" formControlName="sub" readonly/>
                                 </div>
                             </div>
 
                         </div>
+                        <div class="form-row">
+
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="">รหัสไปรษณีย์ | Postal Code</label>
+                                    <input type="text" name="zip" class="form-control" formControlName="zip" readonly/>
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
 
-                    <div class="col-50">
+                    <div class="col-25">
                         <h3>Payment</h3>
                         <label for="fname">Accepted Cards</label>
-                        <div class="icon-container">
-                            <i class="fa fa-cc-visa" style="color: navy"></i>&nbsp;
-                            <i class="fa fa-cc-amex" style="color: blue"></i>&nbsp;
-                            <i class="fa fa-cc-mastercard" style="color: red"></i>&nbsp;
-                            <i class="fa fa-cc-paypal" style="color: green"></i>&nbsp;
-                            <i class="fa fa-cc-discover" style="color: orange"></i>
-                        </div>
+                        <p class="text-center mb-3">
+                            <img src="assets/misc/payments.png" height="26" />
+                          </p>
 
                         <div class="form-row">
                             <div class="form-group col-md-12">
@@ -117,7 +127,56 @@
                         </div>
 
                     </div>
+
+
+
+
+                    <div class="col-25">
+                        <div class="container">
+                            <h2>Cart
+                                <span class="price" style="color:black">
+                              <i class="fa fa-shopping-cart"></i>&nbsp;
+                              <b>{{counter}}</b>
+                            </span>
+                            </h2>
+                
+                            <tr *ngFor='let item of countProduct'>
+                                <td class="col-sm-8 col-md-6">
+                                    <div class="media">
+                                        <!-- <a class="thumbnail pull-left"> <img class="media-object" src="{{item.file}}" style="width: 72px; height: 72px;"> </a> -->
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><a>{{item.name}}</a></h4>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="col-sm-2 col-md-2" style="text-align: center">
+                                    <input type="text" class="form-control" [value]='item.count' readonly>
+                                </td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong>{{TotalProductPrice(item.count,item.price)}}</strong></td>
+                            </tr>
+                
+                
+                            <hr>
+                            <p>Vat 7%: <span class="vat" style="color:black"><b>{{calTotalVAT7all().toFixed(2)}}</b></span></p>
+                            <p>Total Price: <span class="price" style="color:black"><b>{{calTotalAll().toFixed(2)}}</b></span></p>
+                        </div>
+                    </div>
+
+                    
+
                 </div>
+
+
+
+
+
+               
+
+
+
+
+
+
 
                 <input type="submit" value="Continue to checkout" class="btn" [disabled]="!checkout_form.valid" />
                 <!-- 
@@ -139,7 +198,8 @@
         </div>
     </div>
 
-    <div class="col-25">
+
+    <!-- <div class="col-25">
         <div class="container">
             <h2>Cart
                 <span class="price" style="color:black">
@@ -151,7 +211,7 @@
             <tr *ngFor='let item of countProduct'>
                 <td class="col-sm-8 col-md-6">
                     <div class="media">
-                        <!-- <a class="thumbnail pull-left"> <img class="media-object" src="{{item.file}}" style="width: 72px; height: 72px;"> </a> -->
+                       
                         <div class="media-body">
                             <h4 class="media-heading"><a>{{item.name}}</a></h4>
                         </div>
@@ -165,8 +225,9 @@
 
 
             <hr>
+            <p>Vat 7%: <span class="vat" style="color:black"><b>{{calTotalVAT7all().toFixed(2)}}</b></span></p>
             <p>Total Price: <span class="price" style="color:black"><b>{{calTotalAll().toFixed(2)}}</b></span></p>
         </div>
-    </div>
+    </div> -->
 
 </div>

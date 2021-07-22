@@ -88,15 +88,15 @@
           <div class="card-body">
             <dl class="dlist-align">
               <dt>Total price:</dt>
-              <dd class="text-right">....</dd>
+              <dd class="text-right">{{totalSum().toFixed(2)}}</dd>
             </dl>
             <dl class="dlist-align">
-              <dt>Discount:</dt>
-              <dd class="text-right">....</dd>
+              <dt>VAT 7%:</dt>
+              <dd class="text-right">{{calTotalVAT7all().toFixed(2)}}</dd>
             </dl>
             <dl class="dlist-align">
               <dt>Total:</dt>
-              <dd class="text-right h5"><strong>....</strong></dd>
+              <dd class="text-right h5"><strong>{{calTotalAll().toFixed(2)}}</strong></dd>
             </dl>
             <hr />
             <p class="text-center mb-3">

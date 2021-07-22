@@ -28,8 +28,8 @@ export class HomeComponent implements OnInit {
     private authService: AuthService) {}
 
   ngOnInit() {
-    this.loadCategoryList();
-    this.loadProduct();
+    // this.loadCategoryList();
+    // this.loadProduct();
   }
 
   loadCategoryList() {
@@ -45,16 +45,16 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  loadProduct() {
-    this.masterService.getMasterProduct().subscribe(
-      (res: any) => {
-        this.masterProduct = res;
-      },
-      (error) => {
-        console.log("error" + error.status);
-      }
-    );
-  }
+  // loadProduct() {
+  //   this.masterService.getMasterProduct().subscribe(
+  //     (res: any) => {
+  //       this.masterProduct = res;
+  //     },
+  //     (error) => {
+  //       console.log("error" , error.status);
+  //     }
+  //   );
+  // }
 
   addToCart(data) {
     if (this.authService.isLogin()) {

@@ -10,17 +10,10 @@ import Swal from 'sweetalert2';
 
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-import { AirProduct } from 'src/app/models/air.model';
-import { DishProduct } from 'src/app/models/dish.model';
-import { FanProduct } from 'src/app/models/fan.model';
-import { RefriProduct } from 'src/app/models/refri.model';
-import { TvProduct } from 'src/app/models/tv.model';
-import { WashProduct } from 'src/app/models/wash.model';
 import { CartDataServiceService } from 'src/app/_services/cart-data-service.service';
 import { CheckoutService } from 'src/app/_services/checkout.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { DataUser } from 'src/app/models/user.model';
-import { OtherProduct } from 'src/app/models/other.model';
 import { Router } from '@angular/router';
 import { RegisterService } from 'src/app/_services/register.service';
 import { UserService } from 'src/app/_services/user.service';
@@ -33,14 +26,7 @@ import { ProductsAll } from 'src/app/models/product.model';
 })
 export class CheckoutComponent implements OnInit {
   checkout_form: FormGroup;
-  countAir: AirProduct[] = [];
-  countDish: DishProduct[] = [];
-  countFan: FanProduct[] = [];
-  countRefri: RefriProduct[] = [];
-  countTv: TvProduct[] = [];
-  countWash: WashProduct[] = [];
-  countOther: OtherProduct[] = [];
-
+  
   countProduct: ProductsAll[] = [];
   userData: DataUser;
   // dataUser;
@@ -66,6 +52,7 @@ export class CheckoutComponent implements OnInit {
       city: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       state: new FormControl('', [Validators.required]),
+      sub: new FormControl('', [Validators.required]),
       zip: new FormControl('', [Validators.required]),
       card: new FormControl('', [Validators.required]),
       number_card: new FormControl('', [Validators.required]),
@@ -85,16 +72,20 @@ export class CheckoutComponent implements OnInit {
   ngOnInit() {
     this.userService.currentDataUser.subscribe((data) => {
       if (data) {
-        console.log(data);
+        console.log(" data จ้า" , data);
 
         this.userData = data;
         this.checkout_form.patchValue({
           name: data.name,
           email: data.email,
           address: data.address,
-          city: data.city,
+          city: data.pname_in_thai,
           phone: data.phone,
-          state: data.state,
+          state: data.dname_in_thai,
+          sub: data.sname_in_thai,
+          // pname_in_thai: data.pname_in_thai,
+          // dname_in_thai: data.dname_in_thai,
+          // sname_in_thai: data.sname_in_thai,
           zip: data.zip,
         });
       }
@@ -115,6 +106,7 @@ export class CheckoutComponent implements OnInit {
           form.value.city,
           form.value.phone,
           form.value.state,
+          form.value.sub,
           form.value.zip,
           form.value.card,
           form.value.number_card,
@@ -130,11 +122,13 @@ export class CheckoutComponent implements OnInit {
           },
           (error) => {
             if (error.status === 200 || error.status === 201) {
+              console.log('checkout')
               Swal.fire('Error!', 'error : ' + error.status, 'error');
 
               // this.loadDataMaster();
             } else {
               console.log(error.status);
+              console.log('checkout')
               Swal.fire('Error!', 'error : ' + error.status, 'error');
             }
           }

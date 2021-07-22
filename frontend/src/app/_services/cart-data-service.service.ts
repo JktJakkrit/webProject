@@ -1,14 +1,9 @@
-import { WashProduct } from './../models/wash.model';
-import { TvProduct } from './../models/tv.model';
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { AirProduct } from '../models/air.model';
-import { DishProduct } from '../models/dish.model';
-import { FanProduct } from '../models/fan.model';
-import { RefriProduct } from '../models/refri.model';
+
 import { CartProduct } from '../models/cart.model';
 import { state } from '@angular/animations';
-import { OtherProduct } from '../models/other.model';
 
 import { ProductsAll } from '../models/product.model';
 import { count } from 'rxjs/operators';

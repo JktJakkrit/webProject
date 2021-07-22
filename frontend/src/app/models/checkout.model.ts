@@ -2,10 +2,11 @@ export class DataUser{
     public name: string;
     public email: string;
     public address: string;
-    public city: string;
+    public city: number;
     public phone: string;
-    public state: string;
-    public zip: string;
+    public state: number;
+    public sub: number;
+    public zip: number;
     public dataProduct: DataProduct[] = [];
 
     constructor() {
